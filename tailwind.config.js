@@ -11,8 +11,8 @@ module.exports = {
     },
     extend: {
       colors: {
-        primary: "#3B82F6",
-        bluishColor: "#CBD5E1",
+        brandColor: "#3B82F6",
+        bluishColor: "#cae9f5",
         darkBlue: "#0F172A",
         brownColor: "#CBD5E1",
       },
