@@ -12,7 +12,14 @@ module.exports = {
     extend: {
       colors: {
         primary: "#3B82F6",
+        secondary: " #101828",
+        tertiary:'#344054',
+        inputborderColor:'#CBD5E1',
         bluishColor: "#CBD5E1",
+        errorColor:'#D92D20',
+        focusColor:"#A5B4FC",
+        notificationColor:'#FF7548',
+        validColor:'#048a81',
         darkBlue: "#0F172A",
         brownColor: "#CBD5E1",
       },
