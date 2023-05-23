@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import TextInput from "./components/common/inputs/text-input/TextInput.common";
 import PasswordInput from "./components/common/inputs/password-input/PasswordInput.common";
+import Button from "./components/common/buttons/Button.common";
 
 function App() {
    const [form, setForm] = useState({
@@ -11,7 +12,8 @@ function App() {
 
   return (
     <div className="App">
-      <TextInput
+      <Button text="confirm" buttonType="TERTIARY" />
+      {/* <TextInput
         placeholder={"example@gmail.com"}
         label="Email Address"
         type="email"
@@ -21,9 +23,9 @@ function App() {
         onChange={(e) => {
           setForm({ ...form, email: e.target.value });
         }}
-      />
+      /> */}
 
-      <PasswordInput
+      {/* <PasswordInput
         placeholder={"********"}
         label="Password"
         type="password"
@@ -33,7 +35,7 @@ function App() {
         onChange={(e) => {
           setForm({ ...form, password: e.target.value });
         }}
-      />
+      /> */}
     </div>
   );
 }
