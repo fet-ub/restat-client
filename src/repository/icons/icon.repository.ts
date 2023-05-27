@@ -6,7 +6,9 @@ import ExaminerIcon from "../../icons/Examiner.icon";
 import SettingsIcon from "../../icons/Settings.icon";
 import StudentIcon from "../../icons/Student.icon";
 import UsersIcon from "../../icons/Users.icon";
-
+import PersonIcon from "../../icons/Person.icon";
+import DashboardBooksIcon from "../../icons/DashboardBooks.icon";
+import DashboardStudentIcon from "../../icons/DashboardStudent.icon";
 
 export const IconRepository ={
     LogoIcon,
@@ -16,5 +18,9 @@ export const IconRepository ={
     ExaminerIcon,
     SettingsIcon,
     StudentIcon,
-    UsersIcon
+    UsersIcon,
+    PersonIcon,
+    DashboardBooksIcon,
+    DashboardStudentIcon
+    
 }
