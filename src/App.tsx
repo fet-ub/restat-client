@@ -3,7 +3,8 @@ import "./App.css";
 import TextInput from "./components/common/inputs/text-input/TextInput.common";
 import PasswordInput from "./components/common/inputs/password-input/PasswordInput.common";
 import Button from "./components/common/buttons/Button.common";
-
+import SelectInput from "./components/common/inputs/select-input/SelectInput.common";
+import { LANGUAGE_CONSTANTS } from "./repository/constants/constants";
 function App() {
    const [form, setForm] = useState({
      email: "",
@@ -12,7 +13,15 @@ function App() {
 
   return (
     <div className="App">
-      <Button text="confirm" buttonType="TERTIARY" />
+      {/* <Button text="confirm" buttonType="TERTIARY" /> */}
+      <SelectInput
+        selectOptions={LANGUAGE_CONSTANTS}
+        label="Language"
+        onChange={(e) => {
+          setForm({ ...form, email: e.target.value });
+        }}
+        value={form.email}
+      />
       {/* <TextInput
         placeholder={"example@gmail.com"}
         label="Email Address"
