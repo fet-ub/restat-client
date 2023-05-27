@@ -17,8 +17,8 @@ const ModalContainer = ({children,width,fullWidth,onClick}:ModalContainerPropTyp
       }}
     >
       <div className="flex justify-end">
-        <div onClick={onClick}>
-          <IconRepository.CloseIcon />
+        <div onClick={onClick} style={{cursor:'pointer'}} >
+          <IconRepository.CloseIcon  />
         </div>
       </div>
       <div>{children}</div>
