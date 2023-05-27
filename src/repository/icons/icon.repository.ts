@@ -9,6 +9,7 @@ import UsersIcon from "../../icons/Users.icon";
 import PersonIcon from "../../icons/Person.icon";
 import DashboardBooksIcon from "../../icons/DashboardBooks.icon";
 import DashboardStudentIcon from "../../icons/DashboardStudent.icon";
+import CloseIcon from "../../icons/Close.icon";
 
 export const IconRepository ={
     LogoIcon,
@@ -21,6 +22,8 @@ export const IconRepository ={
     UsersIcon,
     PersonIcon,
     DashboardBooksIcon,
-    DashboardStudentIcon
+    DashboardStudentIcon,
+    CloseIcon
+    
     
 }

@@ -7,6 +7,8 @@ import "./App.css";
 // import { LANGUAGE_CONSTANTS } from "./repository/constants/constants";
 import DashboardCard from "./components/common/cards/dashboard-card/DashboardCard.common";
 import { IconRepository } from "./repository/icons/icon.repository";
+import ModalContainer from "./components/common/modal/modal-container/ModalContainer.common";
+import LogoutModal from "./components/common/modal/modules/logout/LogoutModal.module";
 function App() {
    const [form, setForm] = useState({
      email: "",
@@ -15,11 +17,14 @@ function App() {
 
   return (
     <div className="App">
-      <DashboardCard
+      <ModalContainer width="700px">
+       <LogoutModal />
+      </ModalContainer>
+      {/* <DashboardCard
       label="Students"
       stats={120}
       icon={<IconRepository.DashboardStudentIcon/>}
-      />
+      /> */}
       {/* <Button text="confirm" buttonType="TERTIARY" /> */}
       {/* <SelectInput
         selectOptions={LANGUAGE_CONSTANTS}
