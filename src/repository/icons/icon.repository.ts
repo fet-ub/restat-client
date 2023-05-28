@@ -10,6 +10,8 @@ import PersonIcon from "../../icons/Person.icon";
 import DashboardBooksIcon from "../../icons/DashboardBooks.icon";
 import DashboardStudentIcon from "../../icons/DashboardStudent.icon";
 import CloseIcon from "../../icons/Close.icon";
+import CloseCircleIcon from "../../icons/CloseCircle.icon";
+import SuccessIcon from "../../icons/Success.icon";
 
 export const IconRepository ={
     LogoIcon,
@@ -23,7 +25,8 @@ export const IconRepository ={
     PersonIcon,
     DashboardBooksIcon,
     DashboardStudentIcon,
-    CloseIcon
-    
+    CloseIcon,
+    CloseCircleIcon,
+    SuccessIcon    
     
 }

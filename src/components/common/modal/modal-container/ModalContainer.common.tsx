@@ -5,7 +5,7 @@ import { IconRepository } from '../../../../repository/icons/icon.repository'
 const ModalContainer = ({children,width,fullWidth,onClick}:ModalContainerPropTypes) => {
   return (
     <div
-      className="py-2 px-4 max-w-[500px] max-h-[263px] border rounded-lg   "
+      className="py-2 px-4 max-w-[500px] max-h-[300px] border rounded-lg   "
       style={{
         boxShadow: "0px 20px 25px rgba(76, 103, 100, 0.1)",
         width:

@@ -1,5 +1,5 @@
 import React from "react";
-import { InputTypes } from "../../../../types/common/text-input.type";
+import { InputTypes } from "../../../../types/common/input/text-input.type";
 const TextInput = ({
   id,
   label,

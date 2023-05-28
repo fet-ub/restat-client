@@ -1,5 +1,5 @@
 import React from 'react'
-import { SelectInputPropType } from '../../../../types/common/select-input.type';
+import { SelectInputPropType } from '../../../../types/common/input/select-input.type';
 import styles from '../input.module.css'
 
 const SelectInput = ({

@@ -9,6 +9,8 @@ import DashboardCard from "./components/common/cards/dashboard-card/DashboardCar
 import { IconRepository } from "./repository/icons/icon.repository";
 import ModalContainer from "./components/common/modal/modal-container/ModalContainer.common";
 import LogoutModal from "./components/common/modal/modules/logout/LogoutModal.module";
+import DeleteModal from "./components/common/modal/modules/delete/DeleteModal.module";
+import StatusModal from "./components/common/modal/modules/status/StatusModal.module";
 function App() {
    const [form, setForm] = useState({
      email: "",
@@ -17,8 +19,14 @@ function App() {
 
   return (
     <div className="App">
-      <ModalContainer width="700px">
-       <LogoutModal />
+      <ModalContainer width="400px">
+       {/* <LogoutModal /> */}
+       {/* <DeleteModal record="Lecturer"/> */}
+       <StatusModal
+       status="ERROR"
+       text="The new user has been added successfully"
+
+       />
       </ModalContainer>
       {/* <DashboardCard
       label="Students"
