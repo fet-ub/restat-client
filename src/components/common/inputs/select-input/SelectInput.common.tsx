@@ -9,7 +9,7 @@ const SelectInput = ({
   label,
 }: SelectInputPropType) => {
   return (
-    <div className="mb-4">
+    <div className="mb-4 w-full">
       <label className="block  text-[17px] text-secondary  font-[500] mb-2">
         {label}
       </label>
