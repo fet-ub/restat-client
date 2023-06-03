@@ -1,5 +1,5 @@
 import React from "react";
-import { InputTypes } from "../../../../types/common/text-input.type";
+import { InputTypes } from "../../../../types/common/input/text-input.type";
 const TextInput = ({
   id,
   label,
@@ -10,7 +10,7 @@ const TextInput = ({
   type,
 }: InputTypes) => {
   return (
-    <div className="mb-4">
+    <div className="mb-4 w-full">
       <label className="block  text-[17px] text-secondary  font-[500] mb-2">
         {label}
       </label>

@@ -1,19 +1,16 @@
-import React, {useState} from 'react'
-import { InputTypes } from '../../../../types/common/text-input.type'
-import {AiOutlineEye,AiOutlineEyeInvisible} from 'react-icons/ai'
+import React, { useState } from "react";
+import { InputTypes } from "../../../../types/common/input/text-input.type";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
-
-const PasswordInput = (
-    {
+const PasswordInput = ({
   id,
   label,
   name,
   value,
   placeholder,
   onChange,
-  type
-}: InputTypes
-) => {
+  type,
+}: InputTypes) => {
   const [hidden, setHidden] = useState<boolean>(false);
 
   return (
@@ -53,4 +50,4 @@ const PasswordInput = (
   );
 };
 
-export default PasswordInput
+export default PasswordInput;

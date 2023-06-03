@@ -1,5 +1,5 @@
 import React from 'react'
-import { ButtonTypes } from '../../../types/common/button.type'
+import { ButtonTypes } from '../../../types/common/button/button.type'
 
 const Button = ({text,buttonType,width,fullWidth,disable,onClick,icon}:ButtonTypes) => {
   return (

@@ -1,5 +1,5 @@
 import React from 'react'
-import { SelectInputPropType } from '../../../../types/common/select-input.type';
+import { SelectInputPropType } from '../../../../types/common/input/select-input.type';
 import styles from '../input.module.css'
 
 const SelectInput = ({
@@ -9,7 +9,7 @@ const SelectInput = ({
   label,
 }: SelectInputPropType) => {
   return (
-    <div className="mb-4">
+    <div className="mb-4 w-full">
       <label className="block  text-[17px] text-secondary  font-[500] mb-2">
         {label}
       </label>

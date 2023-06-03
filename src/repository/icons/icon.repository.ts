@@ -9,7 +9,12 @@ import UsersIcon from "../../icons/Users.icon";
 import PersonIcon from "../../icons/Person.icon";
 import DashboardBooksIcon from "../../icons/DashboardBooks.icon";
 import DashboardStudentIcon from "../../icons/DashboardStudent.icon";
-
+import CloseIcon from "../../icons/Close.icon";
+import CloseCircleIcon from "../../icons/CloseCircle.icon";
+import SuccessIcon from "../../icons/Success.icon";
+import PlusIcon from "../../icons/Plus.icon";
+import DownloadIcon from "../../icons/Download.icon";
+import PageIcon from "../../icons/Page.icon";
 export const IconRepository ={
     LogoIcon,
     BooksIcon,
@@ -21,6 +26,12 @@ export const IconRepository ={
     UsersIcon,
     PersonIcon,
     DashboardBooksIcon,
-    DashboardStudentIcon
+    DashboardStudentIcon,
+    CloseIcon,
+    CloseCircleIcon,
+    SuccessIcon,
+    PlusIcon ,
+    PageIcon,
+    DownloadIcon   
     
 }

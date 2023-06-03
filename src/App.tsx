@@ -1,57 +1,42 @@
-import React, { useState } from "react";
-import "./App.css";
-// import TextInput from "./components/common/inputs/text-input/TextInput.common";
-// import PasswordInput from "./components/common/inputs/password-input/PasswordInput.common";
-// import Button from "./components/common/buttons/Button.common";
-// import SelectInput from "./components/common/inputs/select-input/SelectInput.common";
-// import { LANGUAGE_CONSTANTS } from "./repository/constants/constants";
-import DashboardCard from "./components/common/cards/dashboard-card/DashboardCard.common";
-import { IconRepository } from "./repository/icons/icon.repository";
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+
+import DashboardPage from "./pages/dashboard/Dashboard.page";
+import AuthPage from "./pages/auth/Auth.page";
+import LoginPage from "./pages/auth/login/Login.page";
+import ForgotPasswordPage from "./pages/auth/forgot-password/ForgotPassword.page";
+import NotfoundPage from "./pages/404/Notfound.page";
+import IndexPage from "./pages/dashboard/index/Index.page";
+import SettingsPage from "./pages/dashboard/settings/Settings.page";
+import UsersPage from "./pages/dashboard/users/Users.page";
+
 function App() {
-   const [form, setForm] = useState({
-     email: "",
-     password: "",
-   });
-
   return (
-    <div className="App">
-      <DashboardCard
-      label="Students"
-      stats={120}
-      icon={<IconRepository.DashboardStudentIcon/>}
-      />
-      {/* <Button text="confirm" buttonType="TERTIARY" /> */}
-      {/* <SelectInput
-        selectOptions={LANGUAGE_CONSTANTS}
-        label="Language"
-        onChange={(e) => {
-          setForm({ ...form, email: e.target.value });
-        }}
-        value={form.email}
-      /> */}
-      {/* <TextInput
-        placeholder={"example@gmail.com"}
-        label="Email Address"
-        type="email"
-        id="Email"
-        name="Email"
-        value={form.email}
-        onChange={(e) => {
-          setForm({ ...form, email: e.target.value });
-        }}
-      /> */}
+    <div className="app">
+      <Router>
+        <Routes>
+          <Route path="/" element={<Navigate replace to="/auth" />} />
 
-      {/* <PasswordInput
-        placeholder={"********"}
-        label="Password"
-        type="password"
-        id="password"
-        name="password"
-        value={form.password}
-        onChange={(e) => {
-          setForm({ ...form, password: e.target.value });
-        }}
-      /> */}
+          <Route path="/dashboard" element={<DashboardPage />}>
+            <Route index element={<IndexPage />} />
+            <Route path="settings" element={<SettingsPage />} />
+            <Route path="users" element={<UsersPage />} />
+          </Route>
+
+          <Route path="/auth" element={<AuthPage />}>
+            <Route index element={<Navigate replace to="/auth/login" />} />
+            <Route path="login" element={<LoginPage />} />
+            <Route path="forgot-password" element={<ForgotPasswordPage />} />
+          </Route>
+
+          <Route path="*" element={<NotfoundPage />} />
+        </Routes>
+      </Router>
     </div>
   );
 }

@@ -1,0 +1,22 @@
+.dashboard {
+    display: flex;
+    display: -ms-flexbox;
+    flex-direction: column;
+    -ms-flex-direction: column;
+    gap: 2.4rem;
+    width: 100%;
+}
+
+.head h2 {
+    font-size: 2.4rem;
+    font-weight: bold;
+}
+
+.grid {
+    display: flex;
+    display: -ms-flexbox;
+    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    width: 100%;
+    gap: 2.4rem;
+}

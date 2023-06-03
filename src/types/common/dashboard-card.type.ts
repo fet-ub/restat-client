@@ -1,8 +1,5 @@
-
-
-
-export interface DashboardCardPropType{
-    icon:JSX.Element,
-    label:string,
-    stats:number|string,
+export interface DashboardCardPropType {
+  icon: JSX.Element;
+  label: string;
+  stats: number | string;
 }
