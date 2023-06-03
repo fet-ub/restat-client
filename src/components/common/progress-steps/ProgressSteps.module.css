@@ -1,0 +1,96 @@
+.mainContainer {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.brokenLine {
+  
+  /* border-top: 1px dashed black; */
+  width: 226px;
+  height: 0px;
+  left: 35px;
+  top: 18px;
+   border: 3px solid var(--SLATE_300);
+
+}
+
+.regularLine {
+  width: 226px;
+    border: 3px solid var(--PRIMARY_COLOR);
+}
+
+.filled {
+  background-color: var(--PRIMARY_COLOR);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  /* background-color: #036E67; */
+  border: 3px solid var(--PRIMARY_COLOR);
+  transition: 0.4s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stepContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  position: relative;
+}
+
+.wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+.stepStyle {
+background-color: var(--PRIMARY_COLOR);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  /* background-color: #036E67; */
+  border: 3px soliD var(--PRIMARY_COLOR);
+  transition: 0.4s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stepCount {
+  font-size: 19px;
+  color: white;
+}
+
+.stepsLabelContainer {
+  position: absolute;
+  top: 66px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.stepLabel {
+  font-size: 19px;
+  color: #4a154b;
+}
+
+@media screen and (max-width: 700px) {
+  .designBtnOne {
+    height: 50px;
+    font-size: 1.6rem;
+  }
+
+  .designBtnTwo {
+    height: 50px;
+    font-size: 1.6rem;
+  }
+
+  .designBtnThree {
+    height: 50px;
+    font-size: 1.6rem;
+  }
+}

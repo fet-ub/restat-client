@@ -12,7 +12,9 @@ import DashboardStudentIcon from "../../icons/DashboardStudent.icon";
 import CloseIcon from "../../icons/Close.icon";
 import CloseCircleIcon from "../../icons/CloseCircle.icon";
 import SuccessIcon from "../../icons/Success.icon";
-
+import PlusIcon from "../../icons/Plus.icon";
+import DownloadIcon from "../../icons/Download.icon";
+import PageIcon from "../../icons/Page.icon";
 export const IconRepository ={
     LogoIcon,
     BooksIcon,
@@ -27,6 +29,9 @@ export const IconRepository ={
     DashboardStudentIcon,
     CloseIcon,
     CloseCircleIcon,
-    SuccessIcon    
+    SuccessIcon,
+    PlusIcon ,
+    PageIcon,
+    DownloadIcon   
     
 }

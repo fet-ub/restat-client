@@ -1,74 +1,42 @@
-import React, { useState } from "react";
-import "./App.css";
-import TextInput from "./components/common/inputs/text-input/TextInput.common";
-import PasswordInput from "./components/common/inputs/password-input/PasswordInput.common";
-import Button from "./components/common/buttons/Button.common";
-import SelectInput from "./components/common/inputs/select-input/SelectInput.common";
-import { LANGUAGE_CONSTANTS } from "./repository/constants/constants";
-import DashboardCard from "./components/common/cards/dashboard-card/DashboardCard.common";
-import { IconRepository } from "./repository/icons/icon.repository";
-import ModalContainer from "./components/common/modal/modal-container/ModalContainer.common";
-import LogoutModal from "./components/common/modal/modules/logout/LogoutModal.module";
-import DeleteModal from "./components/common/modal/modules/delete/DeleteModal.module";
-import StatusModal from "./components/common/modal/modules/status/StatusModal.module";
-import AddLecturerModal from "./components/common/modal/modules/add-lecturer/AddLecturerModal.module";
-import AddUserModal from "./components/common/modal/modules/add-user/AddUserModal.module";
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+
+import DashboardPage from "./pages/dashboard/Dashboard.page";
+import AuthPage from "./pages/auth/Auth.page";
+import LoginPage from "./pages/auth/login/Login.page";
+import ForgotPasswordPage from "./pages/auth/forgot-password/ForgotPassword.page";
+import NotfoundPage from "./pages/404/Notfound.page";
+import IndexPage from "./pages/dashboard/index/Index.page";
+import SettingsPage from "./pages/dashboard/settings/Settings.page";
+import UsersPage from "./pages/dashboard/users/Users.page";
+
 function App() {
-   const [form, setForm] = useState({
-     email: "",
-     password: "",
-   });
-
   return (
-    <div className="App">
-      <ModalContainer width="800px">
-        <AddUserModal/>
-        {/* <AddLecturerModal/> */}
-       {/* <LogoutModal /> */}
-       {/* <DeleteModal record="student"/> */}
-       {/* <StatusModal
-       status="SUCCESS"
-       text="The new user has been added successfully"
+    <div className="app">
+      <Router>
+        <Routes>
+          <Route path="/" element={<Navigate replace to="/auth" />} />
 
-       /> */}
-      </ModalContainer>
-      {/* <DashboardCard
-      label="Students"
-      stats={120}
-      icon={<IconRepository.DashboardStudentIcon/>}
-      /> */}
-      {/* <Button text="confirm" buttonType="SECONDARY" /> */}
-      {/* <SelectInput
-        selectOptions={LANGUAGE_CONSTANTS}
-        label="Language"
-        onChange={(e) => {
-          setForm({ ...form, email: e.target.value });
-        }}
-        value={form.email}
-      /> */}
-      {/* <TextInput
-        placeholder={"example@gmail.com"}
-        label="Email Address"
-        type="email"
-        id="Email"
-        name="Email"
-        value={form.email}
-        onChange={(e) => {
-          setForm({ ...form, email: e.target.value });
-        }}
-      /> */}
+          <Route path="/dashboard" element={<DashboardPage />}>
+            <Route index element={<IndexPage />} />
+            <Route path="settings" element={<SettingsPage />} />
+            <Route path="users" element={<UsersPage />} />
+          </Route>
 
-      {/* <PasswordInput
-        placeholder={"********"}
-        label="Password"
-        type="password"
-        id="password"
-        name="password"
-        value={form.password}
-        onChange={(e) => {
-          setForm({ ...form, password: e.target.value });
-        }}
-      /> */}
+          <Route path="/auth" element={<AuthPage />}>
+            <Route index element={<Navigate replace to="/auth/login" />} />
+            <Route path="login" element={<LoginPage />} />
+            <Route path="forgot-password" element={<ForgotPasswordPage />} />
+          </Route>
+
+          <Route path="*" element={<NotfoundPage />} />
+        </Routes>
+      </Router>
     </div>
   );
 }

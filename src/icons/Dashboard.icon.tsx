@@ -4,8 +4,8 @@ import { IconPropsType } from "../types";
 const DashboardIcon = ({ width = 42, height = 41 }: IconPropsType) => {
   return (
     <svg
-      width={42}
-      height={41}
+      width={width}
+      height={height}
       viewBox="0 0 42 41"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

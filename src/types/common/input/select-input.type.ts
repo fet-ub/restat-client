@@ -4,8 +4,8 @@ export interface selectOptionType {
 }
 
 export interface SelectInputPropType {
-  selectOptions: selectOptionType[];
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  value: string;
-  label: string;
+  selectOptions?: selectOptionType[];
+  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  value?: string;
+  label?: string;
 }
