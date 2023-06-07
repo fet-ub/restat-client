@@ -3,4 +3,5 @@ export interface ModalContainerPropTypes {
   width?: string;
   fullWidth?: boolean;
   onClick?: () => void;
+  height?: string;
 }

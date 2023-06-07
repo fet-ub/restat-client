@@ -16,11 +16,11 @@ const AddUserModal = () => {
        courseprefix: "",
      });
   return (
-    <div className="px-3 pb-5">
-      <h1 className="text-secondary text-2xl font-semibold">Add User</h1>
+    <div className="px-3 pb-5 bg-white">
+      <h1 className="text-secondary text-3xl font-semibold">Add User</h1>
 
-      <form className="mt-4">
-        <div className="flex gap-5 ">
+      <form className="mt-7">
+        <div className="flex gap-9 mb-6 ">
           <TextInput
             placeholder="Ayuk"
             label="First Name"
@@ -44,7 +44,7 @@ const AddUserModal = () => {
             }}
           />
         </div>
-        <div className="flex gap-5 ">
+        <div className="flex gap-9 mb-6 ">
           <SelectInput
             selectOptions={USER_ROLE}
             label="Role"
@@ -63,59 +63,60 @@ const AddUserModal = () => {
           />
         </div>
 
-        <TextInput
-          placeholder={"example@gmail.com"}
-          label="Email Address"
-          type="email"
-          id="Email"
-          name="Email"
-          value={form.email}
-          onChange={(e) => {
-            setForm({ ...form, email: e.target.value });
-          }}
-        />
-
-        {
-            form.role ==='lecturer'?(
-                <>
-                 <TextInput
-          placeholder={"Algorithms"}
-          label="Course Title"
-          type="text"
-          id="CourseTitle"
-          name="Course Title"
-          value={form.coursetitle}
-          onChange={(e) => {
-            setForm({ ...form, coursetitle: e.target.value });
-          }}
-        />
-        <div className="flex gap-5 ">
-          <SelectInput
-            selectOptions={COURSE_PREFIX}
-            label="Course Prefix"
-            value={form.courseprefix}
-            onChange={(e) => {
-              setForm({ ...form, courseprefix: e.target.value });
-            }}
-          />
+        <div className='w-full h-full mb-12 '>
           <TextInput
-            placeholder={"444"}
-            label="Course Code"
-            type="number"
-            id="CourseCode"
-            name="Course Code"
-            value={form.coursecode}
+            placeholder={"example@gmail.com"}
+            label="Email Address"
+            type="email"
+            id="Email"
+            name="Email"
+            value={form.email}
             onChange={(e) => {
-              setForm({ ...form, coursecode: e.target.value });
+              setForm({ ...form, email: e.target.value });
             }}
           />
         </div>
 
-                </>
-            ):''
-        }
+        {form.role === "lecturer" ? (
+          <>
+            <TextInput
+              placeholder={"Algorithms"}
+              label="Course Title"
+              type="text"
+              id="CourseTitle"
+              name="Course Title"
+              value={form.coursetitle}
+              onChange={(e) => {
+                setForm({ ...form, coursetitle: e.target.value });
+              }}
+            />
+            <div className="flex gap-5 items-center ">
+              <SelectInput
+                selectOptions={COURSE_PREFIX}
+                label="Course Prefix"
+                value={form.courseprefix}
+                onChange={(e) => {
+                  setForm({ ...form, courseprefix: e.target.value });
+                }}
+              />
+              <TextInput
+                placeholder={"444"}
+                label="Course Code"
+                type="number"
+                id="CourseCode"
+                name="Course Code"
+                value={form.coursecode}
+                onChange={(e) => {
+                  setForm({ ...form, coursecode: e.target.value });
+                }}
+              />
+            </div>
+          </>
+        ) : (
+          ""
+        )}
 
-        <div className="flex gap-5 mt-1 ">
+        <div className="flex gap-5 mt-1  mb-8">
           <Button text="Cancel" fullWidth={true} buttonType="TERTIARY" />
           <Button text="confirm" fullWidth={true} buttonType="PRIMARY" />
         </div>

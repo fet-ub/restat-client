@@ -6,6 +6,7 @@ import styles from "./dashboard.module.css";
 import SidebarComponent from "../../components/dashboard/sidebar/Sidebar.component";
 import { IconRepository } from "../../repository/icons/icon.repository";
 import Image from "../../assets/images/image.png";
+import Toggle from "../../components/common/toogle/Toggle.common";
 
 const DashboardPage = () => {
   return (
@@ -17,11 +18,11 @@ const DashboardPage = () => {
         <div className={styles.header}>
           <h2 title="FET">Faculty Of Engineering and Technology</h2>
           <div className={styles.items}>
-            <div className={styles.icon}>
-              <IconRepository.CloseCircleIcon width={32} height={32} />
+            <div >
+              <Toggle/>
             </div>
             <div className={styles.icon}>
-              <IconRepository.CloseCircleIcon width={32} height={32} />
+              <IconRepository.BellIcon width={32} height={32} />
               <span>2</span>
             </div>
 
