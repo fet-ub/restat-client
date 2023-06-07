@@ -15,6 +15,10 @@ import SuccessIcon from "../../icons/Success.icon";
 import PlusIcon from "../../icons/Plus.icon";
 import DownloadIcon from "../../icons/Download.icon";
 import PageIcon from "../../icons/Page.icon";
+import BellIcon from "../../icons/Bell.icon";
+import MessageIcon from "../../icons/Message.icon";
+import DeleteIcon from "../../icons/Delete.icon";
+import EditIcon from "../../icons/Edit.icon";
 export const IconRepository ={
     LogoIcon,
     BooksIcon,
@@ -32,6 +36,11 @@ export const IconRepository ={
     SuccessIcon,
     PlusIcon ,
     PageIcon,
-    DownloadIcon   
+    DownloadIcon,
+    BellIcon,
+    EditIcon,
+    MessageIcon,
+    DeleteIcon
+     
     
 }

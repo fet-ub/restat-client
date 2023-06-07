@@ -19,7 +19,7 @@
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 62.5% !important;
 }
 
 html,
@@ -35,4 +35,20 @@ body {
   --ERROR_COLOR: rgb(217 45 32);
   --TERTIARY_COLOR: #344054;
   --NOTIFICATION_COLOR: #ff7548;
+}
+
+
+.css-pdct74-MuiTablePagination-selectLabel{
+  font-size: 17px !important;
+}
+
+.css-levciy-MuiTablePagination-displayedRows{
+   font-size: 17px !important; 
+}
+
+.css-194a1fa-MuiSelect-select-MuiInputBase-input.css-194a1fa-MuiSelect-select-MuiInputBase-input.css-194a1fa-MuiSelect-select-MuiInputBase-input{
+   font-size: 17px !important; 
+   display: flex;
+   align-items: center;
+   gap:-30px !important ;
 }

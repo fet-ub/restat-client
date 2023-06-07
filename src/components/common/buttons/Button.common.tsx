@@ -15,7 +15,7 @@ const Button = ({text,buttonType,width,fullWidth,disable,onClick,icon}:ButtonTyp
           ? "bg-errorColor text-white"
           : "text-primary"
       }
-     py-[10px] px-5 border rounded-lg outline-none text-[16px] flex justify-center items-center `}
+     py-[10px] px-5 border rounded-lg outline-none text-[16px] flex justify-center items-center gap-3 `}
       onClick={onClick}
       disabled={disable}
       style={{

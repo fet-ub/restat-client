@@ -19,6 +19,7 @@
   position: absolute;
   left: 250px;
   top: 0;
+ 
 }
 
 .header {
@@ -29,8 +30,10 @@
   align-items: center;
   justify-content: space-between;
   padding: 1rem 2.4rem;
-  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid #CBD5E1;
+  
+  /* box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.3); */
 }
 
 .header h2 {
@@ -40,7 +43,7 @@
 }
 
 .modules {
-  padding: 2.4rem;
+  padding:2.4rem  2.4rem;
   max-width: 100%;
 }
 
@@ -83,7 +86,7 @@
   align-items: center;
   padding-top: 0.1rem;
   justify-content: center;
-  right: -0.6rem;
+  right: -0.2rem;
   color: #fff;
   font-size: 10px;
   background: var(--NOTIFICATION_COLOR);
