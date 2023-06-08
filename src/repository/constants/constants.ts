@@ -117,3 +117,17 @@ export const COURSE_PREFIX=[
     value:'fet'
   },
 ]
+
+
+export const SEMESTER = [
+  {
+    label: "First Semester",
+    value: "first semester",
+  },
+  {
+    label: "Second Semester",
+    value: "second semester",
+  },
+  
+  
+];

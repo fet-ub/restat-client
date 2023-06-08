@@ -9,6 +9,8 @@ import { ENGINEERING_DEPARTMENTS } from '../../../repository/constants/constants
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 import ModalContainer from '../../../components/common/modal/modal-container/ModalContainer.common';
 import AddUserModal from '../../../components/common/modal/modules/add-user/AddUserModal.module';
+import DashboardHeader from '../../../components/common/dashboard-header/DashboardHeader.common';
+import DownloadOptions from '../../../components/common/download-options/DownloadOptions.common';
 
 const UsersPage = () => {
 
@@ -51,44 +53,10 @@ const UsersPage = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-center">
-        <div className={styles.head}>
-          <h2>Dashboard</h2>
-        </div>
-
-        <div>
-          <Button
-            text="Add New User"
-            buttonType="PRIMARY"
-            icon={<IconRepository.PlusIcon height={18} width={18} />}
-            onClick={()=>setIsOpen(true)}
-          />
-        </div>
-      </div>
+      <DashboardHeader label={'Dashboard'} ButtonText='Add New User' onClick={()=>setIsOpen(true)} displayButton={true} />
 
       {/* icons row */}
-      <div className="flex gap-4 mt-10">
-        <Button
-          text="PDF"
-          buttonType="SECONDARY"
-          icon={<IconRepository.DownloadIcon height={25} />}
-        />
-        <Button
-          text="CSV"
-          buttonType="SECONDARY"
-          icon={<IconRepository.DownloadIcon height={25} />}
-        />
-        <Button
-          text="EXCEL"
-          buttonType="SECONDARY"
-          icon={<IconRepository.DownloadIcon height={25} />}
-        />
-        <Button
-          text="PRINT"
-          buttonType="SECONDARY"
-          icon={<IconRepository.PageIcon height={25} />}
-        />
-      </div>
+      <DownloadOptions/>
 
       <div className="w-[25%] mt-12">
         <SelectInput

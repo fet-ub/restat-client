@@ -14,10 +14,28 @@ const dataSet = [
     icon: <IconRepository.DashboardIcon width={24} height={24} />,
   },
   {
+    link: "/dashboard/students",
+    label: "Students",
+    notifications: 0,
+    icon: <IconRepository.StudentIcon width={24} height={24} />,
+  },
+  {
+    link: "/dashboard/courses",
+    label: "Courses",
+    notifications: 0,
+    icon: <IconRepository.BooksIcon width={24} height={24} />,
+  },
+  {
     link: "/dashboard/users",
     label: "Users",
     notifications: 4,
     icon: <IconRepository.UsersIcon width={24} height={24} />,
+  },
+  {
+    link: "/dashboard/transcript",
+    label: "Transcript",
+    notifications: 4,
+    icon: <IconRepository.PageIcon width={24} height={24} />,
   },
   {
     link: "/dashboard/settings",

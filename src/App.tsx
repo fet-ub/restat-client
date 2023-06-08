@@ -14,6 +14,9 @@ import NotfoundPage from "./pages/404/Notfound.page";
 import IndexPage from "./pages/dashboard/index/Index.page";
 import SettingsPage from "./pages/dashboard/settings/Settings.page";
 import UsersPage from "./pages/dashboard/users/Users.page";
+import StudentsPage from "./pages/dashboard/students/Students.page";
+import TranscriptPage from "./pages/dashboard/transcript/Transcript.page";
+import CoursesPage from "./pages/dashboard/courses/Courses.page";
 
 function App() {
   return (
@@ -26,6 +29,9 @@ function App() {
             <Route index element={<IndexPage />} />
             <Route path="settings" element={<SettingsPage />} />
             <Route path="users" element={<UsersPage />} />
+            <Route path="students" element={<StudentsPage />} />
+            <Route path="courses" element={<CoursesPage />} />
+            <Route path="transcript" element={<TranscriptPage />} />
           </Route>
 
           <Route path="/auth" element={<AuthPage />}>
