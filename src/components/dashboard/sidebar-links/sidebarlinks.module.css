@@ -37,5 +37,6 @@
 .list:hover .link,
 .list.active .link,
 .list.active:hover .link {
-    background: var(--TERTIARY_COLOR);
+    background: var(--LIGHT_GREEN);
+    border-left: 4px solid white;
 }

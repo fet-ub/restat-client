@@ -11,8 +11,9 @@
     display: -ms-flexbox;
     align-items: center;
     margin-bottom: 2.4rem;
-    background: var(--SECONDARY_COLOR);
+    background: var(--PRIMARY_COLOR);
     gap: 1.5rem;
+    border-bottom: 1px solid var(--SLATE_300);
 }
 
 .logo h2 {
