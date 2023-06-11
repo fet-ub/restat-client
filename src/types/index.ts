@@ -3,6 +3,9 @@ export interface IconPropsType {
   stroke?: number;
   width?: number;
   height?: number;
+  className?: string;
+
+
 
   // eslint-disable-next-line
   props?: any;

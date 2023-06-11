@@ -29,12 +29,13 @@ body {
 }
 
 :root {
-  --PRIMARY_COLOR: rgb(59 130 246);
+  --PRIMARY_COLOR: #42bfdd;
   --SECONDARY_COLOR: rgb(16 24 40);
   --SLATE_300: rgb(203 213 225);
   --ERROR_COLOR: rgb(217 45 32);
   --TERTIARY_COLOR: #344054;
   --NOTIFICATION_COLOR: #ff7548;
+  --LIGHT_GREEN: #a1dfee;
 }
 
 

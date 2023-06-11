@@ -6,7 +6,10 @@ import SelectInput from '../../../components/common/inputs/select-input/SelectIn
 import { ENGINEERING_DEPARTMENTS } from '../../../repository/constants/constants';
 import TextInput from '../../../components/common/inputs/text-input/TextInput.common';
 import DownloadOptions from '../../../components/common/download-options/DownloadOptions.common';
-import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
+import { DataGrid, GridColDef} from "@mui/x-data-grid";
+import ModalContainer from '../../../components/common/modal/modal-container/ModalContainer.common';
+import AddStudentModal from '../../../components/common/modal/modules/add-student/AddStudentModal.module';
+//  GridValueGetterParams; 
 
 
 const StudentsPage = () => {
@@ -142,6 +145,11 @@ const StudentsPage = () => {
           style={{ fontSize: "17px" }}
         />
       </div>
+      {isOpen && (
+        <ModalContainer width="800px" onClick={() => setIsOpen(false)}>
+          <AddStudentModal />
+        </ModalContainer>
+      )}
     </div>
   );
 }

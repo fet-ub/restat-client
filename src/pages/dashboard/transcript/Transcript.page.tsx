@@ -1,18 +1,17 @@
-import React, { useState } from 'react'
+import React from 'react'
 import DashboardHeader from '../../../components/common/dashboard-header/DashboardHeader.common'
 import SelectInput from '../../../components/common/inputs/select-input/SelectInput.common';
-import { ENGINEERING_DEPARTMENTS ,COURSE_LEVELS,SEMESTER} from '../../../repository/constants/constants';
+import { SEMESTER,SCHOOL_YEAR} from '../../../repository/constants/constants';
 import Button from '../../../components/common/buttons/Button.common';
 
 const TranscriptPage = () => {
-    const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div>
       <DashboardHeader
         label={"Transcript"}
         ButtonText="Add New User"
-        onClick={() => setIsOpen(true)}
+       
         displayButton={false}
       />
 
@@ -23,7 +22,7 @@ const TranscriptPage = () => {
 
         <div className='w-[50%] mt-10 flex flex-col gap-9'>
           <SelectInput
-            selectOptions={COURSE_LEVELS}
+            selectOptions={SCHOOL_YEAR}
             label="Year"
             value=""
           />

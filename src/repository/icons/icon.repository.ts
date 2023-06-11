@@ -19,6 +19,8 @@ import BellIcon from "../../icons/Bell.icon";
 import MessageIcon from "../../icons/Message.icon";
 import DeleteIcon from "../../icons/Delete.icon";
 import EditIcon from "../../icons/Edit.icon";
+import CertificateIcon from "../../icons/Certificate.icon";
+
 export const IconRepository ={
     LogoIcon,
     BooksIcon,
@@ -40,7 +42,8 @@ export const IconRepository ={
     BellIcon,
     EditIcon,
     MessageIcon,
-    DeleteIcon
+    DeleteIcon,
+    CertificateIcon
      
     
 }

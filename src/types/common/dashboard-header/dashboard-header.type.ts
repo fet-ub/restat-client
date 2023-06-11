@@ -3,6 +3,6 @@
 export interface DashboardHeaderPropType {
     label:string;
     ButtonText:string;
-    onClick:()=>void;
+    onClick?:()=>void;
     displayButton?:boolean;
 }

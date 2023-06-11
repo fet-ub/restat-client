@@ -35,7 +35,7 @@ const dataSet = [
     link: "/dashboard/transcript",
     label: "Transcript",
     notifications: 4,
-    icon: <IconRepository.PageIcon width={24} height={24} />,
+    icon: <IconRepository.CertificateIcon width={24} height={24} />,
   },
   {
     link: "/dashboard/settings",
