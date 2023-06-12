@@ -146,8 +146,8 @@ const StudentsPage = () => {
         />
       </div>
       {isOpen && (
-        <ModalContainer width="800px" onClick={() => setIsOpen(false)}>
-          <AddStudentModal />
+        <ModalContainer width="900px" onClick={() => setIsOpen(false)}>
+          <AddStudentModal closeModal={()=>setIsOpen(false)}/>
         </ModalContainer>
       )}
     </div>

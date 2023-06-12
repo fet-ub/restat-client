@@ -5,7 +5,7 @@ const ProgressSteps = ({ currentStep }: progressStepTypeProp) => {
     <div className={styles.mainContainer}>
       <div className={styles.stepContainer}>
         <div key={1} className={styles.wrapper}>
-          <div className={currentStep === 0 ? styles.stepStyle : styles.filled}>
+          <div className={currentStep === 0 ? styles.stepStyle : styles.filled} >
             <p className={styles.stepCount}>{1}</p>
           </div>
         </div>

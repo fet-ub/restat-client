@@ -1,7 +1,7 @@
 export interface InputTypes {
   id?: string;
   placeholder: string;
-  value: string;
+  value: string ;
   name: string;
   label: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
