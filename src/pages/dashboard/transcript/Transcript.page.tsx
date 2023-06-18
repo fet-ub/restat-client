@@ -7,30 +7,21 @@ import Button from '../../../components/common/buttons/Button.common';
 const TranscriptPage = () => {
 
   return (
-    <div>
+    <div className="bg-white dark:bg-tertiary w-full h-full ">
       <DashboardHeader
         label={"Transcript"}
         ButtonText="Add New User"
-       
         displayButton={false}
       />
 
       <div className="flex flex-col justify-center items-center">
         <div>
-          <h2 className="text-4xl font-bold">Request for Transcript</h2>
+          <h2 className="text-4xl font-bold dark:text-white">Request for Transcript</h2>
         </div>
 
-        <div className='w-[50%] mt-10 flex flex-col gap-9'>
-          <SelectInput
-            selectOptions={SCHOOL_YEAR}
-            label="Year"
-            value=""
-          />
-          <SelectInput
-            selectOptions={SEMESTER}
-            label="Semester"
-            value=""
-          />
+        <div className="w-[50%] mt-10 flex flex-col gap-9">
+          <SelectInput selectOptions={SCHOOL_YEAR} label="Year" value="" />
+          <SelectInput selectOptions={SEMESTER} label="Semester" value="" />
           <Button text="Send Request" buttonType="PRIMARY" fullWidth={true} />
         </div>
       </div>

@@ -11,11 +11,11 @@ const TextInput = ({
 }: InputTypes) => {
   return (
     <div className="mb-4 w-full">
-      <label className="block  text-[17px] text-secondary  font-[500] mb-2">
+      <label className="block  text-[17px] text-secondary  dark:text-white font-[500] mb-2">
         {label}
       </label>
       <input
-        className={` border border-slate-300 rounded-lg w-full py-7 px-3 text-secondary font-normal text-[17px] leading-tight focus:outline-none focus:shadow-outline placeholder:text-[17px] placeholder:font-normal focus:ring-1  ${
+        className={` border border-slate-300 rounded-lg w-full py-7 px-3 text-secondary font-normal text-[17px] leading-tight focus:outline-none focus:shadow-outline placeholder:text-[17px] placeholder:font-normal focus:ring-1 dark:bg-tertiary dark:text-white ${
           value.length > 2
             ? "focus:ring-1 focus:ring-validColor"
             : value.length === 0

@@ -16,8 +16,8 @@ const AddUserModal = () => {
        courseprefix: "",
      });
   return (
-    <div className="px-3 pb-5 bg-white">
-      <h1 className="text-secondary text-3xl font-semibold">Add User</h1>
+    <div className="px-3 pb-5 bg-white dark:bg-tertiary">
+      <h1 className="text-secondary text-3xl font-semibold dark:text-white">Add User</h1>
 
       <form className="mt-7">
         <div className="flex gap-9 mb-6 ">

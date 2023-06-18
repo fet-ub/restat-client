@@ -36,8 +36,10 @@ const AddStudentModal = ({closeModal}:{closeModal:()=>void}) => {
    const [currentstep, setCurrentstep] = useState(0);
 
   return (
-    <div className="px-8 pb-3 bg-white">
-      <h1 className="text-secondary text-3xl font-semibold">Add Student</h1>
+    <div className="px-8 pb-3 bg-white dark:bg-tertiary">
+      <h1 className="text-secondary text-3xl font-semibold dark:text-white">
+        Add Student
+      </h1>
       <div className="mt-4">
         <ProgressSteps currentStep={currentstep} />
       </div>

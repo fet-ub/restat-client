@@ -50,10 +50,15 @@ const UsersPage = () => {
 
   return (
     <div>
-      <DashboardHeader label={'Dashboard'} ButtonText='Add New User' onClick={()=>setIsOpen(true)} displayButton={true} />
+      <DashboardHeader
+        label={"Dashboard"}
+        ButtonText="Add New User"
+        onClick={() => setIsOpen(true)}
+        displayButton={true}
+      />
 
       {/* icons row */}
-      <DownloadOptions/>
+      <DownloadOptions />
 
       <div className="w-[25%] mt-12">
         <SelectInput
@@ -63,7 +68,7 @@ const UsersPage = () => {
         />
       </div>
 
-      <div style={{ height: 400, width: "100%",marginTop:40 }}>
+      <div style={{ height: 400, width: "100%", marginTop: 40 }}>
         <DataGrid
           rows={rows}
           columns={columns}
@@ -76,14 +81,14 @@ const UsersPage = () => {
           checkboxSelection
           getRowId={(row: any) => row.name + row.phone}
           style={{ fontSize: "17px" }}
-          
+          className="dark:text-white"
         />
       </div>
-      {
-        isOpen && <ModalContainer width='800px' onClick={()=>setIsOpen(false)}><AddUserModal/></ModalContainer>
-      }
-
-     
+      {isOpen && (
+        <ModalContainer width="800px" onClick={() => setIsOpen(false)}>
+          <AddUserModal />
+        </ModalContainer>
+      )}
     </div>
   );
 }

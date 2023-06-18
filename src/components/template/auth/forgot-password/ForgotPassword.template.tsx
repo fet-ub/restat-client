@@ -15,7 +15,7 @@ const ForgotPasswordTemplate = () => {
        navigate("/dashboard");
      };
   return (
-    <div className="w-full text-4xl font-bold mb-12">
+    <div className="w-full text-4xl font-bold mb-12 dark:text-white">
       <h3>Reset Your Password</h3>
 
       <div className="mb-12 mt-6">

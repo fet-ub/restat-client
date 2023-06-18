@@ -34,26 +34,20 @@ const IndexPage = () => {
   return (
     <div className={styles.dashboard}>
       <div className={styles.head}>
-        <h2>Dashboard</h2>
+        <h2 className="text-secondary dark:text-white">Dashboard</h2>
       </div>
 
       <div className={styles.grid}>
-        {dashboardCardData.map((card,index)=>{
+        {dashboardCardData.map((card, index) => {
           return (
             <DashboardCard
               key={index}
               label={card.label}
-              icon={
-                <>
-                  {card.icon}
-                </>
-              }
+              icon={<>{card.icon}</>}
               stats={card.stats}
             />
           );
-        }) 
-            
-         }
+        })}
       </div>
 
       <div>

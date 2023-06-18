@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  darkMode: "class",
   theme: {
     screen: {
       sm: "480px",
@@ -13,7 +14,7 @@ module.exports = {
       colors: {
         primary: "#42BFDD",
         secondary: " #101828",
-        tertiary: "#344054",
+        tertiary: "#053760",
         inputborderColor: "#CBD5E1",
         bluishColor: "#CBD5E1",
         errorColor: "#D92D20",

@@ -132,7 +132,8 @@ const CoursesPage = () => {
           pageSizeOptions={[5, 10]}
           checkboxSelection
           getRowId={(row: any) => row.code}
-          style={{ fontSize: "17px" }}
+          style={{ fontSize: "16px" }}
+          className="dark:text-white"
         />
       </div>
     </div>

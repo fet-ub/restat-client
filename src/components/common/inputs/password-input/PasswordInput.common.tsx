@@ -15,7 +15,7 @@ const PasswordInput = ({
 
   return (
     <div className="mb-4">
-      <label className="block  text-[17px] text-secondary  font-[500] mb-2">
+      <label className="block  text-[17px] text-secondary dark:text-white  font-[500] mb-2">
         {label}
       </label>
       <div className="relative flex w-full flex-wrap items-stretch mb-3">
@@ -26,7 +26,7 @@ const PasswordInput = ({
           name={name}
           value={value}
           type={hidden ? "text" : type}
-          className={` relative border border-slate-300 rounded w-full py-7 px-3 text-secondary font-normal text-[17px] leading-tight focus:outline-none focus:shadow-outline placeholder:text-[17px] placeholder:font-normal focus:ring-1 
+          className={` relative border border-slate-300 rounded w-full py-7 px-3 text-secondary font-normal text-[17px] leading-tight focus:outline-none focus:shadow-outline placeholder:text-[17px] placeholder:font-normal focus:ring-1  dark:bg-tertiary dark:text-white
            ${
              value.length > 2
                ? "focus:ring-1 focus:ring-validColor"

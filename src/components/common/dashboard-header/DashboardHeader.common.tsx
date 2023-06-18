@@ -8,7 +8,7 @@ const DashboardHeader = ({label,ButtonText,onClick,displayButton}:DashboardHeade
   return (
     <div className="flex justify-between items-center">
       <div>
-        <h2 className="text-[2.4rem] font-bold ">{label}</h2>
+        <h2 className="text-[2.4rem] font-bold dark:text-white ">{label}</h2>
       </div>
 
       {displayButton && (

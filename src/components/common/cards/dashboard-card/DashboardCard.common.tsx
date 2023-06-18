@@ -10,8 +10,8 @@ const DashboardCard = ({ label, icon, stats }: DashboardCardPropType) => {
       <div>{icon}</div>
 
       <div>
-        <h2 className="text-[20px]">{label}</h2>
-        <h1 className="text-[35px] font-bold">{stats}</h1>
+        <h2 className="text-[20px] dark:text-white">{label}</h2>
+        <h1 className="text-[35px] font-bold dark:text-white">{stats}</h1>
       </div>
     </div>
   );

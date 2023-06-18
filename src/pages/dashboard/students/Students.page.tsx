@@ -130,7 +130,10 @@ const StudentsPage = () => {
         <DownloadOptions />
       </div>
 
-      <div style={{ height: 400, width: "100%", marginTop: 40 }}>
+      <div
+        style={{ height: 400, width: "100%", marginTop: 40 }}
+        className="dark:text-white"
+      >
         <DataGrid
           rows={rows}
           columns={columns}
@@ -143,11 +146,12 @@ const StudentsPage = () => {
           checkboxSelection
           getRowId={(row: any) => row.name + row.phone}
           style={{ fontSize: "17px" }}
+          className="dark:text-white"
         />
       </div>
       {isOpen && (
         <ModalContainer width="900px" onClick={() => setIsOpen(false)}>
-          <AddStudentModal closeModal={()=>setIsOpen(false)}/>
+          <AddStudentModal closeModal={() => setIsOpen(false)} />
         </ModalContainer>
       )}
     </div>

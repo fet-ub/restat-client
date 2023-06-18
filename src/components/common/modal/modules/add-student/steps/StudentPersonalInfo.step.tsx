@@ -67,7 +67,7 @@ const StudentPersonalInfoStep = ({
   closeModal:()=>void;
 }) => {
   return (
-    <form>
+    <form className="dark:bg-tertiary">
       <div className="flex justify-between gap-10 mt-6 mb-4">
         <TextInput
           placeholder="Ayuk"
@@ -197,7 +197,7 @@ const StudentPersonalInfoStep = ({
       </div>
 
       <div className="flex gap-8 mt-3">
-        <Button text="Cancel" fullWidth={true}  onClick={closeModal}/>
+        <Button text="Cancel" fullWidth={true} onClick={closeModal} />
         <Button
           text="Next"
           fullWidth={true}

@@ -64,8 +64,8 @@ const StudentGuardianInfoStep = ({
   closeModal:()=>void
 }) => {
   return (
-    <form>
-      <div className='flex flex-col gap-3 mt-7'>
+    <form className="dark:bg-tertiary">
+      <div className="flex flex-col gap-3 mt-7">
         <TextInput
           placeholder="Ayuk"
           label="Guardian First Name"

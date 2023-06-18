@@ -64,7 +64,7 @@ const StudentAcademicInfoStep = ({
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
 }) => {
   return (
-    <div className="mt-5 mb-4">
+    <div className="mt-5 mb-4 dark:bg-tertiary">
       <form>
         <div className="flex justify-between gap-10 mt-2 mb-1 ">
           <TextInput
