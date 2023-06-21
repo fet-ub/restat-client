@@ -85,7 +85,7 @@ const StudentAcademicInfoStep = ({
               setForm({ ...form, level: e.target.value });
             }}
             value={form.level}
-            mb-4
+           
           />
           <SelectInput
             selectOptions={SCHOOL_YEAR}
@@ -94,7 +94,7 @@ const StudentAcademicInfoStep = ({
               setForm({ ...form, year: e.target.value });
             }}
             value={form.year}
-            mb-4
+            
           />
         </div>
 
