@@ -5,8 +5,27 @@ import styles from "./sidebar.module.css";
 
 import { IconRepository } from "../../../repository/icons/icon.repository";
 import SidebarLinksComponent from "../sidebar-links/SidebarLinks.component";
+// import { DashboardDefaultType } from "../../../default";
+// import { IconPropsType } from "../../../types";
 
-const dataSet = [
+
+export enum DashboardType {
+  DEAN = 0,
+  HOD = 1,
+  COORDINATOR= 2,
+  LECTURER = 3,
+  SECRETARY = 4,
+  STUDENT=5
+}
+
+export type DataLinksType = {
+  link: string;
+  label: string;
+  icon:  JSX.Element;
+  notifications:number;
+  ref?: DashboardType[];
+};
+const dataSet:DataLinksType[] = [
   {
     link: "/dashboard",
     label: "Dashboard",
@@ -43,10 +62,61 @@ const dataSet = [
     notifications: 0,
     icon: <IconRepository.SettingsIcon width={24} height={24} />,
   },
+  {
+    link: "/dashboard/ca",
+    label: "CA",
+    notifications: 1,
+    icon: <IconRepository.CertificateIcon width={24} height={24} />,
+  },
+  {
+    link: "/dashboard/exam",
+    label: "Exam",
+    notifications: 1,
+    icon: <IconRepository.CertificateIcon width={24} height={24} />,
+  },
 ];
 
+
+
+// const renderDashboardLinks = (dataSource: DataLinksType[]) => {
+  
+//   return (
+//     <>
+//       {dataSource.length > 0 &&
+//         dataSource.map((link, index) => {
+//           return (
+//             <Fragment key={index}>
+//               {link.ref !== undefined &&
+//               link.ref.includes(DashboardDefaultType) ? (
+//                 <li className={styles.list}>
+//                   <Link
+//                     className={`${styles.link} ${
+//                       location.pathname === link.link ? styles.active : ""
+//                     }`}
+//                     to={link.link}
+//                   >
+//                     <span>{link.icon}</span>
+//                     {link.label}
+//                   </Link>
+//                 </li>
+//               ) : (
+//                 ""
+//               )}
+//             </Fragment>
+//           );
+//         })}
+//     </>
+//   );
+// };
+
 const SidebarComponent = () => {
-    const location = useLocation();
+//  const [stateMutation, setStateMutation] = useState(false);
+ const location = useLocation();
+
+//  useEffect(() => {
+//    setStateMutation(!stateMutation);
+//  }, [location.pathname]);
+    
 
   return (
     <aside className={styles.sidebar}>

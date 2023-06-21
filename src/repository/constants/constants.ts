@@ -194,3 +194,15 @@ export const SCHOOL_YEAR=[
     value:'2024'
   },
 ]
+
+
+export const SOFTWARE_COURSES=[
+  {
+    label:'Algorithms',
+    value:'algorithms'
+  },
+  {
+    label:'linear Algebra',
+    value:'linear Algebra',
+  },
+]

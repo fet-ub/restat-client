@@ -17,6 +17,8 @@ import UsersPage from "./pages/dashboard/users/Users.page";
 import StudentsPage from "./pages/dashboard/students/Students.page";
 import TranscriptPage from "./pages/dashboard/transcript/Transcript.page";
 import CoursesPage from "./pages/dashboard/courses/Courses.page";
+import CaPage from "./pages/dashboard/ca/Ca.page";
+import ExamPage from "./pages/dashboard/exam/Exam.page";
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
             <Route path="students" element={<StudentsPage />} />
             <Route path="courses" element={<CoursesPage />} />
             <Route path="transcript" element={<TranscriptPage />} />
+            <Route path="ca" element={<CaPage />} />
+            <Route path="exam" element={<ExamPage/>} />
           </Route>
 
           <Route path="/auth" element={<AuthPage />}>

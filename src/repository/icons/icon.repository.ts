@@ -20,6 +20,7 @@ import MessageIcon from "../../icons/Message.icon";
 import DeleteIcon from "../../icons/Delete.icon";
 import EditIcon from "../../icons/Edit.icon";
 import CertificateIcon from "../../icons/Certificate.icon";
+import UploadIcon from "../../icons/Upload.icon";
 
 export const IconRepository ={
     LogoIcon,
@@ -43,7 +44,8 @@ export const IconRepository ={
     EditIcon,
     MessageIcon,
     DeleteIcon,
-    CertificateIcon
+    CertificateIcon,
+    UploadIcon,
      
     
 }
