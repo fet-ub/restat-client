@@ -7,7 +7,7 @@ const ModalContainer = ({children,width,fullWidth,onClick,height}:ModalContainer
   return (
     <div className={styles.modal} >
       <div
-        className={`py-2 px-4 max-w-[2000px]  border rounded-lg bg-white dark:bg-tertiary`}
+        className={`py-2 px-4 max-w-[2000px]  border rounded-lg bg-white dark:bg-tertiary dark:border-none`}
         style={{
           boxShadow: "0px 20px 25px rgba(76, 103, 100, 0.1)",
           width:

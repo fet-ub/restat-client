@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import DashboardHeader from '../../../components/common/dashboard-header/DashboardHeader.common';
 import ModalContainer from '../../../components/common/modal/modal-container/ModalContainer.common';
-import AddCaModal from '../../../components/common/modal/modules/ca/AddCaModal.module';
+import AddMarksModal from '../../../components/common/modal/modules/marks/AddMarksModal.module';
+import { MarksType } from '../../../types/atoms/enums.atoms';
 
 const CaPage = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,14 +12,14 @@ const CaPage = () => {
     <div>
       {" "}
       <DashboardHeader
-        label={"Dashboard"}
+        label={"CA"}
         ButtonText="Add CA marks"
         onClick={() => setIsOpen(true)}
         displayButton={true}
       />
       {isOpen && (
         <ModalContainer width="700px" onClick={() => setIsOpen(false)}>
-          <AddCaModal  />
+          <AddMarksModal modalType={MarksType.CA}  />
         </ModalContainer>
       )}
     </div>

@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { IconRepository } from "../../../../../repository/icons/icon.repository";
 import SelectInput from "../../../inputs/select-input/SelectInput.common";
-import { SCHOOL_YEAR, SOFTWARE_COURSES } from "../../../../../repository/constants/constants";
+import { ACADEMIC_YEAR, SOFTWARE_COURSES } from "../../../../../repository/constants/constants";
 import Button from "../../../buttons/Button.common";
+import { AddMarksModalPropType } from "../../../../../types/common/modal/add-marks.modal.type";
+import { MarksType } from "../../../../../types/atoms/enums.atoms";
 
 
-const AddCaModal = () => {
+const AddMarksModal = ({modalType}:AddMarksModalPropType) => {
   const [active, setActive] = useState(0);
   const [form, setForm] = useState({
     course:'',
@@ -30,14 +32,18 @@ const AddCaModal = () => {
     setActive(1);
   };
 
+  const markText= modalType === MarksType.CA? 'CA':'Exam'
+
   return (
     <div className="mb-10 px-5">
-      <h2 className="text-3xl font-bold text-secondary">Bulk Upload Marks</h2>
-      <p className="text-xl mb-5 mt-1">
-        Here,you can upload bulk CA marks as .xls or .csv
+      <h2 className="text-3xl font-bold text-secondary dark:text-white">
+        Bulk Upload Marks
+      </h2>
+      <p className="text-xl mb-5 mt-1 dark:text-white">
+      {`Here,you can upload bulk ${markText} marks as .xls or .csv`}
       </p>
 
-      <div className={"bg-[#f4f4f4] px-4 border-t-2 border-primary  py-4"}>
+      <div className={"bg-[#f4f4f4]  px-4 border-t-2 border-primary  py-4"}>
         <div className="flex mt-4">
           <div
             onClick={handleXls}
@@ -64,12 +70,15 @@ const AddCaModal = () => {
             }
           >
             {selectedFile ? (
-              <h1>{selectedFile.name}</h1>
+              <h1 className="text-2xl">{selectedFile.name}</h1>
             ) : (
               <>
                 <h1 className="text-xl">
                   Drag and Drop or
-                  <span className="text-primary"> Upload new file</span>
+                  <span className="text-primary text-2xl">
+                    {" "}
+                    Upload new file
+                  </span>
                 </h1>
                 <div>
                   <IconRepository.UploadIcon />
@@ -88,10 +97,7 @@ const AddCaModal = () => {
         </label>
       </div>
 
-      <div className="mb-5 mt-8">
-
-
-
+      <div className="mb-5 mt-8 flex flex-col gap-4">
         <SelectInput
           selectOptions={SOFTWARE_COURSES}
           label="Course"
@@ -101,7 +107,7 @@ const AddCaModal = () => {
           value={form.year}
         />
         <SelectInput
-          selectOptions={SCHOOL_YEAR}
+          selectOptions={ACADEMIC_YEAR}
           label="Year"
           onChange={(e) => {
             setForm({ ...form, year: e.target.value });
@@ -110,16 +116,11 @@ const AddCaModal = () => {
         />
       </div>
 
-      <div className="w-full mt-5">
-        <Button
-        text="Upload"
-        buttonType="PRIMARY"
-        fullWidth={true}
-        />
-       
+      <div className="w-full mt-8">
+        <Button text={`Upload ${markText} marks`} buttonType="PRIMARY" fullWidth={true} />
       </div>
     </div>
   );
 };
 
-export default AddCaModal;
+export default AddMarksModal;
