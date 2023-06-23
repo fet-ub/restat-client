@@ -23,6 +23,7 @@ module.exports = {
         validColor: "#048a81",
         darkBlue: "#0F172A",
         brownColor: "#CBD5E1",
+        faintBlue: "#bfdffb",
       },
     },
   },

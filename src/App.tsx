@@ -19,6 +19,7 @@ import TranscriptPage from "./pages/dashboard/transcript/Transcript.page";
 import CoursesPage from "./pages/dashboard/courses/Courses.page";
 import CaPage from "./pages/dashboard/ca/Ca.page";
 import ExamPage from "./pages/dashboard/exam/Exam.page";
+import EncryptionCaPage from "./pages/dashboard/encryption-ca/EncryptionCa.page";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             <Route path="transcript" element={<TranscriptPage />} />
             <Route path="ca" element={<CaPage />} />
             <Route path="exam" element={<ExamPage/>} />
+            <Route path="encrypt-ca" element={<EncryptionCaPage/>} />
           </Route>
 
           <Route path="/auth" element={<AuthPage />}>

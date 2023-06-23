@@ -74,6 +74,12 @@ const dataSet:DataLinksType[] = [
     notifications: 1,
     icon: <IconRepository.CertificateIcon width={24} height={24} />,
   },
+  {
+    link: "/dashboard/encrypt-ca",
+    label: "Encrypt CA",
+    notifications: 1,
+    icon: <IconRepository.CertificateIcon width={24} height={24} />,
+  },
 ];
 
 
