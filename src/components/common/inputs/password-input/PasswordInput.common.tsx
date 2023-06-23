@@ -26,7 +26,7 @@ const PasswordInput = ({
           name={name}
           value={value}
           type={hidden ? "text" : type}
-          className={` relative border border-slate-300 rounded w-full py-7 px-3 text-secondary font-normal text-[17px] leading-tight focus:outline-none focus:shadow-outline placeholder:text-[17px] placeholder:font-normal focus:ring-1  dark:bg-tertiary dark:text-white
+          className={` relative border border-slate-300 rounded w-full py-6 px-3 text-secondary font-normal text-[17px] leading-tight focus:outline-none focus:shadow-outline placeholder:text-[17px] placeholder:font-normal focus:ring-1  dark:bg-tertiary dark:text-white
            ${
              value.length > 2
                ? "focus:ring-1 focus:ring-validColor"
@@ -35,7 +35,7 @@ const PasswordInput = ({
                : "focus:ring-1 focus:ring-errorColor"
            }`}
         />
-        <span className="z-10 h-full leading-snug font-normal  text-center text-slate-300 absolute bg-transparent rounded text-base items-center justify-center w-8 right-3  py-7">
+        <span className="z-10 h-full leading-snug font-normal  text-center text-slate-300 absolute bg-transparent rounded text-base items-center justify-center w-8 right-3  py-5">
           {hidden ? (
             <AiOutlineEye size={25} onClick={() => setHidden(!hidden)} />
           ) : (

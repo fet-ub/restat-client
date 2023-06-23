@@ -21,6 +21,10 @@ import DeleteIcon from "../../icons/Delete.icon";
 import EditIcon from "../../icons/Edit.icon";
 import CertificateIcon from "../../icons/Certificate.icon";
 import UploadIcon from "../../icons/Upload.icon";
+import DownloadCloudIcon from "../../icons/DownloadCloud.icon";
+import RightPaginationIcon from "../../icons/RightPagination.icon";
+import LeftPaginationIcon from "../../icons/LeftPagnination.icon";
+
 
 export const IconRepository ={
     LogoIcon,
@@ -46,6 +50,10 @@ export const IconRepository ={
     DeleteIcon,
     CertificateIcon,
     UploadIcon,
+    DownloadCloudIcon,
+    RightPaginationIcon,
+    LeftPaginationIcon
+    
      
     
 }
