@@ -20,9 +20,16 @@ const LeftPaginationIcon = ({ width = 32, height = 32 }: IconPropsType) => {
       />
       <path
         d="M19.41 11.41L18 10L12 16L18 22L19.41 20.59L14.83 16L19.41 11.41Z"
-        fill="#eeeeee"
+        fill="rgb(203 213 225)"
       />
-      <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke="#eeeeee" />
+      <rect
+        x="0.5"
+        y="0.5"
+        width="31"
+        height="31"
+        rx="5.5"
+        stroke="rgb(203 213 225)"
+      />
     </svg>
   );
 }

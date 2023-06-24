@@ -20,9 +20,16 @@ const RightPaginationIcon = ({ width = 32, height = 32 }: IconPropsType) => {
       />
       <path
         d="M14.0001 10L12.5901 11.41L17.1701 16L12.5901 20.59L14.0001 22L20.0001 16L14.0001 10Z"
-        fill="#eeeeee"
+        fill="rgb(203 213 225)"
       />
-      <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke="#eeeeee" />
+      <rect
+        x="0.5"
+        y="0.5"
+        width="31"
+        height="31"
+        rx="5.5"
+        stroke="rgb(203 213 225)"
+      />
     </svg>
   );
 };

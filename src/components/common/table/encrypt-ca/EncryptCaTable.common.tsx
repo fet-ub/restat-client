@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./encryptCaTable.module.css";
 import StatusCard from "../../cards/status-card/StatusCard.common";
-import SelectInput from "../../inputs/select-input/SelectInput.common";
+// import SelectInput from "../../inputs/select-input/SelectInput.common";
 import TextInput from "../../inputs/text-input/TextInput.common";
 import Button from "../../buttons/Button.common";
 import { IconRepository } from "../../../../repository/icons/icon.repository";
@@ -10,7 +10,7 @@ interface marksType {
   id: string;
   matricule: string;
   Ca: string;
-  status: boolean;
+  status: string;
   encrypt: string;
 }
 
@@ -19,46 +19,77 @@ const EncryptCaTable = () => {
     filterText: "",
     searchText: "",
   });
+
+  
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(10);
+
+  
+
   const data = [
     {
       id: "01",
       matricule: "FE19A038",
-      Ca: "30",
-      status: false,
-      encrypt: '',
+      Ca: "10",
+      status: "not filled",
+      encrypt: "",
     },
     {
       id: "02",
       matricule: "FE19A037",
-      Ca: "25",
-      status: false,
-      encrypt: '',
+      Ca: "20",
+      status: "not filled",
+      encrypt: "",
     },
     {
       id: "03",
       matricule: "FE19A048",
-      Ca: "10",
-      status: false,
-      encrypt: '',
+      Ca: "30",
+      status: "not filled",
+      encrypt: "",
+    },
+    {
+      id: "04",
+      matricule: "FE19A045",
+      Ca: "40",
+      status: "not filled",
+      encrypt: "",
+    },
+    {
+      id: "05",
+      matricule: "FE19A028",
+      Ca: "50",
+      status: "not filled",
+      encrypt: "",
+    },
+    {
+      id: "06",
+      matricule: "FE19A055",
+      Ca: "60",
+      status: "not filled",
+      encrypt: "",
     },
   ];
 
   const [marksData, setMarksData] = useState<marksType[]>(data);
 
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(6);
+  
   //  const [pageNumberLimit, setpageNumberLimit] = useState(6)
 
   const indexOfLastPost = currentPage * itemsPerPage;
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
-  const currentMarks = data.slice(
-    indexOfFirstPost,
-    indexOfLastPost
-  );
+  // const currentMarks = data.slice(
+  //   indexOfFirstPost,
+  //   indexOfLastPost
+  // );
+
+  // console.log(currentMarks)
+
+  // const [filteredData, setFilteredData] = useState<marksType[]>(marksData);
 
   const pages = [];
-  for (let i = 1; i <= Math.ceil(data.length / itemsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(marksData.length / itemsPerPage); i++) {
     pages.push(i);
   }
 
@@ -69,7 +100,7 @@ const EncryptCaTable = () => {
   };
 
   const nextPage = () => {
-    if (currentPage !== Math.ceil(data.length / itemsPerPage)) {
+    if (currentPage !== Math.ceil(marksData.length / itemsPerPage)) {
       setCurrentPage(currentPage + 1);
     }
   };
@@ -79,11 +110,11 @@ const EncryptCaTable = () => {
     id: string
   ) => {
     const { name, value } = e.target;
-    console.log("name", name);
-    console.log("value", value);
-    console.log("id", id);
+    // console.log("name", name);
+    // console.log("value", value);
+    // console.log("id", id);
 
-    const statusValue= e.target.value?true:false
+    const statusValue= e.target.value?'encrypted':'not filled';
 
     const editData = marksData.map((item) =>
       item.id === id && name
@@ -91,38 +122,29 @@ const EncryptCaTable = () => {
         : item
     );
 
-    console.log("editData", editData);
+    // console.log("editData", editData);
 
-    setMarksData(editData);
+    // setFilteredData(editData);
+    setMarksData(editData)
   };
+
+
+
+
+  // console.log(form.filterText);
+  
   return (
     <>
-      <div className="flex flex-col mt-8 ">
-        <div className="flex gap-32">
-          <SelectInput
-            selectOptions={[
-              {
-                label: "Status",
-                value: "status",
-              },
-              {
-                label: "Matricule",
-                value: "matricule",
-              },
-            ]}
-            label="Filter"
-            value={form.filterText}
-            onChange={(e) => {
-              setForm({ ...form, filterText: e.target.value });
-            }}
-          />
+      <div className="flex justify-between  mt-8 ">
+        <div className="w-1/2">
           <TextInput
-            placeholder={"Search....."}
+            placeholder={"038 or search by status(encrypted or not filled)"}
             value={form.searchText}
             name={"searchText"}
             label={"Search"}
             type={"text"}
             onChange={(e) => {
+              // handleUserSearch(e);
               setForm({ ...form, searchText: e.target.value });
             }}
           />
@@ -151,30 +173,45 @@ const EncryptCaTable = () => {
             </tr>
           </thead>
           <tbody>
-            {marksData.map((mark) => {
-              return (
-                <tr key={mark.id} className="text-secondary dark:text-white">
-                  <td className={styles.row__matricule}>{mark.matricule}</td>
-                  <td className={styles.row__ca}>{mark.Ca}</td>
-                  <td className={styles.row__status}>
-                    {mark.encrypt?.length > 0 ? (
-                      <StatusCard encrypted={true} />
-                    ) : (
-                      <StatusCard encrypted={false} />
-                    )}
-                  </td>
-                  <td className={styles.row__input}>
-                    <input
-                      name="encrypt"
-                      type="text"
-                      value={mark.encrypt}
-                      onChange={(e) => onChangeInput(e, mark.id)}
-                      placeholder="Encrypt mark"
-                    />
-                  </td>
-                </tr>
-              );
-            })}
+            {marksData
+              .filter((value) => {
+                return (
+                  value.matricule
+                    .toLowerCase()
+                    .includes(form.searchText.toLowerCase()) ||
+                  value.status
+                    .toLowerCase()
+                    .includes(form.searchText.toLowerCase())
+                );
+
+                // return keys.some((key) => value[key].toLowerCase().includes(form.searchText.toLowerCase()));
+                //  || value.status.toLowerCase().includes(form.filterText.toLowerCase())
+              })
+              .slice(indexOfFirstPost, indexOfLastPost)
+              .map((mark) => {
+                return (
+                  <tr key={mark.id} className="text-secondary dark:text-white">
+                    <td className={styles.row__matricule}>{mark.matricule}</td>
+                    <td className={styles.row__ca}>{mark.Ca}</td>
+                    <td className={styles.row__status}>
+                      {mark.encrypt?.length > 0 ? (
+                        <StatusCard encrypted={"encrypted"} />
+                      ) : (
+                        <StatusCard encrypted={"not filled"} />
+                      )}
+                    </td>
+                    <td className={styles.row__input}>
+                      <input
+                        name="encrypt"
+                        type="text"
+                        value={mark.encrypt}
+                        onChange={(e) => onChangeInput(e, mark.id)}
+                        placeholder="Encrypt mark"
+                      />
+                    </td>
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
 

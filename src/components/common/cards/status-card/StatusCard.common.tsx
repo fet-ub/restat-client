@@ -11,12 +11,12 @@ const StatusCard = ({encrypted}:StatusCardPropType) => {
     <div
       className={`${styles.container}
      ${
-       encrypted
+       encrypted === 'encrypted'
          ? styles.encrypted
          : styles.empty
      }`}
     >
-      <p>{encrypted?'Encrypted':'Empty'}</p>
+      <p>{encrypted}</p>
     </div>
   );
 }
