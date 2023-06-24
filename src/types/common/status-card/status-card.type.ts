@@ -2,5 +2,5 @@
 
 
 export interface StatusCardPropType{
-    encrypted:boolean;
+    encrypted:string;
 }

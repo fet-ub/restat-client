@@ -20,13 +20,13 @@
 .table tr th {
   font-size: 18px;
   padding: 12px;
-  border: 1px solid #eeeeee;
+  border: 1px solid rgb(203 213 225);
   text-align: left;
   /* background-color: rgba(217, 221, 146, 0.2); */
 }
 
 .table tr td {
-  border: 1px solid #eeeeee;
+  border: 1px solid rgb(203 213 225);
   text-align: left;
   font-size: 14px;
 

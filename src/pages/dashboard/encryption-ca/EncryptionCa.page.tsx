@@ -4,7 +4,7 @@ import { IconRepository } from '../../../repository/icons/icon.repository';
 import EncryptCaTable from '../../../components/common/table/encrypt-ca/EncryptCaTable.common';
 
 const EncryptionCaPage = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
   const [active, setActive] = useState(0);
 
     const [selectedFile, setSelectedFile] = useState<File | undefined>(
@@ -34,7 +34,7 @@ const EncryptionCaPage = () => {
       <DashboardHeader
         label={"Encryption of Scripts"}
         ButtonText="Add CA marks"
-        onClick={() => setIsOpen(true)}
+        // onClick={() => setIsOpen(true)}
         displayButton={false}
       />
 
