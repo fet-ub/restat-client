@@ -1,43 +1,92 @@
-# Getting Started with Create React App
+## Restat Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Getting Started
 
-## Available Scripts
+-   **Perequisites: You have nodejs installed
+    locally**
+-   Clone the staging branch of this repository.
+-   Open the project in your favourite code editor _preferrably Visual Studio
+    Code_.
 
-In the project directory, you can run:
+## Rules or Folders and Files Naming Conventions
 
-### `npm start`
+-   `Directories` with longer names should be named using
+    `hyphens-to-seperate-each-word`.
+-   Each directory has an example of how each folder and file belonging to that directory is to be named. PLEASE FOLLOW THE SAME CONVENTION.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Folder Structuring Explained (Most important files and folders)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+    .
+    ├── ...
+    ├── public                 # Public folder
+    ├── src                    # Source folder
+    │   ├── app                # Redux store configs folder
+    │   ├── components         # App components folder
+    │   ├── configs            # Global config folder
+    │   ├── features           # Redux thunks, slices config folder
+    │   ├── icons              # Project icons folder
+    │   ├── lib                # Useful project functions folder
+    │   │   ├── hooks          # Custom hooks creation folder
+    │   │   ├── utils          # Reusable function groups folder 
+    │   ├── pages              # Pages folder
+    │   ├── repository         # Reusable exports
+    │   │   ├── assets         # Assets exports folder
+    │   │   ├── constants      # App constants exports folder
+    │   │   ├── data           # Dummy/Static data exports folder
+    │   │   ├── icons          # Icons exports folder  
+    │   ├── router             # App routing configs folder
+    │   ├── services           # Services folder
+    │   │   ├── api            # Api services folder
+    │   │   ├── storage        # Storage services folder 
+    │   ├── stories            # Components stories folder
+    │   ├── types              # Type definitions
+    │   └── ...
+    └── ...
 
-### `npm test`
+## How to contribute
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+-   Make sure to pull the latest changes from `development branch` and update your branch.
+-   Name your branch accordingly by your task name and with `_` if it is: `composed_of_may_words`.
+-   Before pushing, you should format your work using the command: 
 
-### `npm run build`
+```bash
+    $ npm run format
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+-   Add and stage your changes using the command:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+    $ git add .
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+OR
 
-### `npm run eject`
+```bash
+    $ git add <file-name>
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+-   Commit your work by running:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+    $ npm run commit
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Please follow the questionaires that follow to commit your work (please make sure to provide descriptive commit messages).
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Branch Naming Convention
+
+- If working on a page we have `<page_name>/feature`
+- If working on a component `<component_name>/feature`
+
+
+
+## Reporting
+
+- Please follow the follow link to provide daily reporting on what you have accomplished on your respective tasks [Github discussion reference](https://github.com/World-Charity-Tour/payment-gateway-client/discussions/10)
+
+## Project Board
+
+- Refere to the following link for the project board and assigned tasks and issue labels. This also includes an automatic milestones tracker linked to issues [Project board reference](https://github.com/orgs/World-Charity-Tour/projects/5)
 
 ## Learn More
 
