@@ -74,10 +74,9 @@
 }
 
 .lang > div {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
-    border: 2px solid #000;
 }
 
 .lang > div.active {

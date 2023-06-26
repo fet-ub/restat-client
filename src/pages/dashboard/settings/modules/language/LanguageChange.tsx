@@ -28,7 +28,11 @@ const LanguageChange = () => {
         }}
         className={styles.lang}
       >
-        <div className={`${lang === "en" ? styles.active : ""}`}></div>
+        <div
+          className={`border-2 border-black dark:border-white ${
+            lang === "en" ? styles.active : ""
+          }`}
+        ></div>
         <h4 className="text-secondary dark:text-white">English</h4>
       </div>
       <div
@@ -37,7 +41,11 @@ const LanguageChange = () => {
         }}
         className={styles.lang}
       >
-        <div className={`${lang === "fr" ? styles.active : ""}`}></div>
+        <div
+          className={`border-2 border-black dark:border-white ${
+            lang === "fr" ? styles.active : ""
+          }`}
+        ></div>
         <h4 className="text-secondary dark:text-white">French</h4>
       </div>
     </div>
