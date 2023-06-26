@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
 } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import DashboardPage from "./pages/dashboard/Dashboard.page";
 import AuthPage from "./pages/auth/Auth.page";
@@ -20,8 +21,31 @@ import CoursesPage from "./pages/dashboard/courses/Courses.page";
 import CaPage from "./pages/dashboard/ca/Ca.page";
 import ExamPage from "./pages/dashboard/exam/Exam.page";
 import EncryptionCaPage from "./pages/dashboard/encryption-ca/EncryptionCa.page";
+import { LocalStorage } from "./storage/LocalStorage";
 
-function App() {
+const App = () => {
+  const { i18n } = useTranslation(["home", "main"]);
+
+  const languageLocalConfig = useCallback(async (local: string) => {
+    LocalStorage.storeAppLang(local);
+    await i18n.changeLanguage(local);
+
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    if (
+      LocalStorage.getAppLang().appLang !== undefined &&
+      LocalStorage.getAppLang().appLang !== null
+    ) {
+      languageLocalConfig(LocalStorage.getAppLang().appLang as string);
+    } else {
+      languageLocalConfig("en");
+    }
+
+    // eslint-disable-next-line
+  }, [window.location.pathname]);
+
   return (
     <div className="app">
       <Router>
@@ -36,8 +60,8 @@ function App() {
             <Route path="courses" element={<CoursesPage />} />
             <Route path="transcript" element={<TranscriptPage />} />
             <Route path="ca" element={<CaPage />} />
-            <Route path="exam" element={<ExamPage/>} />
-            <Route path="encrypt-ca" element={<EncryptionCaPage/>} />
+            <Route path="exam" element={<ExamPage />} />
+            <Route path="encrypt-ca" element={<EncryptionCaPage />} />
           </Route>
 
           <Route path="/auth" element={<AuthPage />}>
@@ -51,6 +75,6 @@ function App() {
       </Router>
     </div>
   );
-}
+};
 
 export default App;

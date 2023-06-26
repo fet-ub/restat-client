@@ -15,7 +15,7 @@
 
 .content {
   width: calc(100% - 250px);
-  min-height: 200vh;
+  min-height: 100vh;
   position: absolute;
   left: 250px;
   top: 0;

@@ -1,0 +1,26 @@
+.tabs {
+  display: flex;
+  display: -ms-flexbox;
+  width: 100%;
+  justify-content: space-between;
+  overflow-x: scroll;
+}
+
+.tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tabs button {
+  background: transparent;
+  font-size: 1.6rem;
+  padding: 1.2rem 2rem;
+  white-space: nowrap;
+  transition: 0.2s ease-in-out;
+  border-bottom: 2px solid transparent;
+  width: 100%;
+}
+
+.tabs button.active {
+  color: var(--PRIMARY_COLOR);
+  border-bottom: 2px solid var(--PRIMARY_COLOR);
+}
