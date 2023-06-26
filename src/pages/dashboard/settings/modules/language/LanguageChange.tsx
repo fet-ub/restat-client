@@ -19,7 +19,9 @@ const LanguageChange = () => {
 
   return (
     <div className={styles.form}>
-      <h2>{t("Select Language Below:", { ns: ["main", "home"] })}</h2>
+      <h2 className="text-secondary dark:text-white">
+        {t("Select Language Below:", { ns: ["main", "home"] })}
+      </h2>
       <div
         onClick={() => {
           handleLanguageConvertion("en");
@@ -27,7 +29,7 @@ const LanguageChange = () => {
         className={styles.lang}
       >
         <div className={`${lang === "en" ? styles.active : ""}`}></div>
-        <h4>English</h4>
+        <h4 className="text-secondary dark:text-white">English</h4>
       </div>
       <div
         onClick={() => {
@@ -36,7 +38,7 @@ const LanguageChange = () => {
         className={styles.lang}
       >
         <div className={`${lang === "fr" ? styles.active : ""}`}></div>
-        <h4>French</h4>
+        <h4 className="text-secondary dark:text-white">French</h4>
       </div>
     </div>
   );

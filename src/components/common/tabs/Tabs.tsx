@@ -21,7 +21,7 @@ const Tabs: React.FC<TabsPropType> = ({
             <button
               className={`${styles.button} ${
                 activeIndex === index ? styles.active : ""
-              }`}
+              } text-secondary dark:text-white`}
               onClick={() => {
                 setActiveIndex(index);
               }}

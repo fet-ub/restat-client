@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 import styles from "../personal-info/personalinfo.module.css";
 
-import TextInput from "../../../../../components/common/inputs/text-input/TextInput.common";
 import Button from "../../../../../components/common/buttons/Button.common";
+import PasswordInput from "../../../../../components/common/inputs/password-input/PasswordInput.common";
 
 const PasswordChange = () => {
   const [form, setForm] = useState({
@@ -14,7 +14,7 @@ const PasswordChange = () => {
 
   return (
     <div className={styles.form}>
-      <TextInput
+      <PasswordInput
         placeholder="*******"
         label="Current Password"
         type="password"
@@ -25,7 +25,7 @@ const PasswordChange = () => {
           setForm({ ...form, currentPassword: e.target.value });
         }}
       />
-      <TextInput
+      <PasswordInput
         placeholder="*******"
         label="New Password"
         type="password"
@@ -36,7 +36,7 @@ const PasswordChange = () => {
           setForm({ ...form, newPassword: e.target.value });
         }}
       />
-      <TextInput
+      <PasswordInput
         placeholder="*******"
         label="Re-Type New Password"
         type="password"
