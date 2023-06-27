@@ -7,14 +7,19 @@ import Button from "../../buttons/Button.common";
 import { IconRepository } from "../../../../repository/icons/icon.repository";
 // import { StatusCardType } from "../../../../types/atoms/enums.atoms";
 interface marksType {
-  id: string;
+  id?: string;
   matricule: string;
-  Ca: string;
+  ca: number | string;
   status: string;
   encrypt: string;
 }
 
-const EncryptCaTable = () => {
+interface EncryptCaTablePropTypes {
+  marksTableData: marksType[];
+  setMarksTableData: React.Dispatch<React.SetStateAction<marksType[]>>;
+}
+
+const EncryptCaTable = ({marksTableData,setMarksTableData}:EncryptCaTablePropTypes) => {
   const [form, setForm] = useState({
     filterText: "",
     searchText: "",
@@ -26,52 +31,52 @@ const EncryptCaTable = () => {
 
   
 
-  const data = [
-    {
-      id: "01",
-      matricule: "FE19A038",
-      Ca: "10",
-      status: "not filled",
-      encrypt: "",
-    },
-    {
-      id: "02",
-      matricule: "FE19A037",
-      Ca: "20",
-      status: "not filled",
-      encrypt: "",
-    },
-    {
-      id: "03",
-      matricule: "FE19A048",
-      Ca: "30",
-      status: "not filled",
-      encrypt: "",
-    },
-    {
-      id: "04",
-      matricule: "FE19A045",
-      Ca: "40",
-      status: "not filled",
-      encrypt: "",
-    },
-    {
-      id: "05",
-      matricule: "FE19A028",
-      Ca: "50",
-      status: "not filled",
-      encrypt: "",
-    },
-    {
-      id: "06",
-      matricule: "FE19A055",
-      Ca: "60",
-      status: "not filled",
-      encrypt: "",
-    },
-  ];
+  // const data = [
+  //   {
+  //     id: "01",
+  //     matricule: "FE19A038",
+  //     Ca: "10",
+  //     status: "not filled",
+  //     encrypt: "",
+  //   },
+  //   {
+  //     id: "02",
+  //     matricule: "FE19A037",
+  //     Ca: "20",
+  //     status: "not filled",
+  //     encrypt: "",
+  //   },
+  //   {
+  //     id: "03",
+  //     matricule: "FE19A048",
+  //     Ca: "30",
+  //     status: "not filled",
+  //     encrypt: "",
+  //   },
+  //   {
+  //     id: "04",
+  //     matricule: "FE19A045",
+  //     Ca: "40",
+  //     status: "not filled",
+  //     encrypt: "",
+  //   },
+  //   {
+  //     id: "05",
+  //     matricule: "FE19A028",
+  //     Ca: "50",
+  //     status: "not filled",
+  //     encrypt: "",
+  //   },
+  //   {
+  //     id: "06",
+  //     matricule: "FE19A055",
+  //     Ca: "60",
+  //     status: "not filled",
+  //     encrypt: "",
+  //   },
+  // ];
 
-  const [marksData, setMarksData] = useState<marksType[]>(data);
+  // const [marksData, setMarksData] = useState<marksType[]>(data);
 
 
   
@@ -89,7 +94,7 @@ const EncryptCaTable = () => {
   // const [filteredData, setFilteredData] = useState<marksType[]>(marksData);
 
   const pages = [];
-  for (let i = 1; i <= Math.ceil(marksData.length / itemsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(marksTableData.length / itemsPerPage); i++) {
     pages.push(i);
   }
 
@@ -100,14 +105,14 @@ const EncryptCaTable = () => {
   };
 
   const nextPage = () => {
-    if (currentPage !== Math.ceil(marksData.length / itemsPerPage)) {
+    if (currentPage !== Math.ceil(marksTableData.length / itemsPerPage)) {
       setCurrentPage(currentPage + 1);
     }
   };
 
   const onChangeInput = (
     e: React.ChangeEvent<HTMLInputElement>,
-    id: string
+    matricule: any
   ) => {
     const { name, value } = e.target;
     // console.log("name", name);
@@ -116,8 +121,8 @@ const EncryptCaTable = () => {
 
     const statusValue= e.target.value?'encrypted':'not filled';
 
-    const editData = marksData.map((item) =>
-      item.id === id && name
+    const editData = marksTableData.map((item) =>
+      item.matricule === matricule && name
         ? { ...item, [name]: value, status: statusValue }
         : item
     );
@@ -125,7 +130,7 @@ const EncryptCaTable = () => {
     // console.log("editData", editData);
 
     // setFilteredData(editData);
-    setMarksData(editData)
+    setMarksTableData(editData)
   };
 
 
@@ -135,7 +140,7 @@ const EncryptCaTable = () => {
   
   return (
     <>
-      <div className="flex justify-between  mt-8 ">
+      <div className="flex flex-row-reverse justify-between  mt-8 ">
         <div className="w-1/2">
           <TextInput
             placeholder={"038 or search by status(encrypted or not filled)"}
@@ -173,7 +178,7 @@ const EncryptCaTable = () => {
             </tr>
           </thead>
           <tbody>
-            {marksData
+            {marksTableData
               .filter((value) => {
                 return (
                   value.matricule
@@ -188,11 +193,11 @@ const EncryptCaTable = () => {
                 //  || value.status.toLowerCase().includes(form.filterText.toLowerCase())
               })
               .slice(indexOfFirstPost, indexOfLastPost)
-              .map((mark) => {
+              .map((mark,index:any) => {
                 return (
                   <tr key={mark.id} className="text-secondary dark:text-white">
                     <td className={styles.row__matricule}>{mark.matricule}</td>
-                    <td className={styles.row__ca}>{mark.Ca}</td>
+                    <td className={styles.row__ca}>{mark.ca}</td>
                     <td className={styles.row__status}>
                       {mark.encrypt?.length > 0 ? (
                         <StatusCard encrypted={"encrypted"} />
@@ -205,7 +210,7 @@ const EncryptCaTable = () => {
                         name="encrypt"
                         type="text"
                         value={mark.encrypt}
-                        onChange={(e) => onChangeInput(e, mark.id)}
+                        onChange={(e) => onChangeInput(e, mark.matricule)}
                         placeholder="Encrypt mark"
                       />
                     </td>
