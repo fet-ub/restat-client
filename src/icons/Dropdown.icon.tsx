@@ -1,5 +1,5 @@
-import React from 'react'
-import { IconPropsType } from '../types';
+import React from "react";
+import { IconPropsType } from "../types";
 
 const DropdownIcon = ({ width = 42, height = 41 }: IconPropsType) => {
   return (
@@ -13,7 +13,7 @@ const DropdownIcon = ({ width = 42, height = 41 }: IconPropsType) => {
       <path
         d="M1 1L6 6L11 1"
         stroke="#667085"
-        stroke-width="1.66667"
+        strokeWidth="1.66667"
         stroke-linecap="round"
         stroke-linejoin="round"
       />
@@ -21,4 +21,4 @@ const DropdownIcon = ({ width = 42, height = 41 }: IconPropsType) => {
   );
 };
 
-export default DropdownIcon
+export default DropdownIcon;
