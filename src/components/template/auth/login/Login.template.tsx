@@ -45,7 +45,9 @@ const LoginTemplate = () => {
 
               localStorage.setItem("accessToken", response.data.access_token);
               localStorage.setItem("role", response.data.role);
-              localStorage.setItem("user", response.data.user);
+              localStorage.setItem("user", JSON.stringify(response.data.user));
+
+              navigate("/dashboard");
             });
         });
     } catch (e) {
@@ -55,7 +57,6 @@ const LoginTemplate = () => {
     } finally {
       setLoading(false);
     }
-    // navigate("/dashboard");
   };
 
   const handleNavigation = () => {
@@ -79,6 +80,12 @@ const LoginTemplate = () => {
       document.documentElement.classList.remove("dark");
     }
   }, [theme]);
+
+  useEffect(() => {
+    if (localStorage.getItem("accessToken") !== null) {
+      navigate("/dashboard");
+    }
+  }, [window.location.pathname]);
 
   //  const handleThemeSwitch = () => {
   //    setTheme(theme === "dark" ? "light" : "dark");
