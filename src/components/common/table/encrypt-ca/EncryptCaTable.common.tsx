@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./encryptCaTable.module.css";
 import StatusCard from "../../cards/status-card/StatusCard.common";
 // import SelectInput from "../../inputs/select-input/SelectInput.common";
@@ -72,7 +72,20 @@ const EncryptCaTable = ({marksTableData,setMarksTableData}:EncryptCaTablePropTyp
 
 
   
+useEffect(()=>{
+    const count = marksTableData.reduce((acc, curr) => {
+      
+      if (curr.encrypt.length>0) {
+        return acc + 1;
+      }
+      return acc;
+    }, 0);
 
+   console.log(count);
+   
+
+    setTotalEncrypted(count)
+},[marksTableData])
 
 
 
@@ -162,7 +175,7 @@ const EncryptCaTable = ({marksTableData,setMarksTableData}:EncryptCaTablePropTyp
 
         <div className="flex justify-between items-center">
           <span className={"text-[14px] text-secondary dark:text-white"}>
-          Total of  {marksTableData.length} students
+          Total of  {marksTableData.length} students, {totalEncrypted} encyrpted
           </span>
 
           <div className={"flex  items-center mt-5 py-3 gap-3"}>
