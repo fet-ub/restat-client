@@ -6,6 +6,7 @@ import TextInput from "../../inputs/text-input/TextInput.common";
 import Button from "../../buttons/Button.common";
 import { IconRepository } from "../../../../repository/icons/icon.repository";
 // import { StatusCardType } from "../../../../types/atoms/enums.atoms";
+import { CSVLink } from "react-csv";
 interface marksType {
   id?: string;
   matricule: string;
@@ -14,27 +15,36 @@ interface marksType {
   encrypt: string;
 }
 
+interface exportMarksType {
+  status: string;
+  encrypt: string;
+}
+
+interface exportCaMarksType {
+  exportedData: exportMarksType[];
+}
+
 interface EncryptCaTablePropTypes {
   marksTableData: marksType[];
   setMarksTableData: React.Dispatch<React.SetStateAction<marksType[]>>;
 }
 
-const EncryptCaTable = ({marksTableData,setMarksTableData}:EncryptCaTablePropTypes) => {
+const EncryptCaTable = ({
+  marksTableData,
+  setMarksTableData,
+}: EncryptCaTablePropTypes) => {
   const [form, setForm] = useState({
     filterText: "",
     searchText: "",
   });
 
-  
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
-  const [totalEncrypted,setTotalEncrypted]=useState<number>(0)
-
-  
+  const [totalEncrypted, setTotalEncrypted] = useState<number>(0);
+  const [exportData, setExportData] = useState<any>([]);
 
   const indexOfLastPost = currentPage * itemsPerPage;
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
-
 
   const pages = [];
   for (let i = 1; i <= Math.ceil(marksTableData.length / itemsPerPage); i++) {
@@ -58,8 +68,8 @@ const EncryptCaTable = ({marksTableData,setMarksTableData}:EncryptCaTablePropTyp
     matricule: any
   ) => {
     const { name, value } = e.target;
-  
-    const statusValue= e.target.value?'encrypted':'not filled';
+
+    const statusValue = e.target.value ? "encrypted" : "not filled";
 
     const editData = marksTableData.map((item) =>
       item.matricule === matricule && name
@@ -67,30 +77,37 @@ const EncryptCaTable = ({marksTableData,setMarksTableData}:EncryptCaTablePropTyp
         : item
     );
 
-    setMarksTableData(editData)
+    setMarksTableData(editData);
   };
 
-
-  
-useEffect(()=>{
+  useEffect(() => {
     const count = marksTableData.reduce((acc, curr) => {
-      
-      if (curr.encrypt.length>0) {
+      if (curr.encrypt.length > 0) {
         return acc + 1;
       }
       return acc;
     }, 0);
 
-   console.log(count);
-   
+    var newArr = marksTableData.map(function (obj: any) {
+      var newObj: any = {};
+      for (var key in obj) {
+        if (key !== "status") {
+          newObj[key] = obj[key];
+        }
+      }
+      return newObj;
+    });
+    // console.log('zxZXZ',newArr);
 
-    setTotalEncrypted(count)
-},[marksTableData])
+    setExportData(newArr);
 
+    // console.log(exportData);
 
+    //  console.log(count);
 
- 
-  
+    setTotalEncrypted(count);
+  }, [marksTableData]);
+
   return (
     <>
       <div className="flex flex-row-reverse justify-between  mt-8 ">
@@ -109,13 +126,20 @@ useEffect(()=>{
         </div>
 
         <div className="flex justify-center items-center mt-4">
-          <Button
+          <CSVLink
+            data={exportData}
+            filename="EncryptedCAMarks"
+            className="bg-primary  px-4 text-secondary dark:text-white  py-[10px]    rounded-lg outline-none text-[16px] flex justify-center items-center gap-3"
+          >
+            Export User Data
+          </CSVLink>
+          {/* <Button
             text="Download File"
             buttonType="SECONDARY"
             icon={
               <IconRepository.DownloadCloudIcon height={25} color="#42BFDD" />
             }
-          />
+          /> */}
         </div>
       </div>
       <div className={`${styles.container} `}>
@@ -175,7 +199,8 @@ useEffect(()=>{
 
         <div className="flex justify-between items-center">
           <span className={"text-[14px] text-secondary dark:text-white"}>
-          Total of  {marksTableData.length} students, {totalEncrypted} encyrpted
+            Total of {marksTableData.length} students, {totalEncrypted}{" "}
+            encyrpted
           </span>
 
           <div className={"flex  items-center mt-5 py-3 gap-3"}>
