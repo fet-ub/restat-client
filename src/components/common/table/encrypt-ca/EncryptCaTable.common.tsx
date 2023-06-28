@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./encryptCaTable.module.css";
 import StatusCard from "../../cards/status-card/StatusCard.common";
 // import SelectInput from "../../inputs/select-input/SelectInput.common";
@@ -28,70 +28,13 @@ const EncryptCaTable = ({marksTableData,setMarksTableData}:EncryptCaTablePropTyp
   
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
+  const [totalEncrypted,setTotalEncrypted]=useState<number>(0)
 
   
-
-  // const data = [
-  //   {
-  //     id: "01",
-  //     matricule: "FE19A038",
-  //     Ca: "10",
-  //     status: "not filled",
-  //     encrypt: "",
-  //   },
-  //   {
-  //     id: "02",
-  //     matricule: "FE19A037",
-  //     Ca: "20",
-  //     status: "not filled",
-  //     encrypt: "",
-  //   },
-  //   {
-  //     id: "03",
-  //     matricule: "FE19A048",
-  //     Ca: "30",
-  //     status: "not filled",
-  //     encrypt: "",
-  //   },
-  //   {
-  //     id: "04",
-  //     matricule: "FE19A045",
-  //     Ca: "40",
-  //     status: "not filled",
-  //     encrypt: "",
-  //   },
-  //   {
-  //     id: "05",
-  //     matricule: "FE19A028",
-  //     Ca: "50",
-  //     status: "not filled",
-  //     encrypt: "",
-  //   },
-  //   {
-  //     id: "06",
-  //     matricule: "FE19A055",
-  //     Ca: "60",
-  //     status: "not filled",
-  //     encrypt: "",
-  //   },
-  // ];
-
-  // const [marksData, setMarksData] = useState<marksType[]>(data);
-
-
-  
-  //  const [pageNumberLimit, setpageNumberLimit] = useState(6)
 
   const indexOfLastPost = currentPage * itemsPerPage;
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
-  // const currentMarks = data.slice(
-  //   indexOfFirstPost,
-  //   indexOfLastPost
-  // );
 
-  // console.log(currentMarks)
-
-  // const [filteredData, setFilteredData] = useState<marksType[]>(marksData);
 
   const pages = [];
   for (let i = 1; i <= Math.ceil(marksTableData.length / itemsPerPage); i++) {
@@ -115,10 +58,7 @@ const EncryptCaTable = ({marksTableData,setMarksTableData}:EncryptCaTablePropTyp
     matricule: any
   ) => {
     const { name, value } = e.target;
-    // console.log("name", name);
-    // console.log("value", value);
-    // console.log("id", id);
-
+  
     const statusValue= e.target.value?'encrypted':'not filled';
 
     const editData = marksTableData.map((item) =>
@@ -127,16 +67,29 @@ const EncryptCaTable = ({marksTableData,setMarksTableData}:EncryptCaTablePropTyp
         : item
     );
 
-    // console.log("editData", editData);
-
-    // setFilteredData(editData);
     setMarksTableData(editData)
   };
 
 
+  
+useEffect(()=>{
+    const count = marksTableData.reduce((acc, curr) => {
+      
+      if (curr.encrypt.length>0) {
+        return acc + 1;
+      }
+      return acc;
+    }, 0);
+
+   console.log(count);
+   
+
+    setTotalEncrypted(count)
+},[marksTableData])
 
 
-  // console.log(form.filterText);
+
+ 
   
   return (
     <>
@@ -193,7 +146,7 @@ const EncryptCaTable = ({marksTableData,setMarksTableData}:EncryptCaTablePropTyp
                 //  || value.status.toLowerCase().includes(form.filterText.toLowerCase())
               })
               .slice(indexOfFirstPost, indexOfLastPost)
-              .map((mark,index:any) => {
+              .map((mark, index: any) => {
                 return (
                   <tr key={mark.id} className="text-secondary dark:text-white">
                     <td className={styles.row__matricule}>{mark.matricule}</td>
@@ -220,16 +173,22 @@ const EncryptCaTable = ({marksTableData,setMarksTableData}:EncryptCaTablePropTyp
           </tbody>
         </table>
 
-        <div className={"flex justify-end items-center mt-5 py-3 gap-3"}>
-          <span onClick={previousPage}>
-            <IconRepository.LeftPaginationIcon />
+        <div className="flex justify-between items-center">
+          <span className={"text-[14px] text-secondary dark:text-white"}>
+          Total of  {marksTableData.length} students, {totalEncrypted} encyrpted
           </span>
-          <p className={"text-[14px] text-secondary dark:text-white"}>
-            showing {currentPage} of {pages.length} pages
-          </p>
-          <span onClick={nextPage}>
-            <IconRepository.RightPaginationIcon />
-          </span>
+
+          <div className={"flex  items-center mt-5 py-3 gap-3"}>
+            <span onClick={previousPage}>
+              <IconRepository.LeftPaginationIcon />
+            </span>
+            <p className={"text-[14px] text-secondary dark:text-white"}>
+              showing {currentPage} of {pages.length} pages
+            </p>
+            <span onClick={nextPage}>
+              <IconRepository.RightPaginationIcon />
+            </span>
+          </div>
         </div>
       </div>
     </>

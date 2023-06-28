@@ -72,52 +72,6 @@ const EncryptionCaPage = () => {
     }
   }, [selectedFile]);
 
-  //  console.log("zxcxzc", selectedFile);
-
-  // interface ObjectType{
-  //   [key: string]: string;
-  // }
-
-  // for (let i:number = 0; i < selectedFile.length; i++) {
-  //   const keys = Object.keys(selectedFile[i] );
-  //   // console.log(keys); 
-  //   const regex1 = /matricule/i;
-  //   const regex2 = /ca/i;
-  //   const filteredKeys = keys.filter(
-  //     (key) => regex1.test(key) || regex2.test(key)
-  //   );
-  //    filteredKeys.sort((a, b) => {
-  //      if (regex1.test(a)) {
-  //        return -1;
-  //      } else if (regex1.test(b)) {
-  //        return 1;
-  //      } else {
-  //        return 0;
-  //      }
-  //    });
-  //   // console.log(filteredKeys);
-  //   // ["name", "age"]
-
-  //   const result = selectedFile.reduce((acc:any, curr:any) => {
-  //     const obj:any = {};
-  //     filteredKeys.forEach((key) => {
-  //      let newKey = key;
-  //      if (regex1.test(key)) {
-  //        newKey = "matricule";
-  //      } else if (regex2.test(key)) {
-  //        newKey = "ca";
-  //      }
-  //      obj[newKey] = curr[key];
-  //     });
-  //      obj.status = "not filled";
-  //       obj.encrypt= "";
-  //     acc.push(obj);
-  //     return acc;
-  //   }, []);
-
-  //   // console.log(result);
-  //   setMarksTableData(result)
-  // }
 
  
   const handleXls = () => {
