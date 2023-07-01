@@ -1,13 +1,17 @@
-import React, { useState } from 'react'
-import DashboardHeader from '../../../components/common/dashboard-header/DashboardHeader.common'
-import SelectInput from '../../../components/common/inputs/select-input/SelectInput.common';
-import { SEMESTER,ACADEMIC_YEAR} from '../../../repository/constants/constants';
-import Button from '../../../components/common/buttons/Button.common';
+import React, { useState } from "react";
+import DashboardHeader from "../../../components/common/dashboard-header/DashboardHeader.common";
+import SelectInput from "../../../components/common/inputs/select-input/SelectInput.common";
+import {
+  SEMESTER,
+  ACADEMIC_YEAR,
+} from "../../../repository/constants/constants";
+import Button from "../../../components/common/buttons/Button.common";
+// import DateInput from "../../../components/common/inputs/date-input/DateInput";
 
 const TranscriptPage = () => {
   const [form, setForm] = useState({
     year: "",
-   semester : "",
+    semester: "",
   });
 
   return (
@@ -26,6 +30,14 @@ const TranscriptPage = () => {
         </div>
 
         <div className="w-[50%] mt-10 flex flex-col gap-9">
+          {/* <DateInput
+            label="Year"
+            name="year"
+            value={form.semester}
+            onChange={(e) => {
+              setForm({ ...form, semester: e.target.value });
+            }}
+          /> */}
           <SelectInput
             selectOptions={ACADEMIC_YEAR}
             label="Year"
@@ -47,6 +59,6 @@ const TranscriptPage = () => {
       </div>
     </div>
   );
-}
+};
 
-export default TranscriptPage
+export default TranscriptPage;

@@ -1,13 +1,18 @@
-import React from 'react'
-import TextInput from '../../../../inputs/text-input/TextInput.common';
-import SelectInput from '../../../../inputs/select-input/SelectInput.common';
-import { COMPUTER_PROGRAMS, COURSE_LEVELS, ENGINEERING_DEPARTMENTS, SCHOOL_YEAR } from '../../../../../../repository/constants/constants';
-import Button from '../../../../buttons/Button.common';
+import React from "react";
+import TextInput from "../../../../inputs/text-input/TextInput.common";
+import SelectInput from "../../../../inputs/select-input/SelectInput.common";
+import {
+  COMPUTER_PROGRAMS,
+  COURSE_LEVELS,
+  ENGINEERING_DEPARTMENTS,
+  SCHOOL_YEAR,
+} from "../../../../../../repository/constants/constants";
+import Button from "../../../../buttons/Button.common";
 
 const StudentAcademicInfoStep = ({
   form,
   setForm,
-  setCurrentStep
+  setCurrentStep,
 }: {
   form: {
     firstname: string;
@@ -33,6 +38,7 @@ const StudentAcademicInfoStep = ({
     guardianLastName: string;
     guardianEmail: string;
     guardianAddress: string;
+    guardianPhoneNumber: string;
   };
   setForm: React.Dispatch<
     React.SetStateAction<{
@@ -59,6 +65,7 @@ const StudentAcademicInfoStep = ({
       guardianLastName: string;
       guardianEmail: string;
       guardianAddress: string;
+      guardianPhoneNumber: string;
     }>
   >;
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
@@ -85,7 +92,6 @@ const StudentAcademicInfoStep = ({
               setForm({ ...form, level: e.target.value });
             }}
             value={form.level}
-           
           />
           <SelectInput
             selectOptions={SCHOOL_YEAR}
@@ -94,7 +100,6 @@ const StudentAcademicInfoStep = ({
               setForm({ ...form, year: e.target.value });
             }}
             value={form.year}
-            
           />
         </div>
 
@@ -154,4 +159,4 @@ const StudentAcademicInfoStep = ({
   );
 };
 
-export default StudentAcademicInfoStep
+export default StudentAcademicInfoStep;

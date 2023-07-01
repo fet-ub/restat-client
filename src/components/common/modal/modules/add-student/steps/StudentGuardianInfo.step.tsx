@@ -1,12 +1,12 @@
-import React from 'react'
-import TextInput from '../../../../inputs/text-input/TextInput.common';
-import Button from '../../../../buttons/Button.common';
+import React from "react";
+import TextInput from "../../../../inputs/text-input/TextInput.common";
+import Button from "../../../../buttons/Button.common";
 
 const StudentGuardianInfoStep = ({
   form,
   setForm,
   setCurrentStep,
-  closeModal
+  closeModal,
 }: {
   form: {
     firstname: string;
@@ -32,6 +32,7 @@ const StudentGuardianInfoStep = ({
     guardianLastName: string;
     guardianEmail: string;
     guardianAddress: string;
+    guardianPhoneNumber: string;
   };
   setForm: React.Dispatch<
     React.SetStateAction<{
@@ -58,10 +59,11 @@ const StudentGuardianInfoStep = ({
       guardianLastName: string;
       guardianEmail: string;
       guardianAddress: string;
+      guardianPhoneNumber: string;
     }>
   >;
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
-  closeModal:()=>void
+  closeModal: () => void;
 }) => {
   return (
     <form className="dark:bg-tertiary">
@@ -89,26 +91,39 @@ const StudentGuardianInfoStep = ({
           }}
         />
 
+        <div className="flex justify-between gap-10">
+          <TextInput
+            placeholder="Guardian Email"
+            label="Address"
+            type="email"
+            id="address"
+            name="email"
+            value={form.guardianEmail}
+            onChange={(e) => {
+              setForm({ ...form, guardianEmail: e.target.value });
+            }}
+          />
+          <TextInput
+            placeholder="Buea Town"
+            label="Guardian Address"
+            type="text"
+            id="guardianAddress"
+            name="guardianaddress"
+            value={form.guardianAddress}
+            onChange={(e) => {
+              setForm({ ...form, guardianAddress: e.target.value });
+            }}
+          />
+        </div>
         <TextInput
-          placeholder="Guardian Email"
-          label="Address"
-          type="email"
-          id="address"
-          name="email"
-          value={form.guardianEmail}
+          placeholder="67234521"
+          label="Guardian Phone Number"
+          type="number"
+          id="GuardianLastName"
+          name="guardianlasstsname"
+          value={form.guardianPhoneNumber}
           onChange={(e) => {
-            setForm({ ...form, guardianEmail: e.target.value });
-          }}
-        />
-        <TextInput
-          placeholder="Buea Town"
-          label="Guardian Address"
-          type="text"
-          id="guardianAddress"
-          name="guardianaddress"
-          value={form.guardianAddress}
-          onChange={(e) => {
-            setForm({ ...form, guardianAddress: e.target.value });
+            setForm({ ...form, guardianPhoneNumber: e.target.value });
           }}
         />
       </div>
@@ -130,4 +145,4 @@ const StudentGuardianInfoStep = ({
   );
 };
 
-export default StudentGuardianInfoStep
+export default StudentGuardianInfoStep;

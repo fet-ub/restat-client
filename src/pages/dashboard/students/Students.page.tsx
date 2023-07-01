@@ -1,90 +1,92 @@
-import React, { useState } from 'react'
-import DashboardHeader from '../../../components/common/dashboard-header/DashboardHeader.common'
-import DashboardCard from '../../../components/common/cards/dashboard-card/DashboardCard.common';
-import { IconRepository } from '../../../repository/icons/icon.repository';
-import SelectInput from '../../../components/common/inputs/select-input/SelectInput.common';
-import { ENGINEERING_DEPARTMENTS } from '../../../repository/constants/constants';
-import TextInput from '../../../components/common/inputs/text-input/TextInput.common';
-import DownloadOptions from '../../../components/common/download-options/DownloadOptions.common';
-import { DataGrid, GridColDef} from "@mui/x-data-grid";
-import ModalContainer from '../../../components/common/modal/modal-container/ModalContainer.common';
-import AddStudentModal from '../../../components/common/modal/modules/add-student/AddStudentModal.module';
-//  GridValueGetterParams; 
-
+import React, { useState } from "react";
+import DashboardHeader from "../../../components/common/dashboard-header/DashboardHeader.common";
+import DashboardCard from "../../../components/common/cards/dashboard-card/DashboardCard.common";
+import { IconRepository } from "../../../repository/icons/icon.repository";
+import SelectInput from "../../../components/common/inputs/select-input/SelectInput.common";
+import { ENGINEERING_DEPARTMENTS } from "../../../repository/constants/constants";
+import TextInput from "../../../components/common/inputs/text-input/TextInput.common";
+import DownloadOptions from "../../../components/common/download-options/DownloadOptions.common";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import ModalContainer from "../../../components/common/modal/modal-container/ModalContainer.common";
+import AddStudentModal from "../../../components/common/modal/modules/add-student/AddStudentModal.module";
+import Button from "../../../components/common/buttons/Button.common";
+import { MdOutlineContactPage } from "react-icons/md";
+import { MarksType } from "../../../types/atoms/enums.atoms";
+import AddBulkStudentModal from "../../../components/common/modal/modules/add-student/AddBulkStudent.modal";
+//  GridValueGetterParams;
 
 const StudentsPage = () => {
-    const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isBulkOpen, setBulkIsOpen] = useState(false);
 
-    const [form, setForm] = useState({
-      
-      department: "",
-      name: "",
-     
-    });
+  const [form, setForm] = useState({
+    department: "",
+    name: "",
+  });
 
-    const columns: GridColDef[] = [
-      { field: "name", headerName: "Name", width: 280, sortable: false },
-      { field: "matricule", headerName: "Matrcule", width: 150, sortable: false },
-      {
-        field: "department",
-        headerName: "Department",
-        width: 250,
-        sortable: false,
-      },
-      {
-        field: "email",
-        headerName: "Email",
-        width: 200,
-        sortable: false,
-        headerAlign: "left",
-        align: "left",
-      },
-      {
-        field: "phone",
-        headerName: "Phone",
-        width: 180,
-        sortable: false,
-        headerAlign: "left",
-        align: "left",
-      },
-      {
-        field: "action",
-        headerName: "Action",
-        sortable: false,
-        width: 100,
-        headerAlign: "left",
-        align: "left",
-        // valueGetter: (params: GridValueGetterParams) =>
-        //   `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-      },
-    ];
+  const columns: GridColDef[] = [
+    { field: "name", headerName: "Name", width: 280, sortable: false },
+    { field: "matricule", headerName: "Matrcule", width: 150, sortable: false },
+    {
+      field: "department",
+      headerName: "Department",
+      width: 250,
+      sortable: false,
+    },
+    {
+      field: "email",
+      headerName: "Email",
+      width: 200,
+      sortable: false,
+      headerAlign: "left",
+      align: "left",
+    },
+    {
+      field: "phone",
+      headerName: "Phone",
+      width: 180,
+      sortable: false,
+      headerAlign: "left",
+      align: "left",
+    },
+    {
+      field: "action",
+      headerName: "Action",
+      sortable: false,
+      width: 100,
+      headerAlign: "left",
+      align: "left",
+      // valueGetter: (params: GridValueGetterParams) =>
+      //   `${params.row.firstName || ""} ${params.row.lastName || ""}`,
+    },
+  ];
 
-    const rows = [
-      {
-        name: "Fomonyuytar Joseph",
-        matricule: "FE19A038",
-        department: "Computer Enginnering",
-        email: "joe@email.com",
-        phone: '651273636',
-        action: "action",
-      },
-      {
-        name: "Njoh Prince",
-        matricule: "FE19A035",
-        department: "Electrical Enginnering",
-        email: "prince@email.com",
-        phone: '653445345',
-        action: "action",
-      },
-      {
-        name: "Hans Weno",
-        matricule: "FE19A045",
-        department: "Computer Enginnering",
-        email: "hans@email.com",
-        phone: '6534454656',
-        action: "action",
-      },
-    ];
+  const rows = [
+    {
+      name: "Fomonyuytar Joseph",
+      matricule: "FE19A038",
+      department: "Computer Enginnering",
+      email: "joe@email.com",
+      phone: "651273636",
+      action: "action",
+    },
+    {
+      name: "Njoh Prince",
+      matricule: "FE19A035",
+      department: "Electrical Enginnering",
+      email: "prince@email.com",
+      phone: "653445345",
+      action: "action",
+    },
+    {
+      name: "Hans Weno",
+      matricule: "FE19A045",
+      department: "Computer Enginnering",
+      email: "hans@email.com",
+      phone: "6534454656",
+      action: "action",
+    },
+  ];
 
   return (
     <div>
@@ -98,11 +100,17 @@ const StudentsPage = () => {
       </div>
 
       <div className="w-[230px] mt-5">
-        <DashboardCard
+        <Button
+          text="Bulk Upload Students"
+          buttonType="PRIMARY"
+          icon={<MdOutlineContactPage size={20} />}
+          onClick={() => setBulkIsOpen(true)}
+        />
+        {/* <DashboardCard
           label="Students"
           stats={120}
           icon={<IconRepository.DashboardStudentIcon width={70} height={70} />}
-        />
+        /> */}
       </div>
 
       <div className="flex items-center gap-[75px] mt-12">
@@ -149,6 +157,12 @@ const StudentsPage = () => {
           className="dark:text-white"
         />
       </div>
+      {isBulkOpen && (
+        <ModalContainer width="700px" onClick={() => setBulkIsOpen(false)}>
+          <AddBulkStudentModal modalType={MarksType.EXAM} />
+        </ModalContainer>
+      )}
+
       {isOpen && (
         <ModalContainer width="900px" onClick={() => setIsOpen(false)}>
           <AddStudentModal closeModal={() => setIsOpen(false)} />
@@ -156,6 +170,6 @@ const StudentsPage = () => {
       )}
     </div>
   );
-}
+};
 
-export default StudentsPage
+export default StudentsPage;
