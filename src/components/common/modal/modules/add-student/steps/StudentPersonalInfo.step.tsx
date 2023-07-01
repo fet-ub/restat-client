@@ -1,15 +1,20 @@
-import React from 'react'
-import TextInput from '../../../../inputs/text-input/TextInput.common';
-import Button from '../../../../buttons/Button.common';
-import SelectInput from '../../../../inputs/select-input/SelectInput.common';
-import { GENDER, MARITAL_STATUS, SCHOOL_YEAR } from '../../../../../../repository/constants/constants';
+import React from "react";
+import TextInput from "../../../../inputs/text-input/TextInput.common";
+import Button from "../../../../buttons/Button.common";
+import SelectInput from "../../../../inputs/select-input/SelectInput.common";
+import {
+  GENDER,
+  MARITAL_STATUS,
+  SCHOOL_YEAR,
+} from "../../../../../../repository/constants/constants";
+import DateInput from "../../../../inputs/date-input/DateInput";
 // import { AddStudentPropType } from '../../../../../../types/common/modal/add-student-modal.type';
 
 const StudentPersonalInfoStep = ({
   form,
   setForm,
   setCurrentStep,
-  closeModal
+  closeModal,
 }: {
   form: {
     firstname: string;
@@ -35,6 +40,7 @@ const StudentPersonalInfoStep = ({
     guardianLastName: string;
     guardianEmail: string;
     guardianAddress: string;
+    guardianPhoneNumber: string;
   };
   setForm: React.Dispatch<
     React.SetStateAction<{
@@ -61,10 +67,11 @@ const StudentPersonalInfoStep = ({
       guardianLastName: string;
       guardianEmail: string;
       guardianAddress: string;
+      guardianPhoneNumber: string;
     }>
   >;
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
-  closeModal:()=>void;
+  closeModal: () => void;
 }) => {
   return (
     <form className="dark:bg-tertiary">
@@ -111,14 +118,22 @@ const StudentPersonalInfoStep = ({
           }}
           value={form.status}
         />
-        <SelectInput
+        <DateInput
+          label="DOB"
+          name="dob"
+          value={form.dob}
+          onChange={(e) => {
+            setForm({ ...form, dob: e.target.value });
+          }}
+        />
+        {/* <SelectInput
           selectOptions={SCHOOL_YEAR}
           label="DOB"
           onChange={(e) => {
             setForm({ ...form, dob: e.target.value });
           }}
           value={form.dob}
-        />
+        /> */}
       </div>
 
       <div className="flex justify-between gap-10 mb-4">
@@ -173,17 +188,6 @@ const StudentPersonalInfoStep = ({
 
       <div className="flex justify-between gap-10">
         <TextInput
-          placeholder="South-West"
-          label="Region"
-          type="text"
-          id="region"
-          name="region"
-          value={form.region}
-          onChange={(e) => {
-            setForm({ ...form, region: e.target.value });
-          }}
-        />
-        <TextInput
           placeholder="Cameroon"
           label="Country"
           type="text"
@@ -209,4 +213,4 @@ const StudentPersonalInfoStep = ({
   );
 };
 
-export default StudentPersonalInfoStep
+export default StudentPersonalInfoStep;
