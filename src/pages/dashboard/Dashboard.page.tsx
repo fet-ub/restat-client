@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import styles from "./dashboard.module.css";
 
@@ -9,7 +10,13 @@ import Image from "../../assets/images/image.png";
 import Toggle from "../../components/common/toogle/Toggle.common";
 
 const DashboardPage = () => {
-   const [theme, setTheme] = useState<any>('light');
+  const [theme, setTheme] = useState<any>("light");
+  const [user, setUser] = useState({
+    name: "",
+  });
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
 
    useEffect(()=>{
      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
@@ -39,41 +46,66 @@ const DashboardPage = () => {
         setTheme("dark");
      }
    };
+
+  useEffect(() => {
+    const userInfo = localStorage.getItem("user");
+
+    if (!userInfo) {
+      navigate("/auth/login");
+    } else {
+      setUser(JSON.parse(userInfo));
+    }
+  }, [window.location.pathname]);
+
+  useEffect(() => {
+    if (user?.name.length > 0) {
+      setLoading(false);
+    }
+  }, [user]);
+
+  
+
   return (
     <div className={`${styles.dashboard} bg-white dark:bg-tertiary`}>
-      <div className={styles.sidebar}>
-        <SidebarComponent />
-      </div>
-      <div className={`${styles.content}  bg-white dark:bg-tertiary`}>
-        <div className={styles.header}>
-          <h2 title="FET" className="text-secondary dark:text-white">
-            Faculty Of Engineering and Technology
-          </h2>
-          <div className={styles.items}>
-            <div>
-              <Toggle onClick={handleThemeSwitch} />
-            </div>
-            <div className={styles.icon}>
-              <IconRepository.BellIcon width={32} height={32} />
-              <span>2</span>
+      {loading ? (
+        <div>Loading dashboard information...</div>
+      ) : (
+        <>
+          <div className={styles.sidebar}>
+            <SidebarComponent />
+          </div>
+          <div className={`${styles.content}  bg-white dark:bg-tertiary`}>
+            <div className={styles.header}>
+              <h2 title="FET" className="text-secondary dark:text-white">
+                Faculty Of Engineering and Technology
+              </h2>
+              <div className={styles.items}>
+                <div>
+                  <Toggle onClick={handleThemeSwitch} />
+                </div>
+                <div className={styles.icon}>
+                  <IconRepository.BellIcon width={32} height={32} />
+                  <span>2</span>
+                </div>
+
+                <div className={styles.user}>
+                  <div className={styles.profile}>
+                    <img src={Image} alt="profile" />
+                  </div>
+                  <div className="dark:text-white">
+                    <h2 className="dark:text-white">{user?.name}</h2>
+                    <h3>FE19A000</h3>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div className={styles.user}>
-              <div className={styles.profile}>
-                <img src={Image} alt="profile" />
-              </div>
-              <div className="dark:text-white">
-                <h2 className="dark:text-white">Joseph</h2>
-                <h3>FE19A000</h3>
-              </div>
+            <div className={`${styles.modules} dark:bg-tertiary`}>
+              <Outlet />
             </div>
           </div>
-        </div>
-
-        <div className={`${styles.modules} dark:bg-tertiary`}>
-          <Outlet />
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 };

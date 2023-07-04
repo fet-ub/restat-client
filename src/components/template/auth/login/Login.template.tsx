@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 
 import TextInput from "../../../common/inputs/text-input/TextInput.common";
 import PasswordInput from "../../../common/inputs/password-input/PasswordInput.common";
@@ -12,10 +13,50 @@ const LoginTemplate = () => {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
 
-  const handleSubmit = () => {
-    navigate("/dashboard");
+  const handleSubmit = async () => {
+    setLoading(true);
+
+    const config = {
+      headers: {
+        accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      //transaction-manager-cmr.herokuapp.com/
+      await axios
+        .get("http://localhost:8000/sanctum/csrf-cookie")
+        .then(async () => {
+          await axios
+            .post(
+              "http://localhost:8000/api/login",
+              JSON.stringify({
+                email: form.email,
+                password: form.password,
+              }),
+              config
+            )
+            .then((response) => {
+              console.log({ response: response.data });
+
+              localStorage.setItem("accessToken", response.data.access_token);
+              localStorage.setItem("role", response.data.role);
+              localStorage.setItem("user", JSON.stringify(response.data.user));
+
+              navigate("/dashboard");
+            });
+        });
+    } catch (e) {
+      console.log({ e });
+
+      alert("Please check your credentials and try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleNavigation = () => {
@@ -34,6 +75,14 @@ const LoginTemplate = () => {
       setTheme('light')
     }
   }, [theme]);
+
+
+  useEffect(() => {
+    if (localStorage.getItem("accessToken") !== null) {
+      navigate("/dashboard");
+    }
+  }, [window.location.pathname]);
+
 
   return (
     <div className="w-full ">
@@ -81,7 +130,8 @@ const LoginTemplate = () => {
       </div>
 
       <Button
-        text="Login"
+        disable={loading}
+        text={loading ? "Loading..." : "Login"}
         fullWidth={true}
         buttonType="PRIMARY"
         onClick={handleSubmit}

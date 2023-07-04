@@ -1,7 +1,12 @@
-import React from 'react'
-import { IconPropsType } from '../types';
+import React from "react";
+import { IconPropsType } from "../types";
 
-const LogoIcon = ({ width = 48, height = 24 ,color='white',className }: IconPropsType) => {
+const LogoIcon = ({
+  width = 48,
+  height = 24,
+  color = "white",
+  className,
+}: IconPropsType) => {
   return (
     <svg
       width={width}
@@ -22,10 +27,10 @@ const LogoIcon = ({ width = 48, height = 24 ,color='white',className }: IconProp
         height="94"
         rx="47"
         stroke={color}
-        stroke-width="9"
+        strokeWidth="9"
       />
     </svg>
   );
 };
 
-export default LogoIcon
+export default LogoIcon;
