@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import ProgressSteps from "../../../progress-steps/ProgressSteps.common";
 import StudentPersonalInfoStep from "./steps/StudentPersonalInfo.step";
@@ -22,6 +22,7 @@ const AddStudentModal = ({ closeModal }: { closeModal: () => void }) => {
     level: "",
     year: "",
     faculty: "",
+    phone:"",
     department: "",
     program: "",
     certificate: "",

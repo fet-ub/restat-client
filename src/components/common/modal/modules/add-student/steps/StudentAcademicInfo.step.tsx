@@ -26,6 +26,7 @@ const StudentAcademicInfoStep = ({
     country: string;
     idCard: string;
     email: string;
+    phone:string;
     matricule: string;
     level: string;
     year: string;
@@ -53,6 +54,7 @@ const StudentAcademicInfoStep = ({
       country: string;
       idCard: string;
       email: string;
+      phone:string;
       matricule: string;
       level: string;
       year: string;

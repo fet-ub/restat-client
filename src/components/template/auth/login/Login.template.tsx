@@ -25,24 +25,16 @@ const LoginTemplate = () => {
   const [theme, setTheme] = useState<any>("light");
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
-  }, []);
-
-  useEffect(() => {
-    if (theme === "dark") {
+    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+    if (localStorage.theme === "dark"  || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add("dark");
+      setTheme('dark')
     } else {
       document.documentElement.classList.remove("dark");
+      setTheme('light')
     }
   }, [theme]);
 
-  //  const handleThemeSwitch = () => {
-  //    setTheme(theme === "dark" ? "light" : "dark");
-  //  };
   return (
     <div className="w-full ">
       {/* form */}

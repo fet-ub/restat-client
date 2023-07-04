@@ -11,24 +11,33 @@ import Toggle from "../../components/common/toogle/Toggle.common";
 const DashboardPage = () => {
    const [theme, setTheme] = useState<any>('light');
 
-   useEffect(() => {
-     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-       setTheme("dark");
-     } else {
-       setTheme("light");
-     }
-   }, []);
-
-   useEffect(() => {
-     if (theme === "dark") {
+   useEffect(()=>{
+     // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+     if (
+       localStorage.theme === "dark"
+     ) {
        document.documentElement.classList.add("dark");
      } else {
        document.documentElement.classList.remove("dark");
      }
-   }, [theme]);
+   },[theme])
+
+  
 
    const handleThemeSwitch = () => {
-     setTheme(theme === "dark" ? "light" : "dark");
+     // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+     if (
+       localStorage.theme === "dark" 
+     ) {
+      localStorage.theme = "light";
+      // console.log(localStorage.theme);
+      setTheme('light');
+      
+     } else {
+       localStorage.setItem('theme','dark')
+        // console.log(localStorage.theme);
+        setTheme("dark");
+     }
    };
   return (
     <div className={`${styles.dashboard} bg-white dark:bg-tertiary`}>

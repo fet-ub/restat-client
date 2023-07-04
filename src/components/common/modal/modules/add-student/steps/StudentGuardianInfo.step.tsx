@@ -20,6 +20,7 @@ const StudentGuardianInfoStep = ({
     country: string;
     idCard: string;
     email: string;
+    phone :string;
     matricule: string;
     level: string;
     year: string;
@@ -47,6 +48,7 @@ const StudentGuardianInfoStep = ({
       country: string;
       idCard: string;
       email: string;
+      phone: string;
       matricule: string;
       level: string;
       year: string;
@@ -94,7 +96,7 @@ const StudentGuardianInfoStep = ({
         <div className="flex justify-between gap-10">
           <TextInput
             placeholder="Guardian Email"
-            label="Address"
+            label="Email"
             type="email"
             id="address"
             name="email"
