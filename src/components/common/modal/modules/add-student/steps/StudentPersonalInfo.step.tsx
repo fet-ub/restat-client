@@ -5,7 +5,6 @@ import SelectInput from "../../../../inputs/select-input/SelectInput.common";
 import {
   GENDER,
   MARITAL_STATUS,
-  SCHOOL_YEAR,
 } from "../../../../../../repository/constants/constants";
 import DateInput from "../../../../inputs/date-input/DateInput";
 // import { AddStudentPropType } from '../../../../../../types/common/modal/add-student-modal.type';
@@ -28,6 +27,7 @@ const StudentPersonalInfoStep = ({
     country: string;
     idCard: string;
     email: string;
+    phone: string;
     matricule: string;
     level: string;
     year: string;
@@ -56,6 +56,7 @@ const StudentPersonalInfoStep = ({
       idCard: string;
       email: string;
       matricule: string;
+      phone:string;
       level: string;
       year: string;
       faculty: string;

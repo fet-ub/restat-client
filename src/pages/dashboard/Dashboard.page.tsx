@@ -17,6 +17,36 @@ const DashboardPage = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+
+   useEffect(()=>{
+     // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+     if (
+       localStorage.theme === "dark"
+     ) {
+       document.documentElement.classList.add("dark");
+     } else {
+       document.documentElement.classList.remove("dark");
+     }
+   },[theme])
+
+  
+
+   const handleThemeSwitch = () => {
+     // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+     if (
+       localStorage.theme === "dark" 
+     ) {
+      localStorage.theme = "light";
+      // console.log(localStorage.theme);
+      setTheme('light');
+      
+     } else {
+       localStorage.setItem('theme','dark')
+        // console.log(localStorage.theme);
+        setTheme("dark");
+     }
+   };
+
   useEffect(() => {
     const userInfo = localStorage.getItem("user");
 
@@ -33,25 +63,8 @@ const DashboardPage = () => {
     }
   }, [user]);
 
-  useEffect(() => {
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
-  }, []);
+  
 
-  useEffect(() => {
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [theme]);
-
-  const handleThemeSwitch = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
   return (
     <div className={`${styles.dashboard} bg-white dark:bg-tertiary`}>
       {loading ? (

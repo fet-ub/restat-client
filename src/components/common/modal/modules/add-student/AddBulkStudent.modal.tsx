@@ -1,27 +1,43 @@
-import React, { useState } from "react";
-import { AddMarksModalPropType } from "../../../../../types/common/modal/add-marks.modal.type";
-import { MarksType } from "../../../../../types/atoms/enums.atoms";
+import React, { useEffect, useState } from "react";
 import SelectInput from "../../../inputs/select-input/SelectInput.common";
 import { COURSE_LEVELS } from "../../../../../repository/constants/constants";
 import Button from "../../../buttons/Button.common";
 import { IconRepository } from "../../../../../repository/icons/icon.repository";
-
-const AddBulkStudentmodal = ({ modalType }: AddMarksModalPropType) => {
+import { AddBulkStudentModalPropType } from "../../../../../types/common/modal/add-bulk-student-modal.type";
+import * as xlsx from "xlsx";
+const AddBulkStudentmodal = ({fileName,setFileName,setSelectedFile, selectedFile,setStudentsTableData,studentsTableData}:AddBulkStudentModalPropType) => {
   const [active, setActive] = useState(0);
   const [form, setForm] = useState({
     level: "",
   });
-  const [selectedFile, setSelectedFile] = useState<File | undefined>(undefined);
+  // const [selectedFile, setSelectedFile] = useState<File | undefined>(undefined);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: any) => {
     if (e?.target?.files) {
-      //  setSelectedCategoryImage(URL.createObjectURL(e.target.files[0]));
-      setSelectedFile(e.target.files[0]);
-      console.log(e.target.files[0]);
+      setFileName(e.target.files[0]);
 
-      console.log(selectedFile?.name);
+      const file = e.target.files[0];
+      const data = await file.arrayBuffer(file);
+      const excelfile = xlsx.read(data);
+      const excelsheet = excelfile.Sheets[excelfile.SheetNames[0]];
+      const exceljson = xlsx.utils.sheet_to_json(excelsheet);
+      console.log(exceljson);
+      setSelectedFile(exceljson);
+      setStudentsTableData(exceljson);
+      // setStudentsTableData();
+      // console.log('zxcxzc',selectedFile);
     }
   };
+
+
+  console.log('hghfgh',studentsTableData);
+  
+
+  //  useEffect(() => {
+     
+       
+    //  setStudentsTableData(selectedFile)
+  //  }, [selectedFile,setStudentsTableData]);
 
   const handleXls = () => {
     setActive(0);
@@ -65,8 +81,8 @@ const AddBulkStudentmodal = ({ modalType }: AddMarksModalPropType) => {
               "flex items-center justify-center gap-1 border-dashed border border-primary bg-[#bfdffb] py-[15px] mt-4 rounded-lg "
             }
           >
-            {selectedFile ? (
-              <h1 className="text-2xl">{selectedFile.name}</h1>
+            {fileName ? (
+              <h1 className="text-2xl">{fileName.name}</h1>
             ) : (
               <>
                 <h1 className="text-xl">

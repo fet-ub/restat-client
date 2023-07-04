@@ -3,7 +3,7 @@ import styles from "./encryptCaTable.module.css";
 import StatusCard from "../../cards/status-card/StatusCard.common";
 // import SelectInput from "../../inputs/select-input/SelectInput.common";
 import TextInput from "../../inputs/text-input/TextInput.common";
-import Button from "../../buttons/Button.common";
+// import Button from "../../buttons/Button.common";
 import { IconRepository } from "../../../../repository/icons/icon.repository";
 // import { StatusCardType } from "../../../../types/atoms/enums.atoms";
 import { CSVLink } from "react-csv";
@@ -15,14 +15,14 @@ interface marksType {
   encrypt: string;
 }
 
-interface exportMarksType {
-  status: string;
-  encrypt: string;
-}
+// interface exportMarksType {
+//   status: string;
+//   encrypt: string;
+// }
 
-interface exportCaMarksType {
-  exportedData: exportMarksType[];
-}
+// interface exportCaMarksType {
+//   exportedData: exportMarksType[];
+// }
 
 interface EncryptCaTablePropTypes {
   marksTableData: marksType[];

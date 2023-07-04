@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import DashboardHeader from "../../../components/common/dashboard-header/DashboardHeader.common";
-import DashboardCard from "../../../components/common/cards/dashboard-card/DashboardCard.common";
-import { IconRepository } from "../../../repository/icons/icon.repository";
+// import DashboardCard from "../../../components/common/cards/dashboard-card/DashboardCard.common";
+// import { IconRepository } from "../../../repository/icons/icon.repository";
 import SelectInput from "../../../components/common/inputs/select-input/SelectInput.common";
 import { ENGINEERING_DEPARTMENTS } from "../../../repository/constants/constants";
 import TextInput from "../../../components/common/inputs/text-input/TextInput.common";
@@ -11,19 +11,39 @@ import ModalContainer from "../../../components/common/modal/modal-container/Mod
 import AddStudentModal from "../../../components/common/modal/modules/add-student/AddStudentModal.module";
 import Button from "../../../components/common/buttons/Button.common";
 import { MdOutlineContactPage } from "react-icons/md";
-import { MarksType } from "../../../types/atoms/enums.atoms";
+// import { MarksType } from "../../../types/atoms/enums.atoms";
 import AddBulkStudentModal from "../../../components/common/modal/modules/add-student/AddBulkStudent.modal";
+import { studentType } from "../../../types/common/modal/add-bulk-student-modal.type";
+
 //  GridValueGetterParams;
 
 const StudentsPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isBulkOpen, setBulkIsOpen] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<any>([]);
+  const [fileName, setFileName] = useState<any>("");
+  const [studentsTableData, setStudentsTableData] = useState<studentType[]>([]);
 
   const [form, setForm] = useState({
     department: "",
     name: "",
   });
 
+
+const formattedArr = studentsTableData.map((obj: any) => {
+  // Add code to rename keys here
+
+  const formattedObj: any = {};
+  Object.keys(obj).forEach((key: any) => {
+    const formattedKey = key.replace(/ /g, "_").toLowerCase();
+    formattedObj[formattedKey] = obj[key];
+  });
+
+  return formattedObj as studentType;
+});
+
+ console.log(formattedArr);
+ 
   const columns: GridColDef[] = [
     { field: "name", headerName: "Name", width: 280, sortable: false },
     { field: "matricule", headerName: "Matrcule", width: 150, sortable: false },
@@ -159,7 +179,16 @@ const StudentsPage = () => {
       </div>
       {isBulkOpen && (
         <ModalContainer width="700px" onClick={() => setBulkIsOpen(false)}>
-          <AddBulkStudentModal modalType={MarksType.EXAM} />
+          <AddBulkStudentModal
+           fileName={fileName}
+           setFileName={setFileName}
+           setSelectedFile={setSelectedFile}
+           selectedFile={selectedFile}
+           setStudentsTableData={setStudentsTableData}
+           studentsTableData={studentsTableData}
+           
+          
+          />
         </ModalContainer>
       )}
 
