@@ -18,45 +18,46 @@ const LoginTemplate = () => {
 
   const handleSubmit = async () => {
     setLoading(true);
+     navigate("/dashboard");
 
-    const config = {
-      headers: {
-        accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    };
+    // const config = {
+    //   headers: {
+    //     accept: "application/json",
+    //     "Content-Type": "application/json",
+    //   },
+    // };
 
-    try {
-      //transaction-manager-cmr.herokuapp.com/
-      await axios
-        .get("http://localhost:8000/sanctum/csrf-cookie")
-        .then(async () => {
-          await axios
-            .post(
-              "http://localhost:8000/api/login",
-              JSON.stringify({
-                email: form.email,
-                password: form.password,
-              }),
-              config
-            )
-            .then((response) => {
-              console.log({ response: response.data });
+    // try {
+    //   //transaction-manager-cmr.herokuapp.com/
+    //   await axios
+    //     .get("http://localhost:8000/sanctum/csrf-cookie")
+    //     .then(async () => {
+    //       await axios
+    //         .post(
+    //           "http://localhost:8000/api/login",
+    //           JSON.stringify({
+    //             email: form.email,
+    //             password: form.password,
+    //           }),
+    //           config
+    //         )
+    //         .then((response) => {
+    //           console.log({ response: response.data });
 
-              localStorage.setItem("accessToken", response.data.access_token);
-              localStorage.setItem("role", response.data.role);
-              localStorage.setItem("user", JSON.stringify(response.data.user));
+    //           localStorage.setItem("accessToken", response.data.access_token);
+    //           localStorage.setItem("role", response.data.role);
+    //           localStorage.setItem("user", JSON.stringify(response.data.user));
 
-              navigate("/dashboard");
-            });
-        });
-    } catch (e) {
-      console.log({ e });
+    //           navigate("/dashboard");
+    //         });
+    //     });
+    // } catch (e) {
+    //   console.log({ e });
 
-      alert("Please check your credentials and try again.");
-    } finally {
-      setLoading(false);
-    }
+    //   alert("Please check your credentials and try again.");
+    // } finally {
+    //   setLoading(false);
+    // }
   };
 
   const handleNavigation = () => {
