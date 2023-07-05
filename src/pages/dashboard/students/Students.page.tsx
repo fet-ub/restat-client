@@ -14,10 +14,12 @@ import { MdOutlineContactPage } from "react-icons/md";
 // import { MarksType } from "../../../types/atoms/enums.atoms";
 import AddBulkStudentModal from "../../../components/common/modal/modules/add-student/AddBulkStudent.modal";
 import { studentType } from "../../../types/common/modal/add-bulk-student-modal.type";
+import { useTranslation } from "react-i18next";
 
 //  GridValueGetterParams;
 
 const StudentsPage = () => {
+    const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [isBulkOpen, setBulkIsOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState<any>([]);
@@ -112,8 +114,8 @@ const formattedArr = studentsTableData.map((obj: any) => {
     <div>
       <div>
         <DashboardHeader
-          label={"Dashboard"}
-          ButtonText="Add New Student"
+          label={t("Students", { ns: ["main", "home"] })}
+          ButtonText={t("Add New Student", { ns: ["main", "home"] })}
           onClick={() => setIsOpen(true)}
           displayButton={true}
         />
@@ -121,10 +123,11 @@ const formattedArr = studentsTableData.map((obj: any) => {
 
       <div className="w-[230px] mt-5">
         <Button
-          text="Bulk Upload Students"
+          text={t("Bulk Upload Students", { ns: ["main", "home"] })}
           buttonType="PRIMARY"
           icon={<MdOutlineContactPage size={20} />}
           onClick={() => setBulkIsOpen(true)}
+          width="400px"
         />
         {/* <DashboardCard
           label="Students"
@@ -136,14 +139,14 @@ const formattedArr = studentsTableData.map((obj: any) => {
       <div className="flex items-center gap-[75px] mt-12">
         <SelectInput
           selectOptions={ENGINEERING_DEPARTMENTS}
-          label="Department"
+          label={t("Department", { ns: ["main", "home"] })}
           value={form.department}
           onChange={(e) => {
             setForm({ ...form, department: e.target.value });
           }}
         />
         <TextInput
-          label="Search"
+          label={t("Search", { ns: ["main", "home"] })}
           placeholder={"Arrey Tabe"}
           value={form.name}
           onChange={(e) => {
@@ -180,14 +183,12 @@ const formattedArr = studentsTableData.map((obj: any) => {
       {isBulkOpen && (
         <ModalContainer width="700px" onClick={() => setBulkIsOpen(false)}>
           <AddBulkStudentModal
-           fileName={fileName}
-           setFileName={setFileName}
-           setSelectedFile={setSelectedFile}
-           selectedFile={selectedFile}
-           setStudentsTableData={setStudentsTableData}
-           studentsTableData={studentsTableData}
-           
-          
+            fileName={fileName}
+            setFileName={setFileName}
+            setSelectedFile={setSelectedFile}
+            selectedFile={selectedFile}
+            setStudentsTableData={setStudentsTableData}
+            studentsTableData={studentsTableData}
           />
         </ModalContainer>
       )}

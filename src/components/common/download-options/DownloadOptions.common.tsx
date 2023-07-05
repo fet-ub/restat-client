@@ -1,8 +1,11 @@
 import React from 'react'
 import Button from '../buttons/Button.common';
 import { IconRepository } from '../../../repository/icons/icon.repository';
+import { useTranslation } from "react-i18next";
+
 
 const DownloadOptions = () => {
+    const { t } = useTranslation();
   return (
     <div className="flex gap-4 mt-10">
       <Button
@@ -21,7 +24,7 @@ const DownloadOptions = () => {
         icon={<IconRepository.DownloadIcon height={25} />}
       />
       <Button
-        text="PRINT"
+        text={t("PRINT", { ns: ["main", "home"] })}
         buttonType="SECONDARY"
         icon={<IconRepository.PageIcon height={25} />}
       />

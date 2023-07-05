@@ -3,8 +3,11 @@ import DashboardHeader from '../../../components/common/dashboard-header/Dashboa
 import DownloadOptions from '../../../components/common/download-options/DownloadOptions.common';
 import TextInput from '../../../components/common/inputs/text-input/TextInput.common';
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { useTranslation } from "react-i18next";
+
 
 const CoursesPage = () => {
+    const { t } = useTranslation();
   const [form, setForm] = useState({
     search: "",
   });
@@ -99,8 +102,8 @@ const CoursesPage = () => {
   return (
     <div>
       <DashboardHeader
-        label={"Courses"}
-        ButtonText="Add New User"
+        label={t("Courses", { ns: ["main", "home"] })}
+        ButtonText={t("Add New User", { ns: ["main", "home"] })}
         displayButton={false}
       />
 
@@ -109,11 +112,11 @@ const CoursesPage = () => {
 
       <div className="w-[400px] mt-8">
         <TextInput
-          label="Search"
+          label={t("Search", { ns: ["main", "home"] })}
           type="search"
           name="text"
           id="search"
-          placeholder="Enter your search"
+          placeholder={t("Enter your search term", { ns: ["main", "home"] })}
           value={form.search}
           onChange={(e) => {
             setForm({ ...form, search: e.target.value });

@@ -6,8 +6,10 @@ import TextInput from "../../../../../components/common/inputs/text-input/TextIn
 import Button from "../../../../../components/common/buttons/Button.common";
 import { IconRepository } from "../../../../../repository/icons/icon.repository";
 import Image from "../../../../../assets/images/image.png";
+import { useTranslation } from "react-i18next";
 
 const PersonalInfo = () => {
+    const { t } = useTranslation();
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -29,7 +31,7 @@ const PersonalInfo = () => {
 
       <TextInput
         placeholder="Tabe"
-        label="First Name"
+        label={t("First Name", { ns: ["main", "home"] })}
         type="text"
         id="firstName"
         name="firstName"
@@ -40,7 +42,7 @@ const PersonalInfo = () => {
       />
       <TextInput
         placeholder="Tabe"
-        label="Last Name"
+        label={t("Last Name", { ns: ["main", "home"] })}
         type="text"
         id="lastName"
         name="LastName"
@@ -50,7 +52,11 @@ const PersonalInfo = () => {
         }}
       />
 
-      <Button text="Edit Info" fullWidth={true} buttonType="PRIMARY" />
+      <Button
+        text={t("Edit Info", { ns: ["main", "home"] })}
+        fullWidth={true}
+        buttonType="PRIMARY"
+      />
     </div>
   );
 };

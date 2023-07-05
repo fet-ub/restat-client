@@ -4,15 +4,17 @@ import DashboardHeader from "../../../components/common/dashboard-header/Dashboa
 import ModalContainer from "../../../components/common/modal/modal-container/ModalContainer.common";
 import AddMarksModal from "../../../components/common/modal/modules/marks/AddMarksModal.module";
 import { MarksType } from "../../../types/atoms/enums.atoms";
+import { useTranslation } from "react-i18next";
 
 const ExamPage = () => {
+    const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div>
       {" "}
       <DashboardHeader
-        label={"Exam"}
-        ButtonText="Add Exam marks"
+        label={t("Exam", { ns: ["main", "home"] })}
+        ButtonText={t("Add Exam marks", { ns: ["main", "home"] })}
         onClick={() => setIsOpen(true)}
         displayButton={true}
       />

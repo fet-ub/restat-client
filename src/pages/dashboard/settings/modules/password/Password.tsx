@@ -4,8 +4,10 @@ import styles from "../personal-info/personalinfo.module.css";
 
 import Button from "../../../../../components/common/buttons/Button.common";
 import PasswordInput from "../../../../../components/common/inputs/password-input/PasswordInput.common";
+import { useTranslation } from "react-i18next";
 
 const PasswordChange = () => {
+    const { t } = useTranslation();
   const [form, setForm] = useState({
     currentPassword: "",
     newPassword: "",
@@ -16,7 +18,7 @@ const PasswordChange = () => {
     <div className={styles.form}>
       <PasswordInput
         placeholder="*******"
-        label="Current Password"
+        label={t("Current Password", { ns: ["main", "home"] })}
         type="password"
         id="currentPassword"
         name="currentPassword"
@@ -27,7 +29,7 @@ const PasswordChange = () => {
       />
       <PasswordInput
         placeholder="*******"
-        label="New Password"
+        label={t("New Password", { ns: ["main", "home"] })}
         type="password"
         id="newPassword"
         name="newPassword"
@@ -38,7 +40,7 @@ const PasswordChange = () => {
       />
       <PasswordInput
         placeholder="*******"
-        label="Re-Type New Password"
+        label={t("Re-Type New Password", { ns: ["main", "home"] })}
         type="password"
         id="confirmPassword"
         name="confirmPassword"
@@ -47,7 +49,11 @@ const PasswordChange = () => {
           setForm({ ...form, confirmPassword: e.target.value });
         }}
       />
-      <Button text="Update Password" fullWidth={true} buttonType="PRIMARY" />
+      <Button
+        text={t("Update Password", { ns: ["main", "home"] })}
+        fullWidth={true}
+        buttonType="PRIMARY"
+      />
     </div>
   );
 };

@@ -6,27 +6,30 @@ import DashboardCard from "../../../components/common/cards/dashboard-card/Dashb
 import { IconRepository } from "../../../repository/icons/icon.repository";
 import DoughnutChart from "../../../components/common/chart/DoughnutChart.component";
 import LineChart from "../../../components/common/chart/LineChart.component";
+import { useTranslation } from "react-i18next";
+
 
 const IndexPage = () => {
+    const { t } = useTranslation();
 
   const dashboardCardData = [
     {
-      label: "Students",
+      label: t("Students", { ns: ["main", "home"] }),
       stats: 200,
       icon: <IconRepository.DashboardStudentIcon width={70} height={70} />,
     },
     {
-      label: "Courses",
+      label: t("Courses", { ns: ["main", "home"] }),
       stats: 50,
       icon: <IconRepository.DashboardBooksIcon width={70} height={70} />,
     },
     {
-      label: "Users",
+      label: t("Users", { ns: ["main", "home"] }),
       stats: 10,
       icon: <IconRepository.PersonIcon width={70} height={70} />,
     },
     {
-      label: "Lecturers",
+      label: t("Lecturers", { ns: ["main", "home"] }),
       stats: 20,
       icon: <IconRepository.PersonIcon width={70} height={70} />,
     },
@@ -34,7 +37,10 @@ const IndexPage = () => {
   return (
     <div className={styles.dashboard}>
       <div className={styles.head}>
-        <h2 className="text-secondary dark:text-white">Dashboard</h2>
+        <h2 className="text-secondary dark:text-white">
+          
+          {t("Dashboard", { ns: ["main", "home"] })}
+        </h2>
       </div>
 
       <div className={styles.grid}>

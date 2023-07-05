@@ -8,8 +8,11 @@ import SidebarComponent from "../../components/dashboard/sidebar/Sidebar.compone
 import { IconRepository } from "../../repository/icons/icon.repository";
 import Image from "../../assets/images/image.png";
 import Toggle from "../../components/common/toogle/Toggle.common";
+import { useTranslation } from "react-i18next";
+
 
 const DashboardPage = () => {
+    const { t } = useTranslation();
   const [theme, setTheme] = useState<any>("light");
   const [user, setUser] = useState({
     name: "",
@@ -77,7 +80,7 @@ const DashboardPage = () => {
           <div className={`${styles.content}  bg-white dark:bg-tertiary`}>
             <div className={styles.header}>
               <h2 title="FET" className="text-secondary dark:text-white">
-                Faculty Of Engineering and Technology
+               { t("Faculty of Engineering and Technology", { ns: ["main", "home"] })}
               </h2>
               <div className={styles.items}>
                 <div>
