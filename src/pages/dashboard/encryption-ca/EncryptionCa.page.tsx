@@ -3,8 +3,10 @@ import DashboardHeader from '../../../components/common/dashboard-header/Dashboa
 import { IconRepository } from '../../../repository/icons/icon.repository';
 import EncryptCaTable from '../../../components/common/table/encrypt-ca/EncryptCaTable.common';
 import * as xlsx from "xlsx";
+import { useTranslation } from "react-i18next";
 
 const EncryptionCaPage = () => {
+    const { t } = useTranslation();
   // const [isOpen, setIsOpen] = useState(false);
   const [active, setActive] = useState(0);
 
@@ -84,17 +86,19 @@ const EncryptionCaPage = () => {
   return (
     <div>
       <DashboardHeader
-        label={"Encryption of Scripts"}
-        ButtonText="Add CA marks"
+        label={t("Encryption of Scripts", { ns: ["main", "home"] })}
+        ButtonText={t("Add CA marks", { ns: ["main", "home"] })}
         // onClick={() => setIsOpen(true)}
         displayButton={false}
       />
 
       <h2 className="text-3xl font-bold text-secondary dark:text-white mt-10">
-        Bulk Upload CA Marks
+        {t("Bulk Upload CA Marks", { ns: ["main", "home"] })}
       </h2>
       <p className="text-xl mb-5 mt-1 dark:text-white">
-        {`Here,you can upload bulk CA marks as .xls or .csv`}
+        {t("Here,you can upload bulk CA marks as .xls or .csv", {
+          ns: ["main", "home"],
+        })}
       </p>
 
       <div className={"bg-[#f4f4f4]  px-4 border-t-2 border-primary  py-4"}>
@@ -128,10 +132,10 @@ const EncryptionCaPage = () => {
             ) : (
               <>
                 <h1 className="text-xl">
-                  Drag and Drop or
+                  {t("Drag and Drop or", { ns: ["main", "home"] })}
                   <span className="text-primary text-2xl">
                     {" "}
-                    Upload new file
+                    {t("Upload new file", { ns: ["main", "home"] })}
                   </span>
                 </h1>
                 <div>
@@ -151,7 +155,10 @@ const EncryptionCaPage = () => {
         </label>
       </div>
 
-      <EncryptCaTable marksTableData={marksTableData} setMarksTableData={setMarksTableData} />
+      <EncryptCaTable
+        marksTableData={marksTableData}
+        setMarksTableData={setMarksTableData}
+      />
     </div>
   );
 }

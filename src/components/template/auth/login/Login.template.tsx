@@ -88,13 +88,12 @@ const LoginTemplate = () => {
     <div className="w-full ">
       {/* form */}
       <h3 className="mb-8 text-4xl font-bold dark:text-white">
-        {t("Welcome", { ns: ["main", "home"] })} to{" "}
-        <span className="text-primary">Restat</span>
+        {t("Welcome to", { ns: ["main", "home"] })}{" "} <span className="text-primary">Restat</span>
       </h3>
 
       <div className="mb-8">
         <TextInput
-          label="Email"
+          label={t("Email", { ns: ["main", "home"] })}
           type="email"
           name="Email"
           id="Email"
@@ -108,7 +107,7 @@ const LoginTemplate = () => {
 
       <div className="mb-8">
         <PasswordInput
-          label="Password"
+          label={t("Password", { ns: ["main", "home"] })}
           type="password"
           name="password"
           id="password"
@@ -125,13 +124,13 @@ const LoginTemplate = () => {
           className="cursor-pointer text-[17px] font-medium text-primary"
           onClick={handleNavigation}
         >
-          Forgot Password?
+          {t("Forgot Password?", { ns: ["main", "home"] })}
         </p>
       </div>
 
       <Button
         disable={loading}
-        text={loading ? "Loading..." : "Login"}
+        text={loading ? "Loading..." :   t("Login", { ns: ["main", "home"] })}
         fullWidth={true}
         buttonType="PRIMARY"
         onClick={handleSubmit}

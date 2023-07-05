@@ -7,8 +7,10 @@ import {
 } from "../../../repository/constants/constants";
 import Button from "../../../components/common/buttons/Button.common";
 // import DateInput from "../../../components/common/inputs/date-input/DateInput";
+import { useTranslation } from "react-i18next";
 
 const TranscriptPage = () => {
+    const { t } = useTranslation();
   const [form, setForm] = useState({
     year: "",
     semester: "",
@@ -17,7 +19,7 @@ const TranscriptPage = () => {
   return (
     <div className="bg-white dark:bg-tertiary w-full h-full ">
       <DashboardHeader
-        label={"Transcript"}
+        label={t("Transcript", { ns: ["main", "home"] })}
         ButtonText="Add New User"
         displayButton={false}
       />
@@ -25,7 +27,7 @@ const TranscriptPage = () => {
       <div className="flex flex-col justify-center items-center">
         <div>
           <h2 className="text-4xl font-bold dark:text-white">
-            Request for Transcript
+            {t("Request for Transcript", { ns: ["main", "home"] })}
           </h2>
         </div>
 
@@ -40,7 +42,7 @@ const TranscriptPage = () => {
           /> */}
           <SelectInput
             selectOptions={ACADEMIC_YEAR}
-            label="Year"
+            label={t("Year", { ns: ["main", "home"] })}
             onChange={(e) => {
               setForm({ ...form, semester: e.target.value });
             }}
@@ -48,13 +50,17 @@ const TranscriptPage = () => {
           />
           <SelectInput
             selectOptions={SEMESTER}
-            label="Semester"
+            label={t("Semester", { ns: ["main", "home"] })}
             onChange={(e) => {
               setForm({ ...form, year: e.target.value });
             }}
             value={form.year}
           />
-          <Button text="Send Request" buttonType="PRIMARY" fullWidth={true} />
+          <Button
+            text={t("Send Request", { ns: ["main", "home"] })}
+            buttonType="PRIMARY"
+            fullWidth={true}
+          />
         </div>
       </div>
     </div>

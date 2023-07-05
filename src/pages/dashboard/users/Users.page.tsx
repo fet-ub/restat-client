@@ -8,8 +8,11 @@ import ModalContainer from '../../../components/common/modal/modal-container/Mod
 import AddUserModal from '../../../components/common/modal/modules/add-user/AddUserModal.module';
 import DashboardHeader from '../../../components/common/dashboard-header/DashboardHeader.common';
 import DownloadOptions from '../../../components/common/download-options/DownloadOptions.common';
+import { useTranslation } from "react-i18next";
+
 //  GridValueGetterParams
 const UsersPage = () => {
+    const { t } = useTranslation();
 
   const [isOpen, setIsOpen] = useState(false);
   const columns: GridColDef[] = [
@@ -51,8 +54,8 @@ const UsersPage = () => {
   return (
     <div>
       <DashboardHeader
-        label={"Dashboard"}
-        ButtonText="Add New User"
+        label={t("Users", { ns: ["main", "home"] })}
+        ButtonText={t("Add New User", { ns: ["main", "home"] })}
         onClick={() => setIsOpen(true)}
         displayButton={true}
       />
@@ -63,7 +66,7 @@ const UsersPage = () => {
       <div className="w-[25%] mt-12">
         <SelectInput
           selectOptions={ENGINEERING_DEPARTMENTS}
-          label="Department"
+          label={t("Department", { ns: ["main", "home"] })}
           value=""
         />
       </div>

@@ -7,6 +7,8 @@ import TextInput from "../../inputs/text-input/TextInput.common";
 import { IconRepository } from "../../../../repository/icons/icon.repository";
 // import { StatusCardType } from "../../../../types/atoms/enums.atoms";
 import { CSVLink } from "react-csv";
+import { useTranslation } from "react-i18next";
+
 interface marksType {
   id?: string;
   matricule: string;
@@ -33,6 +35,7 @@ const EncryptCaTable = ({
   marksTableData,
   setMarksTableData,
 }: EncryptCaTablePropTypes) => {
+    const { t } = useTranslation();
   const [form, setForm] = useState({
     filterText: "",
     searchText: "",
@@ -116,7 +119,7 @@ const EncryptCaTable = ({
             placeholder={"038 or search by status(encrypted or not filled)"}
             value={form.searchText}
             name={"searchText"}
-            label={"Search"}
+            label={t("Search", { ns: ["main", "home"] })}
             type={"text"}
             onChange={(e) => {
               // handleUserSearch(e);
@@ -131,7 +134,7 @@ const EncryptCaTable = ({
             filename="EncryptedCAMarks"
             className="bg-primary  px-4 text-secondary dark:text-white  py-[10px]    rounded-lg outline-none text-[16px] flex justify-center items-center gap-3"
           >
-            Export User Data
+            {t("Export User Data", { ns: ["main", "home"] })}
           </CSVLink>
           {/* <Button
             text="Download File"
@@ -148,10 +151,10 @@ const EncryptCaTable = ({
             <tr
               className={`${styles.table__heading} text-secondary dark:text-white  font-bold`}
             >
-              <th>Matricule Number</th>
-              <th>CA Mark</th>
-              <th>Status</th>
-              <th>Encrypt </th>
+              <th> {t("Matricule Number", { ns: ["main", "home"] })}</th>
+              <th> {t("CA mark", { ns: ["main", "home"] })}</th>
+              <th> {t("Status", { ns: ["main", "home"] })}</th>
+              <th> {t("Encrypt", { ns: ["main", "home"] })}</th>
             </tr>
           </thead>
           <tbody>
@@ -199,8 +202,9 @@ const EncryptCaTable = ({
 
         <div className="flex justify-between items-center">
           <span className={"text-[14px] text-secondary dark:text-white"}>
-            Total of {marksTableData.length} students, {totalEncrypted}{" "}
-            encyrpted
+            {t("Total of", { ns: ["main", "home"] })} {marksTableData.length}{" "}
+            {t("students", { ns: ["main", "home"] })}, {totalEncrypted}{" "}
+            {t("encrypted", { ns: ["main", "home"] })}
           </span>
 
           <div className={"flex  items-center mt-5 py-3 gap-3"}>
@@ -208,7 +212,9 @@ const EncryptCaTable = ({
               <IconRepository.LeftPaginationIcon />
             </span>
             <p className={"text-[14px] text-secondary dark:text-white"}>
-              showing {currentPage} of {pages.length} pages
+              {t("showing", { ns: ["main", "home"] })} {currentPage}{" "}
+              {t("of", { ns: ["main", "home"] })} {pages.length}{" "}
+              {t("pages", { ns: ["main", "home"] })}
             </p>
             <span onClick={nextPage}>
               <IconRepository.RightPaginationIcon />

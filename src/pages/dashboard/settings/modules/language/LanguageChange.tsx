@@ -33,7 +33,10 @@ const LanguageChange = () => {
             lang === "en" ? styles.active : ""
           }`}
         ></div>
-        <h4 className="text-secondary dark:text-white">English</h4>
+        <h4 className="text-secondary dark:text-white">
+          {" "}
+          {t("English", { ns: ["main", "home"] })}
+        </h4>
       </div>
       <div
         onClick={() => {
@@ -46,7 +49,10 @@ const LanguageChange = () => {
             lang === "fr" ? styles.active : ""
           }`}
         ></div>
-        <h4 className="text-secondary dark:text-white">French</h4>
+        <h4 className="text-secondary dark:text-white">
+        
+          {t("French", { ns: ["main", "home"] })}
+        </h4>
       </div>
     </div>
   );

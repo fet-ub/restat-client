@@ -3,7 +3,7 @@ export interface  ButtonTypes{
     fullWidth?:boolean;
     width?:string;
     onClick?:()=>void;
-    text?:string;
+    text?:string | any;
     disable?:boolean;
     icon?:JSX.Element;
 }

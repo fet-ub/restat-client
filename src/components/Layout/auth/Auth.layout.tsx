@@ -4,9 +4,11 @@ import React from 'react'
 import { IconRepository } from '../../../repository/icons/icon.repository';
 import { ImageAssets } from '../../../assets';
 import { AuthLayoutPropTypes } from '../../../types/layout/auth-layout.type';
+import { useTranslation } from "react-i18next";
+
 
 const AuthLayout = ({children}:AuthLayoutPropTypes) => {
-     
+       const { t } = useTranslation();
   return (
     <div className="h-screen w-full flex justify-center items-center bg-[#f4f4f4] dark:bg-[#044982] ">
       {/* form box */}
@@ -22,7 +24,13 @@ const AuthLayout = ({children}:AuthLayoutPropTypes) => {
               alt="female"
             />
             <h1 className="font-medium text-[18px] text-center text-white mt-4 mb-4">
-              The Record Management system for the <br /> University of Buea
+              {t("The Record Management system for the", {
+                ns: ["main", "home"],
+              })}{" "}
+              <br />{" "}
+              {t("Computer Engineering Department", {
+                ns: ["main", "home"],
+              })}{" "}
             </h1>
 
             <div className="mt">

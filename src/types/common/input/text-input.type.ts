@@ -1,6 +1,6 @@
 export interface InputTypes {
   id?: string;
-  placeholder?: string;
+  placeholder?: string | any;
   value: string;
   name: string;
   label: string;

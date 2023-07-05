@@ -5,6 +5,8 @@ import styles from "./sidebar.module.css";
 
 import { IconRepository } from "../../../repository/icons/icon.repository";
 import SidebarLinksComponent from "../sidebar-links/SidebarLinks.component";
+import { useTranslation } from "react-i18next";
+
 // import { DashboardDefaultType } from "../../../default";
 // import { IconPropsType } from "../../../types";
 
@@ -25,62 +27,6 @@ export type DataLinksType = {
   notifications:number;
   ref?: DashboardType[];
 };
-const dataSet:DataLinksType[] = [
-  {
-    link: "/dashboard",
-    label: "Dashboard",
-    notifications: 0,
-    icon: <IconRepository.DashboardIcon width={24} height={24} />,
-  },
-  {
-    link: "/dashboard/students",
-    label: "Students",
-    notifications: 0,
-    icon: <IconRepository.StudentIcon width={24} height={24} />,
-  },
-  {
-    link: "/dashboard/courses",
-    label: "Courses",
-    notifications: 0,
-    icon: <IconRepository.BooksIcon width={24} height={24} />,
-  },
-  {
-    link: "/dashboard/users",
-    label: "Users",
-    notifications: 4,
-    icon: <IconRepository.UsersIcon width={24} height={24} />,
-  },
-  {
-    link: "/dashboard/transcript",
-    label: "Transcript",
-    notifications: 4,
-    icon: <IconRepository.CertificateIcon width={24} height={24} />,
-  },
-  {
-    link: "/dashboard/settings",
-    label: "Settings",
-    notifications: 0,
-    icon: <IconRepository.SettingsIcon width={24} height={24} />,
-  },
-  {
-    link: "/dashboard/ca",
-    label: "CA",
-    notifications: 1,
-    icon: <IconRepository.CertificateIcon width={24} height={24} />,
-  },
-  {
-    link: "/dashboard/exam",
-    label: "Exam",
-    notifications: 1,
-    icon: <IconRepository.CertificateIcon width={24} height={24} />,
-  },
-  {
-    link: "/dashboard/encrypt-ca",
-    label: "Encrypt CA",
-    notifications: 1,
-    icon: <IconRepository.CertificateIcon width={24} height={24} />,
-  },
-];
 
 
 
@@ -118,6 +64,65 @@ const dataSet:DataLinksType[] = [
 const SidebarComponent = () => {
 //  const [stateMutation, setStateMutation] = useState(false);
  const location = useLocation();
+   const { t } = useTranslation();
+
+   const dataSet: DataLinksType[] = [
+     {
+       link: "/dashboard",
+       label: t("Dashboard", { ns: ["main", "home"] }),
+       notifications: 0,
+       icon: <IconRepository.DashboardIcon width={24} height={24} />,
+     },
+     {
+       link: "/dashboard/students",
+       label: t("Students", { ns: ["main", "home"] }),
+       notifications: 0,
+       icon: <IconRepository.StudentIcon width={24} height={24} />,
+     },
+     {
+       link: "/dashboard/courses",
+       label: t("Courses", { ns: ["main", "home"] }),
+       notifications: 0,
+       icon: <IconRepository.BooksIcon width={24} height={24} />,
+     },
+     {
+       link: "/dashboard/users",
+       label: t("Users", { ns: ["main", "home"] }),
+       notifications: 4,
+       icon: <IconRepository.UsersIcon width={24} height={24} />,
+     },
+     {
+       link: "/dashboard/transcript",
+       label: t("Transcript", { ns: ["main", "home"] }),
+       notifications: 4,
+       icon: <IconRepository.CertificateIcon width={24} height={24} />,
+     },
+     {
+       link: "/dashboard/settings",
+       label: t("Settings", { ns: ["main", "home"] }),
+       notifications: 0,
+       icon: <IconRepository.SettingsIcon width={24} height={24} />,
+     },
+     {
+       link: "/dashboard/ca",
+       label: t("CA", { ns: ["main", "home"] }),
+       notifications: 1,
+       icon: <IconRepository.CertificateIcon width={24} height={24} />,
+     },
+     {
+       link: "/dashboard/exam",
+       label: t("Exam", { ns: ["main", "home"] }),
+       notifications: 1,
+       icon: <IconRepository.CertificateIcon width={24} height={24} />,
+     },
+     {
+       link: "/dashboard/encrypt-ca",
+       label: t("Encrypt CA", { ns: ["main", "home"] }),
+       notifications: 1,
+       icon: <IconRepository.CertificateIcon width={24} height={24} />,
+     },
+   ];
+
 
 //  useEffect(() => {
 //    setStateMutation(!stateMutation);

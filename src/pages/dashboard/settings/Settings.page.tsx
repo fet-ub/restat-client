@@ -7,8 +7,11 @@ import PersonalInfo from "./modules/personal-info/PersonalInfo";
 import PasswordChange from "./modules/password/Password";
 import EmailChange from "./modules/email-change/EmailChange";
 import LanguageChange from "./modules/language/LanguageChange";
+import { useTranslation } from "react-i18next";
+
 
 const SettingsPage = () => {
+    const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState(0);
   return (
     <div className={`${styles.settings}`}>
@@ -16,10 +19,10 @@ const SettingsPage = () => {
         activeIndex={activeTab}
         setActiveIndex={setActiveTab}
         labels={[
-          "Personal Information",
-          "Password",
-          "Email",
-          "Language",
+          t("Personal Information", { ns: ["main", "home"] }),
+          t("Password", { ns: ["main", "home"] }),
+          t("Email", { ns: ["main", "home"] }),
+          t("Language", { ns: ["main", "home"] }),
         ]}
       />
 
