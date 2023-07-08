@@ -1,46 +1,83 @@
 .spinner {
- width: 60px;
- height: 60px;
- position: relative;
+  width: 60px;
+  height: 60px;
+  position: relative;
 }
 
 .spinner .dot {
- position: absolute;
- inset: 0;
- display: flex;
- justify-content: center;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
 }
 
 .spinner .dot::after {
- content: "";
- width: 7px;
- height: 7px;
- border-radius: 50%;
- background-color: rgb(12, 180, 231);
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: rgb(12, 180, 231);
 }
 
 @keyframes spin {
- to {
-  transform: rotate(360deg);
- }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .spinner .dot {
- animation: spin 2s infinite;
+  animation: spin 2s infinite;
 }
 
 .spinner .dot:nth-child(2) {
- animation-delay: 100ms;
+  animation-delay: 100ms;
 }
 
 .spinner .dot:nth-child(3) {
- animation-delay: 200ms;
+  animation-delay: 200ms;
 }
 
 .spinner .dot:nth-child(4) {
- animation-delay: 300ms;
+  animation-delay: 300ms;
 }
 
 .spinner .dot:nth-child(5) {
- animation-delay: 400ms;
+  animation-delay: 400ms;
+}
+.circle__svg {
+  width: 1.5em;
+  transform-origin: center;
+  animation: rotate4 2s linear infinite;
+}
+
+.circle {
+  fill: none;
+  stroke: white;
+  stroke-width: 5;
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  animation: dash4 2s ease-in-out infinite;
+}
+
+@keyframes rotate4 {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash4 {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -35px;
+  }
+
+  100% {
+    stroke-dashoffset: -125px;
+  }
 }

@@ -1,7 +1,17 @@
-import React from 'react'
-import { ButtonTypes } from '../../../types/common/button/button.type'
+import React from "react";
+import { ButtonTypes } from "../../../types/common/button/button.type";
+import ButtonLoader from "../loader/ButtonLoader.common";
 
-const Button = ({text,buttonType,width,fullWidth,disable,onClick,icon}:ButtonTypes) => {
+const Button = ({
+  text,
+  buttonType,
+  width,
+  fullWidth,
+  disable,
+  onClick,
+  icon,
+  loading,
+}: ButtonTypes) => {
   return (
     <button
       className={`${
@@ -33,9 +43,9 @@ const Button = ({text,buttonType,width,fullWidth,disable,onClick,icon}:ButtonTyp
       ) : (
         ""
       )}
-      {text}
+      {loading ? <ButtonLoader /> : text}
     </button>
   );
-}
+};
 
-export default Button
+export default Button;

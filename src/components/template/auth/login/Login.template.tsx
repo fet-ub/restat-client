@@ -67,15 +67,18 @@ const LoginTemplate = () => {
 
   useEffect(() => {
     // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-    if (localStorage.theme === "dark"  || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    if (
+      localStorage.theme === "dark" ||
+      (!("theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
       document.documentElement.classList.add("dark");
-      setTheme('dark')
+      setTheme("dark");
     } else {
       document.documentElement.classList.remove("dark");
-      setTheme('light')
+      setTheme("light");
     }
   }, [theme]);
-
 
   useEffect(() => {
     if (localStorage.getItem("accessToken") !== null) {
@@ -83,12 +86,12 @@ const LoginTemplate = () => {
     }
   }, [window.location.pathname]);
 
-
   return (
     <div className="w-full ">
       {/* form */}
       <h3 className="mb-8 text-4xl font-bold dark:text-white">
-        {t("Welcome to", { ns: ["main", "home"] })}{" "} <span className="text-primary">Restat</span>
+        {t("Welcome to", { ns: ["main", "home"] })}{" "}
+        <span className="text-primary">Restat</span>
       </h3>
 
       <div className="mb-8">
@@ -130,10 +133,11 @@ const LoginTemplate = () => {
 
       <Button
         disable={loading}
-        text={loading ? "Loading..." :   t("Login", { ns: ["main", "home"] })}
+        text={t("Login", { ns: ["main", "home"] })}
         fullWidth={true}
         buttonType="PRIMARY"
         onClick={handleSubmit}
+        loading={loading}
       />
     </div>
   );

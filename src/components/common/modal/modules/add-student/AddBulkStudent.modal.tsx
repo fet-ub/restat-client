@@ -5,11 +5,21 @@ import Button from "../../../buttons/Button.common";
 import { IconRepository } from "../../../../../repository/icons/icon.repository";
 import { AddBulkStudentModalPropType } from "../../../../../types/common/modal/add-bulk-student-modal.type";
 import * as xlsx from "xlsx";
-const AddBulkStudentmodal = ({fileName,setFileName,setSelectedFile, selectedFile,setStudentsTableData,studentsTableData}:AddBulkStudentModalPropType) => {
+import { useTranslation } from "react-i18next";
+
+const AddBulkStudentmodal = ({
+  fileName,
+  setFileName,
+  setSelectedFile,
+  selectedFile,
+  setStudentsTableData,
+  studentsTableData,
+}: AddBulkStudentModalPropType) => {
   const [active, setActive] = useState(0);
   const [form, setForm] = useState({
     level: "",
   });
+  const { t } = useTranslation();
   // const [selectedFile, setSelectedFile] = useState<File | undefined>(undefined);
 
   const handleFileChange = async (e: any) => {
@@ -29,14 +39,11 @@ const AddBulkStudentmodal = ({fileName,setFileName,setSelectedFile, selectedFile
     }
   };
 
-
-  console.log('hghfgh',studentsTableData);
-  
+  console.log("hghfgh", studentsTableData);
 
   //  useEffect(() => {
-     
-       
-    //  setStudentsTableData(selectedFile)
+
+  //  setStudentsTableData(selectedFile)
   //  }, [selectedFile,setStudentsTableData]);
 
   const handleXls = () => {
@@ -49,10 +56,12 @@ const AddBulkStudentmodal = ({fileName,setFileName,setSelectedFile, selectedFile
   return (
     <div className="mb-10 px-5">
       <h2 className="text-3xl font-bold text-secondary dark:text-white">
-        Bulk Upload Students
+        {t("Bulk Upload Students", { ns: ["main", "home"] })}
       </h2>
       <p className="text-xl mb-5 mt-1 dark:text-white">
-        {`Here,you can upload bulk students as .xls or .csv`}
+        {t("Here,you can upload bulk of students as .xls or .csv", {
+          ns: ["main", "home"],
+        })}
       </p>
 
       <div className={"bg-[#f4f4f4]  px-4 border-t-2 border-primary  py-4"}>
@@ -86,10 +95,10 @@ const AddBulkStudentmodal = ({fileName,setFileName,setSelectedFile, selectedFile
             ) : (
               <>
                 <h1 className="text-xl">
-                  Drag and Drop or
+                  {t("Drag and Drop or", { ns: ["main", "home"] })}
                   <span className="text-primary text-2xl">
                     {" "}
-                    Upload new file
+                    {t("Upload new file", { ns: ["main", "home"] })}
                   </span>
                 </h1>
                 <div>
@@ -122,7 +131,7 @@ const AddBulkStudentmodal = ({fileName,setFileName,setSelectedFile, selectedFile
 
       <div className="w-full mt-8">
         <Button
-          text={`Upload Students`}
+          text={t("Upload Students", { ns: ["main", "home"] })}
           buttonType="PRIMARY"
           fullWidth={true}
         />
