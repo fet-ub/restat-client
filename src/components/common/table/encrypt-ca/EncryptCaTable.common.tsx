@@ -35,7 +35,7 @@ const EncryptCaTable = ({
   marksTableData,
   setMarksTableData,
 }: EncryptCaTablePropTypes) => {
-    const { t } = useTranslation();
+  const { t } = useTranslation();
   const [form, setForm] = useState({
     filterText: "",
     searchText: "",
@@ -116,7 +116,9 @@ const EncryptCaTable = ({
       <div className="flex flex-row-reverse justify-between  mt-8 ">
         <div className="w-1/2">
           <TextInput
-            placeholder={"038 or search by status(encrypted or not filled)"}
+            placeholder={t("038 or search by status(encrypted or not filled)", {
+              ns: ["main", "home"],
+            })}
             value={form.searchText}
             name={"searchText"}
             label={t("Search", { ns: ["main", "home"] })}
@@ -132,7 +134,7 @@ const EncryptCaTable = ({
           <CSVLink
             data={exportData}
             filename="EncryptedCAMarks"
-            className="bg-primary  px-4 text-secondary dark:text-white  py-[10px]    rounded-lg outline-none text-[16px] flex justify-center items-center gap-3"
+            className="bg-primary  px-4 text-white   py-[10px]    rounded-lg outline-none text-[16px] flex justify-center items-center gap-3"
           >
             {t("Export User Data", { ns: ["main", "home"] })}
           </CSVLink>

@@ -1,29 +1,42 @@
-import React, { useState } from 'react'
-import { USER_ROLE ,ENGINEERING_DEPARTMENTS, COURSE_PREFIX} from '../../../../../repository/constants/constants'
-import SelectInput from '../../../inputs/select-input/SelectInput.common';
-import TextInput from '../../../inputs/text-input/TextInput.common';
-import Button from '../../../buttons/Button.common';
+import React, { useState } from "react";
+import {
+  USER_ROLE,
+  ENGINEERING_DEPARTMENTS,
+  COURSE_PREFIX,
+} from "../../../../../repository/constants/constants";
+import SelectInput from "../../../inputs/select-input/SelectInput.common";
+import TextInput from "../../../inputs/text-input/TextInput.common";
+import Button from "../../../buttons/Button.common";
+import { useTranslation } from "react-i18next";
 
 const AddUserModal = () => {
-     const [form, setForm] = useState({
-        role:'',
-       department: '',
-       firstname: "",
-       lastname: "",
-       email: "",
-       coursetitle: "",
-       coursecode: "",
-       courseprefix: "",
-     });
+  const [form, setForm] = useState({
+    role: "",
+    department: "",
+    firstname: "",
+    lastname: "",
+    email: "",
+    coursetitle: "",
+    coursecode: "",
+    courseprefix: "",
+  });
+  const { t } = useTranslation();
+
   return (
     <div className="px-3 pb-5 bg-white dark:bg-tertiary">
-      <h1 className="text-secondary text-3xl font-semibold dark:text-white">Add User</h1>
+      <h1 className="text-secondary text-3xl font-semibold dark:text-white">
+        {t("Add User", {
+          ns: ["main", "home"],
+        })}
+      </h1>
 
       <form className="mt-7">
         <div className="flex gap-9 mb-6 ">
           <TextInput
             placeholder="Ayuk"
-            label="First Name"
+            label={t("First Name", {
+              ns: ["main", "home"],
+            })}
             type="text"
             id="FirstName"
             name="First Name"
@@ -34,7 +47,9 @@ const AddUserModal = () => {
           />
           <TextInput
             placeholder="Tabe"
-            label="Last Name"
+            label={t("Last Name", {
+              ns: ["main", "home"],
+            })}
             type="text"
             id="LastName"
             name="Lirst Name"
@@ -47,7 +62,9 @@ const AddUserModal = () => {
         <div className="flex gap-9 mb-6 ">
           <SelectInput
             selectOptions={USER_ROLE}
-            label="Role"
+            label={t("Role", {
+              ns: ["main", "home"],
+            })}
             onChange={(e) => {
               setForm({ ...form, role: e.target.value });
             }}
@@ -55,7 +72,9 @@ const AddUserModal = () => {
           />
           <SelectInput
             selectOptions={ENGINEERING_DEPARTMENTS}
-            label="Department"
+            label={t("Department", {
+              ns: ["main", "home"],
+            })}
             onChange={(e) => {
               setForm({ ...form, department: e.target.value });
             }}
@@ -63,10 +82,12 @@ const AddUserModal = () => {
           />
         </div>
 
-        <div className='w-full h-full mb-12 '>
+        <div className="w-full h-full mb-12 ">
           <TextInput
             placeholder={"example@gmail.com"}
-            label="Email Address"
+            label={t("Email Address", {
+              ns: ["main", "home"],
+            })}
             type="email"
             id="Email"
             name="Email"
@@ -81,7 +102,9 @@ const AddUserModal = () => {
           <>
             <TextInput
               placeholder={"Algorithms"}
-              label="Course Title"
+              label={t("Course Title", {
+                ns: ["main", "home"],
+              })}
               type="text"
               id="CourseTitle"
               name="Course Title"
@@ -93,7 +116,9 @@ const AddUserModal = () => {
             <div className="flex gap-5 items-center ">
               <SelectInput
                 selectOptions={COURSE_PREFIX}
-                label="Course Prefix"
+                label={t("Course Prefix", {
+                  ns: ["main", "home"],
+                })}
                 value={form.courseprefix}
                 onChange={(e) => {
                   setForm({ ...form, courseprefix: e.target.value });
@@ -101,7 +126,9 @@ const AddUserModal = () => {
               />
               <TextInput
                 placeholder={"444"}
-                label="Course Code"
+                label={t("Course Code", {
+                  ns: ["main", "home"],
+                })}
                 type="number"
                 id="CourseCode"
                 name="Course Code"
@@ -117,12 +144,24 @@ const AddUserModal = () => {
         )}
 
         <div className="flex gap-5 mt-1  mb-8">
-          <Button text="Cancel" fullWidth={true} buttonType="TERTIARY" />
-          <Button text="confirm" fullWidth={true} buttonType="PRIMARY" />
+          <Button
+            text={t("Cancel", {
+              ns: ["main", "home"],
+            })}
+            fullWidth={true}
+            buttonType="TERTIARY"
+          />
+          <Button
+            text={t("Confirm", {
+              ns: ["main", "home"],
+            })}
+            fullWidth={true}
+            buttonType="PRIMARY"
+          />
         </div>
       </form>
     </div>
   );
-}
+};
 
-export default AddUserModal
+export default AddUserModal;

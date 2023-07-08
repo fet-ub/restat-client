@@ -10,7 +10,7 @@ import Button from "../../../components/common/buttons/Button.common";
 import { useTranslation } from "react-i18next";
 
 const TranscriptPage = () => {
-    const { t } = useTranslation();
+  const { t } = useTranslation();
   const [form, setForm] = useState({
     year: "",
     semester: "",
@@ -60,6 +60,7 @@ const TranscriptPage = () => {
             text={t("Send Request", { ns: ["main", "home"] })}
             buttonType="PRIMARY"
             fullWidth={true}
+            // loading={true}
           />
         </div>
       </div>
