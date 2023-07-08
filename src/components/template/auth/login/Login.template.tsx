@@ -1,62 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import axios from "axios";
 
 import TextInput from "../../../common/inputs/text-input/TextInput.common";
 import PasswordInput from "../../../common/inputs/password-input/PasswordInput.common";
 import Button from "../../../common/buttons/Button.common";
+import { useAppDispatch, useAppSelector } from "../../../../lib/hooks";
+import { ApiRequestStatus } from "../../../../types/api.types";
+import { loginUserThunk } from "../../../../app/feature/auth/thunks/login.thunk";
+import { LoginRequestType } from "../../../../types/auth.type";
+import { resetLoginState } from "../../../../app/feature/auth/slices/login.slice";
+import {
+  NotificationStatus,
+  setNotificationState,
+} from "../../../../app/feature/notification/notification.slice";
 
 const LoginTemplate = () => {
   const navigate = useNavigate();
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<LoginRequestType>({
     email: "",
     password: "",
   });
-  const [loading, setLoading] = useState(false);
+  const loginState = useAppSelector((state) => state.loginState);
+  const dispatch = useAppDispatch();
+
   const { t } = useTranslation();
 
   const handleSubmit = async () => {
-    setLoading(true);
-
-    const config = {
-      headers: {
-        accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    };
-
-    try {
-      //transaction-manager-cmr.herokuapp.com/
-      await axios
-        .get("http://localhost:8000/sanctum/csrf-cookie")
-        .then(async () => {
-          await axios
-            .post(
-              "http://localhost:8000/api/login",
-              JSON.stringify({
-                email: form.email,
-                password: form.password,
-              }),
-              config
-            )
-            .then((response) => {
-              console.log({ response: response.data });
-
-              localStorage.setItem("accessToken", response.data.access_token);
-              localStorage.setItem("role", response.data.role);
-              localStorage.setItem("user", JSON.stringify(response.data.user));
-
-              navigate("/dashboard");
-            });
-        });
-    } catch (e) {
-      console.log({ e });
-
-      alert("Please check your credentials and try again.");
-    } finally {
-      setLoading(false);
-    }
+    dispatch(loginUserThunk(form));
   };
 
   const handleNavigation = () => {
@@ -85,6 +56,29 @@ const LoginTemplate = () => {
       navigate("/dashboard");
     }
   }, [window.location.pathname]);
+
+  useEffect(() => {
+    if (loginState.status === ApiRequestStatus.FULFILLED) {
+      dispatch(
+        setNotificationState({
+          message: "Successfully logged into your account.",
+          status: NotificationStatus.SUCCESS,
+        })
+      );
+
+      navigate("/dashboard");
+      dispatch(resetLoginState());
+    }
+
+    if (loginState.status === ApiRequestStatus.REJECTED) {
+      dispatch(
+        setNotificationState({
+          message: loginState.message,
+          status: NotificationStatus.ERROR,
+        })
+      );
+    }
+  }, [loginState]);
 
   return (
     <div className="w-full ">
@@ -132,12 +126,12 @@ const LoginTemplate = () => {
       </div>
 
       <Button
-        disable={loading}
+        disable={loginState.status === ApiRequestStatus.PENDING}
         text={t("Login", { ns: ["main", "home"] })}
         fullWidth={true}
         buttonType="PRIMARY"
         onClick={handleSubmit}
-        loading={loading}
+        loading={loginState.status === ApiRequestStatus.PENDING}
       />
     </div>
   );

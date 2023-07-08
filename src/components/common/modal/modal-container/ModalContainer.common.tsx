@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { ModalContainerPropTypes } from '../../../../types/common/modal-container.type'
 import { IconRepository } from '../../../../repository/icons/icon.repository'
 import styles from './modalcontainer.module.css'

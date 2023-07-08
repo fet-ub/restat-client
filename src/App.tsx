@@ -22,9 +22,17 @@ import CaPage from "./pages/dashboard/ca/Ca.page";
 import ExamPage from "./pages/dashboard/exam/Exam.page";
 import EncryptionCaPage from "./pages/dashboard/encryption-ca/EncryptionCa.page";
 import { LocalStorage } from "./storage/LocalStorage";
+import AlertComponent from "./components/common/alert/Alert.component";
+import { useAppDispatch, useAppSelector } from "./lib/hooks";
+import {
+  NotificationStatus,
+  resetNotificationState,
+} from "./app/feature/notification/notification.slice";
 
 const App = () => {
   const { i18n } = useTranslation(["home", "main"]);
+  const notification = useAppSelector((state) => state.notificationState);
+  const dispatch = useAppDispatch();
 
   const languageLocalConfig = useCallback(async (local: string) => {
     LocalStorage.storeAppLang(local);
@@ -46,9 +54,18 @@ const App = () => {
     // eslint-disable-next-line
   }, [window.location.pathname]);
 
+  useEffect(() => {
+    if (notification.status !== NotificationStatus.HIDDEN) {
+      setTimeout(() => {
+        dispatch(resetNotificationState());
+      }, 4000);
+    }
+  }, [notification]);
+
   return (
     <div className="app">
       <Router>
+        <AlertComponent />
         <Routes>
           <Route path="/" element={<Navigate replace to="/auth" />} />
 
