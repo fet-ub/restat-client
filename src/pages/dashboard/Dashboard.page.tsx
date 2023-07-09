@@ -10,6 +10,8 @@ import Image from "../../assets/images/image.png";
 import Toggle from "../../components/common/toogle/Toggle.common";
 import { useTranslation } from "react-i18next";
 import Loader from "../../components/common/loader/Loader.common";
+import { CONSTANTS } from "../../constants/constants";
+import { useAppSelector } from "../../lib/hooks";
 
 const DashboardPage = () => {
   const { t } = useTranslation();
@@ -43,12 +45,13 @@ const DashboardPage = () => {
   };
 
   useEffect(() => {
-    const userInfo = localStorage.getItem("user");
+    const userInfo = localStorage.getItem(CONSTANTS.STORAGE_KEY.CURRENT_USER);
+    const accessToken = useAppSelector((state) => state.loginState).accessToken;
 
-    if (!userInfo) {
+    if (!userInfo && accessToken === null) {
       navigate("/auth/login");
     } else {
-      setUser(JSON.parse(userInfo));
+      setUser(JSON.parse(userInfo as string));
     }
   }, [window.location.pathname]);
 
