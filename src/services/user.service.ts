@@ -8,6 +8,8 @@ const authService = new AuthService();
 export class UserService {
   public async createNewUser(data: userRequestType, userType: UserType) {
     console.log("ser service", userType);
+    console.log('sd',UserType.COORDINATOR);
+    
 
     if (userType === UserType.HOD) {
       const body = new FormData();
