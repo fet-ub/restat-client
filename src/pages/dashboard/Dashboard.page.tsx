@@ -14,6 +14,7 @@ import { CONSTANTS } from "../../constants/constants";
 import { useAppSelector } from "../../lib/hooks";
 
 const DashboardPage = () => {
+  const accessToken = useAppSelector((state) => state.loginState).accessToken;
   const { t } = useTranslation();
   const [theme, setTheme] = useState<any>("light");
   const [user, setUser] = useState({
@@ -46,7 +47,6 @@ const DashboardPage = () => {
 
   useEffect(() => {
     const userInfo = localStorage.getItem(CONSTANTS.STORAGE_KEY.CURRENT_USER);
-    const accessToken = useAppSelector((state) => state.loginState).accessToken;
 
     if (!userInfo && accessToken === null) {
       navigate("/auth/login");
