@@ -1,4 +1,5 @@
 import { UserType } from "../../types/user.type";
+import { CourseStatusType } from "./enums.constants";
 
 export const LANGUAGE_CONSTANTS = [
   {
@@ -128,11 +129,11 @@ export const COURSE_PREFIX=[
 export const SEMESTER = [
   {
     label: "First Semester",
-    value: "first semester",
+    value: "1",
   },
   {
     label: "Second Semester",
-    value: "second semester",
+    value: "2",
   },
   
   
@@ -158,6 +159,18 @@ export const MARITAL_STATUS = [
   {
     label: "Married",
     value: "married",
+  },
+];
+
+
+export const COURSE_STATUS = [
+  {
+    label: "Compulsory",
+    value: CourseStatusType.COMPULSORY,
+  },
+  {
+    label: "Selective",
+    value: CourseStatusType.ELECTIVE,
   },
 ];
 

@@ -1,5 +1,5 @@
 import { publicApiRequest } from "../lib/hooks/axiosInstance";
-import { LoginResponseType, userRequestType } from "../types/auth.type";
+import {  userRequestType } from "../types/auth.type";
 import { UserType } from "../types/user.type";
 import { AuthService } from "./auth.service";
 

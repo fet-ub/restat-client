@@ -4,10 +4,13 @@ import DownloadOptions from '../../../components/common/download-options/Downloa
 import TextInput from '../../../components/common/inputs/text-input/TextInput.common';
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useTranslation } from "react-i18next";
+import ModalContainer from '../../../components/common/modal/modal-container/ModalContainer.common';
+import AddCourseModal from '../../../components/common/modal/modules/course/AddCourseModal.module';
 
 
 const CoursesPage = () => {
     const { t } = useTranslation();
+      const [isOpen, setIsOpen] = useState(false);
   const [form, setForm] = useState({
     search: "",
   });
@@ -103,8 +106,9 @@ const CoursesPage = () => {
     <div>
       <DashboardHeader
         label={t("Courses", { ns: ["main", "home"] })}
-        ButtonText={t("Add New User", { ns: ["main", "home"] })}
-        displayButton={false}
+        ButtonText={t("Add New Course", { ns: ["main", "home"] })}
+        displayButton={true}
+        onClick={() => setIsOpen(true)}
       />
 
       {/* icons row */}
@@ -139,6 +143,11 @@ const CoursesPage = () => {
           className="dark:text-white"
         />
       </div>
+      {isOpen && (
+        <ModalContainer width="700px" onClick={() => setIsOpen(false)}>
+          <AddCourseModal closeModal={()=>setIsOpen(!isOpen)}/>
+        </ModalContainer>
+      )}
     </div>
   );
 }
