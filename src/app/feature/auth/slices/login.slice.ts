@@ -8,20 +8,24 @@ import {
   ApiRequestStatus,
   StoredErrorResponseType,
 } from "../../../../types/api.types";
+import { LocalStorage } from "../../../../storage/LocalStorage";
+import { CONSTANTS } from "../../../../constants/constants";
 
 type InitialStateTypes = {
   user: IUser;
-  accessToken: string;
-  role: string;
+  accessToken: string | null;
+  role: string | null;
   status: ApiRequestStatus;
   message: string;
 };
 
 const initialState: InitialStateTypes = {
-  user: {} as IUser,
+  user: JSON.parse(
+    localStorage.getItem(CONSTANTS.STORAGE_KEY.CURRENT_USER) as string
+  ) as IUser,
   status: ApiRequestStatus.IDLE,
-  accessToken: "",
-  role: "",
+  accessToken: localStorage.getItem(CONSTANTS.STORAGE_KEY.ACCESS_TOKEN),
+  role: localStorage.getItem(CONSTANTS.STORAGE_KEY.USER_ROLE),
   message: "",
 };
 
@@ -46,6 +50,8 @@ const loginSlice = createSlice({
           (state.accessToken = action.payload.accessToken),
           (state.role = action.payload.role),
           (state.user = action.payload.user);
+
+        LocalStorage.storeLoginData(action.payload);
       })
       .addCase(loginUserThunk.rejected, (state, action) => {
         (state.status = ApiRequestStatus.REJECTED),
