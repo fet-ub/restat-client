@@ -12,13 +12,14 @@ import { useTranslation } from "react-i18next";
 import Loader from "../../components/common/loader/Loader.common";
 import { CONSTANTS } from "../../constants/constants";
 import { useAppSelector } from "../../lib/hooks";
+import { RootState } from "../../app/store/store";
 
 const DashboardPage = () => {
-  const accessToken = useAppSelector((state) => state.loginState).accessToken;
+  const accessToken = useAppSelector((state: RootState) => state.loginState).accessToken;
   const { t } = useTranslation();
   const [theme, setTheme] = useState<any>("light");
   const [user, setUser] = useState({
-    name: "",
+    firstName: "",
   });
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -56,7 +57,7 @@ const DashboardPage = () => {
   }, [window.location.pathname]);
 
   useEffect(() => {
-    if (user?.name.length > 0) {
+    if (user?.firstName.length > 0) {
       setLoading(false);
     }
   }, [user]);
@@ -95,7 +96,7 @@ const DashboardPage = () => {
                     <img src={Image} alt="profile" />
                   </div>
                   <div className="dark:text-white">
-                    <h2 className="dark:text-white">{user?.name}</h2>
+                    <h2 className="dark:text-white">{user?.firstName}</h2>
                     <h3>FE19A000</h3>
                   </div>
                 </div>

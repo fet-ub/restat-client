@@ -2,25 +2,43 @@ import React, { useState } from "react";
 import {
   USER_ROLE,
   ENGINEERING_DEPARTMENTS,
-  COURSE_PREFIX,
+  // COURSE_PREFIX,
 } from "../../../../../repository/constants/constants";
 import SelectInput from "../../../inputs/select-input/SelectInput.common";
 import TextInput from "../../../inputs/text-input/TextInput.common";
 import Button from "../../../buttons/Button.common";
 import { useTranslation } from "react-i18next";
+import { useAppDispatch } from "../../../../../lib/hooks";
+import { createUserThunk } from "../../../../../app/feature/user/thunk/user.thunk";
+import { userRequestType } from "../../../../../types/auth.type";
+import { UserType } from "../../../../../types/user.type";
+import { ApiRequestStatus } from "../../../../../types/api.types";
 
-const AddUserModal = () => {
-  const [form, setForm] = useState({
-    role: "",
-    department: "",
-    firstname: "",
-    lastname: "",
+const AddUserModal = ({setIsOpen}:{ setIsOpen:React.Dispatch<React.SetStateAction<boolean>>}) => {
+  const dispatch = useAppDispatch();
+  const [form, setForm] = useState<userRequestType>({
+    role: UserType.HOD,
+    departmentId: "1",
+    firstName: "",
+    lastName: "",
     email: "",
-    coursetitle: "",
-    coursecode: "",
-    courseprefix: "",
+    facultyId: '1',
   });
   const { t } = useTranslation();
+
+  console.log('role',form.role);
+  // console.log(form);
+  
+  
+
+  const handleCreateUser = (event:any) => {
+    event.preventDefault();
+    dispatch(createUserThunk({ userType: form.role as UserType, body: form }));
+      // setIsOpen(false);
+    
+    
+    
+  };
 
   return (
     <div className="px-3 pb-5 bg-white dark:bg-tertiary">
@@ -30,7 +48,7 @@ const AddUserModal = () => {
         })}
       </h1>
 
-      <form className="mt-7">
+      <form className="mt-7" onSubmit={handleCreateUser}>
         <div className="flex gap-9 mb-6 ">
           <TextInput
             placeholder="Ayuk"
@@ -40,9 +58,9 @@ const AddUserModal = () => {
             type="text"
             id="FirstName"
             name="First Name"
-            value={form.firstname}
+            value={form.firstName}
             onChange={(e) => {
-              setForm({ ...form, firstname: e.target.value });
+              setForm({ ...form, firstName: e.target.value });
             }}
           />
           <TextInput
@@ -53,9 +71,9 @@ const AddUserModal = () => {
             type="text"
             id="LastName"
             name="Lirst Name"
-            value={form.lastname}
+            value={form.lastName}
             onChange={(e) => {
-              setForm({ ...form, lastname: e.target.value });
+              setForm({ ...form, lastName: e.target.value });
             }}
           />
         </div>
@@ -66,7 +84,7 @@ const AddUserModal = () => {
               ns: ["main", "home"],
             })}
             onChange={(e) => {
-              setForm({ ...form, role: e.target.value });
+              setForm({ ...form, role: ((e.target.value as unknown )as UserType) });
             }}
             value={form.role}
           />
@@ -76,9 +94,9 @@ const AddUserModal = () => {
               ns: ["main", "home"],
             })}
             onChange={(e) => {
-              setForm({ ...form, department: e.target.value });
+              setForm({ ...form, departmentId: e.target.value });
             }}
-            value={form.department}
+            value={form.departmentId}
           />
         </div>
 
@@ -98,7 +116,7 @@ const AddUserModal = () => {
           />
         </div>
 
-        {form.role === "lecturer" ? (
+        {/* {form.role === "lecturer" ? (
           <>
             <TextInput
               placeholder={"Algorithms"}
@@ -141,7 +159,7 @@ const AddUserModal = () => {
           </>
         ) : (
           ""
-        )}
+        )} */}
 
         <div className="flex gap-5 mt-1  mb-8">
           <Button

@@ -1,3 +1,5 @@
+import { UserType } from "../../types/user.type";
+
 export const LANGUAGE_CONSTANTS = [
   {
     label: "English",
@@ -12,17 +14,21 @@ export const LANGUAGE_CONSTANTS = [
 export const USER_ROLE=[
   {
     label:'Coordinator',
-    value:'Coordinator'
+    value:UserType.COORDINATOR
   },
   {
     label:'HOD',
-    value:'hod'
+    value:UserType.HOD
   },{
     label:'Lecturer',
-    value:'lecturer'
+    value:UserType.LECTURER
  },{
   label:'Support Staff',
-  value:'support staff'
+  value:UserType.SUPPORT_STAFF
+ }
+,{
+  label:'Examiner',
+  value:UserType.EXAMINER
  }
 
 ]
@@ -59,17 +65,17 @@ export const COURSE_LEVELS=[
 export const ENGINEERING_DEPARTMENTS=[
   {
     label:'Computer Engineering',
-    value:'computer engineering'
+    value:'1'
 
   },
   {
     label:'Electrical Engineering',
-    value:'electrical engineering'
+    value:'2'
 
   },
   {
     label:'Civil Engineering',
-    value:'civil engineering'
+    value:'3'
 
   },
 ]

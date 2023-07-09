@@ -89,7 +89,7 @@ const UsersPage = () => {
       </div>
       {isOpen && (
         <ModalContainer width="800px" onClick={() => setIsOpen(false)}>
-          <AddUserModal />
+          <AddUserModal setIsOpen={setIsOpen}/>
         </ModalContainer>
       )}
     </div>
