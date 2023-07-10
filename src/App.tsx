@@ -60,6 +60,7 @@ const App = () => {
         dispatch(resetNotificationState());
       }, 4000);
     }
+    // eslint-disable-next-line
   }, [notification]);
 
   return (

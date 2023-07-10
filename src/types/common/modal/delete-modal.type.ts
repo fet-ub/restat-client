@@ -1,4 +1,5 @@
-export interface DeleteModalPropType{
-    record?:string;
-    onClick?:()=>void
+export interface DeleteModalPropType {
+  record?: string;
+  onClick?: () => void;
+  closeModal?: () => void;
 }

@@ -13,4 +13,12 @@ export class CourseService {
         );
       });
   };
+  public async getCourses(){
+    
+      return await authService.laravelSanctum().then(async () => {
+        return await publicApiRequest().get(
+          "/courses"
+        );
+      });
+  };
 }

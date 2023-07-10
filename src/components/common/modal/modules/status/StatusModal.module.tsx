@@ -1,9 +1,9 @@
-import React from 'react'
-import { StatusModalPropType } from '../../../../../types/common/modal/status-modal.type'
-import { IconRepository } from '../../../../../repository/icons/icon.repository'
-import Button from '../../../buttons/Button.common'
+import React from "react";
+import { StatusModalPropType } from "../../../../../types/common/modal/status-modal.type";
+import { IconRepository } from "../../../../../repository/icons/icon.repository";
+import Button from "../../../buttons/Button.common";
 
-const StatusModal = ({status,text,onClick}:StatusModalPropType) => {
+const StatusModal = ({ status, text, onClick }: StatusModalPropType) => {
   return (
     <div>
       <div className="flex justify-center items-center">
@@ -15,8 +15,8 @@ const StatusModal = ({status,text,onClick}:StatusModalPropType) => {
           ""
         )}
       </div>
-      <h1 className='text-center my-4'>{text}</h1>
-      <div className='mb-6'>
+      <h1 className="text-2xl font-medium text-center my-4">{text}</h1>
+      <div className="mb-6">
         <Button
           buttonType="PRIMARY"
           fullWidth={true}
@@ -28,6 +28,6 @@ const StatusModal = ({status,text,onClick}:StatusModalPropType) => {
       </div>
     </div>
   );
-}
+};
 
-export default StatusModal
+export default StatusModal;

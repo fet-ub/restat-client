@@ -16,7 +16,17 @@ import { useNavigate } from "react-router-dom";
 import { createCourseThunk } from "../../../../../app/feature/course/thunk/course.thunk";
 import { ApiRequestStatus } from "../../../../../types/api.types";
 
-const AddCourseModal = ({ closeModal }: { closeModal: () => void }) => {
+const AddCourseModal = ({
+  setIsOpen,
+  isOpen,
+  showSuccessModal,
+  setShowSuccessModal,
+}: {
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isOpen: boolean;
+  showSuccessModal: boolean;
+  setShowSuccessModal: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
@@ -50,11 +60,16 @@ const AddCourseModal = ({ closeModal }: { closeModal: () => void }) => {
     creditValue: "",
   });
 
-  const handleAddCourse = (event: any) => {
+  // console.log(createCourseState.status);
+
+  const handleAddCourse = async (event: any) => {
     event.preventDefault();
-    dispatch(createCourseThunk({ ...form, userId: user.id.toString() }));
+    await dispatch(createCourseThunk({ ...form, userId: user.id.toString() }));
+    // setTracker(!tracker)
+
     if (createCourseState.status === ApiRequestStatus.FULFILLED) {
-      closeModal();
+      console.log("it ran");
+
       setForm({
         facultyId: "1",
         semesterId: "1",
@@ -64,8 +79,17 @@ const AddCourseModal = ({ closeModal }: { closeModal: () => void }) => {
         status: CourseStatusType.COMPULSORY,
         creditValue: "",
       });
+
+      setIsOpen(false);
+      setShowSuccessModal(true);
+      // const timeout = setTimeout(() => {
+      //   setShowSuccessModal(!showSuccessModal);
+      // }, 1000);
+
+      // return () => clearTimeout(timeout);
     }
   };
+
   return (
     <div className="px-3 pb-5 bg-white dark:bg-tertiary">
       <h1 className="text-secondary text-3xl font-semibold dark:text-white">

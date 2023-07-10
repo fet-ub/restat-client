@@ -11,3 +11,20 @@ export type courseRequestType ={
       creditValue: string | number,
 
 }
+
+
+export interface CourseResponseTypes {
+  courseCode: string;
+  created_at: Date;
+  creditValue: number;
+  facultyId: number;
+  id: number;
+  level: string;
+  name: string;
+  semesterId: number;
+  status: string;
+  updated_at: Date;
+  userId: number;
+}
+
+

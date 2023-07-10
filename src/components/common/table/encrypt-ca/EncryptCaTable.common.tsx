@@ -17,15 +17,6 @@ interface marksType {
   encrypt: string;
 }
 
-// interface exportMarksType {
-//   status: string;
-//   encrypt: string;
-// }
-
-// interface exportCaMarksType {
-//   exportedData: exportMarksType[];
-// }
-
 interface EncryptCaTablePropTypes {
   marksTableData: marksType[];
   setMarksTableData: React.Dispatch<React.SetStateAction<marksType[]>>;

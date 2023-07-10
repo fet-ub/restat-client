@@ -6,43 +6,43 @@ import {
   ApiRequestStatus,
   StoredErrorResponseType,
 } from "../../../../types/api.types";
-import { createCourseThunk } from "../thunk/course.thunk";
+import { getCoursesThunk } from "../thunk/course.thunk";
+import { CourseResponseTypes } from "../../../../types/course.type";
 
 type InitialStateTypes = {
   status: ApiRequestStatus;
   message: string;
+  courses: CourseResponseTypes[]
 };
 
 const initialState: InitialStateTypes = {
   status: ApiRequestStatus.IDLE,
   message: "",
+  courses:[] 
 };
 
-const createCourseSlice = createSlice({
-  name: "createCourseSlice",
+const getCoursesSlice = createSlice({
+  name: "getCoursesSlice",
   initialState: initialState,
   reducers: {
-    resetcreateCourseState: (state) => {
+    resetGetCoursesState: (state) => {
       state.status = ApiRequestStatus.IDLE;
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(createCourseThunk.pending, (state, _action) => {
+      .addCase(getCoursesThunk.pending, (state, _action) => {
         state.status = ApiRequestStatus.PENDING;
-        //  console.log({ payload: action.payload });
+        
       })
-      .addCase(createCourseThunk.fulfilled, (state, action) => {
+      .addCase(getCoursesThunk.fulfilled, (state, action) => {
         state.status = ApiRequestStatus.FULFILLED;
-        // console.log(state.status);
-
-        console.log(state.status);
-        
-        
+        state.courses=action.payload
+       
 
         console.log({ payload: action.payload });
       })
-      .addCase(createCourseThunk.rejected, (state, action) => {
+      .addCase(getCoursesThunk.rejected, (state, action) => {
         (state.status = ApiRequestStatus.REJECTED),
           (state.message = (action.payload as StoredErrorResponseType).message);
         console.log({ payload: action.payload });
@@ -50,5 +50,5 @@ const createCourseSlice = createSlice({
   },
 });
 
-export const { resetcreateCourseState } = createCourseSlice.actions;
-export default createCourseSlice.reducer;
+export const { resetGetCoursesState } = getCoursesSlice.actions;
+export default getCoursesSlice.reducer;

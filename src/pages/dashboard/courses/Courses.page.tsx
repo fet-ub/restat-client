@@ -1,106 +1,144 @@
-import React, { useState } from 'react'
-import DashboardHeader from '../../../components/common/dashboard-header/DashboardHeader.common';
-import DownloadOptions from '../../../components/common/download-options/DownloadOptions.common';
-import TextInput from '../../../components/common/inputs/text-input/TextInput.common';
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { useState, useEffect } from "react";
+import DashboardHeader from "../../../components/common/dashboard-header/DashboardHeader.common";
+import DownloadOptions from "../../../components/common/download-options/DownloadOptions.common";
+import TextInput from "../../../components/common/inputs/text-input/TextInput.common";
+import {
+  DataGrid,
+  GridColDef,
+  GridRenderCellParams,
+  GridValueGetterParams,
+} from "@mui/x-data-grid";
 import { useTranslation } from "react-i18next";
-import ModalContainer from '../../../components/common/modal/modal-container/ModalContainer.common';
-import AddCourseModal from '../../../components/common/modal/modules/course/AddCourseModal.module';
-
+import ModalContainer from "../../../components/common/modal/modal-container/ModalContainer.common";
+import AddCourseModal from "../../../components/common/modal/modules/course/AddCourseModal.module";
+import { useAppDispatch, useAppSelector } from "../../../lib/hooks";
+import { getCoursesThunk } from "../../../app/feature/course/thunk/course.thunk";
+import { RootState } from "../../../app/store/store";
+import EditIcon from "../../../icons/Edit.icon";
+import DeleteIcon from "../../../icons/Delete.icon";
+import DeleteModal from "../../../components/common/modal/modules/delete/DeleteModal.module";
+import StatusModal from "../../../components/common/modal/modules/status/StatusModal.module";
+import { ApiRequestStatus } from "../../../types/api.types";
 
 const CoursesPage = () => {
-    const { t } = useTranslation();
-      const [isOpen, setIsOpen] = useState(false);
-  const [form, setForm] = useState({
-    search: "",
-  });
+  const getCoursesState = useAppSelector(
+    (state: RootState) => state.getCoursesState
+  );
+  const createCourseState = useAppSelector((state) => state.createCourseState);
+  const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const [isOpen, setIsOpen] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [filteredData, setFilteredData] = useState<any>([]);
+  const [searchText, setSearchText] = useState("");
+  const [selectedDeletedCourse, setSelectedDeletedCourse] = useState("");
 
-   const columns: GridColDef[] = [
-     { field: "code", headerName: "Code", width: 70, sortable: false },
-     { field: "title", headerName: "Title", width: 270, sortable: false },
-     {
-       field: "level",
-       headerName: "Level",
-       width: 80,
-       sortable: false,
-     },
-     {
-       field: "instructor",
-       headerName: "Instructor",
-       width: 200,
-       sortable: false,
-       headerAlign: "left",
-       align: "left",
-     },
-     {
-       field: "status",
-       headerName: "Status",
-       width: 200,
-       sortable: false,
-       headerAlign: "left",
-       align: "left",
-     },
-     {
-       field: "creditValue",
-       headerName: "Credit Value",
-       width: 120,
-       sortable: false,
-       headerAlign: "left",
-       align: "left",
-     },
-     {
-       field: "semester",
-       headerName: "Semester",
-       width: 200,
-       sortable: false,
-       headerAlign: "left",
-       align: "left",
-     },
-     {
-       field: "action",
-       headerName: "Action",
-       sortable: false,
-       width: 100,
-       headerAlign: "left",
-       align: "left",
-       // valueGetter: (params: GridValueGetterParams) =>
-       //   `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-     },
-   ];
+  useEffect(() => {
+    dispatch(getCoursesThunk());
 
+    setFilteredData(getCoursesState.courses);
+    // eslint-disable-next-line
+  }, []);
 
-    const rows = [
-      {
-        code: "512",
-        title: "Algoriths and Data structure",
-        level: "500",
-        instructor:'Dr John Doe',
-        status: 'Compulsory',
-        creditValue:'20',
-        semester:'First Semester',
-        action: "action",
+  const handleFilter = (valueText: any) => {
+    setSearchText(valueText);
+    const newFilter = getCoursesState?.courses.filter((value) => {
+      return value.name.toLowerCase().includes(searchText.toLowerCase());
+    });
+
+    if (searchText === "") {
+      setFilteredData(getCoursesState.courses);
+    } else {
+      setFilteredData(newFilter);
+    }
+  };
+
+  // console.log(getCoursesState.courses);
+  // console.log(filteredData);
+  console.log(isOpen);
+
+  const columns: GridColDef[] = [
+    { field: "courseCode", headerName: "Code", width: 75, sortable: false },
+    { field: "name", headerName: "Title", width: 290, sortable: true },
+    {
+      field: "level",
+      headerName: "Level",
+      width: 90,
+      sortable: true,
+      type: "number",
+    },
+    {
+      field: "userId",
+      headerName: "Lecturer",
+      width: 200,
+      sortable: false,
+      headerAlign: "left",
+      align: "left",
+    },
+    {
+      field: "status",
+      headerName: "Status",
+      width: 100,
+      sortable: true,
+      headerAlign: "left",
+      align: "left",
+    },
+    {
+      field: "creditValue",
+      headerName: "Credit Value",
+      width: 120,
+      sortable: true,
+      headerAlign: "left",
+      align: "center",
+    },
+    {
+      field: "semesterId",
+      headerName: "Semester",
+      width: 150,
+      sortable: true,
+      headerAlign: "left",
+      align: "left",
+      valueGetter: (params: GridValueGetterParams) =>
+        params.row.semesterId === 1
+          ? "First Semester"
+          : params.row.semesterId === 2
+          ? "Second Semester"
+          : "",
+    },
+    {
+      field: "action",
+      headerName: "Action",
+      sortable: false,
+      width: 100,
+      headerAlign: "left",
+      align: "left",
+      renderCell: (params: GridRenderCellParams) => {
+        return (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              gap: "10px",
+            }}
+          >
+            <div>
+              <EditIcon width={25} height={27} />
+            </div>
+            <div
+              onClick={() => {
+                setDeleteModal(true);
+                setSelectedDeletedCourse(params.row.courseCode);
+              }}
+            >
+              <DeleteIcon width={25} height={27} />
+            </div>
+          </div>
+        );
       },
-      {
-        code: "444",
-        title: "AI and Machine Learning",
-        level: "400",
-        instructor:'Dr John Doe',
-        status: 'Compulsory',
-        creditValue:'20',
-        semester:'First Semester',
-        action: "action",
-      },
-      {
-        code: "344",
-        title: "Cryptography",
-        level: "200",
-        instructor:'Dr John Doe',
-        status: 'Compulsory',
-        creditValue:'10',
-        semester:'Second Semester',
-        action: "action",
-      },
-    ];
+    },
+  ];
 
   return (
     <div>
@@ -120,36 +158,76 @@ const CoursesPage = () => {
           type="search"
           name="text"
           id="search"
-          placeholder={t("Enter your search term", { ns: ["main", "home"] })}
-          value={form.search}
+          placeholder={t("Search course Title", { ns: ["main", "home"] })}
+          value={searchText}
           onChange={(e) => {
-            setForm({ ...form, search: e.target.value });
+            handleFilter(e.target.value);
           }}
         />
       </div>
-      <div style={{ height: 400, width: "100%", marginTop: 40 }}>
+      <div style={{ height: 420, width: "100%", marginTop: 40 }}>
         <DataGrid
-          rows={rows}
+          rows={filteredData}
           columns={columns}
           initialState={{
             pagination: {
-              paginationModel: { page: 0, pageSize: 5 },
+              paginationModel: { page: 0, pageSize: 6 },
             },
           }}
-          pageSizeOptions={[5, 10]}
-          checkboxSelection
-          getRowId={(row: any) => row.code}
-          style={{ fontSize: "16px" }}
+          pageSizeOptions={[6, 10]}
+          // checkboxSelection
+          getRowId={(row: any) => row.id}
+          style={{ fontSize: "13px" }}
           className="dark:text-white"
         />
       </div>
       {isOpen && (
         <ModalContainer width="700px" onClick={() => setIsOpen(false)}>
-          <AddCourseModal closeModal={()=>setIsOpen(!isOpen)}/>
+          <AddCourseModal
+            setIsOpen={setIsOpen}
+            isOpen={isOpen}
+            showSuccessModal={showSuccessModal}
+            setShowSuccessModal={setShowSuccessModal}
+          />
+        </ModalContainer>
+      )}
+
+      {deleteModal && (
+        <ModalContainer width="600px" onClick={() => setDeleteModal(false)}>
+          <DeleteModal
+            onClick={() => console.log("HI")}
+            closeModal={() => setDeleteModal(false)}
+            record={selectedDeletedCourse}
+          />
+        </ModalContainer>
+      )}
+
+      {showSuccessModal && (
+        <ModalContainer
+          width="400px"
+          onClick={() => setShowSuccessModal(false)}
+        >
+          <StatusModal
+            status={
+              createCourseState.status === ApiRequestStatus.FULFILLED
+                ? "SUCCESS"
+                : createCourseState.status === ApiRequestStatus.REJECTED
+                ? "ERROR"
+                : "SUCCESS"
+            }
+            text={
+              createCourseState.status === ApiRequestStatus.FULFILLED
+                ? "Sucessuly Added Course"
+                : createCourseState.status === ApiRequestStatus.REJECTED
+                ? "Could not Add Course"
+                : ""
+            }
+            onClick={() => setShowSuccessModal(false)}
+          />
         </ModalContainer>
       )}
     </div>
   );
-}
+};
 
-export default CoursesPage
+export default CoursesPage;
