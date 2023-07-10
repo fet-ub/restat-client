@@ -8,68 +8,15 @@ import {
   SCHOOL_YEAR,
 } from "../../../../../../repository/constants/constants";
 import Button from "../../../../buttons/Button.common";
+import { StudentType } from "../../../../../../types/student.type";
 
 const StudentAcademicInfoStep = ({
   form,
   setForm,
   setCurrentStep,
 }: {
-  form: {
-    firstname: string;
-    lastname: string;
-    gender: string;
-    status: string;
-    dob: string;
-    pob: string;
-    region: string;
-    address: string;
-    country: string;
-    idCard: string;
-    email: string;
-    phone:string;
-    matricule: string;
-    level: string;
-    year: string;
-    faculty: string;
-    department: string;
-    program: string;
-    certificate: string;
-    yearObtained: string;
-    guardianFirstName: string;
-    guardianLastName: string;
-    guardianEmail: string;
-    guardianAddress: string;
-    guardianPhoneNumber: string;
-  };
-  setForm: React.Dispatch<
-    React.SetStateAction<{
-      firstname: string;
-      lastname: string;
-      gender: string;
-      status: string;
-      dob: string;
-      pob: string;
-      region: string;
-      address: string;
-      country: string;
-      idCard: string;
-      email: string;
-      phone:string;
-      matricule: string;
-      level: string;
-      year: string;
-      faculty: string;
-      department: string;
-      program: string;
-      certificate: string;
-      yearObtained: string;
-      guardianFirstName: string;
-      guardianLastName: string;
-      guardianEmail: string;
-      guardianAddress: string;
-      guardianPhoneNumber: string;
-    }>
-  >;
+  form: StudentType;
+  setForm: React.Dispatch<React.SetStateAction<StudentType>>;
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
 }) => {
   return (

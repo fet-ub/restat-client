@@ -7,6 +7,7 @@ import {
   MARITAL_STATUS,
 } from "../../../../../../repository/constants/constants";
 import DateInput from "../../../../inputs/date-input/DateInput";
+import { StudentType } from "../../../../../../types/student.type";
 // import { AddStudentPropType } from '../../../../../../types/common/modal/add-student-modal.type';
 
 const StudentPersonalInfoStep = ({
@@ -15,62 +16,8 @@ const StudentPersonalInfoStep = ({
   setCurrentStep,
   closeModal,
 }: {
-  form: {
-    firstname: string;
-    lastname: string;
-    gender: string;
-    status: string;
-    dob: string;
-    pob: string;
-    region: string;
-    address: string;
-    country: string;
-    idCard: string;
-    email: string;
-    phone: string;
-    matricule: string;
-    level: string;
-    year: string;
-    faculty: string;
-    department: string;
-    program: string;
-    certificate: string;
-    yearObtained: string;
-    guardianFirstName: string;
-    guardianLastName: string;
-    guardianEmail: string;
-    guardianAddress: string;
-    guardianPhoneNumber: string;
-  };
-  setForm: React.Dispatch<
-    React.SetStateAction<{
-      firstname: string;
-      lastname: string;
-      gender: string;
-      status: string;
-      dob: string;
-      pob: string;
-      region: string;
-      address: string;
-      country: string;
-      idCard: string;
-      email: string;
-      matricule: string;
-      phone:string;
-      level: string;
-      year: string;
-      faculty: string;
-      department: string;
-      program: string;
-      certificate: string;
-      yearObtained: string;
-      guardianFirstName: string;
-      guardianLastName: string;
-      guardianEmail: string;
-      guardianAddress: string;
-      guardianPhoneNumber: string;
-    }>
-  >;
+  form: StudentType;
+  setForm: React.Dispatch<React.SetStateAction<StudentType>>;
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
   closeModal: () => void;
 }) => {
@@ -83,9 +30,9 @@ const StudentPersonalInfoStep = ({
           type="text"
           id="FirstName"
           name="First Name"
-          value={form.firstname}
+          value={form.firstName}
           onChange={(e) => {
-            setForm({ ...form, firstname: e.target.value });
+            setForm({ ...form, firstName: e.target.value });
           }}
         />
         <TextInput
@@ -94,9 +41,9 @@ const StudentPersonalInfoStep = ({
           type="text"
           id="LastName"
           name="Lirst Name"
-          value={form.lastname}
+          value={form.lastName}
           onChange={(e) => {
-            setForm({ ...form, lastname: e.target.value });
+            setForm({ ...form, lastName: e.target.value });
           }}
         />
       </div>
@@ -127,14 +74,6 @@ const StudentPersonalInfoStep = ({
             setForm({ ...form, dob: e.target.value });
           }}
         />
-        {/* <SelectInput
-          selectOptions={SCHOOL_YEAR}
-          label="DOB"
-          onChange={(e) => {
-            setForm({ ...form, dob: e.target.value });
-          }}
-          value={form.dob}
-        /> */}
       </div>
 
       <div className="flex justify-between gap-10 mb-4">
@@ -144,9 +83,9 @@ const StudentPersonalInfoStep = ({
           type="text"
           id="pob"
           name="Place of Birth"
-          value={form.pob}
+          value={form.placeOfBirth}
           onChange={(e) => {
-            setForm({ ...form, pob: e.target.value });
+            setForm({ ...form, placeOfBirth: e.target.value });
           }}
         />
         <TextInput
@@ -180,9 +119,9 @@ const StudentPersonalInfoStep = ({
           type="text"
           id="idCard"
           name="idCard"
-          value={form.idCard}
+          value={form.nationalIdentification}
           onChange={(e) => {
-            setForm({ ...form, idCard: e.target.value });
+            setForm({ ...form, nationalIdentification: e.target.value });
           }}
         />
       </div>
@@ -195,6 +134,18 @@ const StudentPersonalInfoStep = ({
           id="country"
           name="country"
           value={form.country}
+          onChange={(e) => {
+            setForm({ ...form, country: e.target.value });
+          }}
+        />
+
+        <TextInput
+          placeholder="6745020442"
+          label="Phone Number"
+          type="number"
+          id="phone"
+          name="phone"
+          value={form.phone}
           onChange={(e) => {
             setForm({ ...form, country: e.target.value });
           }}

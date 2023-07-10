@@ -1,6 +1,7 @@
 import React from "react";
 import TextInput from "../../../../inputs/text-input/TextInput.common";
 import Button from "../../../../buttons/Button.common";
+import { StudentType } from "../../../../../../types/student.type";
 
 const StudentGuardianInfoStep = ({
   form,
@@ -8,62 +9,8 @@ const StudentGuardianInfoStep = ({
   setCurrentStep,
   closeModal,
 }: {
-  form: {
-    firstname: string;
-    lastname: string;
-    gender: string;
-    status: string;
-    dob: string;
-    pob: string;
-    region: string;
-    address: string;
-    country: string;
-    idCard: string;
-    email: string;
-    phone :string;
-    matricule: string;
-    level: string;
-    year: string;
-    faculty: string;
-    department: string;
-    program: string;
-    certificate: string;
-    yearObtained: string;
-    guardianFirstName: string;
-    guardianLastName: string;
-    guardianEmail: string;
-    guardianAddress: string;
-    guardianPhoneNumber: string;
-  };
-  setForm: React.Dispatch<
-    React.SetStateAction<{
-      firstname: string;
-      lastname: string;
-      gender: string;
-      status: string;
-      dob: string;
-      pob: string;
-      region: string;
-      address: string;
-      country: string;
-      idCard: string;
-      email: string;
-      phone: string;
-      matricule: string;
-      level: string;
-      year: string;
-      faculty: string;
-      department: string;
-      program: string;
-      certificate: string;
-      yearObtained: string;
-      guardianFirstName: string;
-      guardianLastName: string;
-      guardianEmail: string;
-      guardianAddress: string;
-      guardianPhoneNumber: string;
-    }>
-  >;
+  form: StudentType;
+  setForm: React.Dispatch<React.SetStateAction<StudentType>>;
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
   closeModal: () => void;
 }) => {
@@ -121,11 +68,11 @@ const StudentGuardianInfoStep = ({
           placeholder="67234521"
           label="Guardian Phone Number"
           type="number"
-          id="GuardianLastName"
-          name="guardianlasstsname"
-          value={form.guardianPhoneNumber}
+          id="GuardianPhone"
+          name="guardianPhone"
+          value={form.guardianPhone}
           onChange={(e) => {
-            setForm({ ...form, guardianPhoneNumber: e.target.value });
+            setForm({ ...form, guardianPhone: e.target.value });
           }}
         />
       </div>

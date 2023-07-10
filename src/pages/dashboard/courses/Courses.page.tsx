@@ -248,7 +248,7 @@ const CoursesPage = () => {
           width="400px"
           onClick={() => {
             setShowSuccessModal(false);
-            dispatch(resetcreateCourseState);
+            dispatch(resetcreateCourseState());
           }}
         >
           <StatusModal
@@ -268,7 +268,7 @@ const CoursesPage = () => {
             }
             onClick={() => {
               setShowSuccessModal(false);
-              dispatch(resetcreateCourseState);
+              dispatch(resetcreateCourseState());
             }}
           />
         </ModalContainer>
@@ -279,7 +279,7 @@ const CoursesPage = () => {
           width="400px"
           onClick={() => {
             setShowSuccessDelete(false);
-            dispatch(resetDeleteCourseState);
+            dispatch(resetDeleteCourseState());
           }}
         >
           <StatusModal
@@ -299,7 +299,7 @@ const CoursesPage = () => {
             }
             onClick={() => {
               setShowSuccessDelete(false);
-              dispatch(resetDeleteCourseState);
+              dispatch(resetDeleteCourseState());
             }}
           />
         </ModalContainer>

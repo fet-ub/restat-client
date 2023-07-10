@@ -4,25 +4,26 @@ import ProgressSteps from "../../../progress-steps/ProgressSteps.common";
 import StudentPersonalInfoStep from "./steps/StudentPersonalInfo.step";
 import StudentAcademicInfoStep from "./steps/StudentAcademicInfo.step";
 import StudentGuardianInfoStep from "./steps/StudentGuardianInfo.step";
+import { StudentType } from "../../../../../types/student.type";
 
 const AddStudentModal = ({ closeModal }: { closeModal: () => void }) => {
-  const [form, setForm] = useState({
-    firstname: "",
-    lastname: "",
+  const [form, setForm] = useState<StudentType>({
+    firstName: "",
+    lastName: "",
     gender: "",
     status: "",
     dob: "",
-    pob: "",
+    placeOfBirth: "",
     region: "",
     address: "",
     country: "",
-    idCard: "",
+    nationalIdentification: "",
     email: "",
     matricule: "",
     level: "",
     year: "",
     faculty: "",
-    phone:"",
+    phone: "",
     department: "",
     program: "",
     certificate: "",
@@ -31,7 +32,7 @@ const AddStudentModal = ({ closeModal }: { closeModal: () => void }) => {
     guardianLastName: "",
     guardianEmail: "",
     guardianAddress: "",
-    guardianPhoneNumber: "",
+    guardianPhone: "",
   });
   const [currentstep, setCurrentstep] = useState(0);
 
