@@ -34,11 +34,10 @@ const createCourseSlice = createSlice({
       })
       .addCase(createCourseThunk.fulfilled, (state, action) => {
         state.status = ApiRequestStatus.FULFILLED;
-        // console.log(state.status);
+        console.log(state.status);
 
         console.log(state.status);
-        
-        
+        console.log({ payload: action.payload });
 
         console.log({ payload: action.payload });
       })

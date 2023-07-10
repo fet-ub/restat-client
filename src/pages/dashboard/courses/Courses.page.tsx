@@ -12,26 +12,36 @@ import { useTranslation } from "react-i18next";
 import ModalContainer from "../../../components/common/modal/modal-container/ModalContainer.common";
 import AddCourseModal from "../../../components/common/modal/modules/course/AddCourseModal.module";
 import { useAppDispatch, useAppSelector } from "../../../lib/hooks";
-import { getCoursesThunk } from "../../../app/feature/course/thunk/course.thunk";
+import {
+  getCoursesThunk,
+  deleteCourseThunk,
+} from "../../../app/feature/course/thunk/course.thunk";
 import { RootState } from "../../../app/store/store";
 import EditIcon from "../../../icons/Edit.icon";
 import DeleteIcon from "../../../icons/Delete.icon";
 import DeleteModal from "../../../components/common/modal/modules/delete/DeleteModal.module";
 import StatusModal from "../../../components/common/modal/modules/status/StatusModal.module";
 import { ApiRequestStatus } from "../../../types/api.types";
+import { resetDeleteCourseState } from "../../../app/feature/course/slices/deleteCourse.slice";
+import { resetcreateCourseState } from "../../../app/feature/course/slices/createCourse.slice";
 
 const CoursesPage = () => {
   const getCoursesState = useAppSelector(
     (state: RootState) => state.getCoursesState
   );
   const createCourseState = useAppSelector((state) => state.createCourseState);
+  const deleteCourseState = useAppSelector((state) => state.deleteCourseState);
+
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+
   const [isOpen, setIsOpen] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showSuccessDelete, setShowSuccessDelete] = useState(false);
   const [filteredData, setFilteredData] = useState<any>([]);
   const [searchText, setSearchText] = useState("");
+  const [courseId, setCourseId] = useState("");
   const [selectedDeletedCourse, setSelectedDeletedCourse] = useState("");
 
   useEffect(() => {
@@ -39,7 +49,7 @@ const CoursesPage = () => {
 
     setFilteredData(getCoursesState.courses);
     // eslint-disable-next-line
-  }, []);
+  }, [getCoursesState]);
 
   const handleFilter = (valueText: any) => {
     setSearchText(valueText);
@@ -54,9 +64,34 @@ const CoursesPage = () => {
     }
   };
 
+  useEffect(() => {
+    if (deleteCourseState.status === ApiRequestStatus.FULFILLED) {
+      setDeleteModal(false);
+      setShowSuccessDelete(!showSuccessDelete);
+    }
+
+    // dispatch(resetcreateCourseState());
+  }, [deleteCourseState.status === ApiRequestStatus.FULFILLED]);
+
+  const handleDeleteCourse = async (id: any) => {
+    await dispatch(deleteCourseThunk(id));
+    // dispatch(resetDeleteCourseState());
+    if (deleteCourseState.status === ApiRequestStatus.FULFILLED) {
+      setDeleteModal(false);
+      setShowSuccessDelete(!showSuccessDelete);
+    }
+  };
+
+  const handleSelectedDeletedCourse = (courseCode: any, id: any) => {
+    setDeleteModal(true);
+    setSelectedDeletedCourse(courseCode);
+    setCourseId(id);
+  };
+
   // console.log(getCoursesState.courses);
   // console.log(filteredData);
-  console.log(isOpen);
+  // console.log(isOpen);
+  // console.log(courseId);
 
   const columns: GridColDef[] = [
     { field: "courseCode", headerName: "Code", width: 75, sortable: false },
@@ -128,8 +163,12 @@ const CoursesPage = () => {
             </div>
             <div
               onClick={() => {
-                setDeleteModal(true);
-                setSelectedDeletedCourse(params.row.courseCode);
+                // setDeleteModal(true);
+                // setSelectedDeletedCourse(params.row.courseCode);
+                handleSelectedDeletedCourse(
+                  params.row.courseCode,
+                  params.row.id
+                );
               }}
             >
               <DeleteIcon width={25} height={27} />
@@ -195,9 +234,11 @@ const CoursesPage = () => {
       {deleteModal && (
         <ModalContainer width="600px" onClick={() => setDeleteModal(false)}>
           <DeleteModal
-            onClick={() => console.log("HI")}
+            onClick={() => handleDeleteCourse(courseId)}
             closeModal={() => setDeleteModal(false)}
             record={selectedDeletedCourse}
+            disable={deleteCourseState.status === ApiRequestStatus.PENDING}
+            loading={deleteCourseState.status === ApiRequestStatus.PENDING}
           />
         </ModalContainer>
       )}
@@ -205,7 +246,10 @@ const CoursesPage = () => {
       {showSuccessModal && (
         <ModalContainer
           width="400px"
-          onClick={() => setShowSuccessModal(false)}
+          onClick={() => {
+            setShowSuccessModal(false);
+            dispatch(resetcreateCourseState);
+          }}
         >
           <StatusModal
             status={
@@ -222,7 +266,41 @@ const CoursesPage = () => {
                 ? "Could not Add Course"
                 : ""
             }
-            onClick={() => setShowSuccessModal(false)}
+            onClick={() => {
+              setShowSuccessModal(false);
+              dispatch(resetcreateCourseState);
+            }}
+          />
+        </ModalContainer>
+      )}
+
+      {showSuccessDelete && (
+        <ModalContainer
+          width="400px"
+          onClick={() => {
+            setShowSuccessDelete(false);
+            dispatch(resetDeleteCourseState);
+          }}
+        >
+          <StatusModal
+            status={
+              deleteCourseState.status === ApiRequestStatus.FULFILLED
+                ? "SUCCESS"
+                : deleteCourseState.status === ApiRequestStatus.REJECTED
+                ? "ERROR"
+                : "SUCCESS"
+            }
+            text={
+              deleteCourseState.status === ApiRequestStatus.FULFILLED
+                ? "Sucessuly Deleted Course"
+                : deleteCourseState.status === ApiRequestStatus.REJECTED
+                ? "Could not Delete Course"
+                : ""
+            }
+            onClick={() => {
+              setShowSuccessDelete(false);
+              dispatch(resetDeleteCourseState);
+            }}
           />
         </ModalContainer>
       )}

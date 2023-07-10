@@ -15,6 +15,7 @@ import { CONSTANTS } from "../../../../../constants/constants";
 import { useNavigate } from "react-router-dom";
 import { createCourseThunk } from "../../../../../app/feature/course/thunk/course.thunk";
 import { ApiRequestStatus } from "../../../../../types/api.types";
+import { resetcreateCourseState } from "../../../../../app/feature/course/slices/createCourse.slice";
 
 const AddCourseModal = ({
   setIsOpen,
@@ -62,9 +63,31 @@ const AddCourseModal = ({
 
   // console.log(createCourseState.status);
 
+  useEffect(() => {
+    if (createCourseState.status === ApiRequestStatus.FULFILLED) {
+      setForm({
+        facultyId: "1",
+        semesterId: "1",
+        name: "",
+        courseCode: "",
+        level: "200",
+        status: CourseStatusType.COMPULSORY,
+        creditValue: "",
+      });
+
+      setIsOpen(false);
+      setShowSuccessModal(true);
+    }
+
+    // dispatch(resetcreateCourseState());
+  }, [createCourseState.status === ApiRequestStatus.FULFILLED]);
+
+  // console.log(createCourseState.status);
+
   const handleAddCourse = async (event: any) => {
     event.preventDefault();
     await dispatch(createCourseThunk({ ...form, userId: user.id.toString() }));
+    // dispatch(resetcreateCourseState());
     // setTracker(!tracker)
 
     if (createCourseState.status === ApiRequestStatus.FULFILLED) {

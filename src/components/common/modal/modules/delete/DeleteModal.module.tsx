@@ -1,7 +1,13 @@
 import React from "react";
 import Button from "../../../buttons/Button.common";
 import { DeleteModalPropType } from "../../../../../types/common/modal/delete-modal.type";
-const DeleteModal = ({ record, onClick, closeModal }: DeleteModalPropType) => {
+const DeleteModal = ({
+  record,
+  onClick,
+  closeModal,
+  disable,
+  loading,
+}: DeleteModalPropType) => {
   return (
     <div>
       <h1 className="text-3xl font-medium text-darkBlue text-center mt-1 mb-10 dark:white ">
@@ -20,6 +26,8 @@ const DeleteModal = ({ record, onClick, closeModal }: DeleteModalPropType) => {
           fullWidth={true}
           buttonType="ERROR"
           onClick={onClick}
+          disable={disable}
+          loading={loading}
         />
       </div>
     </div>

@@ -7,10 +7,14 @@ import { IconRepository } from "../../../repository/icons/icon.repository";
 import DoughnutChart from "../../../components/common/chart/DoughnutChart.component";
 import LineChart from "../../../components/common/chart/LineChart.component";
 import { useTranslation } from "react-i18next";
-
+import { useAppSelector } from "../../../lib/hooks";
+import { RootState } from "../../../app/store/store";
 
 const IndexPage = () => {
-    const { t } = useTranslation();
+  const { t } = useTranslation();
+  const getCoursesState = useAppSelector(
+    (state: RootState) => state.getCoursesState
+  );
 
   const dashboardCardData = [
     {
@@ -20,7 +24,7 @@ const IndexPage = () => {
     },
     {
       label: t("Courses", { ns: ["main", "home"] }),
-      stats: 50,
+      stats: getCoursesState.courses.length,
       icon: <IconRepository.DashboardBooksIcon width={70} height={70} />,
     },
     {
@@ -38,7 +42,6 @@ const IndexPage = () => {
     <div className={styles.dashboard}>
       <div className={styles.head}>
         <h2 className="text-secondary dark:text-white">
-          
           {t("Dashboard", { ns: ["main", "home"] })}
         </h2>
       </div>
