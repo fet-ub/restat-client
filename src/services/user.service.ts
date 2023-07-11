@@ -1,5 +1,5 @@
 import { publicApiRequest } from "../lib/hooks/axiosInstance";
-import {  userRequestType } from "../types/auth.type";
+import { userRequestType } from "../types/auth.type";
 import { UserType } from "../types/user.type";
 import { AuthService } from "./auth.service";
 
@@ -8,8 +8,7 @@ const authService = new AuthService();
 export class UserService {
   public async createNewUser(data: userRequestType, userType: UserType) {
     console.log("ser service", userType);
-    console.log('sd',UserType.COORDINATOR);
-    
+    console.log("sd", UserType.COORDINATOR);
 
     if (userType === UserType.HOD) {
       const body = new FormData();
@@ -23,7 +22,6 @@ export class UserService {
       // );
 
       console.log(body);
-      
 
       return await authService.laravelSanctum().then(async () => {
         return await publicApiRequest("", "multipart/form-data").post(
@@ -121,5 +119,11 @@ export class UserService {
         );
       });
     }
+  }
+
+  public async getUsers() {
+    return await authService.laravelSanctum().then(async () => {
+      return await publicApiRequest().get("/users");
+    });
   }
 }

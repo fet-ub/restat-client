@@ -6,7 +6,12 @@ import SelectInput from "../../../components/common/inputs/select-input/SelectIn
 import { ENGINEERING_DEPARTMENTS } from "../../../repository/constants/constants";
 import TextInput from "../../../components/common/inputs/text-input/TextInput.common";
 import DownloadOptions from "../../../components/common/download-options/DownloadOptions.common";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridColDef,
+  GridRenderCellParams,
+  GridValueGetterParams,
+} from "@mui/x-data-grid";
 import ModalContainer from "../../../components/common/modal/modal-container/ModalContainer.common";
 import AddStudentModal from "../../../components/common/modal/modules/add-student/AddStudentModal.module";
 import Button from "../../../components/common/buttons/Button.common";
@@ -20,7 +25,14 @@ import { useAppSelector, useAppDispatch } from "../../../lib/hooks";
 import { resetCreateStudentState } from "../../../app/feature/student/slice/createStudent.slice";
 import StatusModal from "../../../components/common/modal/modules/status/StatusModal.module";
 import { RootState } from "../../../app/store/store";
-import { getStudentsThunk } from "../../../app/feature/student/thunk/student.thunk";
+import {
+  getStudentsThunk,
+  deleteStudentThunk,
+} from "../../../app/feature/student/thunk/student.thunk";
+import EditIcon from "../../../icons/Edit.icon";
+import DeleteIcon from "../../../icons/Delete.icon";
+import DeleteModal from "../../../components/common/modal/modules/delete/DeleteModal.module";
+import { resetDeleteStudentState } from "../../../app/feature/student/slice/deleteStudent.slice";
 //  GridValueGetterParams;
 
 const StudentsPage = () => {
@@ -29,6 +41,9 @@ const StudentsPage = () => {
 
   const createStudentState = useAppSelector(
     (state) => state.createStudentState
+  );
+  const deleteStudentState = useAppSelector(
+    (state) => state.deleteStudentState
   );
 
   const getStudentsState = useAppSelector(
@@ -43,6 +58,8 @@ const StudentsPage = () => {
   const [selectedFile, setSelectedFile] = useState<any>([]);
   const [fileName, setFileName] = useState<any>("");
   const [studentsTableData, setStudentsTableData] = useState<studentType[]>([]);
+  const [studentId, setStudentId] = useState("");
+  const [selectedDeletedStudent, setSelectedDeletedStudent] = useState("");
 
   const [form, setForm] = useState({
     department: "",
@@ -57,13 +74,28 @@ const StudentsPage = () => {
   }, [getStudentsState]);
 
   //  useEffect(() => {
-  //    if (deleteCourseState.status === ApiRequestStatus.FULFILLED) {
+  //    if (deleteStudentState.status === ApiRequestStatus.FULFILLED) {
   //      setDeleteModal(false);
   //      setShowSuccessDelete(!showSuccessDelete);
   //    }
 
-  //    // dispatch(resetcreateCourseState());
-  //  }, [deleteCourseState.status === ApiRequestStatus.FULFILLED]);
+  //    // dispatch(resetcreateStudentState());
+  //  }, [deleteStudentState.status === ApiRequestStatus.FULFILLED]);
+
+  // const handleDeleteStudent = async (id: any) => {
+  //   await dispatch(deleteStudentThunk(id));
+  //   // dispatch(resetDeleteCourseState());
+  //   if (deleteStudentState.status === ApiRequestStatus.FULFILLED) {
+  //     setDeleteModal(false);
+  //     setShowSuccessDelete(!showSuccessDelete);
+  //   }
+  // };
+
+  // const handleSelectedDeletedStudent = (courseCode: any, id: any) => {
+  //   setDeleteModal(true);
+  //   setSelectedDeletedStudent(courseCode);
+  //   setStudentId(id);
+  // };
 
   const formattedArr = studentsTableData.map((obj: any) => {
     // Add code to rename keys here
@@ -80,26 +112,47 @@ const StudentsPage = () => {
   // console.log(formattedArr);
 
   const columns: GridColDef[] = [
-    { field: "name", headerName: "Name", width: 280, sortable: false },
-    { field: "matricule", headerName: "Matrcule", width: 150, sortable: false },
     {
-      field: "department",
-      headerName: "Department",
-      width: 250,
+      field: "name",
+      headerName: "Name",
+      width: 280,
+      sortable: false,
+
+      valueGetter: (params: GridValueGetterParams) =>
+        `${params.row.firstName || ""} ${params.row.lastName || ""}`,
+    },
+    {
+      field: "matriculationNumber",
+      headerName: "Matrcule",
+      width: 120,
       sortable: false,
     },
     {
-      field: "email",
-      headerName: "Email",
-      width: 200,
+      field: "level",
+      headerName: "level",
+      width: 70,
       sortable: false,
       headerAlign: "left",
       align: "left",
     },
     {
+      field: "program",
+      headerName: "Program",
+      width: 250,
+      sortable: false,
+    },
+    {
       field: "phone",
       headerName: "Phone",
-      width: 180,
+      width: 130,
+      sortable: false,
+      headerAlign: "left",
+      align: "left",
+    },
+    {
+      field: "email",
+      headerName: "Email",
+      width: 190,
       sortable: false,
       headerAlign: "left",
       align: "left",
@@ -108,9 +161,37 @@ const StudentsPage = () => {
       field: "action",
       headerName: "Action",
       sortable: false,
-      width: 100,
+      width: 70,
       headerAlign: "left",
       align: "left",
+      renderCell: (params: GridRenderCellParams) => {
+        return (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              gap: "10px",
+            }}
+          >
+            <div>
+              <EditIcon width={25} height={27} />
+            </div>
+            <div
+            // onClick={() => {
+            //   // setDeleteModal(true);
+            //   // setSelectedDeletedStudent(params.row.courseCode);
+            //   handleSelectedDeletedStudent(
+            //     params.row.courseCode,
+            //     params.row.id
+            //   );
+            // }}
+            >
+              <DeleteIcon width={25} height={27} />
+            </div>
+          </div>
+        );
+      },
       // valueGetter: (params: GridValueGetterParams) =>
       //   `${params.row.firstName || ""} ${params.row.lastName || ""}`,
     },
@@ -118,28 +199,34 @@ const StudentsPage = () => {
 
   const rows = [
     {
-      name: "Fomonyuytar Joseph",
-      matricule: "FE19A038",
-      department: "Computer Enginnering",
+      id: 1,
+      firstName: "Fomonyutar",
+      lastName: "Joseph",
+      matriculationNumber: "FE19A038",
+      level: "500",
+      program: "Software Enginnering",
       email: "joe@email.com",
       phone: "651273636",
-      action: "action",
     },
     {
-      name: "Njoh Prince",
-      matricule: "FE19A035",
-      department: "Electrical Enginnering",
+      id: 2,
+      firstName: "Njoh",
+      lastName: " Prince",
+      matriculationNumber: "FE19A035",
+      level: "500",
+      program: "Network Enginnering",
       email: "prince@email.com",
       phone: "653445345",
-      action: "action",
     },
     {
-      name: "Hans Weno",
-      matricule: "FE19A045",
-      department: "Computer Enginnering",
+      id: 3,
+      firstName: "Hans",
+      lastName: " Weno",
+      matriculationNumber: "FE19A045",
+      level: "500",
+      program: "Software Enginnering",
       email: "hans@email.com",
       phone: "6534454656",
-      action: "action",
     },
   ];
 
@@ -208,8 +295,8 @@ const StudentsPage = () => {
           }}
           pageSizeOptions={[5, 10]}
           checkboxSelection
-          getRowId={(row: any) => row.name + row.phone}
-          style={{ fontSize: "17px" }}
+          getRowId={(row: any) => row.id}
+          style={{ fontSize: "15px" }}
           className="dark:text-white"
         />
       </div>
@@ -261,6 +348,49 @@ const StudentsPage = () => {
             onClick={() => {
               setShowSuccessModal(false);
               dispatch(resetCreateStudentState());
+            }}
+          />
+        </ModalContainer>
+      )}
+
+      {deleteModal && (
+        <ModalContainer width="600px" onClick={() => setDeleteModal(false)}>
+          <DeleteModal
+            // onClick={() => handleDeleteStudent(studentId)}
+            closeModal={() => setDeleteModal(false)}
+            record={selectedDeletedStudent}
+            disable={deleteStudentState.status === ApiRequestStatus.PENDING}
+            loading={deleteStudentState.status === ApiRequestStatus.PENDING}
+          />
+        </ModalContainer>
+      )}
+
+      {showSuccessDelete && (
+        <ModalContainer
+          width="400px"
+          onClick={() => {
+            setShowSuccessDelete(false);
+            dispatch(resetDeleteStudentState());
+          }}
+        >
+          <StatusModal
+            status={
+              deleteStudentState.status === ApiRequestStatus.FULFILLED
+                ? "SUCCESS"
+                : deleteStudentState.status === ApiRequestStatus.REJECTED
+                ? "ERROR"
+                : "SUCCESS"
+            }
+            text={
+              deleteStudentState.status === ApiRequestStatus.FULFILLED
+                ? "Sucessuly Deleted Student"
+                : deleteStudentState.status === ApiRequestStatus.REJECTED
+                ? deleteStudentState.message
+                : ""
+            }
+            onClick={() => {
+              setShowSuccessDelete(false);
+              dispatch(resetDeleteStudentState());
             }}
           />
         </ModalContainer>

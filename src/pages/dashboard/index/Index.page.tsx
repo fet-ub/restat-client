@@ -15,6 +15,9 @@ const IndexPage = () => {
   const getCoursesState = useAppSelector(
     (state: RootState) => state.getCoursesState
   );
+  const getStudentsState = useAppSelector(
+    (state: RootState) => state.getStudentsState
+  );
 
   const dashboardCardData = [
     {

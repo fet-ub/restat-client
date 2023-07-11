@@ -28,3 +28,18 @@ export const createUserThunk = createAsyncThunk(
     }
   }
 );
+
+export const getUsersThunk = createAsyncThunk(
+  "/getUsers",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await userService.getUsers();
+
+      // console.log({ response });
+
+      return response?.data;
+    } catch (ex) {
+      return rejectWithValue(getExceptionPayload(ex) as ApiRequestErrorType);
+    }
+  }
+);

@@ -1,17 +1,28 @@
 export interface IUser {
-    nane:  string
-    email: string
-    id: number
-    status: string
+  name: string;
+  email: string;
+  id: number;
+  status: string;
 }
 
 export enum UserType {
-    ADMIN,
-    HOD,
-    DEAN,
-    STUDENT,
-    LECTURER,
-    SUPPORT_STAFF,
-    EXAMINER,
-    COORDINATOR
+  ADMIN,
+  HOD,
+  DEAN,
+  STUDENT,
+  LECTURER,
+  SUPPORT_STAFF,
+  EXAMINER,
+  COORDINATOR,
+}
+
+export interface UserResponseTypes {
+  firstName: string;
+  lastName: string;
+  email: string;
+  id: number;
+  status: string;
+  created_at: Date;
+  updated_at: Date;
+  profilePicture?: string | null;
 }
