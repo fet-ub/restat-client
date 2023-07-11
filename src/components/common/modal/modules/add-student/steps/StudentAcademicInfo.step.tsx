@@ -29,10 +29,11 @@ const StudentAcademicInfoStep = ({
             type="text"
             id="matricule"
             name="matricule"
-            value={form.matricule}
+            value={form.matriculationNumber}
             onChange={(e) => {
-              setForm({ ...form, matricule: e.target.value });
+              setForm({ ...form, matriculationNumber: e.target.value });
             }}
+            required={true}
           />
           <SelectInput
             selectOptions={COURSE_LEVELS}
@@ -52,22 +53,37 @@ const StudentAcademicInfoStep = ({
           />
         </div>
 
-        <div className="flex flex-col gap-1">
+        <div className="flex justify-between gap-10">
           <SelectInput
             selectOptions={ENGINEERING_DEPARTMENTS}
             label="Department"
             onChange={(e) => {
-              setForm({ ...form, department: e.target.value });
+              setForm({ ...form, departmentId: e.target.value });
             }}
-            value={form.department}
+            value={form.departmentId}
           />
+          <TextInput
+            placeholder="example@email.com"
+            label="Email"
+            type="email"
+            id="email"
+            name="email"
+            value={form.email}
+            onChange={(e) => {
+              setForm({ ...form, email: e.target.value });
+            }}
+            required={true}
+          />
+        </div>
+
+        <div className="flex flex-col gap-1">
           <SelectInput
             selectOptions={COMPUTER_PROGRAMS}
             label="Program"
             onChange={(e) => {
-              setForm({ ...form, department: e.target.value });
+              setForm({ ...form, program: e.target.value });
             }}
-            value={form.department}
+            value={form.program}
           />
           <TextInput
             placeholder="Bsc Software Enginnering"
@@ -75,10 +91,11 @@ const StudentAcademicInfoStep = ({
             type="text"
             id="certificate"
             name="certificate"
-            value={form.certificate}
+            value={form.certificateObtained}
             onChange={(e) => {
-              setForm({ ...form, certificate: e.target.value });
+              setForm({ ...form, certificateObtained: e.target.value });
             }}
+            required={true}
           />
           <SelectInput
             selectOptions={SCHOOL_YEAR}

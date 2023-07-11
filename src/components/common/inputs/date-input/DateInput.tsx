@@ -7,6 +7,7 @@ const DateInput = ({
   value,
   placeholder,
   onChange,
+  required,
 }: InputTypes) => {
   return (
     <div className="mb-4 w-full">
@@ -27,6 +28,7 @@ const DateInput = ({
         name={name}
         value={value}
         type={"date"}
+        required={required}
       />
     </div>
   );

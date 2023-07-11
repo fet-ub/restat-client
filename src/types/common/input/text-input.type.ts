@@ -8,4 +8,5 @@ export interface InputTypes {
   type?: string;
   icon?: JSX.Element;
   hidden?: boolean;
+  required?: boolean;
 }

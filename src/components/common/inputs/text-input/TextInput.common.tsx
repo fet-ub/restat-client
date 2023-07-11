@@ -8,6 +8,7 @@ const TextInput = ({
   placeholder,
   onChange,
   type,
+  required,
 }: InputTypes) => {
   return (
     <div className="mb-4 w-full">
@@ -28,6 +29,7 @@ const TextInput = ({
         name={name}
         value={value}
         type={type}
+        required={required}
       />
     </div>
   );

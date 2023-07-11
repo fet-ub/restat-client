@@ -5,6 +5,7 @@ import SelectInput from "../../../../inputs/select-input/SelectInput.common";
 import {
   GENDER,
   MARITAL_STATUS,
+  REGIONS,
 } from "../../../../../../repository/constants/constants";
 import DateInput from "../../../../inputs/date-input/DateInput";
 import { StudentType } from "../../../../../../types/student.type";
@@ -29,22 +30,24 @@ const StudentPersonalInfoStep = ({
           label="First Name"
           type="text"
           id="FirstName"
-          name="First Name"
+          name="FirstName"
           value={form.firstName}
           onChange={(e) => {
             setForm({ ...form, firstName: e.target.value });
           }}
+          required={true}
         />
         <TextInput
           placeholder="Tabe"
           label="Last Name"
           type="text"
           id="LastName"
-          name="Lirst Name"
+          name="LastName"
           value={form.lastName}
           onChange={(e) => {
             setForm({ ...form, lastName: e.target.value });
           }}
+          required={true}
         />
       </div>
 
@@ -73,6 +76,7 @@ const StudentPersonalInfoStep = ({
           onChange={(e) => {
             setForm({ ...form, dob: e.target.value });
           }}
+          required={true}
         />
       </div>
 
@@ -82,11 +86,12 @@ const StudentPersonalInfoStep = ({
           label="Place of Birth"
           type="text"
           id="pob"
-          name="Place of Birth"
+          name="pob"
           value={form.placeOfBirth}
           onChange={(e) => {
             setForm({ ...form, placeOfBirth: e.target.value });
           }}
+          required={true}
         />
         <TextInput
           placeholder="Buea Town"
@@ -98,31 +103,30 @@ const StudentPersonalInfoStep = ({
           onChange={(e) => {
             setForm({ ...form, address: e.target.value });
           }}
+          required={true}
         />
       </div>
 
       <div className="flex justify-between gap-10 mb-4">
-        <TextInput
-          placeholder="South-West"
+        <SelectInput
+          selectOptions={REGIONS}
           label="Region"
-          type="text"
-          id="region"
-          name="region"
-          value={form.region}
           onChange={(e) => {
             setForm({ ...form, region: e.target.value });
           }}
+          value={form.region}
         />
         <TextInput
           placeholder="National ID number"
           label="National Identification"
           type="text"
-          id="idCard"
-          name="idCard"
+          id="nationalIdentification"
+          name="nationalIdentification"
           value={form.nationalIdentification}
           onChange={(e) => {
             setForm({ ...form, nationalIdentification: e.target.value });
           }}
+          required={true}
         />
       </div>
 
@@ -137,6 +141,7 @@ const StudentPersonalInfoStep = ({
           onChange={(e) => {
             setForm({ ...form, country: e.target.value });
           }}
+          required={true}
         />
 
         <TextInput
@@ -147,8 +152,9 @@ const StudentPersonalInfoStep = ({
           name="phone"
           value={form.phone}
           onChange={(e) => {
-            setForm({ ...form, country: e.target.value });
+            setForm({ ...form, phone: e.target.value });
           }}
+          required={true}
         />
       </div>
 

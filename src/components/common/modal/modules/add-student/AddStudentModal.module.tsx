@@ -1,33 +1,66 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import ProgressSteps from "../../../progress-steps/ProgressSteps.common";
 import StudentPersonalInfoStep from "./steps/StudentPersonalInfo.step";
 import StudentAcademicInfoStep from "./steps/StudentAcademicInfo.step";
 import StudentGuardianInfoStep from "./steps/StudentGuardianInfo.step";
 import { StudentType } from "../../../../../types/student.type";
+import { useAppDispatch, useAppSelector } from "../../../../../lib/hooks";
+import { createStudentThunk } from "../../../../../app/feature/student/thunk/student.thunk";
+import { ApiRequestStatus } from "../../../../../types/api.types";
+import { useTranslation } from "react-i18next";
+import { CONSTANTS } from "../../../../../constants/constants";
 
-const AddStudentModal = ({ closeModal }: { closeModal: () => void }) => {
+const AddStudentModal = ({
+  closeModal,
+  setShowSuccessModal,
+}: {
+  closeModal: () => void;
+  setShowSuccessModal: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+
+  const createStudentState = useAppSelector(
+    (state) => state.createStudentState
+  );
+
+  const [user, setUser] = useState({
+    id: "",
+  });
+
+  useEffect(() => {
+    const userInfo = localStorage.getItem(CONSTANTS.STORAGE_KEY.CURRENT_USER);
+
+    if (!userInfo) {
+      navigate("/auth/login");
+    } else {
+      setUser(JSON.parse(userInfo as string));
+    }
+  }, [window.location.pathname]);
+
   const [form, setForm] = useState<StudentType>({
     firstName: "",
     lastName: "",
-    gender: "",
-    status: "",
+    gender: "male",
+    status: "single",
     dob: "",
     placeOfBirth: "",
-    region: "",
+    region: "south_west",
     address: "",
     country: "",
     nationalIdentification: "",
     email: "",
-    matricule: "",
-    level: "",
-    year: "",
-    faculty: "",
+    matriculationNumber: "",
+    level: "200",
+    year: "2016",
     phone: "",
-    department: "",
-    program: "",
-    certificate: "",
-    yearObtained: "",
+    departmentId: "1",
+    program: "software",
+    certificateObtained: "",
+    yearObtained: "2016",
     guardianFirstName: "",
     guardianLastName: "",
     guardianEmail: "",
@@ -35,6 +68,70 @@ const AddStudentModal = ({ closeModal }: { closeModal: () => void }) => {
     guardianPhone: "",
   });
   const [currentstep, setCurrentstep] = useState(0);
+
+  console.log(createStudentState.status);
+
+  useEffect(() => {
+    if (createStudentState.status === ApiRequestStatus.FULFILLED) {
+      console.log("it ran");
+
+      setForm({
+        firstName: "",
+        lastName: "",
+        gender: "male",
+        status: "single",
+        dob: "",
+        placeOfBirth: "",
+        region: "south_west",
+        address: "",
+        country: "",
+        nationalIdentification: "",
+        email: "",
+        matriculationNumber: "",
+        level: "200",
+        year: "2016",
+        phone: "",
+        departmentId: "1",
+        program: "software",
+        certificateObtained: "",
+        yearObtained: "2016",
+        guardianFirstName: "",
+        guardianLastName: "",
+        guardianEmail: "",
+        guardianAddress: "",
+        guardianPhone: "",
+      });
+
+      closeModal();
+      setShowSuccessModal(true);
+    }
+
+    // dispatch(resetcreateCourseState());
+  }, [createStudentState.status === ApiRequestStatus.FULFILLED]);
+
+  useEffect(() => {
+    if (createStudentState.status === ApiRequestStatus.REJECTED) {
+      console.log("it ran");
+
+      closeModal();
+      setShowSuccessModal(true);
+    }
+
+    // dispatch(resetcreateCourseState());
+  }, [createStudentState.status === ApiRequestStatus.REJECTED]);
+  const handleAddStudent = async (e: any) => {
+    e.preventDefault();
+    console.log("i was presses");
+
+    await dispatch(
+      createStudentThunk({
+        ...form,
+        facultyId: "1",
+        userId: user.id,
+        profilePicture: "null",
+      })
+    );
+  };
 
   return (
     <div className="px-8 pb-3 bg-white dark:bg-tertiary">
@@ -63,6 +160,7 @@ const AddStudentModal = ({ closeModal }: { closeModal: () => void }) => {
           setForm={setForm}
           setCurrentStep={setCurrentstep}
           closeModal={closeModal}
+          handleAddStudent={handleAddStudent}
         />
       ) : (
         ""

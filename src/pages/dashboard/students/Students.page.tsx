@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DashboardHeader from "../../../components/common/dashboard-header/DashboardHeader.common";
 // import DashboardCard from "../../../components/common/cards/dashboard-card/DashboardCard.common";
 // import { IconRepository } from "../../../repository/icons/icon.repository";
@@ -15,13 +15,31 @@ import { MdOutlineContactPage } from "react-icons/md";
 import AddBulkStudentModal from "../../../components/common/modal/modules/add-student/AddBulkStudent.modal";
 import { studentType } from "../../../types/common/modal/add-bulk-student-modal.type";
 import { useTranslation } from "react-i18next";
-
+import { ApiRequestStatus } from "../../../types/api.types";
+import { useAppSelector, useAppDispatch } from "../../../lib/hooks";
+import { resetCreateStudentState } from "../../../app/feature/student/slice/createStudent.slice";
+import StatusModal from "../../../components/common/modal/modules/status/StatusModal.module";
+import { RootState } from "../../../app/store/store";
+import { getStudentsThunk } from "../../../app/feature/student/thunk/student.thunk";
 //  GridValueGetterParams;
 
 const StudentsPage = () => {
-    const { t } = useTranslation();
+  const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+
+  const createStudentState = useAppSelector(
+    (state) => state.createStudentState
+  );
+
+  const getStudentsState = useAppSelector(
+    (state: RootState) => state.getStudentsState
+  );
+
   const [isOpen, setIsOpen] = useState(false);
   const [isBulkOpen, setBulkIsOpen] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showSuccessDelete, setShowSuccessDelete] = useState(false);
   const [selectedFile, setSelectedFile] = useState<any>([]);
   const [fileName, setFileName] = useState<any>("");
   const [studentsTableData, setStudentsTableData] = useState<studentType[]>([]);
@@ -31,21 +49,36 @@ const StudentsPage = () => {
     name: "",
   });
 
+  useEffect(() => {
+    dispatch(getStudentsThunk());
 
-const formattedArr = studentsTableData.map((obj: any) => {
-  // Add code to rename keys here
+    //  setFilteredData(getCoursesState.courses);
+    // eslint-disable-next-line
+  }, [getStudentsState]);
 
-  const formattedObj: any = {};
-  Object.keys(obj).forEach((key: any) => {
-    const formattedKey = key.replace(/ /g, "_").toLowerCase();
-    formattedObj[formattedKey] = obj[key];
+  //  useEffect(() => {
+  //    if (deleteCourseState.status === ApiRequestStatus.FULFILLED) {
+  //      setDeleteModal(false);
+  //      setShowSuccessDelete(!showSuccessDelete);
+  //    }
+
+  //    // dispatch(resetcreateCourseState());
+  //  }, [deleteCourseState.status === ApiRequestStatus.FULFILLED]);
+
+  const formattedArr = studentsTableData.map((obj: any) => {
+    // Add code to rename keys here
+
+    const formattedObj: any = {};
+    Object.keys(obj).forEach((key: any) => {
+      const formattedKey = key.replace(/ /g, "_").toLowerCase();
+      formattedObj[formattedKey] = obj[key];
+    });
+
+    return formattedObj as studentType;
   });
 
-  return formattedObj as studentType;
-});
+  // console.log(formattedArr);
 
- console.log(formattedArr);
- 
   const columns: GridColDef[] = [
     { field: "name", headerName: "Name", width: 280, sortable: false },
     { field: "matricule", headerName: "Matrcule", width: 150, sortable: false },
@@ -195,7 +228,41 @@ const formattedArr = studentsTableData.map((obj: any) => {
 
       {isOpen && (
         <ModalContainer width="900px" onClick={() => setIsOpen(false)}>
-          <AddStudentModal closeModal={() => setIsOpen(false)} />
+          <AddStudentModal
+            closeModal={() => setIsOpen(false)}
+            setShowSuccessModal={setShowSuccessModal}
+          />
+        </ModalContainer>
+      )}
+
+      {showSuccessModal && (
+        <ModalContainer
+          width="400px"
+          onClick={() => {
+            setShowSuccessModal(false);
+            dispatch(resetCreateStudentState());
+          }}
+        >
+          <StatusModal
+            status={
+              createStudentState.status === ApiRequestStatus.FULFILLED
+                ? "SUCCESS"
+                : createStudentState.status === ApiRequestStatus.REJECTED
+                ? "ERROR"
+                : "SUCCESS"
+            }
+            text={
+              createStudentState.status === ApiRequestStatus.FULFILLED
+                ? "Sucessuly Added Student"
+                : createStudentState.status === ApiRequestStatus.REJECTED
+                ? createStudentState.message
+                : ""
+            }
+            onClick={() => {
+              setShowSuccessModal(false);
+              dispatch(resetCreateStudentState());
+            }}
+          />
         </ModalContainer>
       )}
     </div>

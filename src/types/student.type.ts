@@ -11,17 +11,22 @@ export interface StudentType {
   phone: string;
   nationalIdentification: string;
   email: string;
-  matricule: string;
+  matriculationNumber: string;
   level: string;
   year: string;
-  faculty: string;
-  department: string;
+  departmentId: string;
   program: string;
-  certificate: string;
+  certificateObtained: string;
   yearObtained: string;
   guardianFirstName: string;
   guardianLastName: string;
   guardianEmail: string;
   guardianAddress: string;
   guardianPhone: string;
+}
+
+export interface StudentRequestType extends StudentType {
+  userId: string;
+  profilePicture: string;
+  facultyId: string;
 }

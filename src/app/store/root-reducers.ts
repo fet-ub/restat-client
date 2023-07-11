@@ -3,6 +3,8 @@ import createCourseSlice from "../feature/course/slices/createCourse.slice";
 import deleteCourseSlice from "../feature/course/slices/deleteCourse.slice";
 import getCoursesSlice from "../feature/course/slices/getCourses.slice";
 import notificationSlice from "../feature/notification/notification.slice";
+import createStudentSlice from "../feature/student/slice/createStudent.slice";
+import getStudentsSlice from "../feature/student/slice/getStudents.slice";
 import createUserSlice from "../feature/user/slices/createUser.slice";
 
 /* eslint-disable */
@@ -14,4 +16,6 @@ export default {
   createCourseState: createCourseSlice,
   getCoursesState: getCoursesSlice,
   deleteCourseState: deleteCourseSlice,
+  createStudentState: createStudentSlice,
+  getStudentsState: getStudentsSlice,
 };

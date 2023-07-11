@@ -245,3 +245,42 @@ export const SOFTWARE_COURSES = [
     value: "linear Algebra",
   },
 ];
+
+export const REGIONS = [
+  {
+    label: "South-West",
+    value: "south_west",
+  },
+  {
+    label: "North-West",
+    value: "north_west",
+  },
+  {
+    label: "Center",
+    value: "centre",
+  },
+  {
+    label: "Littoral",
+    value: "littoral",
+  },
+  {
+    label: "East",
+    value: "east",
+  },
+  {
+    label: "South",
+    value: "south",
+  },
+  {
+    label: "West",
+    value: "west",
+  },
+  {
+    label: "Far North",
+    value: "far_north",
+  },
+  {
+    label: "North",
+    value: "north",
+  },
+];
