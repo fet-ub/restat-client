@@ -6,42 +6,37 @@ import {
   ApiRequestStatus,
   StoredErrorResponseType,
 } from "../../../../types/api.types";
-import { getStudentsThunk } from "../thunk/student.thunk";
-import { StudentResponseTypes } from "../../../../types/student.type";
-// import { CourseResponseTypes } from "../../../../types/course.type";
-
+import { createBulkStudentThunk } from "../thunk/student.thunk";
 type InitialStateTypes = {
   status: ApiRequestStatus;
   message: string;
-  students: StudentResponseTypes[];
 };
 
 const initialState: InitialStateTypes = {
   status: ApiRequestStatus.IDLE,
   message: "",
-  students: [],
 };
 
-const getStudentsSlice = createSlice({
-  name: "getStudentsSlice",
+const createBulkStudentsSlice = createSlice({
+  name: "createBulkStudentsSlice",
   initialState: initialState,
   reducers: {
-    resetGetStudentsState: (state) => {
+    resetBulkStudentState: (state) => {
       state.status = ApiRequestStatus.IDLE;
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getStudentsThunk.pending, (state, _action) => {
+      .addCase(createBulkStudentThunk.pending, (state, _action) => {
         state.status = ApiRequestStatus.PENDING;
+        //  console.log({ payload: action.payload });
       })
-      .addCase(getStudentsThunk.fulfilled, (state, action) => {
+      .addCase(createBulkStudentThunk.fulfilled, (state, action) => {
         state.status = ApiRequestStatus.FULFILLED;
-        state.students = action.payload.students;
 
-        // console.log(state.students);
+        console.log({ payload: action.payload });
       })
-      .addCase(getStudentsThunk.rejected, (state, action) => {
+      .addCase(createBulkStudentThunk.rejected, (state, action) => {
         (state.status = ApiRequestStatus.REJECTED),
           (state.message = (action.payload as StoredErrorResponseType).message);
         console.log({ payload: action.payload });
@@ -49,5 +44,5 @@ const getStudentsSlice = createSlice({
   },
 });
 
-export const { resetGetStudentsState } = getStudentsSlice.actions;
-export default getStudentsSlice.reducer;
+export const { resetBulkStudentState } = createBulkStudentsSlice.actions;
+export default createBulkStudentsSlice.reducer;

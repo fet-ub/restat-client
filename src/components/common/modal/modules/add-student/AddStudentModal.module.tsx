@@ -69,7 +69,7 @@ const AddStudentModal = ({
   });
   const [currentstep, setCurrentstep] = useState(0);
 
-  console.log(createStudentState.status);
+  // console.log(createStudentState.status);
 
   useEffect(() => {
     if (createStudentState.status === ApiRequestStatus.FULFILLED) {

@@ -33,6 +33,9 @@ import EditIcon from "../../../icons/Edit.icon";
 import DeleteIcon from "../../../icons/Delete.icon";
 import DeleteModal from "../../../components/common/modal/modules/delete/DeleteModal.module";
 import { resetDeleteStudentState } from "../../../app/feature/student/slice/deleteStudent.slice";
+import { StudentResponseTypes } from "../../../types/student.type";
+import { resetBulkStudentState } from "../../../app/feature/student/slice/createBulkStudents.slice";
+
 //  GridValueGetterParams;
 
 const StudentsPage = () => {
@@ -44,6 +47,10 @@ const StudentsPage = () => {
   );
   const deleteStudentState = useAppSelector(
     (state) => state.deleteStudentState
+  );
+
+  const createBulkStudentState = useAppSelector(
+    (state) => state.createBulkStudentState
   );
 
   const getStudentsState = useAppSelector(
@@ -60,42 +67,68 @@ const StudentsPage = () => {
   const [studentsTableData, setStudentsTableData] = useState<studentType[]>([]);
   const [studentId, setStudentId] = useState("");
   const [selectedDeletedStudent, setSelectedDeletedStudent] = useState("");
-
+  const [allStudents, setAllStudents] = useState<StudentResponseTypes[]>([]);
+  const [searchText, setSearchText] = useState("");
+  const [filteredData, setFilteredData] = useState<any>([]);
   const [form, setForm] = useState({
     department: "",
     name: "",
   });
 
   useEffect(() => {
-    dispatch(getStudentsThunk());
+    const timeout = setTimeout(() => {
+      dispatch(getStudentsThunk());
 
-    //  setFilteredData(getCoursesState.courses);
+      // setAllStudents(getStudentsState.students);
+      setFilteredData(getStudentsState.students);
+    }, 2000);
+
+    return () => clearTimeout(timeout);
+
     // eslint-disable-next-line
-  }, [getStudentsState]);
+  }, []);
 
-  //  useEffect(() => {
-  //    if (deleteStudentState.status === ApiRequestStatus.FULFILLED) {
-  //      setDeleteModal(false);
-  //      setShowSuccessDelete(!showSuccessDelete);
-  //    }
+  // getStudentsState;
 
-  //    // dispatch(resetcreateStudentState());
-  //  }, [deleteStudentState.status === ApiRequestStatus.FULFILLED]);
+  useEffect(() => {
+    if (deleteStudentState.status === ApiRequestStatus.FULFILLED) {
+      setDeleteModal(false);
+      setShowSuccessDelete(!showSuccessDelete);
+    }
 
-  // const handleDeleteStudent = async (id: any) => {
-  //   await dispatch(deleteStudentThunk(id));
-  //   // dispatch(resetDeleteCourseState());
-  //   if (deleteStudentState.status === ApiRequestStatus.FULFILLED) {
-  //     setDeleteModal(false);
-  //     setShowSuccessDelete(!showSuccessDelete);
-  //   }
-  // };
+    // dispatch(resetcreateStudentState());
+  }, [deleteStudentState.status === ApiRequestStatus.FULFILLED]);
 
-  // const handleSelectedDeletedStudent = (courseCode: any, id: any) => {
-  //   setDeleteModal(true);
-  //   setSelectedDeletedStudent(courseCode);
-  //   setStudentId(id);
-  // };
+  const handleDeleteStudent = async (id: any) => {
+    await dispatch(deleteStudentThunk(id));
+    // dispatch(resetDeleteCourseState());
+    if (deleteStudentState.status === ApiRequestStatus.FULFILLED) {
+      setDeleteModal(false);
+      setShowSuccessDelete(!showSuccessDelete);
+    }
+  };
+
+  const handleSelectedDeletedStudent = (studentMatricule: any, id: any) => {
+    setDeleteModal(true);
+    setSelectedDeletedStudent(studentMatricule);
+    setStudentId(id);
+  };
+
+  const handleFilter = (valueText: any) => {
+    setSearchText(valueText);
+    const newFilter = getStudentsState?.students.filter((value) => {
+      return (
+        value.user.firstName.toLowerCase().includes(searchText.toLowerCase()) ||
+        value.user.lastName.toLowerCase().includes(searchText.toLowerCase())
+      );
+    });
+
+    if (searchText === "") {
+      setFilteredData(getStudentsState.students);
+    } else {
+      setFilteredData(newFilter);
+    }
+  };
 
   const formattedArr = studentsTableData.map((obj: any) => {
     // Add code to rename keys here
@@ -109,17 +142,19 @@ const StudentsPage = () => {
     return formattedObj as studentType;
   });
 
-  // console.log(formattedArr);
+  // console.log(allStudents);
+
+  // console.log(filteredData);
 
   const columns: GridColDef[] = [
     {
-      field: "name",
+      field: "user",
       headerName: "Name",
       width: 280,
-      sortable: false,
+      sortable: true,
 
       valueGetter: (params: GridValueGetterParams) =>
-        `${params.row.firstName || ""} ${params.row.lastName || ""}`,
+        `${params.row.user.firstName || ""} ${params.row.user.lastName || ""}`,
     },
     {
       field: "matriculationNumber",
@@ -131,31 +166,35 @@ const StudentsPage = () => {
       field: "level",
       headerName: "level",
       width: 70,
-      sortable: false,
+      sortable: true,
       headerAlign: "left",
       align: "left",
+      type: "number",
     },
     {
       field: "program",
       headerName: "Program",
-      width: 250,
+      width: 170,
       sortable: false,
     },
     {
       field: "phone",
       headerName: "Phone",
-      width: 130,
-      sortable: false,
+      width: 180,
+      sortable: true,
       headerAlign: "left",
       align: "left",
+      type: "number",
     },
     {
       field: "email",
       headerName: "Email",
-      width: 190,
+      width: 210,
       sortable: false,
       headerAlign: "left",
       align: "left",
+
+      valueGetter: (params: GridValueGetterParams) => params.row.user.email,
     },
     {
       field: "action",
@@ -178,14 +217,14 @@ const StudentsPage = () => {
               <EditIcon width={25} height={27} />
             </div>
             <div
-            // onClick={() => {
-            //   // setDeleteModal(true);
-            //   // setSelectedDeletedStudent(params.row.courseCode);
-            //   handleSelectedDeletedStudent(
-            //     params.row.courseCode,
-            //     params.row.id
-            //   );
-            // }}
+              onClick={() => {
+                // setDeleteModal(true);
+                // setSelectedDeletedStudent(params.row.matriculationNumber);
+                handleSelectedDeletedStudent(
+                  params.row.matriculationNumber,
+                  params.row.user.id
+                );
+              }}
             >
               <DeleteIcon width={25} height={27} />
             </div>
@@ -194,39 +233,6 @@ const StudentsPage = () => {
       },
       // valueGetter: (params: GridValueGetterParams) =>
       //   `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-    },
-  ];
-
-  const rows = [
-    {
-      id: 1,
-      firstName: "Fomonyutar",
-      lastName: "Joseph",
-      matriculationNumber: "FE19A038",
-      level: "500",
-      program: "Software Enginnering",
-      email: "joe@email.com",
-      phone: "651273636",
-    },
-    {
-      id: 2,
-      firstName: "Njoh",
-      lastName: " Prince",
-      matriculationNumber: "FE19A035",
-      level: "500",
-      program: "Network Enginnering",
-      email: "prince@email.com",
-      phone: "653445345",
-    },
-    {
-      id: 3,
-      firstName: "Hans",
-      lastName: " Weno",
-      matriculationNumber: "FE19A045",
-      level: "500",
-      program: "Software Enginnering",
-      email: "hans@email.com",
-      phone: "6534454656",
     },
   ];
 
@@ -268,12 +274,12 @@ const StudentsPage = () => {
         <TextInput
           label={t("Search", { ns: ["main", "home"] })}
           placeholder={"Arrey Tabe"}
-          value={form.name}
-          onChange={(e) => {
-            setForm({ ...form, name: e.target.value });
-          }}
           name={"name"}
           type={"text"}
+          value={searchText}
+          onChange={(e) => {
+            handleFilter(e.target.value);
+          }}
         />
       </div>
 
@@ -286,7 +292,7 @@ const StudentsPage = () => {
         className="dark:text-white"
       >
         <DataGrid
-          rows={rows}
+          rows={filteredData}
           columns={columns}
           initialState={{
             pagination: {
@@ -309,6 +315,8 @@ const StudentsPage = () => {
             selectedFile={selectedFile}
             setStudentsTableData={setStudentsTableData}
             studentsTableData={studentsTableData}
+            closeModal={() => setBulkIsOpen(false)}
+            setShowSuccessModal={setShowSuccessModal}
           />
         </ModalContainer>
       )}
@@ -328,6 +336,7 @@ const StudentsPage = () => {
           onClick={() => {
             setShowSuccessModal(false);
             dispatch(resetCreateStudentState());
+            dispatch(resetBulkStudentState());
           }}
         >
           <StatusModal
@@ -336,18 +345,27 @@ const StudentsPage = () => {
                 ? "SUCCESS"
                 : createStudentState.status === ApiRequestStatus.REJECTED
                 ? "ERROR"
+                : createBulkStudentState.status === ApiRequestStatus.FULFILLED
+                ? "SUCCESS"
+                : createBulkStudentState.status === ApiRequestStatus.REJECTED
+                ? "ERROR"
                 : "SUCCESS"
             }
             text={
               createStudentState.status === ApiRequestStatus.FULFILLED
-                ? "Sucessuly Added Student"
+                ? createStudentState.message
                 : createStudentState.status === ApiRequestStatus.REJECTED
                 ? createStudentState.message
+                : createBulkStudentState.status === ApiRequestStatus.FULFILLED
+                ? createBulkStudentState.message
+                : createBulkStudentState.status === ApiRequestStatus.REJECTED
+                ? createBulkStudentState.message
                 : ""
             }
             onClick={() => {
               setShowSuccessModal(false);
               dispatch(resetCreateStudentState());
+              dispatch(resetBulkStudentState());
             }}
           />
         </ModalContainer>
@@ -356,7 +374,7 @@ const StudentsPage = () => {
       {deleteModal && (
         <ModalContainer width="600px" onClick={() => setDeleteModal(false)}>
           <DeleteModal
-            // onClick={() => handleDeleteStudent(studentId)}
+            onClick={() => handleDeleteStudent(studentId)}
             closeModal={() => setDeleteModal(false)}
             record={selectedDeletedStudent}
             disable={deleteStudentState.status === ApiRequestStatus.PENDING}

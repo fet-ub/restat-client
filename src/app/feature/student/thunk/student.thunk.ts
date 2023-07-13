@@ -22,6 +22,21 @@ export const createStudentThunk = createAsyncThunk(
   }
 );
 
+export const createBulkStudentThunk = createAsyncThunk(
+  "/createBulkNewStudents",
+  async (data: StudentRequestType[], { rejectWithValue }) => {
+    try {
+      const response = await studentService.createBulkNewStudents(data);
+
+      console.log({ response });
+
+      return response?.data;
+    } catch (ex) {
+      return rejectWithValue(getExceptionPayload(ex) as ApiRequestErrorType);
+    }
+  }
+);
+
 export const getStudentsThunk = createAsyncThunk(
   "/getStudents",
   async (_, { rejectWithValue }) => {

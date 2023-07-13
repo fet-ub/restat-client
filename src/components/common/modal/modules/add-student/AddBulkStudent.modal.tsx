@@ -6,6 +6,11 @@ import { IconRepository } from "../../../../../repository/icons/icon.repository"
 import { AddBulkStudentModalPropType } from "../../../../../types/common/modal/add-bulk-student-modal.type";
 import * as xlsx from "xlsx";
 import { useTranslation } from "react-i18next";
+import { useAppDispatch, useAppSelector } from "../../../../../lib/hooks";
+import { createBulkStudentThunk } from "../../../../../app/feature/student/thunk/student.thunk";
+import { ApiRequestStatus } from "../../../../../types/api.types";
+import { StudentRequestType } from "../../../../../types/student.type";
+import { CONSTANTS } from "../../../../../constants/constants";
 
 const AddBulkStudentmodal = ({
   fileName,
@@ -14,12 +19,56 @@ const AddBulkStudentmodal = ({
   selectedFile,
   setStudentsTableData,
   studentsTableData,
+  closeModal,
+  setShowSuccessModal,
 }: AddBulkStudentModalPropType) => {
+  const dispatch = useAppDispatch();
+  const createBulkStudentState = useAppSelector(
+    (state) => state.createBulkStudentState
+  );
   const [active, setActive] = useState(0);
   const [form, setForm] = useState({
     level: "",
   });
+  const [user, setUser] = useState({
+    id: "",
+  });
+
+  const [newData, setNewData] = useState([]);
   const { t } = useTranslation();
+
+  useEffect(() => {
+    const userInfo = localStorage.getItem(CONSTANTS.STORAGE_KEY.CURRENT_USER);
+
+    setUser(JSON.parse(userInfo as string));
+  }, [window.location.pathname]);
+
+  useEffect(() => {
+    if (createBulkStudentState.status === ApiRequestStatus.FULFILLED) {
+      console.log("it ran");
+
+      closeModal();
+      setSelectedFile("");
+      setShowSuccessModal(true);
+      setStudentsTableData([]);
+      setFileName("");
+    }
+
+    // dispatch(resetcreateCourseState());
+  }, [createBulkStudentState.status === ApiRequestStatus.FULFILLED]);
+
+  useEffect(() => {
+    if (createBulkStudentState.status === ApiRequestStatus.REJECTED) {
+      console.log("it ran");
+
+      closeModal();
+      setSelectedFile("");
+      setFileName("");
+      setShowSuccessModal(true);
+    }
+
+    // dispatch(resetcreateCourseState());
+  }, [createBulkStudentState.status === ApiRequestStatus.REJECTED]);
   // const [selectedFile, setSelectedFile] = useState<File | undefined>(undefined);
 
   const handleFileChange = async (e: any) => {
@@ -31,15 +80,29 @@ const AddBulkStudentmodal = ({
       const excelfile = xlsx.read(data);
       const excelsheet = excelfile.Sheets[excelfile.SheetNames[0]];
       const exceljson = xlsx.utils.sheet_to_json(excelsheet);
-      console.log(exceljson);
+      // console.log(exceljson);
       setSelectedFile(exceljson);
-      setStudentsTableData(exceljson);
+      await setStudentsTableData(exceljson);
+
+      // const data1 = studentsTableData.push({
+      //   facultyId: "1",
+      //   userId: user.id,
+      //   profilePicture: "null",
+      // });
+      // const combinedObj = Object.assign({}, ...studentsTableData, {
+      //   facultyId: "1",
+      //   userId: user.id,
+      //   profilePicture: "null",
+      // });
+
+      // console.log("sadas", combinedObj);
+
       // setStudentsTableData();
       // console.log('zxcxzc',selectedFile);
     }
   };
 
-  console.log("hghfgh", studentsTableData);
+  // console.log("hghfgh", studentsTableData);
 
   //  useEffect(() => {
 
@@ -51,6 +114,32 @@ const AddBulkStudentmodal = ({
   };
   const handleCSV = () => {
     setActive(1);
+  };
+
+  // const newFile = studentsTableData.forEach((obj: any) => {
+  //   obj.facultyId = "1";
+  //   obj.userId = user.id;
+  //   obj.profilePicture = "null";
+  // });
+  // setNewData(newFile);
+  // console.log(newData);
+
+  const handleBulkUploadStudent = async () => {
+    studentsTableData.forEach((obj: any) => {
+      obj.facultyId = "1";
+      obj.userId = user.id;
+      obj.profilePicture = "null";
+    });
+
+    console.log(studentsTableData);
+
+    await dispatch(createBulkStudentThunk(studentsTableData));
+
+    if (createBulkStudentState.status === ApiRequestStatus.FULFILLED) {
+      closeModal();
+      setShowSuccessModal(true);
+      setStudentsTableData([]);
+    }
   };
 
   return (
@@ -134,6 +223,9 @@ const AddBulkStudentmodal = ({
           text={t("Upload Students", { ns: ["main", "home"] })}
           buttonType="PRIMARY"
           fullWidth={true}
+          onClick={handleBulkUploadStudent}
+          disable={createBulkStudentState.status === ApiRequestStatus.PENDING}
+          loading={createBulkStudentState.status === ApiRequestStatus.PENDING}
         />
       </div>
     </div>

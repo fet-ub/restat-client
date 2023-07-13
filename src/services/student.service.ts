@@ -44,6 +44,27 @@ export class StudentService {
     });
   }
 
+  public async createBulkNewStudents(data: StudentRequestType[]) {
+    const body = new FormData();
+    data.forEach((obj) => {
+      Object.entries(obj).forEach(([key, value]) => {
+        body.append(key, value);
+      });
+    });
+
+    console.log(body);
+
+    // data.map((obj) => {
+    //   return Object.entries(obj).forEach(([key, value]) => {
+    //     // console.log(`${key}: ${value}`);
+    //     body.append(`${key}`, value);
+    //   });
+    // });
+    return await authService.laravelSanctum().then(async () => {
+      return await publicApiRequest().post("/students");
+    });
+  }
+
   public async getStudents() {
     return await authService.laravelSanctum().then(async () => {
       return await publicApiRequest().get("/students");

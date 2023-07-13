@@ -31,9 +31,13 @@ const UsersPage = () => {
 
   const [currentUsers, setCurrentUSers] = useState<UserResponseTypes[]>([]);
   useEffect(() => {
-    dispatch(getUsersThunk());
+    const timeout = setTimeout(() => {
+      dispatch(getUsersThunk());
 
-    setCurrentUSers(getUsersState.users);
+      setCurrentUSers(getUsersState.users);
+    }, 2000);
+
+    return () => clearTimeout(timeout);
 
     //  setFilteredData(getCoursesState.courses);
     // eslint-disable-next-line

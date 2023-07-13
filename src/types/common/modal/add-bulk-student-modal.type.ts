@@ -1,16 +1,13 @@
-
-
-export interface AddBulkStudentModalPropType{
-    fileName?:any;
-    setFileName?:any;
-    selectedFile?:any;
-    setSelectedFile?:any;
-    studentsTableData?:any
-    setStudentsTableData?:any;
-  
+export interface AddBulkStudentModalPropType {
+  fileName?: any;
+  setFileName?: any;
+  selectedFile?: any;
+  setSelectedFile?: any;
+  studentsTableData?: any;
+  setStudentsTableData?: any;
+  closeModal: () => void;
+  setShowSuccessModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
-
 
 export interface studentType {
   firstname: string;
@@ -18,8 +15,8 @@ export interface studentType {
   gender: string;
   status: string;
   dob: string;
-  email:string;
-  phone:string;
+  email: string;
+  phone: string;
   place_of_birth: string;
   region: string;
   address: string;

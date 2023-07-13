@@ -34,7 +34,7 @@ const deleteStudentSlice = createSlice({
       })
       .addCase(deleteStudentThunk.fulfilled, (state, action) => {
         state.status = ApiRequestStatus.FULFILLED;
-        // console.log(state.status);
+        console.log(state.status);
 
         // console.log(state.status);
 

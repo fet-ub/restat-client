@@ -45,11 +45,17 @@ const CoursesPage = () => {
   const [selectedDeletedCourse, setSelectedDeletedCourse] = useState("");
 
   useEffect(() => {
-    dispatch(getCoursesThunk());
+    const timeout = setTimeout(() => {
+      dispatch(getCoursesThunk());
 
-    setFilteredData(getCoursesState.courses);
+      setFilteredData(getCoursesState.courses);
+    }, 2000);
+
+    return () => clearTimeout(timeout);
+
     // eslint-disable-next-line
-  }, [getCoursesState]);
+  }, []);
+  // getCoursesState;
 
   const handleFilter = (valueText: any) => {
     setSearchText(valueText);
@@ -59,6 +65,7 @@ const CoursesPage = () => {
 
     if (searchText === "") {
       setFilteredData(getCoursesState.courses);
+      console.log(filteredData);
     } else {
       setFilteredData(newFilter);
     }
