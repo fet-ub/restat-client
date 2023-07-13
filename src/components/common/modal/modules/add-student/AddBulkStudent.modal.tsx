@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "../../../../../lib/hooks";
 import { createBulkStudentThunk } from "../../../../../app/feature/student/thunk/student.thunk";
 import { ApiRequestStatus } from "../../../../../types/api.types";
-import { StudentRequestType } from "../../../../../types/student.type";
+// import { StudentRequestType } from "../../../../../types/student.type";
 import { CONSTANTS } from "../../../../../constants/constants";
 
 const AddBulkStudentmodal = ({
@@ -34,13 +34,14 @@ const AddBulkStudentmodal = ({
     id: "",
   });
 
-  const [newData, setNewData] = useState([]);
+  // const [newData, setNewData] = useState([]);
   const { t } = useTranslation();
 
   useEffect(() => {
     const userInfo = localStorage.getItem(CONSTANTS.STORAGE_KEY.CURRENT_USER);
 
     setUser(JSON.parse(userInfo as string));
+    // eslint-disable-next-line
   }, [window.location.pathname]);
 
   useEffect(() => {
@@ -55,6 +56,7 @@ const AddBulkStudentmodal = ({
     }
 
     // dispatch(resetcreateCourseState());
+    // eslint-disable-next-line
   }, [createBulkStudentState.status === ApiRequestStatus.FULFILLED]);
 
   useEffect(() => {
@@ -68,6 +70,7 @@ const AddBulkStudentmodal = ({
     }
 
     // dispatch(resetcreateCourseState());
+    // eslint-disable-next-line
   }, [createBulkStudentState.status === ApiRequestStatus.REJECTED]);
   // const [selectedFile, setSelectedFile] = useState<File | undefined>(undefined);
 
@@ -83,31 +86,8 @@ const AddBulkStudentmodal = ({
       // console.log(exceljson);
       setSelectedFile(exceljson);
       await setStudentsTableData(exceljson);
-
-      // const data1 = studentsTableData.push({
-      //   facultyId: "1",
-      //   userId: user.id,
-      //   profilePicture: "null",
-      // });
-      // const combinedObj = Object.assign({}, ...studentsTableData, {
-      //   facultyId: "1",
-      //   userId: user.id,
-      //   profilePicture: "null",
-      // });
-
-      // console.log("sadas", combinedObj);
-
-      // setStudentsTableData();
-      // console.log('zxcxzc',selectedFile);
     }
   };
-
-  // console.log("hghfgh", studentsTableData);
-
-  //  useEffect(() => {
-
-  //  setStudentsTableData(selectedFile)
-  //  }, [selectedFile,setStudentsTableData]);
 
   const handleXls = () => {
     setActive(0);
@@ -115,14 +95,6 @@ const AddBulkStudentmodal = ({
   const handleCSV = () => {
     setActive(1);
   };
-
-  // const newFile = studentsTableData.forEach((obj: any) => {
-  //   obj.facultyId = "1";
-  //   obj.userId = user.id;
-  //   obj.profilePicture = "null";
-  // });
-  // setNewData(newFile);
-  // console.log(newData);
 
   const handleBulkUploadStudent = async () => {
     studentsTableData.forEach((obj: any) => {

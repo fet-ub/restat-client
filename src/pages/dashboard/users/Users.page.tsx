@@ -14,9 +14,9 @@ import DashboardHeader from "../../../components/common/dashboard-header/Dashboa
 import DownloadOptions from "../../../components/common/download-options/DownloadOptions.common";
 import { useTranslation } from "react-i18next";
 import { getUsersThunk } from "../../../app/feature/user/thunk/user.thunk";
-import { ApiRequestStatus } from "../../../types/api.types";
+// import { ApiRequestStatus } from "../../../types/api.types";
 import { useAppDispatch, useAppSelector } from "../../../lib/hooks";
-import { resetGetUsersState } from "../../../app/feature/user/slices/getUsers.slice";
+// import { resetGetUsersState } from "../../../app/feature/user/slices/getUsers.slice";
 import { RootState } from "../../../app/store/store";
 import { UserResponseTypes } from "../../../types/user.type";
 import EditIcon from "../../../icons/Edit.icon";
@@ -137,30 +137,6 @@ const UsersPage = () => {
       },
       // valueGetter: (params: GridValueGetterParams) =>
       //   `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-    },
-  ];
-
-  const rows = [
-    {
-      name: "Fomonyuytar Joseph",
-      role: "HOD",
-      department: "Computer Enginnering",
-      phone: 651273636,
-      action: "action",
-    },
-    {
-      name: "Lannister",
-      role: "Lecturer",
-      department: "Computer Enginnering",
-      phone: 651273636,
-      action: "action",
-    },
-    {
-      name: "Lannisteddr",
-      role: "Software Coordinator",
-      department: "Computer Enginnering",
-      phone: 651273636,
-      action: "action",
     },
   ];
 

@@ -12,9 +12,13 @@ import { useAppDispatch } from "../../../../../lib/hooks";
 import { createUserThunk } from "../../../../../app/feature/user/thunk/user.thunk";
 import { userRequestType } from "../../../../../types/auth.type";
 import { UserType } from "../../../../../types/user.type";
-import { ApiRequestStatus } from "../../../../../types/api.types";
+// import { ApiRequestStatus } from "../../../../../types/api.types";
 
-const AddUserModal = ({setIsOpen}:{ setIsOpen:React.Dispatch<React.SetStateAction<boolean>>}) => {
+const AddUserModal = ({
+  setIsOpen,
+}: {
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const dispatch = useAppDispatch();
   const [form, setForm] = useState<userRequestType>({
     role: UserType.HOD,
@@ -22,22 +26,17 @@ const AddUserModal = ({setIsOpen}:{ setIsOpen:React.Dispatch<React.SetStateActio
     firstName: "",
     lastName: "",
     email: "",
-    facultyId: '1',
+    facultyId: "1",
   });
   const { t } = useTranslation();
 
-  console.log('role',form.role);
+  console.log("role", form.role);
   // console.log(form);
-  
-  
 
-  const handleCreateUser = (event:any) => {
+  const handleCreateUser = (event: any) => {
     event.preventDefault();
     dispatch(createUserThunk({ userType: form.role as UserType, body: form }));
-      // setIsOpen(false);
-    
-    
-    
+    // setIsOpen(false);
   };
 
   return (
@@ -84,7 +83,7 @@ const AddUserModal = ({setIsOpen}:{ setIsOpen:React.Dispatch<React.SetStateActio
               ns: ["main", "home"],
             })}
             onChange={(e) => {
-              setForm({ ...form, role: ((e.target.value as unknown )as UserType) });
+              setForm({ ...form, role: e.target.value as unknown as UserType });
             }}
             value={form.role}
           />

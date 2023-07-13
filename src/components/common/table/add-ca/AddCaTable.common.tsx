@@ -1,20 +1,25 @@
-import React, { useEffect, useState } from "react";
-import styles from "./encryptCaTable.module.css";
-import StatusCard from "../../cards/status-card/StatusCard.common";
-// import SelectInput from "../../inputs/select-input/SelectInput.common";
-import TextInput from "../../inputs/text-input/TextInput.common";
-// import Button from "../../buttons/Button.common";
+import React, { useState, useEffect } from "react";
 import { IconRepository } from "../../../../repository/icons/icon.repository";
-// import { StatusCardType } from "../../../../types/atoms/enums.atoms";
+import TextInput from "../../inputs/text-input/TextInput.common";
 import { CSVLink } from "react-csv";
 import { useTranslation } from "react-i18next";
+import styles from "../encrypt-ca/encryptCaTable.module.css";
+import StatusCard from "../../cards/status-card/StatusCard.common";
+import FilledCard from "../../cards/filled-card/FilledCard.common";
+import EditIcon from "../../../../icons/Edit.icon";
+import DeleteIcon from "../../../../icons/Delete.icon";
+import { StudentResponseTypes } from "../../../../types/student.type";
 
-interface marksType {
-  id?: string;
-  matricule: string;
-  ca: number | string;
-  status: string;
-  encrypt: string;
+// interface marksType {
+//   id?: string;
+//   matriculationNumber: string;
+//   mark: string;
+//   filledStatus: string;
+// }
+
+export interface marksType extends StudentResponseTypes {
+  mark: string;
+  filledStatus: string;
 }
 
 interface EncryptCaTablePropTypes {
@@ -22,7 +27,7 @@ interface EncryptCaTablePropTypes {
   setMarksTableData: React.Dispatch<React.SetStateAction<marksType[]>>;
 }
 
-const EncryptCaTable = ({
+const AddCaTable = ({
   marksTableData,
   setMarksTableData,
 }: EncryptCaTablePropTypes) => {
@@ -34,14 +39,14 @@ const EncryptCaTable = ({
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
-  const [totalEncrypted, setTotalEncrypted] = useState<number>(0);
+  const [totalFilled, setTotalFilled] = useState<number>(0);
   const [exportData, setExportData] = useState<any>([]);
 
   const indexOfLastPost = currentPage * itemsPerPage;
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
 
   const pages = [];
-  for (let i = 1; i <= Math.ceil(marksTableData.length / itemsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(marksTableData?.length / itemsPerPage); i++) {
     pages.push(i);
   }
 
@@ -63,11 +68,11 @@ const EncryptCaTable = ({
   ) => {
     const { name, value } = e.target;
 
-    const statusValue = e.target.value ? "encrypted" : "not filled";
+    const statusValue = e.target.value ? "filled" : "not filled";
 
     const editData = marksTableData.map((item) =>
-      item.matricule === matricule && name
-        ? { ...item, [name]: value, status: statusValue }
+      item.matriculationNumber === matricule && name
+        ? { ...item, [name]: value, filledStatustatus: statusValue }
         : item
     );
 
@@ -76,7 +81,7 @@ const EncryptCaTable = ({
 
   useEffect(() => {
     const count = marksTableData.reduce((acc, curr) => {
-      if (curr.encrypt.length > 0) {
+      if (curr.mark?.length > 0) {
         return acc + 1;
       }
       return acc;
@@ -85,7 +90,7 @@ const EncryptCaTable = ({
     var newArr = marksTableData.map(function (obj: any) {
       var newObj: any = {};
       for (var key in obj) {
-        if (key !== "status") {
+        if (key !== "filledStatus") {
           newObj[key] = obj[key];
         }
       }
@@ -99,7 +104,7 @@ const EncryptCaTable = ({
 
     //  console.log(count);
 
-    setTotalEncrypted(count);
+    setTotalFilled(count);
   }, [marksTableData]);
 
   return (
@@ -107,7 +112,7 @@ const EncryptCaTable = ({
       <div className="flex flex-row-reverse justify-between  mt-8 ">
         <div className="w-1/2">
           <TextInput
-            placeholder={t("038 or search by status(encrypted or not filled)", {
+            placeholder={t("038 or search by status(filled or not filled)", {
               ns: ["main", "home"],
             })}
             value={form.searchText}
@@ -127,7 +132,7 @@ const EncryptCaTable = ({
             filename="EncryptedCAMarks"
             className="bg-primary  px-4 text-white   py-[10px]    rounded-lg outline-none text-[16px] flex justify-center items-center gap-3"
           >
-            {t("Download CA File", { ns: ["main", "home"] })}
+            {t("Export User Data", { ns: ["main", "home"] })}
           </CSVLink>
           {/* <Button
             text="Download File"
@@ -145,19 +150,20 @@ const EncryptCaTable = ({
               className={`${styles.table__heading} text-secondary dark:text-white  font-bold`}
             >
               <th> {t("Matricule Number", { ns: ["main", "home"] })}</th>
-              <th> {t("CA mark", { ns: ["main", "home"] })}</th>
               <th> {t("Status", { ns: ["main", "home"] })}</th>
-              <th> {t("Encrypt", { ns: ["main", "home"] })}</th>
+              <th> {t("CA mark", { ns: ["main", "home"] })}</th>
+
+              <th> {t("Action", { ns: ["main", "home"] })}</th>
             </tr>
           </thead>
           <tbody>
             {marksTableData
               .filter((value) => {
                 return (
-                  value.matricule
+                  value.matriculationNumber
                     .toLowerCase()
                     .includes(form.searchText.toLowerCase()) ||
-                  value.status
+                  value.filledStatus
                     .toLowerCase()
                     .includes(form.searchText.toLowerCase())
                 );
@@ -169,23 +175,54 @@ const EncryptCaTable = ({
               .map((mark, index: any) => {
                 return (
                   <tr key={mark.id} className="text-secondary dark:text-white">
-                    <td className={styles.row__matricule}>{mark.matricule}</td>
-                    <td className={styles.row__ca}>{mark.ca}</td>
+                    <td className={styles.row__matricule}>
+                      {mark.matriculationNumber}
+                    </td>
                     <td className={styles.row__status}>
-                      {mark.encrypt?.length > 0 ? (
-                        <StatusCard encrypted={"encrypted"} />
+                      {mark.mark?.length > 0 ? (
+                        <FilledCard filled={"filled"} />
                       ) : (
-                        <StatusCard encrypted={"not filled"} />
+                        <FilledCard filled={"not filled"} />
                       )}
                     </td>
                     <td className={styles.row__input}>
                       <input
-                        name="encrypt"
+                        name="mark"
                         type="text"
-                        value={mark.encrypt}
-                        onChange={(e) => onChangeInput(e, mark.matricule)}
-                        placeholder="Encrypt mark"
+                        value={mark.mark}
+                        onChange={(e) =>
+                          onChangeInput(e, mark.matriculationNumber)
+                        }
+                        placeholder="Enter mark"
                       />
+                    </td>
+                    <td className={styles.row__ca}>
+                      {" "}
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          // justifyContent: "space-between",
+                          alignItems: "center",
+                          gap: "20px",
+                        }}
+                      >
+                        <div>
+                          <EditIcon width={25} height={27} />
+                        </div>
+                        <div
+                        // onClick={() => {
+                        //   // setDeleteModal(true);
+                        //   // setSelectedDeletedStudent(params.row.courseCode);
+                        //   handleSelectedDeletedStudent(
+                        //     params.row.courseCode,
+                        //     params.row.id
+                        //   );
+                        // }}
+                        >
+                          <DeleteIcon width={25} height={27} />
+                        </div>
+                      </div>
                     </td>
                   </tr>
                 );
@@ -196,8 +233,8 @@ const EncryptCaTable = ({
         <div className="flex justify-between items-center">
           <span className={"text-[14px] text-secondary dark:text-white"}>
             {t("Total of", { ns: ["main", "home"] })} {marksTableData.length}{" "}
-            {t("students", { ns: ["main", "home"] })}, {totalEncrypted}{" "}
-            {t("encrypted", { ns: ["main", "home"] })}
+            {t("students", { ns: ["main", "home"] })}, {totalFilled}{" "}
+            {t("filled", { ns: ["main", "home"] })}
           </span>
 
           <div className={"flex  items-center mt-5 py-3 gap-3"}>
@@ -219,4 +256,4 @@ const EncryptCaTable = ({
   );
 };
 
-export default EncryptCaTable;
+export default AddCaTable;

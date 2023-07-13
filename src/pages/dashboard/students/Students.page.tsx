@@ -33,7 +33,7 @@ import EditIcon from "../../../icons/Edit.icon";
 import DeleteIcon from "../../../icons/Delete.icon";
 import DeleteModal from "../../../components/common/modal/modules/delete/DeleteModal.module";
 import { resetDeleteStudentState } from "../../../app/feature/student/slice/deleteStudent.slice";
-import { StudentResponseTypes } from "../../../types/student.type";
+// import { StudentResponseTypes } from "../../../types/student.type";
 import { resetBulkStudentState } from "../../../app/feature/student/slice/createBulkStudents.slice";
 
 //  GridValueGetterParams;
@@ -67,7 +67,7 @@ const StudentsPage = () => {
   const [studentsTableData, setStudentsTableData] = useState<studentType[]>([]);
   const [studentId, setStudentId] = useState("");
   const [selectedDeletedStudent, setSelectedDeletedStudent] = useState("");
-  const [allStudents, setAllStudents] = useState<StudentResponseTypes[]>([]);
+  // const [allStudents, setAllStudents] = useState<StudentResponseTypes[]>([]);
   const [searchText, setSearchText] = useState("");
   const [filteredData, setFilteredData] = useState<any>([]);
   const [form, setForm] = useState({
@@ -97,6 +97,7 @@ const StudentsPage = () => {
     }
 
     // dispatch(resetcreateStudentState());
+    // eslint-disable-next-line
   }, [deleteStudentState.status === ApiRequestStatus.FULFILLED]);
 
   const handleDeleteStudent = async (id: any) => {
@@ -130,17 +131,17 @@ const StudentsPage = () => {
     }
   };
 
-  const formattedArr = studentsTableData.map((obj: any) => {
-    // Add code to rename keys here
+  // const formattedArr = studentsTableData.map((obj: any) => {
+  //   // Add code to rename keys here
 
-    const formattedObj: any = {};
-    Object.keys(obj).forEach((key: any) => {
-      const formattedKey = key.replace(/ /g, "_").toLowerCase();
-      formattedObj[formattedKey] = obj[key];
-    });
+  //   const formattedObj: any = {};
+  //   Object.keys(obj).forEach((key: any) => {
+  //     const formattedKey = key.replace(/ /g, "_").toLowerCase();
+  //     formattedObj[formattedKey] = obj[key];
+  //   });
 
-    return formattedObj as studentType;
-  });
+  //   return formattedObj as studentType;
+  // });
 
   // console.log(allStudents);
 

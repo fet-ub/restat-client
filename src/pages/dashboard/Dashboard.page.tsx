@@ -15,7 +15,9 @@ import { useAppSelector } from "../../lib/hooks";
 import { RootState } from "../../app/store/store";
 
 const DashboardPage = () => {
-  const accessToken = useAppSelector((state: RootState) => state.loginState).accessToken;
+  const accessToken = useAppSelector(
+    (state: RootState) => state.loginState
+  ).accessToken;
   const { t } = useTranslation();
   const [theme, setTheme] = useState<any>("light");
   const [user, setUser] = useState({
@@ -54,6 +56,7 @@ const DashboardPage = () => {
     } else {
       setUser(JSON.parse(userInfo as string));
     }
+    // eslint-disable-next-line
   }, [window.location.pathname]);
 
   useEffect(() => {
