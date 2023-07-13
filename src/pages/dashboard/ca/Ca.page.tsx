@@ -42,6 +42,11 @@ const CaPage = () => {
       mark: "",
     }));
 
+    // const courseResult=getCoursesState.courses.map((obj)=>{
+    //   ...object,
+
+    // })
+
     setAllStudents(result);
   }, []);
 
