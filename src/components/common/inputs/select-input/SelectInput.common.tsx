@@ -1,12 +1,13 @@
-import React from 'react'
+import React from 'react';
 import { SelectInputPropType } from '../../../../types/common/input/select-input.type';
-import styles from '../input.module.css'
+import styles from '../input.module.css';
 
 const SelectInput = ({
   selectOptions,
   onChange,
   value,
   label,
+  placeholder,
 }: SelectInputPropType) => {
   return (
     <div className="mb-4 w-full">
@@ -18,6 +19,7 @@ const SelectInput = ({
         className={`${styles.select__container} dark:bg-tertiary dark:text-white`}
         onChange={onChange}
       >
+        <option value="">{placeholder}</option>
         {selectOptions?.map((selectOption, index) => {
           return (
             <option value={selectOption.value} key={index}>
@@ -30,4 +32,4 @@ const SelectInput = ({
   );
 };
 
-export default SelectInput
+export default SelectInput;

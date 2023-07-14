@@ -14,6 +14,7 @@ export enum UserType {
   SUPPORT_STAFF,
   EXAMINER,
   COORDINATOR,
+  DEFAULT = '',
 }
 
 export interface UserResponseTypes {

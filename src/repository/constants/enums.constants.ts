@@ -1,5 +1,5 @@
 export enum CourseStatusType {
-  COMPULSORY = "compulsory",
-  ELECTIVE = "Elective",
- 
+  COMPULSORY = 'compulsory',
+  ELECTIVE = 'Elective',
+  DEFAULT = '',
 }

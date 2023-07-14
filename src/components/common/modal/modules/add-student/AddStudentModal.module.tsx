@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import ProgressSteps from "../../../progress-steps/ProgressSteps.common";
-import StudentPersonalInfoStep from "./steps/StudentPersonalInfo.step";
-import StudentAcademicInfoStep from "./steps/StudentAcademicInfo.step";
-import StudentGuardianInfoStep from "./steps/StudentGuardianInfo.step";
-import { StudentType } from "../../../../../types/student.type";
-import { useAppDispatch, useAppSelector } from "../../../../../lib/hooks";
-import { createStudentThunk } from "../../../../../app/feature/student/thunk/student.thunk";
-import { ApiRequestStatus } from "../../../../../types/api.types";
-import { useTranslation } from "react-i18next";
-import { CONSTANTS } from "../../../../../constants/constants";
+import ProgressSteps from '../../../progress-steps/ProgressSteps.common';
+import StudentPersonalInfoStep from './steps/StudentPersonalInfo.step';
+import StudentAcademicInfoStep from './steps/StudentAcademicInfo.step';
+import StudentGuardianInfoStep from './steps/StudentGuardianInfo.step';
+import { StudentType } from '../../../../../types/student.type';
+import { useAppDispatch, useAppSelector } from '../../../../../lib/hooks';
+import { createStudentThunk } from '../../../../../app/feature/student/thunk/student.thunk';
+import { ApiRequestStatus } from '../../../../../types/api.types';
+import { useTranslation } from 'react-i18next';
+import { CONSTANTS } from '../../../../../constants/constants';
 
 const AddStudentModal = ({
   closeModal,
@@ -28,44 +28,44 @@ const AddStudentModal = ({
   );
 
   const [user, setUser] = useState({
-    id: "",
+    id: '',
   });
 
   useEffect(() => {
     const userInfo = localStorage.getItem(CONSTANTS.STORAGE_KEY.CURRENT_USER);
 
     if (!userInfo) {
-      navigate("/auth/login");
+      navigate('/auth/login');
     } else {
       setUser(JSON.parse(userInfo as string));
     }
   }, [window.location.pathname]);
 
   const [form, setForm] = useState<StudentType>({
-    firstName: "",
-    lastName: "",
-    gender: "male",
-    status: "single",
-    dob: "",
-    placeOfBirth: "",
-    region: "south_west",
-    address: "",
-    country: "",
-    nationalIdentification: "",
-    email: "",
-    matriculationNumber: "",
-    level: "200",
-    year: "2016",
-    phone: "",
-    departmentId: "1",
-    program: "software",
-    certificateObtained: "",
-    yearObtained: "2016",
-    guardianFirstName: "",
-    guardianLastName: "",
-    guardianEmail: "",
-    guardianAddress: "",
-    guardianPhone: "",
+    firstName: '',
+    lastName: '',
+    gender: '',
+    status: '',
+    dob: '',
+    placeOfBirth: '',
+    region: '',
+    address: '',
+    country: '',
+    nationalIdentification: '',
+    email: '',
+    matriculationNumber: '',
+    level: '',
+    year: '',
+    phone: '',
+    departmentId: '',
+    program: '',
+    certificateObtained: '',
+    yearObtained: '',
+    guardianFirstName: '',
+    guardianLastName: '',
+    guardianEmail: '',
+    guardianAddress: '',
+    guardianPhone: '',
   });
   const [currentstep, setCurrentstep] = useState(0);
 
@@ -73,33 +73,33 @@ const AddStudentModal = ({
 
   useEffect(() => {
     if (createStudentState.status === ApiRequestStatus.FULFILLED) {
-      console.log("it ran");
+      console.log('it ran');
 
       setForm({
-        firstName: "",
-        lastName: "",
-        gender: "male",
-        status: "single",
-        dob: "",
-        placeOfBirth: "",
-        region: "south_west",
-        address: "",
-        country: "",
-        nationalIdentification: "",
-        email: "",
-        matriculationNumber: "",
-        level: "200",
-        year: "2016",
-        phone: "",
-        departmentId: "1",
-        program: "software",
-        certificateObtained: "",
-        yearObtained: "2016",
-        guardianFirstName: "",
-        guardianLastName: "",
-        guardianEmail: "",
-        guardianAddress: "",
-        guardianPhone: "",
+        firstName: '',
+        lastName: '',
+        gender: '',
+        status: '',
+        dob: '',
+        placeOfBirth: '',
+        region: '',
+        address: '',
+        country: '',
+        nationalIdentification: '',
+        email: '',
+        matriculationNumber: '',
+        level: '',
+        year: '',
+        phone: '',
+        departmentId: '',
+        program: '',
+        certificateObtained: '',
+        yearObtained: '',
+        guardianFirstName: '',
+        guardianLastName: '',
+        guardianEmail: '',
+        guardianAddress: '',
+        guardianPhone: '',
       });
 
       closeModal();
@@ -111,7 +111,7 @@ const AddStudentModal = ({
 
   useEffect(() => {
     if (createStudentState.status === ApiRequestStatus.REJECTED) {
-      console.log("it ran");
+      console.log('it ran');
 
       closeModal();
       setShowSuccessModal(true);
@@ -121,14 +121,14 @@ const AddStudentModal = ({
   }, [createStudentState.status === ApiRequestStatus.REJECTED]);
   const handleAddStudent = async (e: any) => {
     e.preventDefault();
-    console.log("i was presses");
+    console.log('i was presses');
 
     await dispatch(
       createStudentThunk({
         ...form,
-        facultyId: "1",
+        facultyId: '1',
         userId: user.id,
-        profilePicture: "null",
+        profilePicture: 'null',
       })
     );
   };
@@ -163,7 +163,7 @@ const AddStudentModal = ({
           handleAddStudent={handleAddStudent}
         />
       ) : (
-        ""
+        ''
       )}
     </div>
   );
