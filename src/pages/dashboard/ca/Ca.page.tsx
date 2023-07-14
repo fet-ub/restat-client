@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import React, { useEffect, useState } from "react";
 import DashboardHeader from "../../../components/common/dashboard-header/DashboardHeader.common";
 import ModalContainer from "../../../components/common/modal/modal-container/ModalContainer.common";
@@ -12,22 +12,7 @@ import { RootState } from "../../../app/store/store";
 import { marksType } from "../../../components/common/table/add-ca/AddCaTable.common";
 import Button from "../../../components/common/buttons/Button.common";
 import { CourseResponseTypes } from "../../../types/course.type";
-=======
-import React, { useEffect, useState } from 'react';
-import DashboardHeader from '../../../components/common/dashboard-header/DashboardHeader.common';
-import ModalContainer from '../../../components/common/modal/modal-container/ModalContainer.common';
-import AddMarksModal from '../../../components/common/modal/modules/marks/AddMarksModal.module';
-import { MarksType } from '../../../types/atoms/enums.atoms';
-import { useTranslation } from 'react-i18next';
-import SelectInput from '../../../components/common/inputs/select-input/SelectInput.common';
-import { SOFTWARE_COURSES } from '../../../repository/constants/constants';
-import AddCaTable from '../../../components/common/table/add-ca/AddCaTable.common';
-import { useAppSelector } from '../../../lib/hooks';
-import { RootState } from '../../../app/store/store';
-import { StudentResponseTypes } from '../../../types/student.type';
-import { marksType } from '../../../components/common/table/add-ca/AddCaTable.common';
-import Button from '../../../components/common/buttons/Button.common';
->>>>>>> 65267a3ff91aae2235acedd8d6e6d9f5b4c12c89
+
 
 const CaPage = () => {
   const { t } = useTranslation();
@@ -90,19 +75,15 @@ const CaPage = () => {
       />
       <div className="w-[40%] mt-12">
         <SelectInput
-<<<<<<< HEAD
+
           selectOptions={formatedCourses}
           label={t("Course", { ns: ["main", "home"] })}
           value={selectedCourse}
+           placeholder="course"
           onChange={(e) => {
             setSelectedCourse(e.target.value);
           }}
-=======
-          selectOptions={SOFTWARE_COURSES}
-          placeholder="course"
-          label={t('Course', { ns: ['main', 'home'] })}
-          value=""
->>>>>>> 65267a3ff91aae2235acedd8d6e6d9f5b4c12c89
+
         />
       </div>
       <AddCaTable
