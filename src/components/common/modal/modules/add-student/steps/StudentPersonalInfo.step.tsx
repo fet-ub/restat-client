@@ -1,14 +1,14 @@
-import React from "react";
-import TextInput from "../../../../inputs/text-input/TextInput.common";
-import Button from "../../../../buttons/Button.common";
-import SelectInput from "../../../../inputs/select-input/SelectInput.common";
+import React from 'react';
+import TextInput from '../../../../inputs/text-input/TextInput.common';
+import Button from '../../../../buttons/Button.common';
+import SelectInput from '../../../../inputs/select-input/SelectInput.common';
 import {
   GENDER,
   MARITAL_STATUS,
   REGIONS,
-} from "../../../../../../repository/constants/constants";
-import DateInput from "../../../../inputs/date-input/DateInput";
-import { StudentType } from "../../../../../../types/student.type";
+} from '../../../../../../repository/constants/constants';
+import DateInput from '../../../../inputs/date-input/DateInput';
+import { StudentType } from '../../../../../../types/student.type';
 // import { AddStudentPropType } from '../../../../../../types/common/modal/add-student-modal.type';
 
 const StudentPersonalInfoStep = ({
@@ -54,6 +54,7 @@ const StudentPersonalInfoStep = ({
       <div className="flex justify-between gap-10 mb-2 ">
         <SelectInput
           selectOptions={GENDER}
+          placeholder="select gender"
           label="Gender"
           onChange={(e) => {
             setForm({ ...form, gender: e.target.value });
@@ -63,6 +64,7 @@ const StudentPersonalInfoStep = ({
         />
         <SelectInput
           selectOptions={MARITAL_STATUS}
+          placeholder="select marital status"
           label="Status"
           onChange={(e) => {
             setForm({ ...form, status: e.target.value });
@@ -110,6 +112,7 @@ const StudentPersonalInfoStep = ({
       <div className="flex justify-between gap-10 mb-4">
         <SelectInput
           selectOptions={REGIONS}
+          placeholder="select region"
           label="Region"
           onChange={(e) => {
             setForm({ ...form, region: e.target.value });

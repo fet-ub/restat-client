@@ -1,4 +1,4 @@
-import { UserType } from "../../user.type";
+import { UserType } from '../../user.type';
 
 export interface selectOptionType {
   label: string;
@@ -8,6 +8,7 @@ export interface selectOptionType {
 export interface SelectInputPropType {
   selectOptions?: selectOptionType[];
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  value?: string | UserType | undefined |any ;
+  value?: string | UserType | undefined | any;
   label?: string | any;
+  placeholder?: string;
 }

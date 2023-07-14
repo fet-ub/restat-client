@@ -1,4 +1,4 @@
-import { CourseStatusType } from "../repository/constants/enums.constants";
+import { CourseStatusType } from '../repository/constants/enums.constants';
 
 export type courseRequestType = {
   facultyId: string;

@@ -1,9 +1,9 @@
-import React from "react";
-import TextInput from "../../../../inputs/text-input/TextInput.common";
-import Button from "../../../../buttons/Button.common";
-import { StudentType } from "../../../../../../types/student.type";
-import { useAppSelector } from "../../../../../../lib/hooks";
-import { ApiRequestStatus } from "../../../../../../types/api.types";
+import React from 'react';
+import TextInput from '../../../../inputs/text-input/TextInput.common';
+import Button from '../../../../buttons/Button.common';
+import { StudentType } from '../../../../../../types/student.type';
+import { useAppSelector } from '../../../../../../lib/hooks';
+import { ApiRequestStatus } from '../../../../../../types/api.types';
 const StudentGuardianInfoStep = ({
   form,
   setForm,

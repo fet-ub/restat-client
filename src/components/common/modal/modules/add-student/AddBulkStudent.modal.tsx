@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import SelectInput from "../../../inputs/select-input/SelectInput.common";
-import { COURSE_LEVELS } from "../../../../../repository/constants/constants";
-import Button from "../../../buttons/Button.common";
-import { IconRepository } from "../../../../../repository/icons/icon.repository";
-import { AddBulkStudentModalPropType } from "../../../../../types/common/modal/add-bulk-student-modal.type";
-import * as xlsx from "xlsx";
-import { useTranslation } from "react-i18next";
-import { useAppDispatch, useAppSelector } from "../../../../../lib/hooks";
-import { createBulkStudentThunk } from "../../../../../app/feature/student/thunk/student.thunk";
-import { ApiRequestStatus } from "../../../../../types/api.types";
+import React, { useEffect, useState } from 'react';
+import SelectInput from '../../../inputs/select-input/SelectInput.common';
+import { COURSE_LEVELS } from '../../../../../repository/constants/constants';
+import Button from '../../../buttons/Button.common';
+import { IconRepository } from '../../../../../repository/icons/icon.repository';
+import { AddBulkStudentModalPropType } from '../../../../../types/common/modal/add-bulk-student-modal.type';
+import * as xlsx from 'xlsx';
+import { useTranslation } from 'react-i18next';
+import { useAppDispatch, useAppSelector } from '../../../../../lib/hooks';
+import { createBulkStudentThunk } from '../../../../../app/feature/student/thunk/student.thunk';
+import { ApiRequestStatus } from '../../../../../types/api.types';
 // import { StudentRequestType } from "../../../../../types/student.type";
-import { CONSTANTS } from "../../../../../constants/constants";
+import { CONSTANTS } from '../../../../../constants/constants';
 
 const AddBulkStudentmodal = ({
   fileName,
@@ -28,10 +28,10 @@ const AddBulkStudentmodal = ({
   );
   const [active, setActive] = useState(0);
   const [form, setForm] = useState({
-    level: "",
+    level: '',
   });
   const [user, setUser] = useState({
-    id: "",
+    id: '',
   });
 
   // const [newData, setNewData] = useState([]);
@@ -46,13 +46,13 @@ const AddBulkStudentmodal = ({
 
   useEffect(() => {
     if (createBulkStudentState.status === ApiRequestStatus.FULFILLED) {
-      console.log("it ran");
+      console.log('it ran');
 
       closeModal();
-      setSelectedFile("");
+      setSelectedFile('');
       setShowSuccessModal(true);
       setStudentsTableData([]);
-      setFileName("");
+      setFileName('');
     }
 
     // dispatch(resetcreateCourseState());
@@ -61,11 +61,11 @@ const AddBulkStudentmodal = ({
 
   useEffect(() => {
     if (createBulkStudentState.status === ApiRequestStatus.REJECTED) {
-      console.log("it ran");
+      console.log('it ran');
 
       closeModal();
-      setSelectedFile("");
-      setFileName("");
+      setSelectedFile('');
+      setFileName('');
       setShowSuccessModal(true);
     }
 
@@ -98,9 +98,9 @@ const AddBulkStudentmodal = ({
 
   const handleBulkUploadStudent = async () => {
     studentsTableData.forEach((obj: any) => {
-      obj.facultyId = "1";
+      obj.facultyId = '1';
       obj.userId = user.id;
-      obj.profilePicture = "null";
+      obj.profilePicture = 'null';
     });
 
     console.log(studentsTableData);
@@ -117,20 +117,20 @@ const AddBulkStudentmodal = ({
   return (
     <div className="mb-10 px-5">
       <h2 className="text-3xl font-bold text-secondary dark:text-white">
-        {t("Bulk Upload Students", { ns: ["main", "home"] })}
+        {t('Bulk Upload Students', { ns: ['main', 'home'] })}
       </h2>
       <p className="text-xl mb-5 mt-1 dark:text-white">
-        {t("Here,you can upload bulk of students as .xls or .csv", {
-          ns: ["main", "home"],
+        {t('Here,you can upload bulk of students as .xls or .csv', {
+          ns: ['main', 'home'],
         })}
       </p>
 
-      <div className={"bg-[#f4f4f4]  px-4 border-t-2 border-primary  py-4"}>
+      <div className={'bg-[#f4f4f4]  px-4 border-t-2 border-primary  py-4'}>
         <div className="flex mt-4">
           <div
             onClick={handleXls}
             className={`flex items-center justify-center border border-primary rounded-tl-md rounded-bl-md py-[10px] px-3 cursor-pointer  ${
-              active === 0 ? "bg-primary text-white" : ""
+              active === 0 ? 'bg-primary text-white' : ''
             }`}
           >
             <h3 className="text-xl">Xls or Xlsx</h3>
@@ -138,7 +138,7 @@ const AddBulkStudentmodal = ({
           <div
             onClick={handleCSV}
             className={`flex items-center justify-center border border-primary rounded-tr-md rounded-br-md py-[10px] px-3 cursor-pointer  ${
-              active === 1 ? "bg-primary text-white" : ""
+              active === 1 ? 'bg-primary text-white' : ''
             }`}
           >
             <h3 className="text-xl">CSV</h3>
@@ -148,7 +148,7 @@ const AddBulkStudentmodal = ({
         <label htmlFor="dropzone-file">
           <div
             className={
-              "flex items-center justify-center gap-1 border-dashed border border-primary bg-[#bfdffb] py-[15px] mt-4 rounded-lg "
+              'flex items-center justify-center gap-1 border-dashed border border-primary bg-[#bfdffb] py-[15px] mt-4 rounded-lg '
             }
           >
             {fileName ? (
@@ -156,10 +156,10 @@ const AddBulkStudentmodal = ({
             ) : (
               <>
                 <h1 className="text-xl">
-                  {t("Drag and Drop or", { ns: ["main", "home"] })}
+                  {t('Drag and Drop or', { ns: ['main', 'home'] })}
                   <span className="text-primary text-2xl">
-                    {" "}
-                    {t("Upload new file", { ns: ["main", "home"] })}
+                    {' '}
+                    {t('Upload new file', { ns: ['main', 'home'] })}
                   </span>
                 </h1>
                 <div>
@@ -172,9 +172,9 @@ const AddBulkStudentmodal = ({
             id="dropzone-file"
             type="file"
             className="hidden"
-            style={{ display: "none" }}
+            style={{ display: 'none' }}
             onChange={handleFileChange}
-            accept={active === 0 ? ".xlsx, .xls" : ".csv"}
+            accept={active === 0 ? '.xlsx, .xls' : '.csv'}
           />
         </label>
       </div>
@@ -182,6 +182,7 @@ const AddBulkStudentmodal = ({
       <div className="mb-5 mt-8 flex flex-col gap-4">
         <SelectInput
           selectOptions={COURSE_LEVELS}
+          placeholder="select a course"
           label="Level"
           onChange={(e) => {
             setForm({ ...form, level: e.target.value });
@@ -192,7 +193,7 @@ const AddBulkStudentmodal = ({
 
       <div className="w-full mt-8">
         <Button
-          text={t("Upload Students", { ns: ["main", "home"] })}
+          text={t('Upload Students', { ns: ['main', 'home'] })}
           buttonType="PRIMARY"
           fullWidth={true}
           onClick={handleBulkUploadStudent}

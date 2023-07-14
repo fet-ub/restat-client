@@ -1,14 +1,14 @@
-import React from "react";
-import TextInput from "../../../../inputs/text-input/TextInput.common";
-import SelectInput from "../../../../inputs/select-input/SelectInput.common";
+import React from 'react';
+import TextInput from '../../../../inputs/text-input/TextInput.common';
+import SelectInput from '../../../../inputs/select-input/SelectInput.common';
 import {
   COMPUTER_PROGRAMS,
   COURSE_LEVELS,
   ENGINEERING_DEPARTMENTS,
   SCHOOL_YEAR,
-} from "../../../../../../repository/constants/constants";
-import Button from "../../../../buttons/Button.common";
-import { StudentType } from "../../../../../../types/student.type";
+} from '../../../../../../repository/constants/constants';
+import Button from '../../../../buttons/Button.common';
+import { StudentType } from '../../../../../../types/student.type';
 
 const StudentAcademicInfoStep = ({
   form,
@@ -37,6 +37,7 @@ const StudentAcademicInfoStep = ({
           />
           <SelectInput
             selectOptions={COURSE_LEVELS}
+            placeholder="select level"
             label="Level"
             onChange={(e) => {
               setForm({ ...form, level: e.target.value });
@@ -45,6 +46,7 @@ const StudentAcademicInfoStep = ({
           />
           <SelectInput
             selectOptions={SCHOOL_YEAR}
+            placeholder="year"
             label="Year"
             onChange={(e) => {
               setForm({ ...form, year: e.target.value });
@@ -56,6 +58,7 @@ const StudentAcademicInfoStep = ({
         <div className="flex justify-between gap-10">
           <SelectInput
             selectOptions={ENGINEERING_DEPARTMENTS}
+            placeholder="select department"
             label="Department"
             onChange={(e) => {
               setForm({ ...form, departmentId: e.target.value });
@@ -79,6 +82,7 @@ const StudentAcademicInfoStep = ({
         <div className="flex flex-col gap-1">
           <SelectInput
             selectOptions={COMPUTER_PROGRAMS}
+            placeholder="select program"
             label="Program"
             onChange={(e) => {
               setForm({ ...form, program: e.target.value });
@@ -99,6 +103,7 @@ const StudentAcademicInfoStep = ({
           />
           <SelectInput
             selectOptions={SCHOOL_YEAR}
+            placeholder="select school year"
             label="Year Obtained"
             onChange={(e) => {
               setForm({ ...form, yearObtained: e.target.value });

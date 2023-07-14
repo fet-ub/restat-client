@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-import { IconRepository } from "../../../../../repository/icons/icon.repository";
-import SelectInput from "../../../inputs/select-input/SelectInput.common";
+import React, { useState } from 'react';
+import { IconRepository } from '../../../../../repository/icons/icon.repository';
+import SelectInput from '../../../inputs/select-input/SelectInput.common';
 import {
   ACADEMIC_YEAR,
   SOFTWARE_COURSES,
-} from "../../../../../repository/constants/constants";
-import Button from "../../../buttons/Button.common";
-import { AddMarksModalPropType } from "../../../../../types/common/modal/add-marks.modal.type";
-import { MarksType } from "../../../../../types/atoms/enums.atoms";
-import { useTranslation } from "react-i18next";
+} from '../../../../../repository/constants/constants';
+import Button from '../../../buttons/Button.common';
+import { AddMarksModalPropType } from '../../../../../types/common/modal/add-marks.modal.type';
+import { MarksType } from '../../../../../types/atoms/enums.atoms';
+import { useTranslation } from 'react-i18next';
 
 const AddMarksModal = ({ modalType }: AddMarksModalPropType) => {
   const [active, setActive] = useState(0);
   const { t } = useTranslation();
   const [form, setForm] = useState({
-    course: "",
-    year: "",
+    course: '',
+    year: '',
   });
   const [selectedFile, setSelectedFile] = useState<File | undefined>(undefined);
 
@@ -37,29 +37,29 @@ const AddMarksModal = ({ modalType }: AddMarksModalPropType) => {
   };
 
   const markText =
-    modalType === MarksType.CA ? "CA" : t("Exam", { ns: ["main", "home"] });
+    modalType === MarksType.CA ? 'CA' : t('Exam', { ns: ['main', 'home'] });
 
   return (
     <div className="mb-10 px-5">
       <h2 className="text-3xl font-bold text-secondary dark:text-white">
-        {t("Bulk Upload Marks", { ns: ["main", "home"] })}
+        {t('Bulk Upload Marks', { ns: ['main', 'home'] })}
       </h2>
       <p className="text-xl mb-5 mt-1 dark:text-white">
         {modalType === MarksType.CA
-          ? t("Here,you can upload bulk CA marks as .xls or .csv", {
-              ns: ["main", "home"],
+          ? t('Here,you can upload bulk CA marks as .xls or .csv', {
+              ns: ['main', 'home'],
             })
-          : t("Here,you can upload bulk Exam marks as .xls or .csv", {
-              ns: ["main", "home"],
+          : t('Here,you can upload bulk Exam marks as .xls or .csv', {
+              ns: ['main', 'home'],
             })}
       </p>
 
-      <div className={"bg-[#f4f4f4]  px-4 border-t-2 border-primary  py-4"}>
+      <div className={'bg-[#f4f4f4]  px-4 border-t-2 border-primary  py-4'}>
         <div className="flex mt-4">
           <div
             onClick={handleXls}
             className={`flex items-center justify-center border border-primary rounded-tl-md rounded-bl-md py-[10px] px-3 cursor-pointer  ${
-              active === 0 ? "bg-primary text-white" : ""
+              active === 0 ? 'bg-primary text-white' : ''
             }`}
           >
             <h3 className="text-xl">Xls or Xlsx</h3>
@@ -67,7 +67,7 @@ const AddMarksModal = ({ modalType }: AddMarksModalPropType) => {
           <div
             onClick={handleCSV}
             className={`flex items-center justify-center border border-primary rounded-tr-md rounded-br-md py-[10px] px-3 cursor-pointer  ${
-              active === 1 ? "bg-primary text-white" : ""
+              active === 1 ? 'bg-primary text-white' : ''
             }`}
           >
             <h3 className="text-xl">CSV</h3>
@@ -77,7 +77,7 @@ const AddMarksModal = ({ modalType }: AddMarksModalPropType) => {
         <label htmlFor="dropzone-file">
           <div
             className={
-              "flex items-center justify-center gap-1 border-dashed border border-primary bg-[#bfdffb] py-[15px] mt-4 rounded-lg "
+              'flex items-center justify-center gap-1 border-dashed border border-primary bg-[#bfdffb] py-[15px] mt-4 rounded-lg '
             }
           >
             {selectedFile ? (
@@ -85,13 +85,13 @@ const AddMarksModal = ({ modalType }: AddMarksModalPropType) => {
             ) : (
               <>
                 <h1 className="text-xl">
-                  {t("Drag and Drop or", {
-                    ns: ["main", "home"],
+                  {t('Drag and Drop or', {
+                    ns: ['main', 'home'],
                   })}
                   <span className="text-primary text-2xl">
-                    {" "}
-                    {t("Upload new file", {
-                      ns: ["main", "home"],
+                    {' '}
+                    {t('Upload new file', {
+                      ns: ['main', 'home'],
                     })}
                   </span>
                 </h1>
@@ -105,9 +105,9 @@ const AddMarksModal = ({ modalType }: AddMarksModalPropType) => {
             id="dropzone-file"
             type="file"
             className="hidden"
-            style={{ display: "none" }}
+            style={{ display: 'none' }}
             onChange={handleFileChange}
-            accept={active === 0 ? ".xlsx, .xls" : ".csv"}
+            accept={active === 0 ? '.xlsx, .xls' : '.csv'}
           />
         </label>
       </div>
@@ -115,8 +115,9 @@ const AddMarksModal = ({ modalType }: AddMarksModalPropType) => {
       <div className="mb-5 mt-8 flex flex-col gap-4">
         <SelectInput
           selectOptions={SOFTWARE_COURSES}
-          label={t("Course", {
-            ns: ["main", "home"],
+          placeholder="select a course"
+          label={t('Course', {
+            ns: ['main', 'home'],
           })}
           onChange={(e) => {
             setForm({ ...form, year: e.target.value });
@@ -125,8 +126,9 @@ const AddMarksModal = ({ modalType }: AddMarksModalPropType) => {
         />
         <SelectInput
           selectOptions={ACADEMIC_YEAR}
-          label={t("Year", {
-            ns: ["main", "home"],
+          placeholder="year"
+          label={t('Year', {
+            ns: ['main', 'home'],
           })}
           onChange={(e) => {
             setForm({ ...form, year: e.target.value });
@@ -139,11 +141,11 @@ const AddMarksModal = ({ modalType }: AddMarksModalPropType) => {
         <Button
           text={
             modalType === MarksType.CA
-              ? t("Upload CA marks", {
-                  ns: ["main", "home"],
+              ? t('Upload CA marks', {
+                  ns: ['main', 'home'],
                 })
-              : t("Upload Exam marks", {
-                  ns: ["main", "home"],
+              : t('Upload Exam marks', {
+                  ns: ['main', 'home'],
                 })
           }
           buttonType="PRIMARY"

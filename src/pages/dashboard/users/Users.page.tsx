@@ -1,26 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import SelectInput from "../../../components/common/inputs/select-input/SelectInput.common";
-import { ENGINEERING_DEPARTMENTS } from "../../../repository/constants/constants";
+import SelectInput from '../../../components/common/inputs/select-input/SelectInput.common';
+import { ENGINEERING_DEPARTMENTS } from '../../../repository/constants/constants';
 import {
   DataGrid,
   GridColDef,
   GridRenderCellParams,
   GridValueGetterParams,
-} from "@mui/x-data-grid";
-import ModalContainer from "../../../components/common/modal/modal-container/ModalContainer.common";
-import AddUserModal from "../../../components/common/modal/modules/add-user/AddUserModal.module";
-import DashboardHeader from "../../../components/common/dashboard-header/DashboardHeader.common";
-import DownloadOptions from "../../../components/common/download-options/DownloadOptions.common";
-import { useTranslation } from "react-i18next";
-import { getUsersThunk } from "../../../app/feature/user/thunk/user.thunk";
+} from '@mui/x-data-grid';
+import ModalContainer from '../../../components/common/modal/modal-container/ModalContainer.common';
+import AddUserModal from '../../../components/common/modal/modules/add-user/AddUserModal.module';
+import DashboardHeader from '../../../components/common/dashboard-header/DashboardHeader.common';
+import DownloadOptions from '../../../components/common/download-options/DownloadOptions.common';
+import { useTranslation } from 'react-i18next';
+import { getUsersThunk } from '../../../app/feature/user/thunk/user.thunk';
 // import { ApiRequestStatus } from "../../../types/api.types";
-import { useAppDispatch, useAppSelector } from "../../../lib/hooks";
+import { useAppDispatch, useAppSelector } from '../../../lib/hooks';
 // import { resetGetUsersState } from "../../../app/feature/user/slices/getUsers.slice";
-import { RootState } from "../../../app/store/store";
-import { UserResponseTypes } from "../../../types/user.type";
-import EditIcon from "../../../icons/Edit.icon";
-import DeleteIcon from "../../../icons/Delete.icon";
+import { RootState } from '../../../app/store/store';
+import { UserResponseTypes } from '../../../types/user.type';
+import EditIcon from '../../../icons/Edit.icon';
+import DeleteIcon from '../../../icons/Delete.icon';
 
 //  GridValueGetterParams
 const UsersPage = () => {
@@ -48,37 +48,37 @@ const UsersPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const columns: GridColDef[] = [
     {
-      field: "name",
-      headerName: "Name",
+      field: 'name',
+      headerName: 'Name',
       width: 280,
       sortable: false,
 
       valueGetter: (params: GridValueGetterParams) =>
-        `${params.row.firstName || ""} ${params.row.lastName || ""}`,
+        `${params.row.firstName || ''} ${params.row.lastName || ''}`,
     },
     {
-      field: "id",
-      headerName: "Role",
+      field: 'id',
+      headerName: 'Role',
       width: 270,
       sortable: false,
       valueGetter: (params: GridValueGetterParams) =>
         params.row.id === 1
-          ? "Admin"
+          ? 'Admin'
           : params.row.id === 2
-          ? "Dean"
+          ? 'Dean'
           : params.row.id === 3
-          ? "HOD"
+          ? 'HOD'
           : params.row.id === 4
-          ? "Coordinator"
+          ? 'Coordinator'
           : params.row.id === 5
-          ? "Lecturer"
+          ? 'Lecturer'
           : params.row.id === 6
-          ? "Examiner"
+          ? 'Examiner'
           : params.row.id === 7
-          ? "Support Staff"
+          ? 'Support Staff'
           : params.row.id === 8
-          ? "Student"
-          : "",
+          ? 'Student'
+          : '',
     },
     // {
     //   field: "department",
@@ -87,8 +87,8 @@ const UsersPage = () => {
     //   sortable: false,
     // },
     {
-      field: "email",
-      headerName: "Email",
+      field: 'email',
+      headerName: 'Email',
       width: 270,
       sortable: false,
     },
@@ -101,20 +101,20 @@ const UsersPage = () => {
     //   align: "left",
     // },
     {
-      field: "action",
-      headerName: "Action",
+      field: 'action',
+      headerName: 'Action',
       sortable: false,
       width: 100,
-      headerAlign: "left",
-      align: "left",
+      headerAlign: 'left',
+      align: 'left',
       renderCell: (params: GridRenderCellParams) => {
         return (
           <div
             style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              gap: "10px",
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              gap: '10px',
             }}
           >
             <div>
@@ -143,8 +143,8 @@ const UsersPage = () => {
   return (
     <div>
       <DashboardHeader
-        label={t("Users", { ns: ["main", "home"] })}
-        ButtonText={t("Add New User", { ns: ["main", "home"] })}
+        label={t('Users', { ns: ['main', 'home'] })}
+        ButtonText={t('Add New User', { ns: ['main', 'home'] })}
         onClick={() => setIsOpen(true)}
         displayButton={true}
       />
@@ -155,12 +155,13 @@ const UsersPage = () => {
       <div className="w-[25%] mt-12">
         <SelectInput
           selectOptions={ENGINEERING_DEPARTMENTS}
-          label={t("Department", { ns: ["main", "home"] })}
+          placeholder="Select Department"
+          label={t('Department', { ns: ['main', 'home'] })}
           value=""
         />
       </div>
 
-      <div style={{ height: 400, width: "100%", marginTop: 40 }}>
+      <div style={{ height: 400, width: '100%', marginTop: 40 }}>
         <DataGrid
           rows={currentUsers}
           columns={columns}
@@ -172,7 +173,7 @@ const UsersPage = () => {
           pageSizeOptions={[5, 10]}
           checkboxSelection
           getRowId={(row: any) => row.email + row.id}
-          style={{ fontSize: "15px" }}
+          style={{ fontSize: '15px' }}
           className="dark:text-white"
         />
       </div>
