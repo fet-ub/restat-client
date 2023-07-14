@@ -1,6 +1,6 @@
-import React from 'react'
-import { SelectInputPropType } from '../../../../types/common/input/select-input.type';
-import styles from '../input.module.css'
+import React from "react";
+import { SelectInputPropType } from "../../../../types/common/input/select-input.type";
+import styles from "../input.module.css";
 
 const SelectInput = ({
   selectOptions,
@@ -30,4 +30,4 @@ const SelectInput = ({
   );
 };
 
-export default SelectInput
+export default SelectInput;

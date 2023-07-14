@@ -5,13 +5,12 @@ import AddMarksModal from "../../../components/common/modal/modules/marks/AddMar
 import { MarksType } from "../../../types/atoms/enums.atoms";
 import { useTranslation } from "react-i18next";
 import SelectInput from "../../../components/common/inputs/select-input/SelectInput.common";
-import { SOFTWARE_COURSES } from "../../../repository/constants/constants";
 import AddCaTable from "../../../components/common/table/add-ca/AddCaTable.common";
 import { useAppSelector } from "../../../lib/hooks";
 import { RootState } from "../../../app/store/store";
-import { StudentResponseTypes } from "../../../types/student.type";
 import { marksType } from "../../../components/common/table/add-ca/AddCaTable.common";
 import Button from "../../../components/common/buttons/Button.common";
+import { CourseResponseTypes } from "../../../types/course.type";
 
 const CaPage = () => {
   const { t } = useTranslation();
@@ -35,6 +34,8 @@ const CaPage = () => {
     },
   ]);
 
+  const [selectedCourse, setSelectedCourse] = useState<any>("");
+
   useEffect(() => {
     const result = getStudentsState.students.map((obj) => ({
       ...obj,
@@ -50,7 +51,15 @@ const CaPage = () => {
     setAllStudents(result);
   }, []);
 
-  // console.log(allStudents);
+  const formatedCourses = getCoursesState.courses.map((obj, index) => ({
+    ...obj,
+    label: obj.name,
+    value: index,
+  }));
+
+  console.log(selectedCourse);
+
+  console.log("zxczxczx", formatedCourses);
 
   // const [selectedFile, setSelectedFile] = useState('');
   return (
@@ -62,11 +71,14 @@ const CaPage = () => {
         onClick={() => setIsOpen(true)}
         displayButton={true}
       />
-      <div className="w-[25%] mt-12">
+      <div className="w-[40%] mt-12">
         <SelectInput
-          selectOptions={SOFTWARE_COURSES}
+          selectOptions={formatedCourses}
           label={t("Course", { ns: ["main", "home"] })}
-          value=""
+          value={selectedCourse}
+          onChange={(e) => {
+            setSelectedCourse(e.target.value);
+          }}
         />
       </div>
       <AddCaTable
