@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import DashboardHeader from "../../../components/common/dashboard-header/DashboardHeader.common";
 import ModalContainer from "../../../components/common/modal/modal-container/ModalContainer.common";
@@ -12,7 +11,6 @@ import { RootState } from "../../../app/store/store";
 import { marksType } from "../../../components/common/table/add-ca/AddCaTable.common";
 import Button from "../../../components/common/buttons/Button.common";
 import { CourseResponseTypes } from "../../../types/course.type";
-
 
 const CaPage = () => {
   const { t } = useTranslation();
@@ -30,19 +28,19 @@ const CaPage = () => {
   const [allStudents, setAllStudents] = useState<marksType[]>([]);
   const [marksTableData, setMarksTableData] = useState<any>([
     {
-      matriculationNumber: 'FE19A038',
-      mark: '',
-      filledStatus: 'not filled',
+      matriculationNumber: "FE19A038",
+      mark: "",
+      filledStatus: "not filled",
     },
   ]);
 
-  const [selectedCourse, setSelectedCourse] = useState<any>("");
+  const [selectedIndex, setSelectedIndex] = useState<any>("");
 
   useEffect(() => {
     const result = getStudentsState.students.map((obj) => ({
       ...obj,
-      filledStatus: 'not filled',
-      mark: '',
+      filledStatus: "not filled",
+      mark: "",
     }));
 
     // const courseResult=getCoursesState.courses.map((obj)=>{
@@ -59,40 +57,48 @@ const CaPage = () => {
     value: index,
   }));
 
-  console.log(selectedCourse);
+  console.log(selectedIndex);
 
-  console.log("zxczxczx", formatedCourses);
+  const choosenCourse = getCoursesState.courses[selectedIndex];
+
+  console.log(choosenCourse);
+
+  // console.log("zxczxczx", formatedCourses);
 
   // const [selectedFile, setSelectedFile] = useState('');
   return (
     <div>
-      {' '}
+      {" "}
       <DashboardHeader
-        label={t('CA', { ns: ['main', 'home'] })}
-        ButtonText={t('Add CA marks', { ns: ['main', 'home'] })}
+        label={t("CA", { ns: ["main", "home"] })}
+        ButtonText={t("Add CA marks", { ns: ["main", "home"] })}
         onClick={() => setIsOpen(true)}
         displayButton={true}
       />
       <div className="w-[40%] mt-12">
         <SelectInput
-
           selectOptions={formatedCourses}
           label={t("Course", { ns: ["main", "home"] })}
-          value={selectedCourse}
-           placeholder="course"
+          value={selectedIndex}
+          placeholder="select a course"
           onChange={(e) => {
-            setSelectedCourse(e.target.value);
+            setSelectedIndex(e.target.value);
           }}
-
         />
       </div>
-      <AddCaTable
-        marksTableData={allStudents}
-        setMarksTableData={setAllStudents}
-      />
-      <div className="w-full flex items-center justify-center mt-10">
-        <Button text={'Upload Marks'} width="500px" buttonType="PRIMARY" />
-      </div>
+      {choosenCourse && (
+        <>
+          <AddCaTable
+            marksTableData={allStudents.filter(
+              (student) => student.level === choosenCourse?.level
+            )}
+            setMarksTableData={setAllStudents}
+          />
+          <div className="w-full flex items-center justify-center mt-10">
+            <Button text={"Upload Marks"} width="500px" buttonType="PRIMARY" />
+          </div>
+        </>
+      )}
       {isOpen && (
         <ModalContainer width="700px" onClick={() => setIsOpen(false)}>
           <AddMarksModal modalType={MarksType.CA} />
