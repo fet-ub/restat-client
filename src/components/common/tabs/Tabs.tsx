@@ -15,7 +15,7 @@ const Tabs: React.FC<TabsPropType> = ({
 }) => {
   return (
     <div className={styles.tabs}>
-      {labels.length > 0 &&
+      {labels?.length > 0 &&
         labels.map((item, index) => {
           return (
             <button

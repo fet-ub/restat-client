@@ -41,7 +41,7 @@ const EncryptCaTable = ({
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
 
   const pages = [];
-  for (let i = 1; i <= Math.ceil(marksTableData.length / itemsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(marksTableData?.length / itemsPerPage); i++) {
     pages.push(i);
   }
 
@@ -52,7 +52,7 @@ const EncryptCaTable = ({
   };
 
   const nextPage = () => {
-    if (currentPage !== Math.ceil(marksTableData.length / itemsPerPage)) {
+    if (currentPage !== Math.ceil(marksTableData?.length / itemsPerPage)) {
       setCurrentPage(currentPage + 1);
     }
   };
@@ -195,7 +195,7 @@ const EncryptCaTable = ({
 
         <div className="flex justify-between items-center">
           <span className={"text-[14px] text-secondary dark:text-white"}>
-            {t("Total of", { ns: ["main", "home"] })} {marksTableData.length}{" "}
+            {t("Total of", { ns: ["main", "home"] })} {marksTableData?.length}{" "}
             {t("students", { ns: ["main", "home"] })}, {totalEncrypted}{" "}
             {t("encrypted", { ns: ["main", "home"] })}
           </span>

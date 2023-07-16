@@ -7,10 +7,7 @@ const authService = new AuthService();
 
 export class UserService {
   public async createNewUser(data: userRequestType, userType: UserType) {
-    console.log("ser service", userType);
-    console.log("sd", UserType.COORDINATOR);
-
-    if (userType === UserType.HOD) {
+    if (Number(userType) === Number(UserType.HOD)) {
       const body = new FormData();
       body.append("facultyId", data.facultyId);
       body.append("departmentId", data.departmentId as string);
@@ -21,8 +18,6 @@ export class UserService {
       //   "profilePicture",'null'
       // );
 
-      console.log(body);
-
       return await authService.laravelSanctum().then(async () => {
         return await publicApiRequest("", "multipart/form-data").post(
           "/hods",
@@ -30,7 +25,7 @@ export class UserService {
         );
       });
     }
-    if (userType === UserType.DEAN) {
+    if (Number(userType) === UserType.DEAN) {
       const body = new FormData();
       body.append("facultyId", data.facultyId);
       body.append("firstName", data.firstName);
@@ -44,7 +39,7 @@ export class UserService {
         );
       });
     }
-    if (userType === UserType.COORDINATOR) {
+    if (Number(userType) === UserType.COORDINATOR) {
       const body = new FormData();
       body.append("facultyId", data.facultyId);
       body.append("departmentId", data.departmentId as string);
@@ -59,7 +54,7 @@ export class UserService {
         );
       });
     }
-    if (userType === UserType.LECTURER) {
+    if (Number(userType) === UserType.LECTURER) {
       const body = new FormData();
       body.append("facultyId", data.facultyId);
       body.append("departmentId", data.departmentId as string);
@@ -74,7 +69,7 @@ export class UserService {
         );
       });
     }
-    if (userType === UserType.STUDENT) {
+    if (Number(userType) === UserType.STUDENT) {
       const body = new FormData();
       body.append("facultyId", data.facultyId);
       body.append("departmentId", data.departmentId as string);
@@ -89,7 +84,7 @@ export class UserService {
         );
       });
     }
-    if (userType === UserType.EXAMINER) {
+    if (Number(userType) === UserType.EXAMINER) {
       const body = new FormData();
       body.append("facultyId", data.facultyId);
       body.append("departmentId", data.departmentId as string);
@@ -104,7 +99,7 @@ export class UserService {
         );
       });
     }
-    if (userType === UserType.SUPPORT_STAFF) {
+    if (Number(userType) === UserType.SUPPORT_STAFF) {
       const body = new FormData();
       body.append("facultyId", data.facultyId);
       body.append("departmentId", data.departmentId as string);
