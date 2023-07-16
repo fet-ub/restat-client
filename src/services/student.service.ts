@@ -45,23 +45,44 @@ export class StudentService {
   }
 
   public async createBulkNewStudents(data: StudentRequestType[]) {
-    const body = new FormData();
-    data.forEach((obj) => {
-      Object.entries(obj).forEach(([key, value]) => {
-        body.append(key, value);
-      });
+    const request: Promise<any[]>[] = [] as Promise<any[]>[];
+    // const body = new FormData();
+
+    data.map((student: StudentRequestType) => {
+      const body = new FormData();
+      body.append("facultyId", student.facultyId);
+      body.append("departmentId", student.departmentId as string);
+      body.append("firstName", student.firstName);
+      body.append("lastName", student.lastName);
+      body.append("email", student.email);
+      body.append("gender", student.gender);
+      body.append("status", student.status);
+      body.append("dob", student.dob);
+      body.append("placeOfBirth", student.placeOfBirth);
+      body.append("region", student.region);
+      body.append("address", student.address);
+      body.append("country", student.country);
+      body.append("phone", student.phone);
+      body.append("nationalIdentification", student.nationalIdentification);
+      body.append("matriculationNumber", student.matriculationNumber);
+      body.append("level", student.level);
+      body.append("year", student.year);
+      body.append("program", student.program);
+      body.append("certificateObtained", student.certificateObtained);
+      body.append("yearObtained", student.yearObtained);
+      body.append("guardianFirstName", student.guardianFirstName);
+      body.append("guardianLastName", student.guardianLastName);
+      body.append("guardianEmail", student.guardianEmail);
+      body.append("guardianAddress", student.guardianAddress);
+      body.append("guardianPhone", student.guardianPhone);
+
+      request.push(
+        publicApiRequest("", "multipart/form-data").post("/students", body)
+      );
     });
-
-    console.log(body);
-
-    // data.map((obj) => {
-    //   return Object.entries(obj).forEach(([key, value]) => {
-    //     // console.log(`${key}: ${value}`);
-    //     body.append(`${key}`, value);
-    //   });
-    // });
     return await authService.laravelSanctum().then(async () => {
-      return await publicApiRequest().post("/students");
+      const response = await Promise.all(request);
+      return response;
     });
   }
 
