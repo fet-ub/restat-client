@@ -60,7 +60,7 @@ const DashboardPage = () => {
   }, [window.location.pathname]);
 
   useEffect(() => {
-    if (user?.firstName.length > 0) {
+    if (user?.firstName?.length > 0) {
       setLoading(false);
     }
   }, [user]);

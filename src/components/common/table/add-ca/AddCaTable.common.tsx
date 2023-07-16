@@ -57,7 +57,7 @@ const AddCaTable = ({
   };
 
   const nextPage = () => {
-    if (currentPage !== Math.ceil(marksTableData.length / itemsPerPage)) {
+    if (currentPage !== Math.ceil(marksTableData?.length / itemsPerPage)) {
       setCurrentPage(currentPage + 1);
     }
   };
@@ -232,7 +232,7 @@ const AddCaTable = ({
 
         <div className="flex justify-between items-center">
           <span className={"text-[14px] text-secondary dark:text-white"}>
-            {t("Total of", { ns: ["main", "home"] })} {marksTableData.length}{" "}
+            {t("Total of", { ns: ["main", "home"] })} {marksTableData?.length}{" "}
             {t("students", { ns: ["main", "home"] })}, {totalFilled}{" "}
             {t("filled", { ns: ["main", "home"] })}
           </span>

@@ -45,17 +45,17 @@ const IndexPage = () => {
   const dashboardCardData = [
     {
       label: t("Students", { ns: ["main", "home"] }),
-      stats: getStudentsState.students.length,
+      stats: getStudentsState?.students?.length,
       icon: <IconRepository.DashboardStudentIcon width={70} height={70} />,
     },
     {
       label: t("Courses", { ns: ["main", "home"] }),
-      stats: getCoursesState.courses.length,
+      stats: getCoursesState?.courses?.length,
       icon: <IconRepository.DashboardBooksIcon width={70} height={70} />,
     },
     {
       label: t("Users", { ns: ["main", "home"] }),
-      stats: getUsersState.users.length,
+      stats: getUsersState?.users?.length,
       icon: <IconRepository.PersonIcon width={70} height={70} />,
     },
     {

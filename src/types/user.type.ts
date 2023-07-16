@@ -6,14 +6,14 @@ export interface IUser {
 }
 
 export enum UserType {
-  ADMIN,
+  COORDINATOR,
   HOD,
-  DEAN,
-  STUDENT,
   LECTURER,
   SUPPORT_STAFF,
   EXAMINER,
-  COORDINATOR,
+  ADMIN,
+  DEAN,
+  STUDENT,
   DEFAULT = '',
 }
 
