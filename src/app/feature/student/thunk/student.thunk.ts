@@ -30,7 +30,7 @@ export const createBulkStudentThunk = createAsyncThunk(
 
       console.log({ response });
 
-      return response?.data;
+      // return response?.data;
     } catch (ex) {
       return rejectWithValue(getExceptionPayload(ex) as ApiRequestErrorType);
     }

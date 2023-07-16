@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   USER_ROLE,
   ENGINEERING_DEPARTMENTS,
   // COURSE_PREFIX,
-} from '../../../../../repository/constants/constants';
-import SelectInput from '../../../inputs/select-input/SelectInput.common';
-import TextInput from '../../../inputs/text-input/TextInput.common';
-import Button from '../../../buttons/Button.common';
-import { useTranslation } from 'react-i18next';
-import { useAppDispatch } from '../../../../../lib/hooks';
-import { createUserThunk } from '../../../../../app/feature/user/thunk/user.thunk';
-import { userRequestType } from '../../../../../types/auth.type';
-import { UserType } from '../../../../../types/user.type';
+} from "../../../../../repository/constants/constants";
+import SelectInput from "../../../inputs/select-input/SelectInput.common";
+import TextInput from "../../../inputs/text-input/TextInput.common";
+import Button from "../../../buttons/Button.common";
+import { useTranslation } from "react-i18next";
+import { useAppDispatch } from "../../../../../lib/hooks";
+import { createUserThunk } from "../../../../../app/feature/user/thunk/user.thunk";
+import { userRequestType } from "../../../../../types/auth.type";
+import { UserType } from "../../../../../types/user.type";
 // import { ApiRequestStatus } from "../../../../../types/api.types";
 
 const AddUserModal = ({
@@ -22,16 +22,16 @@ const AddUserModal = ({
   const dispatch = useAppDispatch();
   const [form, setForm] = useState<userRequestType>({
     role: UserType.DEFAULT,
-    departmentId: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    facultyId: '1',
+    departmentId: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    facultyId: "1",
   });
   const { t } = useTranslation();
 
-  console.log('role', form.role);
-  // console.log(form);
+  console.log("role", form.role);
+  console.log(form);
 
   const handleCreateUser = (event: any) => {
     event.preventDefault();
@@ -42,8 +42,8 @@ const AddUserModal = ({
   return (
     <div className="px-3 pb-5 bg-white dark:bg-tertiary">
       <h1 className="text-secondary text-3xl font-semibold dark:text-white">
-        {t('Add User', {
-          ns: ['main', 'home'],
+        {t("Add User", {
+          ns: ["main", "home"],
         })}
       </h1>
 
@@ -51,8 +51,8 @@ const AddUserModal = ({
         <div className="flex gap-9 mb-6 ">
           <TextInput
             placeholder="Ayuk"
-            label={t('First Name', {
-              ns: ['main', 'home'],
+            label={t("First Name", {
+              ns: ["main", "home"],
             })}
             type="text"
             id="FirstName"
@@ -64,8 +64,8 @@ const AddUserModal = ({
           />
           <TextInput
             placeholder="Tabe"
-            label={t('Last Name', {
-              ns: ['main', 'home'],
+            label={t("Last Name", {
+              ns: ["main", "home"],
             })}
             type="text"
             id="LastName"
@@ -80,8 +80,8 @@ const AddUserModal = ({
           <SelectInput
             selectOptions={USER_ROLE}
             placeholder="select role"
-            label={t('Role', {
-              ns: ['main', 'home'],
+            label={t("Role", {
+              ns: ["main", "home"],
             })}
             onChange={(e) => {
               setForm({ ...form, role: e.target.value as unknown as UserType });
@@ -91,8 +91,8 @@ const AddUserModal = ({
           <SelectInput
             selectOptions={ENGINEERING_DEPARTMENTS}
             placeholder="select department"
-            label={t('Department', {
-              ns: ['main', 'home'],
+            label={t("Department", {
+              ns: ["main", "home"],
             })}
             onChange={(e) => {
               setForm({ ...form, departmentId: e.target.value });
@@ -103,9 +103,9 @@ const AddUserModal = ({
 
         <div className="w-full h-full mb-12 ">
           <TextInput
-            placeholder={'example@gmail.com'}
-            label={t('Email Address', {
-              ns: ['main', 'home'],
+            placeholder={"example@gmail.com"}
+            label={t("Email Address", {
+              ns: ["main", "home"],
             })}
             type="email"
             id="Email"
@@ -164,15 +164,15 @@ const AddUserModal = ({
 
         <div className="flex gap-5 mt-1  mb-8">
           <Button
-            text={t('Cancel', {
-              ns: ['main', 'home'],
+            text={t("Cancel", {
+              ns: ["main", "home"],
             })}
             fullWidth={true}
             buttonType="TERTIARY"
           />
           <Button
-            text={t('Confirm', {
-              ns: ['main', 'home'],
+            text={t("Confirm", {
+              ns: ["main", "home"],
             })}
             fullWidth={true}
             buttonType="PRIMARY"
