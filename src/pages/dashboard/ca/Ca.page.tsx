@@ -63,6 +63,8 @@ const CaPage = () => {
 
   console.log(choosenCourse);
 
+  console.log(allStudents);
+
   // console.log("zxczxczx", formatedCourses);
 
   // const [selectedFile, setSelectedFile] = useState('');
