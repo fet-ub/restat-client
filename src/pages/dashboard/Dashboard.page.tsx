@@ -1,50 +1,64 @@
-import React, { useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-import styles from './dashboard.module.css';
+import styles from "./dashboard.module.css";
 
-import SidebarComponent from '../../components/dashboard/sidebar/Sidebar.component';
-import { IconRepository } from '../../repository/icons/icon.repository';
-import Image from '../../assets/images/image.png';
-import Toggle from '../../components/common/toogle/Toggle.common';
-import { useTranslation } from 'react-i18next';
-import Loader from '../../components/common/loader/Loader.common';
-import { CONSTANTS } from '../../constants/constants';
-import { useAppSelector } from '../../lib/hooks';
-import { RootState } from '../../app/store/store';
+import SidebarComponent from "../../components/dashboard/sidebar/Sidebar.component";
+import { IconRepository } from "../../repository/icons/icon.repository";
+import Image from "../../assets/images/image.png";
+import Toggle from "../../components/common/toogle/Toggle.common";
+import { useTranslation } from "react-i18next";
+import Loader from "../../components/common/loader/Loader.common";
+import { CONSTANTS } from "../../constants/constants";
+import { useAppSelector, useAppDispatch } from "../../lib/hooks";
+import { RootState } from "../../app/store/store";
+import { getUsersThunk } from "../../app/feature/user/thunk/user.thunk";
+import { getStudentsThunk } from "../../app/feature/student/thunk/student.thunk";
+import { getCoursesThunk } from "../../app/feature/course/thunk/course.thunk";
 
 const DashboardPage = () => {
   const accessToken = useAppSelector(
     (state: RootState) => state.loginState
   ).accessToken;
+
   const { t } = useTranslation();
-  const [theme, setTheme] = useState<any>('light');
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const [theme, setTheme] = useState<any>("light");
   const [user, setUser] = useState({
-    firstName: '',
+    firstName: "",
   });
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(getStudentsThunk());
+    dispatch(getUsersThunk());
+    dispatch(getCoursesThunk());
+
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-    if (localStorage.theme === 'dark') {
-      document.documentElement.classList.add('dark');
+    if (localStorage.theme === "dark") {
+      document.documentElement.classList.add("dark");
     } else {
-      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.remove("dark");
     }
   }, [theme]);
 
   const handleThemeSwitch = () => {
     // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-    if (localStorage.theme === 'dark') {
-      localStorage.theme = 'light';
+    if (localStorage.theme === "dark") {
+      localStorage.theme = "light";
       // console.log(localStorage.theme);
-      setTheme('light');
+      setTheme("light");
     } else {
-      localStorage.setItem('theme', 'dark');
+      localStorage.setItem("theme", "dark");
       // console.log(localStorage.theme);
-      setTheme('dark');
+      setTheme("dark");
     }
   };
 
@@ -52,7 +66,7 @@ const DashboardPage = () => {
     const userInfo = localStorage.getItem(CONSTANTS.STORAGE_KEY.CURRENT_USER);
 
     if (!userInfo && accessToken === null) {
-      navigate('/auth/login');
+      navigate("/auth/login");
     } else {
       setUser(JSON.parse(userInfo as string));
     }
@@ -81,8 +95,8 @@ const DashboardPage = () => {
           <div className={`${styles.content}  bg-white dark:bg-tertiary`}>
             <div className={styles.header}>
               <h2 title="FET" className="text-secondary dark:text-white">
-                {t('Faculty of Engineering and Technology', {
-                  ns: ['main', 'home'],
+                {t("Faculty of Engineering and Technology", {
+                  ns: ["main", "home"],
                 })}
               </h2>
               <div className={styles.items}>

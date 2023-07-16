@@ -15,7 +15,9 @@ const StatusModal = ({ status, text, onClick }: StatusModalPropType) => {
           ""
         )}
       </div>
-      <h1 className="text-2xl font-medium text-center my-4">{text}</h1>
+      <h1 className="text-2xl font-medium text-center my-4 dark:text-white">
+        {text}
+      </h1>
       <div className="mb-6">
         <Button
           buttonType="PRIMARY"

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   USER_ROLE,
   ENGINEERING_DEPARTMENTS,
@@ -8,16 +8,24 @@ import SelectInput from "../../../inputs/select-input/SelectInput.common";
 import TextInput from "../../../inputs/text-input/TextInput.common";
 import Button from "../../../buttons/Button.common";
 import { useTranslation } from "react-i18next";
-import { useAppDispatch } from "../../../../../lib/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../../lib/hooks";
 import { createUserThunk } from "../../../../../app/feature/user/thunk/user.thunk";
 import { userRequestType } from "../../../../../types/auth.type";
 import { UserType } from "../../../../../types/user.type";
+import { RootState } from "../../../../../app/store/store";
+import { ApiRequestStatus } from "../../../../../types/api.types";
 // import { ApiRequestStatus } from "../../../../../types/api.types";
 
 const AddUserModal = ({
   setIsOpen,
+  isOpen,
+  showSuccessModal,
+  setShowSuccessModal,
 }: {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isOpen: boolean;
+  showSuccessModal: boolean;
+  setShowSuccessModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const dispatch = useAppDispatch();
   const [form, setForm] = useState<userRequestType>({
@@ -29,14 +37,50 @@ const AddUserModal = ({
     facultyId: "1",
   });
   const { t } = useTranslation();
+  const getUsersState = useAppSelector(
+    (state: RootState) => state.getUsersState
+  );
 
-  console.log("role", form.role);
-  console.log(form);
+  useEffect(() => {
+    if (getUsersState.status === ApiRequestStatus.FULFILLED) {
+      setForm({
+        role: UserType.DEFAULT,
+        departmentId: "",
+        firstName: "",
+        lastName: "",
+        email: "",
+        facultyId: "1",
+      });
+
+      setIsOpen(false);
+      setShowSuccessModal(true);
+    }
+    /* eslint-disable */
+    // dispatch(resetcreateCourseState());
+  }, [getUsersState.status === ApiRequestStatus.FULFILLED]);
+  // console.log("role", form.role);
+  // console.log(form);
 
   const handleCreateUser = (event: any) => {
     event.preventDefault();
     dispatch(createUserThunk({ userType: form.role as UserType, body: form }));
     // setIsOpen(false);
+
+    if (getUsersState.status === ApiRequestStatus.FULFILLED) {
+      console.log("it ran");
+
+      setForm({
+        role: UserType.DEFAULT,
+        departmentId: "",
+        firstName: "",
+        lastName: "",
+        email: "",
+        facultyId: "1",
+      });
+
+      setIsOpen(false);
+      setShowSuccessModal(true);
+    }
   };
 
   return (
@@ -164,6 +208,7 @@ const AddUserModal = ({
 
         <div className="flex gap-5 mt-1  mb-8">
           <Button
+            disable={getUsersState.status === ApiRequestStatus.PENDING}
             text={t("Cancel", {
               ns: ["main", "home"],
             })}
@@ -171,11 +216,13 @@ const AddUserModal = ({
             buttonType="TERTIARY"
           />
           <Button
+            disable={getUsersState.status === ApiRequestStatus.PENDING}
             text={t("Confirm", {
               ns: ["main", "home"],
             })}
             fullWidth={true}
             buttonType="PRIMARY"
+            loading={getUsersState.status === ApiRequestStatus.PENDING}
           />
         </div>
       </form>

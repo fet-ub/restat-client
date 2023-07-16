@@ -21,6 +21,9 @@ import { RootState } from "../../../app/store/store";
 // import { UserResponseTypes } from "../../../types/user.type";
 import EditIcon from "../../../icons/Edit.icon";
 import DeleteIcon from "../../../icons/Delete.icon";
+import { resetGetUsersState } from "../../../app/feature/user/slices/getUsers.slice";
+import { ApiRequestStatus } from "../../../types/api.types";
+import StatusModal from "../../../components/common/modal/modules/status/StatusModal.module";
 
 //  GridValueGetterParams
 const UsersPage = () => {
@@ -28,6 +31,7 @@ const UsersPage = () => {
   const getUsersState = useAppSelector(
     (state: RootState) => state.getUsersState
   );
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   // const [currentUsers, setCurrentUSers] = useState<UserResponseTypes[]>([]);
   // useEffect(() => {
@@ -177,9 +181,57 @@ const UsersPage = () => {
           className="dark:text-white"
         />
       </div>
+      {showSuccessModal && (
+        <ModalContainer
+          width="400px"
+          onClick={() => {
+            setShowSuccessModal(false);
+            dispatch(resetGetUsersState());
+            // dispatch(resetBulkStudentState());
+            dispatch(getUsersThunk());
+          }}
+        >
+          <StatusModal
+            status={
+              getUsersState.status === ApiRequestStatus.FULFILLED
+                ? "SUCCESS"
+                : getUsersState.status === ApiRequestStatus.REJECTED
+                ? "ERROR"
+                : // : createBulkStudentState.status === ApiRequestStatus.FULFILLED
+                  // ? "SUCCESS"
+                  // : createBulkStudentState.status === ApiRequestStatus.REJECTED
+                  // ? "ERROR"
+                  "SUCCESS"
+            }
+            text={
+              getUsersState.status === ApiRequestStatus.FULFILLED
+                ? "User was added successfully"
+                : getUsersState.status === ApiRequestStatus.REJECTED
+                ? getUsersState.message
+                : // : createBulkStudentState.status === ApiRequestStatus.FULFILLED
+                  // ? createBulkStudentState.message
+                  // : createBulkStudentState.status === ApiRequestStatus.REJECTED
+                  // ? createBulkStudentState.message
+                  ""
+            }
+            onClick={() => {
+              setShowSuccessModal(false);
+              dispatch(resetGetUsersState());
+              // dispatch(resetBulkStudentState());
+              dispatch(getUsersThunk());
+            }}
+          />
+        </ModalContainer>
+      )}
+
       {isOpen && (
         <ModalContainer width="800px" onClick={() => setIsOpen(false)}>
-          <AddUserModal setIsOpen={setIsOpen} />
+          <AddUserModal
+            setIsOpen={setIsOpen}
+            isOpen={isOpen}
+            setShowSuccessModal={setShowSuccessModal}
+            showSuccessModal={showSuccessModal}
+          />
         </ModalContainer>
       )}
     </div>

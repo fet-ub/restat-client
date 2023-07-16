@@ -131,22 +131,6 @@ const StudentsPage = () => {
     // }
   };
 
-  // const formattedArr = studentsTableData.map((obj: any) => {
-  //   // Add code to rename keys here
-
-  //   const formattedObj: any = {};
-  //   Object.keys(obj).forEach((key: any) => {
-  //     const formattedKey = key.replace(/ /g, "_").toLowerCase();
-  //     formattedObj[formattedKey] = obj[key];
-  //   });
-
-  //   return formattedObj as studentType;
-  // });
-
-  // console.log(allStudents);
-
-  // console.log(filteredData);
-
   const columns: GridColDef[] = [
     {
       field: "user",

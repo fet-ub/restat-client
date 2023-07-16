@@ -10,7 +10,6 @@ import { useAppSelector, useAppDispatch } from "../../../lib/hooks";
 import { RootState } from "../../../app/store/store";
 import { marksType } from "../../../components/common/table/add-ca/AddCaTable.common";
 import Button from "../../../components/common/buttons/Button.common";
-// import { CourseResponseTypes } from "../../../types/course.type";
 import { CaMarkRequestType } from "../../../types/caMark.type";
 import StatusModal from "../../../components/common/modal/modules/status/StatusModal.module";
 import { resetCreateCaMarkState } from "../../../app/feature/ca-mark/slices/createCaMark.slice";
@@ -31,19 +30,10 @@ const CaPage = () => {
   const createCaMarkState = useAppSelector(
     (state: RootState) => state.createCaMarkState
   );
-  // console.log(getStudentsState.students);
 
   const [isOpen, setIsOpen] = useState(false);
   const [allStudents, setAllStudents] = useState<marksType[]>([]);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
-
-  // const [marksTableData, setMarksTableData] = useState<any>([
-  //   {
-  //     matriculationNumber: "FE19A038",
-  //     mark: "",
-  //     filledStatus: "not filled",
-  //   },
-  // ]);
 
   const [selectedIndex, setSelectedIndex] = useState<any>("");
 
@@ -54,13 +44,33 @@ const CaPage = () => {
       mark: "",
     }));
 
-    // const courseResult=getCoursesState.courses.map((obj)=>{
-    //   ...object,
-
-    // })
-
     setAllStudents(result);
   }, []);
+
+  useEffect(() => {
+    if (createCaMarkState.status === ApiRequestStatus.FULFILLED) {
+      console.log("it ran");
+      setSelectedIndex("");
+      setShowSuccessModal(true);
+    }
+
+    // dispatch(resetcreateCourseState());
+    // eslint-disable-next-line
+  }, [createCaMarkState.status === ApiRequestStatus.FULFILLED]);
+
+  useEffect(() => {
+    if (createCaMarkState.status === ApiRequestStatus.REJECTED) {
+      console.log("it ran");
+
+      // closeModal();
+      // setSelectedFile("");
+      // setFileName("");
+      setShowSuccessModal(true);
+    }
+
+    // dispatch(resetcreateCourseState());
+    // eslint-disable-next-line
+  }, [createCaMarkState.status === ApiRequestStatus.REJECTED]);
 
   const formatedCourses = getCoursesState.courses.map((obj, index) => ({
     ...obj,
@@ -80,7 +90,7 @@ const CaPage = () => {
     const uploadData: CaMarkRequestType[] = [];
     allStudents.map((student) => {
       uploadData.push({
-        studentId: student.userId,
+        studentId: student.id,
         courseId: choosenCourse.id,
         semesterId: choosenCourse.semesterId,
         mark: student.mark,

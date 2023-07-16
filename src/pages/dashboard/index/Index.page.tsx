@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-
+import React from "react";
+// { useEffect }
 import styles from "./index.module.css";
 
 import DashboardCard from "../../../components/common/cards/dashboard-card/DashboardCard.common";
@@ -7,16 +7,16 @@ import { IconRepository } from "../../../repository/icons/icon.repository";
 import DoughnutChart from "../../../components/common/chart/DoughnutChart.component";
 import LineChart from "../../../components/common/chart/LineChart.component";
 import { useTranslation } from "react-i18next";
-import { useAppDispatch, useAppSelector } from "../../../lib/hooks";
+import { useAppSelector } from "../../../lib/hooks";
 import { RootState } from "../../../app/store/store";
 // import getStudentsSlice from "../../../app/feature/student/slice/getStudents.slice";
-import { getStudentsThunk } from "../../../app/feature/student/thunk/student.thunk";
-import { getUsersThunk } from "../../../app/feature/user/thunk/user.thunk";
-import { getCoursesThunk } from "../../../app/feature/course/thunk/course.thunk";
+// import { getStudentsThunk } from "../../../app/feature/student/thunk/student.thunk";
+// import { getUsersThunk } from "../../../app/feature/user/thunk/user.thunk";
+// import { getCoursesThunk } from "../../../app/feature/course/thunk/course.thunk";
 
 const IndexPage = () => {
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const getCoursesState = useAppSelector(
     (state: RootState) => state.getCoursesState
   );
@@ -26,21 +26,6 @@ const IndexPage = () => {
   const getUsersState = useAppSelector(
     (state: RootState) => state.getUsersState
   );
-
-  useEffect(() => {
-    //  const timeout = setTimeout(() => {
-    dispatch(getStudentsThunk());
-    dispatch(getUsersThunk());
-    dispatch(getCoursesThunk());
-
-    // setAllStudents(getStudentsState.students);
-    //  setFilteredData(getStudentsState.students);
-    //  }, 2000);
-
-    //  return () => clearTimeout(timeout);
-
-    // eslint-disable-next-line
-  }, []);
 
   const dashboardCardData = [
     {
