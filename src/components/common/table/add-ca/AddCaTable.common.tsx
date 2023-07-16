@@ -4,7 +4,7 @@ import TextInput from "../../inputs/text-input/TextInput.common";
 import { CSVLink } from "react-csv";
 import { useTranslation } from "react-i18next";
 import styles from "../encrypt-ca/encryptCaTable.module.css";
-import StatusCard from "../../cards/status-card/StatusCard.common";
+// import StatusCard from "../../cards/status-card/StatusCard.common";
 import FilledCard from "../../cards/filled-card/FilledCard.common";
 import EditIcon from "../../../../icons/Edit.icon";
 import DeleteIcon from "../../../../icons/Delete.icon";
@@ -25,11 +25,15 @@ export interface marksType extends StudentResponseTypes {
 interface EncryptCaTablePropTypes {
   marksTableData: marksType[];
   setMarksTableData: React.Dispatch<React.SetStateAction<marksType[]>>;
+  courseCode?: string;
+  courseName?: string;
 }
 
 const AddCaTable = ({
   marksTableData,
   setMarksTableData,
+  courseCode,
+  courseName,
 }: EncryptCaTablePropTypes) => {
   const { t } = useTranslation();
   const [form, setForm] = useState({
@@ -88,15 +92,26 @@ const AddCaTable = ({
     }, 0);
 
     var newArr = marksTableData.map(function (obj: any) {
-      var newObj: any = {};
-      for (var key in obj) {
-        if (key !== "filledStatus") {
-          newObj[key] = obj[key];
-        }
-      }
-      return newObj;
+      // var newObj: any = [];
+      return {
+        firstName: obj.user.firstName,
+        lastName: obj.user.lastName,
+        matriculationNumber: obj.matriculationNumber,
+        mark: obj.mark,
+      };
+
+      // for (var key in obj) {
+      //   if (
+      //     key === "matriculationNumber" ||
+      //     key === "mark" ||
+      //     key === "firstName"
+      //   ) {
+      //     newObj[key] = obj[key];
+      //   }
+      // }
+      // return newObj;
     });
-    // console.log('zxZXZ',newArr);
+    // console.log("zxZXZ", newArr);
 
     setExportData(newArr);
 
@@ -129,10 +144,12 @@ const AddCaTable = ({
         <div className="flex justify-center items-center mt-4">
           <CSVLink
             data={exportData}
-            filename="EncryptedCAMarks"
+            filename="CourseMarks"
             className="bg-primary  px-4 text-white   py-[10px]    rounded-lg outline-none text-[16px] flex justify-center items-center gap-3"
           >
-            {t("Export User Data", { ns: ["main", "home"] })}
+            {t(`Export ${courseCode}: ${courseName} `, {
+              ns: ["main", "home"],
+            })}
           </CSVLink>
           {/* <Button
             text="Download File"
@@ -150,6 +167,7 @@ const AddCaTable = ({
               className={`${styles.table__heading} text-secondary dark:text-white  font-bold`}
             >
               <th> {t("Matricule Number", { ns: ["main", "home"] })}</th>
+              <th> {t("Name", { ns: ["main", "home"] })}</th>
               <th> {t("Status", { ns: ["main", "home"] })}</th>
               <th> {t("CA mark", { ns: ["main", "home"] })}</th>
 
@@ -178,6 +196,9 @@ const AddCaTable = ({
                     <td className={styles.row__matricule}>
                       {mark.matriculationNumber}
                     </td>
+                    <td className={styles.row__name}>
+                      {mark.user.firstName} {mark.user.lastName}
+                    </td>
                     <td className={styles.row__status}>
                       {mark.mark?.length > 0 ? (
                         <FilledCard filled={"filled"} />
@@ -188,7 +209,7 @@ const AddCaTable = ({
                     <td className={styles.row__input}>
                       <input
                         name="mark"
-                        type="text"
+                        type="number"
                         value={mark.mark}
                         onChange={(e) =>
                           onChangeInput(e, mark.matriculationNumber)

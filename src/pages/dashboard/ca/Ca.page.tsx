@@ -6,14 +6,20 @@ import { MarksType } from "../../../types/atoms/enums.atoms";
 import { useTranslation } from "react-i18next";
 import SelectInput from "../../../components/common/inputs/select-input/SelectInput.common";
 import AddCaTable from "../../../components/common/table/add-ca/AddCaTable.common";
-import { useAppSelector } from "../../../lib/hooks";
+import { useAppSelector, useAppDispatch } from "../../../lib/hooks";
 import { RootState } from "../../../app/store/store";
 import { marksType } from "../../../components/common/table/add-ca/AddCaTable.common";
 import Button from "../../../components/common/buttons/Button.common";
-import { CourseResponseTypes } from "../../../types/course.type";
+// import { CourseResponseTypes } from "../../../types/course.type";
+import { CaMarkRequestType } from "../../../types/caMark.type";
+import StatusModal from "../../../components/common/modal/modules/status/StatusModal.module";
+import { resetCreateCaMarkState } from "../../../app/feature/ca-mark/slices/createCaMark.slice";
+import { createCaMarkThunk } from "../../../app/feature/ca-mark/thunk/caMark.thunk";
+import { ApiRequestStatus } from "../../../types/api.types";
 
 const CaPage = () => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
   const getStudentsState = useAppSelector(
     (state: RootState) => state.getStudentsState
   );
@@ -22,17 +28,22 @@ const CaPage = () => {
     (state: RootState) => state.getCoursesState
   );
 
+  const createCaMarkState = useAppSelector(
+    (state: RootState) => state.createCaMarkState
+  );
   // console.log(getStudentsState.students);
 
   const [isOpen, setIsOpen] = useState(false);
   const [allStudents, setAllStudents] = useState<marksType[]>([]);
-  const [marksTableData, setMarksTableData] = useState<any>([
-    {
-      matriculationNumber: "FE19A038",
-      mark: "",
-      filledStatus: "not filled",
-    },
-  ]);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+  // const [marksTableData, setMarksTableData] = useState<any>([
+  //   {
+  //     matriculationNumber: "FE19A038",
+  //     mark: "",
+  //     filledStatus: "not filled",
+  //   },
+  // ]);
 
   const [selectedIndex, setSelectedIndex] = useState<any>("");
 
@@ -57,13 +68,28 @@ const CaPage = () => {
     value: index,
   }));
 
-  console.log(selectedIndex);
+  // console.log(selectedIndex);
 
   const choosenCourse = getCoursesState.courses[selectedIndex];
 
-  console.log(choosenCourse);
+  // console.log(choosenCourse);
 
-  console.log(allStudents);
+  // console.log(allStudents);
+
+  const handleUploadCaMarks = () => {
+    const uploadData: CaMarkRequestType[] = [];
+    allStudents.map((student) => {
+      uploadData.push({
+        studentId: student.userId,
+        courseId: choosenCourse.id,
+        semesterId: choosenCourse.semesterId,
+        mark: student.mark,
+      });
+    });
+    dispatch(createCaMarkThunk(uploadData));
+
+    // console.log(uploadData);
+  };
 
   // console.log("zxczxczx", formatedCourses);
 
@@ -95,15 +121,65 @@ const CaPage = () => {
               (student) => student.level === choosenCourse?.level
             )}
             setMarksTableData={setAllStudents}
+            courseCode={choosenCourse.courseCode}
+            courseName={choosenCourse.name}
           />
           <div className="w-full flex items-center justify-center mt-10">
-            <Button text={"Upload Marks"} width="500px" buttonType="PRIMARY" />
+            <Button
+              text={"Upload Marks"}
+              width="500px"
+              buttonType="PRIMARY"
+              onClick={handleUploadCaMarks}
+              loading={createCaMarkState.status === ApiRequestStatus.PENDING}
+              disable={createCaMarkState.status === ApiRequestStatus.PENDING}
+            />
           </div>
         </>
       )}
       {isOpen && (
         <ModalContainer width="700px" onClick={() => setIsOpen(false)}>
           <AddMarksModal modalType={MarksType.CA} />
+        </ModalContainer>
+      )}
+      {showSuccessModal && (
+        <ModalContainer
+          width="400px"
+          onClick={() => {
+            setShowSuccessModal(false);
+            dispatch(resetCreateCaMarkState());
+            // dispatch(getStudentsThunk());
+          }}
+        >
+          <StatusModal
+            status={
+              createCaMarkState.status === ApiRequestStatus.FULFILLED
+                ? "SUCCESS"
+                : createCaMarkState.status === ApiRequestStatus.REJECTED
+                ? "ERROR"
+                : // : createBulkStudentState.status === ApiRequestStatus.FULFILLED
+                  // ? "SUCCESS"
+                  // : createBulkStudentState.status === ApiRequestStatus.REJECTED
+                  // ? "ERROR"
+                  "SUCCESS"
+            }
+            text={
+              createCaMarkState.status === ApiRequestStatus.FULFILLED
+                ? "Ca Mark was added successfully"
+                : createCaMarkState.status === ApiRequestStatus.REJECTED
+                ? createCaMarkState.message
+                : // : createBulkStudentState.status === ApiRequestStatus.FULFILLED
+                  // ? createBulkStudentState.message
+                  // : createBulkStudentState.status === ApiRequestStatus.REJECTED
+                  // ? createBulkStudentState.message
+                  ""
+            }
+            onClick={() => {
+              setShowSuccessModal(false);
+              dispatch(resetCreateCaMarkState());
+              // dispatch(resetBulkStudentState());
+              // dispatch(getStudentsThunk());
+            }}
+          />
         </ModalContainer>
       )}
     </div>

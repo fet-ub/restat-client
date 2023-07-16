@@ -1,4 +1,3 @@
-
 .container {
   width: 100%;
   padding: 0 10px;
@@ -33,7 +32,10 @@
   /* padding: 12px 12px; */
 }
 
-.row__matricule ,.row__ca , .row__status{
+.row__matricule,
+.row__ca,
+.row__status,
+.row__name {
   padding: 12px;
 }
 
