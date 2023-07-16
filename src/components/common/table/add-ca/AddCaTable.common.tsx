@@ -66,6 +66,13 @@ const AddCaTable = ({
     }
   };
 
+  const handleKeyDown = (event: any) => {
+    if (event.keyCode === 40) {
+      // 40 is the keycode for down arrow key
+      event.target.nextSibling.focus();
+    }
+  };
+
   const onChangeInput = (
     e: React.ChangeEvent<HTMLInputElement>,
     matricule: any
@@ -209,11 +216,14 @@ const AddCaTable = ({
                     <td className={styles.row__input}>
                       <input
                         name="mark"
-                        type="number"
+                        type="text"
                         value={mark.mark}
-                        onChange={(e) =>
-                          onChangeInput(e, mark.matriculationNumber)
-                        }
+                        onChange={(e) => {
+                          onChangeInput(e, mark.matriculationNumber);
+                        }}
+                        // onKeyDown={(e) => {
+                        //   handleKeyDown(e);
+                        // }}
                         placeholder="Enter mark"
                       />
                     </td>

@@ -43,3 +43,18 @@ export const getUsersThunk = createAsyncThunk(
     }
   }
 );
+
+export const deleteUserThunk = createAsyncThunk(
+  "/deleteUsers",
+  async (data: { id: number; userType: UserType }, { rejectWithValue }) => {
+    try {
+      const response = await userService.deleteUser(data.id, data.userType);
+
+      // console.log({ response });
+
+      return response?.data;
+    } catch (ex) {
+      return rejectWithValue(getExceptionPayload(ex) as ApiRequestErrorType);
+    }
+  }
+);

@@ -26,6 +26,11 @@ const IndexPage = () => {
   const getUsersState = useAppSelector(
     (state: RootState) => state.getUsersState
   );
+  const getLecturersState = useAppSelector(
+    (state: RootState) => state.getLecturersState
+  );
+
+  // console.log(getLecturersState);
 
   const dashboardCardData = [
     {
@@ -45,7 +50,7 @@ const IndexPage = () => {
     },
     {
       label: t("Lecturers", { ns: ["main", "home"] }),
-      stats: 20,
+      stats: getLecturersState?.lecturers.length,
       icon: <IconRepository.PersonIcon width={70} height={70} />,
     },
   ];

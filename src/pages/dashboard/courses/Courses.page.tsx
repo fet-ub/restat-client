@@ -227,7 +227,7 @@ const CoursesPage = () => {
         />
       </div>
       {isOpen && (
-        <ModalContainer width="700px" onClick={() => setIsOpen(false)}>
+        <ModalContainer width="840px" onClick={() => setIsOpen(false)}>
           <AddCourseModal
             setIsOpen={setIsOpen}
             isOpen={isOpen}
@@ -238,7 +238,7 @@ const CoursesPage = () => {
       )}
 
       {deleteModal && (
-        <ModalContainer width="600px" onClick={() => setDeleteModal(false)}>
+        <ModalContainer width="700px" onClick={() => setDeleteModal(false)}>
           <DeleteModal
             onClick={() => handleDeleteCourse(courseId)}
             closeModal={() => setDeleteModal(false)}
@@ -269,9 +269,9 @@ const CoursesPage = () => {
             }
             text={
               createCourseState.status === ApiRequestStatus.FULFILLED
-                ? "Sucessuly Added Course"
+                ? "Sucessfully Added Course"
                 : createCourseState.status === ApiRequestStatus.REJECTED
-                ? "Could not Add Course"
+                ? "Could not Add Course!"
                 : ""
             }
             onClick={() => {

@@ -121,4 +121,32 @@ export class UserService {
       return await publicApiRequest().get("/users");
     });
   }
+
+  public async deleteUser(id: number, userType: UserType) {
+    if (Number(userType) === UserType.LECTURER) {
+      return await authService.laravelSanctum().then(async () => {
+        return await publicApiRequest().delete(`/students/${id}`);
+      });
+    }
+    if (Number(userType) === UserType.SUPPORT_STAFF) {
+      return await authService.laravelSanctum().then(async () => {
+        return await publicApiRequest().delete(`/support-staffs/${id}`);
+      });
+    }
+    if (Number(userType) === UserType.EXAMINER) {
+      return await authService.laravelSanctum().then(async () => {
+        return await publicApiRequest().delete(`/examiners/${id}`);
+      });
+    }
+    if (Number(userType) === UserType.COORDINATOR) {
+      return await authService.laravelSanctum().then(async () => {
+        return await publicApiRequest().delete(`/coordinators/${id}`);
+      });
+    }
+    if (Number(userType) === UserType.DEAN) {
+      return await authService.laravelSanctum().then(async () => {
+        return await publicApiRequest().delete(`/deans/${id}`);
+      });
+    }
+  }
 }

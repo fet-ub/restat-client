@@ -16,6 +16,7 @@ import { RootState } from "../../app/store/store";
 import { getUsersThunk } from "../../app/feature/user/thunk/user.thunk";
 import { getStudentsThunk } from "../../app/feature/student/thunk/student.thunk";
 import { getCoursesThunk } from "../../app/feature/course/thunk/course.thunk";
+import { getLecturersThunk } from "../../app/feature/lecturer/thunk/lecturer.thunk";
 
 const DashboardPage = () => {
   const accessToken = useAppSelector(
@@ -36,6 +37,7 @@ const DashboardPage = () => {
     dispatch(getStudentsThunk());
     dispatch(getUsersThunk());
     dispatch(getCoursesThunk());
+    dispatch(getLecturersThunk());
 
     // eslint-disable-next-line
   }, []);
