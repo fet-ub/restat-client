@@ -20,8 +20,8 @@ export enum UserType {
 export interface GetUserResponseTypes {
   user: GetUserType;
   role: string[];
-  faculties: any[];
-  departments: any[];
+  faculties: Faculty[];
+  departments: Department[];
 }
 
 export interface GetUserType {
@@ -33,9 +33,11 @@ export interface GetUserType {
   status: string;
   created_at: Date;
   updated_at: Date;
-  faculties: any[];
-  departments: any[];
+  faculties?: Faculty[];
+  departments?: Department[];
 }
+
+//new
 
 export interface UserResponseTypes {
   id: number;

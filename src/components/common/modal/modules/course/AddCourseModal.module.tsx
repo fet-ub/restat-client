@@ -129,11 +129,6 @@ const AddCourseModal = ({
 
       setIsOpen(false);
       setShowSuccessModal(true);
-      // const timeout = setTimeout(() => {
-      //   setShowSuccessModal(!showSuccessModal);
-      // }, 1000);
-
-      // return () => clearTimeout(timeout);
     }
   };
 

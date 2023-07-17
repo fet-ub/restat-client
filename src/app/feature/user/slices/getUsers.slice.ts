@@ -43,12 +43,12 @@ const getUsersSlice = createSlice({
         state.users = action.payload.users;
         // state.courses = action.payload;
 
-        // console.log({ payload: action.payload });
+        // console.log("sadsad", { payload: action.payload });
       })
       .addCase(getUsersThunk.rejected, (state, action) => {
         (state.status = ApiRequestStatus.REJECTED),
           (state.message = (action.payload as StoredErrorResponseType).message);
-        console.log({ payload: action.payload });
+        // console.log({ payload: action.payload });
       });
   },
 });

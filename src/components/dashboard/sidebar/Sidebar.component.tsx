@@ -45,7 +45,12 @@ const SidebarComponent = () => {
       label: t("Dashboard", { ns: ["main", "home"] }),
       notifications: 0,
       icon: <IconRepository.DashboardIcon width={24} height={24} />,
-      ref: [DashboardType.ADMIN, DashboardType.DEAN, DashboardType.HOD],
+      ref: [
+        DashboardType.ADMIN,
+        DashboardType.DEAN,
+        DashboardType.HOD,
+        DashboardType.LECTURER,
+      ],
     },
     {
       link: "/dashboard/students",
@@ -109,7 +114,7 @@ const SidebarComponent = () => {
       notifications: 1,
       icon: <IconRepository.CertificateIcon width={24} height={24} />,
       ref: [
-        DashboardType.ADMIN,
+        // DashboardType.ADMIN,
         DashboardType.DEAN,
         DashboardType.HOD,
         DashboardType.COORDINATOR,

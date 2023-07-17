@@ -25,12 +25,12 @@ import { resetGetUsersState } from "../../../app/feature/user/slices/getUsers.sl
 import { ApiRequestStatus } from "../../../types/api.types";
 import StatusModal from "../../../components/common/modal/modules/status/StatusModal.module";
 
-interface TableUserResponseTypes {
-  user: TableUser;
-  role: string[];
-  faculties: any[];
-  departments: any[];
-}
+// interface TableUserResponseTypes {
+//   user: TableUser;
+//   role: string[];
+//   faculties: any[];
+//   departments: any[];
+// }
 
 interface TableUser {
   id: number;
@@ -88,12 +88,14 @@ const UsersPage = () => {
       sortable: false,
       valueGetter: (params: GridValueGetterParams) => params.row.role[0],
     },
-    // {
-    //   field: "department",
-    //   headerName: "Department",
-    //   width: 270,
-    //   sortable: false,
-    // },
+    {
+      field: "department",
+      headerName: "Department",
+      width: 250,
+      sortable: false,
+      valueGetter: (params: GridValueGetterParams) =>
+        params.row?.departments[0]?.name,
+    },
     {
       field: "user",
       headerName: "Email",
