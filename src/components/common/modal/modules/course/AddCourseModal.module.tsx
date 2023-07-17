@@ -100,7 +100,16 @@ const AddCourseModal = ({
   const handleAddCourse = async (event: any) => {
     event.preventDefault();
     await dispatch(
-      createCourseThunk({ ...form, userId: choosenLecturer.id.toString() })
+      createCourseThunk({
+        facultyId: form.facultyId,
+        semesterId: form.semesterId,
+        name: form.name.toUpperCase(),
+        courseCode: form.courseCode.toUpperCase(),
+        level: form.level,
+        status: form.status,
+        creditValue: form.creditValue,
+        userId: choosenLecturer.id.toString(),
+      })
     );
     // dispatch(resetcreateCourseState());
     // setTracker(!tracker)

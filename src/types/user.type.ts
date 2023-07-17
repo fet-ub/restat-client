@@ -14,7 +14,27 @@ export enum UserType {
   ADMIN,
   DEAN,
   STUDENT,
-  DEFAULT = '',
+  DEFAULT = "",
+}
+
+export interface GetUserResponseTypes {
+  user: GetUserType;
+  role: string[];
+  faculties: any[];
+  departments: any[];
+}
+
+export interface GetUserType {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  profilePicture: null;
+  status: string;
+  created_at: Date;
+  updated_at: Date;
+  faculties: any[];
+  departments: any[];
 }
 
 export interface UserResponseTypes {
@@ -28,6 +48,7 @@ export interface UserResponseTypes {
   updated_at: Date;
   faculties?: Faculty[];
   departments?: Department[];
+  role: string[];
 }
 
 export interface Department {

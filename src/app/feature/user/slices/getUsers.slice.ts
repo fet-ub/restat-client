@@ -7,13 +7,16 @@ import {
   StoredErrorResponseType,
 } from "../../../../types/api.types";
 import { getUsersThunk } from "../thunk/user.thunk";
-import { UserResponseTypes } from "../../../../types/user.type";
+import {
+  GetUserResponseTypes,
+  UserResponseTypes,
+} from "../../../../types/user.type";
 // import { CourseResponseTypes } from "../../../../types/course.type";
 
 type InitialStateTypes = {
   status: ApiRequestStatus;
   message: string;
-  users: UserResponseTypes[];
+  users: GetUserResponseTypes[];
 };
 
 const initialState: InitialStateTypes = {
@@ -37,7 +40,7 @@ const getUsersSlice = createSlice({
       })
       .addCase(getUsersThunk.fulfilled, (state, action) => {
         state.status = ApiRequestStatus.FULFILLED;
-        state.users = action.payload;
+        state.users = action.payload.users;
         // state.courses = action.payload;
 
         // console.log({ payload: action.payload });

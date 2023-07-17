@@ -25,6 +25,25 @@ import { resetGetUsersState } from "../../../app/feature/user/slices/getUsers.sl
 import { ApiRequestStatus } from "../../../types/api.types";
 import StatusModal from "../../../components/common/modal/modules/status/StatusModal.module";
 
+interface TableUserResponseTypes {
+  user: TableUser;
+  role: string[];
+  faculties: any[];
+  departments: any[];
+}
+
+interface TableUser {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  profilePicture: null;
+  status: string;
+  created_at: Date;
+  updated_at: Date;
+  faculties: any[];
+  departments: any[];
+}
 //  GridValueGetterParams
 const UsersPage = () => {
   const dispatch = useAppDispatch();
@@ -47,6 +66,8 @@ const UsersPage = () => {
   //   // eslint-disable-next-line
   // }, []);
 
+  console.log("hfhgfghfghfhfh", getUsersState.users);
+
   const { t } = useTranslation();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -58,31 +79,14 @@ const UsersPage = () => {
       sortable: false,
 
       valueGetter: (params: GridValueGetterParams) =>
-        `${params.row.firstName || ""} ${params.row.lastName || ""}`,
+        `${params.row.user.firstName || ""} ${params.row.user.lastName || ""}`,
     },
     {
-      field: "id",
+      field: "role",
       headerName: "Role",
       width: 270,
       sortable: false,
-      valueGetter: (params: GridValueGetterParams) =>
-        params.row.id === 1
-          ? "Admin"
-          : params.row.id === 2
-          ? "Dean"
-          : params.row.id === 3
-          ? "HOD"
-          : params.row.id === 4
-          ? "Coordinator"
-          : params.row.id === 5
-          ? "Lecturer"
-          : params.row.id === 6
-          ? "Examiner"
-          : params.row.id === 7
-          ? "Support Staff"
-          : params.row.id === 8
-          ? "Student"
-          : "",
+      valueGetter: (params: GridValueGetterParams) => params.row.role[0],
     },
     // {
     //   field: "department",
@@ -91,10 +95,11 @@ const UsersPage = () => {
     //   sortable: false,
     // },
     {
-      field: "email",
+      field: "user",
       headerName: "Email",
       width: 270,
       sortable: false,
+      valueGetter: (params: GridValueGetterParams) => params.row.user.email,
     },
     // {
     //   field: "phone",
@@ -176,7 +181,7 @@ const UsersPage = () => {
           }}
           pageSizeOptions={[5, 10]}
           checkboxSelection
-          getRowId={(row: any) => row.email + row.id}
+          getRowId={(row: any) => row.user.id}
           style={{ fontSize: "15px" }}
           className="dark:text-white"
         />

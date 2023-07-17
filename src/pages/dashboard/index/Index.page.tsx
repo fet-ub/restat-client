@@ -30,7 +30,7 @@ const IndexPage = () => {
     (state: RootState) => state.getLecturersState
   );
 
-  // console.log(getLecturersState);
+  // console.log("hgjhghjg", getUsersState.users);
 
   const dashboardCardData = [
     {
@@ -45,7 +45,7 @@ const IndexPage = () => {
     },
     {
       label: t("Users", { ns: ["main", "home"] }),
-      stats: getUsersState?.users?.length,
+      stats: getUsersState?.users.length,
       icon: <IconRepository.PersonIcon width={70} height={70} />,
     },
     {
