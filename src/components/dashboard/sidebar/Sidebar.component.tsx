@@ -175,7 +175,7 @@ const SidebarComponent = () => {
       : role === "Examiner"
       ? setCurrentRole(DashboardType.EXAMINER)
       : setCurrentRole(DashboardType.ADMIN);
-  }, [localStorage.getItem(CONSTANTS.STORAGE_KEY.USER_ROLE)]);
+  }, [location.pathname]);
 
   useEffect(() => {
     setStateMutation(!stateMutation);
