@@ -35,7 +35,7 @@ export const getUsersThunk = createAsyncThunk(
     try {
       const response = await userService.getUsers();
 
-      // console.log({ response });
+      // console.log("sad", { response });
 
       return response?.data;
     } catch (ex) {

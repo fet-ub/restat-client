@@ -30,8 +30,12 @@ const DashboardPage = () => {
   const [theme, setTheme] = useState<any>("light");
   const [user, setUser] = useState({
     firstName: "",
+    lastName: "",
   });
+  const [role, setRole] = useState<any>("");
   const [loading, setLoading] = useState(true);
+
+  // console.log(role);
 
   useEffect(() => {
     dispatch(getStudentsThunk());
@@ -66,11 +70,13 @@ const DashboardPage = () => {
 
   useEffect(() => {
     const userInfo = localStorage.getItem(CONSTANTS.STORAGE_KEY.CURRENT_USER);
+    const userRoleInfo = localStorage.getItem(CONSTANTS.STORAGE_KEY.USER_ROLE);
 
     if (!userInfo && accessToken === null) {
       navigate("/auth/login");
     } else {
       setUser(JSON.parse(userInfo as string));
+      setRole(userRoleInfo);
     }
     // eslint-disable-next-line
   }, [window.location.pathname]);
@@ -80,6 +86,10 @@ const DashboardPage = () => {
       setLoading(false);
     }
   }, [user]);
+
+  const capitalizeFirstLetter = (string: any) => {
+    return string[0].toUpperCase() + string.slice(1);
+  };
 
   // console.log(user);
 
@@ -116,8 +126,10 @@ const DashboardPage = () => {
                     {/* <IconRepository.ProfileIcon /> */}
                   </div>
                   <div className="dark:text-white">
-                    <h2 className="dark:text-white">{user?.firstName}</h2>
-                    <h3>FE19A000</h3>
+                    <h2 className="dark:text-white">
+                      {user?.firstName} {user?.lastName}
+                    </h2>
+                    <h3>{capitalizeFirstLetter(role)}</h3>
                   </div>
                 </div>
               </div>

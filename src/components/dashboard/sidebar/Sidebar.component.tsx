@@ -1,23 +1,47 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React, { Fragment } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 import styles from "./sidebar.module.css";
 
 import { IconRepository } from "../../../repository/icons/icon.repository";
 import SidebarLinksComponent from "../sidebar-links/SidebarLinks.component";
 import { useTranslation } from "react-i18next";
+import { CONSTANTS } from "../../../constants/constants";
 
 // import { DashboardDefaultType } from "../../../default";
 // import { IconPropsType } from "../../../types";
 
 export enum DashboardType {
-  DEAN = 0,
-  HOD = 1,
-  COORDINATOR = 2,
-  LECTURER = 3,
-  SECRETARY = 4,
-  STUDENT = 5,
+  ADMIN = 0,
+  DEAN = 1,
+  HOD = 2,
+  COORDINATOR = 3,
+  LECTURER = 4,
+  SUPPORT_STAFF = 5,
+  EXAMINER = 6,
+  STUDENT = 7,
 }
+
+const role = localStorage.getItem(CONSTANTS.STORAGE_KEY.USER_ROLE);
+
+const DashboardDefaultType =
+  role === "admin"
+    ? DashboardType.ADMIN
+    : role === "dean"
+    ? DashboardType.DEAN
+    : role === "hod"
+    ? DashboardType.HOD
+    : role === "coordinator"
+    ? DashboardType.COORDINATOR
+    : role === "student"
+    ? DashboardType.STUDENT
+    : role === "supportStaff"
+    ? DashboardType.SUPPORT_STAFF
+    : role === "lecturer"
+    ? DashboardType.LECTURER
+    : role === "Examiner"
+    ? DashboardType.EXAMINER
+    : DashboardType.ADMIN;
 
 export type DataLinksType = {
   link: string;
@@ -26,37 +50,6 @@ export type DataLinksType = {
   notifications: number;
   ref?: DashboardType[];
 };
-
-// const renderDashboardLinks = (dataSource: DataLinksType[]) => {
-
-//   return (
-//     <>
-//       {dataSource.length > 0 &&
-//         dataSource.map((link, index) => {
-//           return (
-//             <Fragment key={index}>
-//               {link.ref !== undefined &&
-//               link.ref.includes(DashboardDefaultType) ? (
-//                 <li className={styles.list}>
-//                   <Link
-//                     className={`${styles.link} ${
-//                       location.pathname === link.link ? styles.active : ""
-//                     }`}
-//                     to={link.link}
-//                   >
-//                     <span>{link.icon}</span>
-//                     {link.label}
-//                   </Link>
-//                 </li>
-//               ) : (
-//                 ""
-//               )}
-//             </Fragment>
-//           );
-//         })}
-//     </>
-//   );
-// };
 
 const SidebarComponent = () => {
   //  const [stateMutation, setStateMutation] = useState(false);
@@ -69,57 +62,135 @@ const SidebarComponent = () => {
       label: t("Dashboard", { ns: ["main", "home"] }),
       notifications: 0,
       icon: <IconRepository.DashboardIcon width={24} height={24} />,
+      ref: [DashboardType.ADMIN, DashboardType.DEAN, DashboardType.HOD],
     },
     {
       link: "/dashboard/students",
       label: t("Students", { ns: ["main", "home"] }),
       notifications: 0,
       icon: <IconRepository.StudentIcon width={24} height={24} />,
+      ref: [
+        DashboardType.ADMIN,
+        DashboardType.DEAN,
+        DashboardType.HOD,
+        DashboardType.COORDINATOR,
+      ],
     },
     {
       link: "/dashboard/courses",
       label: t("Courses", { ns: ["main", "home"] }),
       notifications: 0,
       icon: <IconRepository.BooksIcon width={24} height={24} />,
+      ref: [
+        DashboardType.ADMIN,
+        DashboardType.DEAN,
+        DashboardType.HOD,
+        DashboardType.COORDINATOR,
+      ],
     },
     {
       link: "/dashboard/users",
       label: t("Users", { ns: ["main", "home"] }),
       notifications: 4,
       icon: <IconRepository.UsersIcon width={24} height={24} />,
+      ref: [
+        DashboardType.ADMIN,
+        DashboardType.DEAN,
+        DashboardType.HOD,
+        DashboardType.COORDINATOR,
+      ],
     },
     {
       link: "/dashboard/transcript",
       label: t("Transcript", { ns: ["main", "home"] }),
       notifications: 4,
       icon: <IconRepository.CertificateIcon width={24} height={24} />,
+      ref: [DashboardType.STUDENT],
     },
     {
       link: "/dashboard/settings",
       label: t("Settings", { ns: ["main", "home"] }),
       notifications: 0,
       icon: <IconRepository.SettingsIcon width={24} height={24} />,
+      ref: [
+        DashboardType.ADMIN,
+        DashboardType.DEAN,
+        DashboardType.HOD,
+        DashboardType.COORDINATOR,
+        DashboardType.STUDENT,
+      ],
     },
     {
       link: "/dashboard/ca",
       label: t("CA", { ns: ["main", "home"] }),
       notifications: 1,
       icon: <IconRepository.CertificateIcon width={24} height={24} />,
+      ref: [
+        DashboardType.ADMIN,
+        DashboardType.DEAN,
+        DashboardType.HOD,
+        DashboardType.COORDINATOR,
+        DashboardType.LECTURER,
+      ],
     },
     {
       link: "/dashboard/exam",
       label: t("Exam", { ns: ["main", "home"] }),
       notifications: 1,
       icon: <IconRepository.CertificateIcon width={24} height={24} />,
+      ref: [
+        DashboardType.ADMIN,
+        DashboardType.DEAN,
+        DashboardType.HOD,
+        DashboardType.COORDINATOR,
+        DashboardType.LECTURER,
+        DashboardType.EXAMINER,
+        DashboardType.SUPPORT_STAFF,
+      ],
     },
     {
       link: "/dashboard/encrypt-ca",
       label: t("Encrypt CA", { ns: ["main", "home"] }),
       notifications: 1,
       icon: <IconRepository.CertificateIcon width={24} height={24} />,
+      ref: [
+        // DashboardType.ADMIN,
+        DashboardType.DEAN,
+        DashboardType.HOD,
+        DashboardType.COORDINATOR,
+        DashboardType.LECTURER,
+        DashboardType.EXAMINER,
+        DashboardType.SUPPORT_STAFF,
+      ],
     },
   ];
 
+  const renderDashboardLinks = (dataSource: DataLinksType[]) => {
+    return (
+      <>
+        {dataSource.length > 0 &&
+          dataSource.map((dataSetItem, index) => {
+            return (
+              <Fragment key={index}>
+                {dataSetItem.ref !== undefined &&
+                dataSetItem.ref.includes(DashboardDefaultType) ? (
+                  <SidebarLinksComponent
+                    link={dataSetItem.link}
+                    text={dataSetItem.label}
+                    key={dataSetItem.label}
+                    notifications={dataSetItem.notifications}
+                    active={location.pathname === dataSetItem.link}
+                    icon={dataSetItem.icon}
+                  />
+                ) : (
+                  ""
+                )}
+              </Fragment>
+            );
+          })}
+      </>
+    );
+  };
   //  useEffect(() => {
   //    setStateMutation(!stateMutation);
   //  }, [location.pathname]);
@@ -132,7 +203,8 @@ const SidebarComponent = () => {
       </div>
 
       <ul className={styles.sidebar__menu}>
-        {dataSet.length > 0 &&
+        {renderDashboardLinks(dataSet)}
+        {/* {dataSet.length > 0 &&
           dataSet.map((dataSetItem) => {
             return (
               <SidebarLinksComponent
@@ -144,7 +216,7 @@ const SidebarComponent = () => {
                 icon={dataSetItem.icon}
               />
             );
-          })}
+          })} */}
       </ul>
     </aside>
   );
