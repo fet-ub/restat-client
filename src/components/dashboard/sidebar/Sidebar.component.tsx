@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import styles from "./sidebar.module.css";
@@ -22,26 +22,9 @@ export enum DashboardType {
   STUDENT = 7,
 }
 
-const role = localStorage.getItem(CONSTANTS.STORAGE_KEY.USER_ROLE);
+// console.log(DashboardDefaultType);
 
-const DashboardDefaultType =
-  role === "admin"
-    ? DashboardType.ADMIN
-    : role === "dean"
-    ? DashboardType.DEAN
-    : role === "hod"
-    ? DashboardType.HOD
-    : role === "coordinator"
-    ? DashboardType.COORDINATOR
-    : role === "student"
-    ? DashboardType.STUDENT
-    : role === "supportStaff"
-    ? DashboardType.SUPPORT_STAFF
-    : role === "lecturer"
-    ? DashboardType.LECTURER
-    : role === "Examiner"
-    ? DashboardType.EXAMINER
-    : DashboardType.ADMIN;
+// useEffect(() => {}, []);
 
 export type DataLinksType = {
   link: string;
@@ -165,6 +148,39 @@ const SidebarComponent = () => {
     },
   ];
 
+  const [stateMutation, setStateMutation] = useState(false);
+  const [currentRole, setCurrentRole] = useState<DashboardType>(
+    DashboardType.ADMIN
+  );
+
+  useEffect(() => {
+    const role = localStorage.getItem(CONSTANTS.STORAGE_KEY.USER_ROLE);
+
+    // const [, set] = useState();
+
+    role === "admin"
+      ? setCurrentRole(DashboardType.ADMIN)
+      : role === "dean"
+      ? setCurrentRole(DashboardType.DEAN)
+      : role === "hod"
+      ? setCurrentRole(DashboardType.HOD)
+      : role === "coordinator"
+      ? setCurrentRole(DashboardType.COORDINATOR)
+      : role === "student"
+      ? setCurrentRole(DashboardType.STUDENT)
+      : role === "supportStaff"
+      ? setCurrentRole(DashboardType.SUPPORT_STAFF)
+      : role === "lecturer"
+      ? setCurrentRole(DashboardType.LECTURER)
+      : role === "Examiner"
+      ? setCurrentRole(DashboardType.EXAMINER)
+      : setCurrentRole(DashboardType.ADMIN);
+  }, [localStorage.getItem(CONSTANTS.STORAGE_KEY.USER_ROLE)]);
+
+  useEffect(() => {
+    setStateMutation(!stateMutation);
+  }, [location.pathname]);
+
   const renderDashboardLinks = (dataSource: DataLinksType[]) => {
     return (
       <>
@@ -173,7 +189,7 @@ const SidebarComponent = () => {
             return (
               <Fragment key={index}>
                 {dataSetItem.ref !== undefined &&
-                dataSetItem.ref.includes(DashboardDefaultType) ? (
+                dataSetItem.ref.includes(currentRole) ? (
                   <SidebarLinksComponent
                     link={dataSetItem.link}
                     text={dataSetItem.label}
