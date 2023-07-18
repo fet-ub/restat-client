@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import SelectInput from "../../../components/common/inputs/select-input/SelectInput.common";
 import { ENGINEERING_DEPARTMENTS } from "../../../repository/constants/constants";
@@ -32,18 +32,18 @@ import StatusModal from "../../../components/common/modal/modules/status/StatusM
 //   departments: any[];
 // }
 
-interface TableUser {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  profilePicture: null;
-  status: string;
-  created_at: Date;
-  updated_at: Date;
-  faculties: any[];
-  departments: any[];
-}
+// interface TableUser {
+//   id: number;
+//   firstName: string;
+//   lastName: string;
+//   email: string;
+//   profilePicture: null;
+//   status: string;
+//   created_at: Date;
+//   updated_at: Date;
+//   faculties: any[];
+//   departments: any[];
+// }
 //  GridValueGetterParams
 const UsersPage = () => {
   const dispatch = useAppDispatch();

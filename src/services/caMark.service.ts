@@ -7,7 +7,6 @@ const authService = new AuthService();
 export class CaMarkService {
   public async createCaMark(data: CaMarkRequestType[]) {
     const request: Promise<any[]>[] = [] as Promise<any[]>[];
-    // const body = new FormData();
 
     data.map((ca: CaMarkRequestType) => {
       const body = new FormData();
