@@ -1,16 +1,16 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { StatsService } from "../../../../services/stats.service";
 import { getExceptionPayload } from "../../../../lib/utils/get-exception-payload";
 import { ApiRequestErrorType } from "../../../../types/api.types";
+import { ResultService } from "../../../../services/results.service";
 
-const statsService = new StatsService();
+const resultsService = new ResultService();
 
-export const getStatsThunk = createAsyncThunk(
-  "/getStats",
+export const getResultsThunk = createAsyncThunk(
+  "/getResults",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await statsService.getStats();
+      const response = await resultsService.getResults();
 
       // console.log({ response });
 

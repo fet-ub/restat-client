@@ -32,8 +32,12 @@ const IndexPage = () => {
   const getStatsState = useAppSelector(
     (state: RootState) => state.getStatsState
   );
+  const getResultsState = useAppSelector(
+    (state: RootState) => state.getResultsState
+  );
 
-  // console.log("hgjhghjg", getStatsState);
+  // console.log("results", getResultsState);
+  // console.log("stats", getStatsState);
 
   const dashboardCardData = [
     {

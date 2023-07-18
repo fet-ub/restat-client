@@ -13,7 +13,7 @@ export const createStudentThunk = createAsyncThunk(
     try {
       const response = await studentService.createNewStudent(data);
 
-      console.log({ response });
+      // console.log({ response });
 
       return response?.data;
     } catch (ex) {

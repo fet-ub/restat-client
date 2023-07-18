@@ -4,3 +4,8 @@ export interface CaMarkRequestType {
   semesterId: number | string;
   mark: string;
 }
+
+export interface BulkCaCaMarkRequestType {
+  matriculationNumber: string;
+  mark: string;
+}

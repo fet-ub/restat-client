@@ -20,7 +20,7 @@ export const createUserThunk = createAsyncThunk(
         data.userType
       );
 
-      console.log({ response });
+      // console.log({ response });
 
       return response?.data;
     } catch (ex) {

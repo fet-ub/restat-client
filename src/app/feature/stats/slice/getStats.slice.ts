@@ -39,7 +39,7 @@ const getStatsSlice = createSlice({
         state.status = ApiRequestStatus.FULFILLED;
         state.stats = action.payload;
 
-        console.log({ payload: action.payload });
+        // console.log({ payload: action.payload });
       })
       .addCase(getStatsThunk.rejected, (state, action) => {
         (state.status = ApiRequestStatus.REJECTED),

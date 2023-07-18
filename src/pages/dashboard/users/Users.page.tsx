@@ -66,7 +66,7 @@ const UsersPage = () => {
   //   // eslint-disable-next-line
   // }, []);
 
-  console.log("hfhgfghfghfhfh", getUsersState.users);
+  // console.log("hfhgfghfghfhfh", getUsersState.users);
 
   const { t } = useTranslation();
 
