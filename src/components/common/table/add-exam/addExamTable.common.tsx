@@ -177,7 +177,7 @@ const AddExamTable = ({
               className={`${styles.table__heading} text-secondary dark:text-white  font-bold`}
             >
               <th> {t("Matricule Number", { ns: ["main", "home"] })}</th>
-              <th> {t("Name", { ns: ["main", "home"] })}</th>
+              {/* <th> {t("Name", { ns: ["main", "home"] })}</th> */}
               <th> {t("Status", { ns: ["main", "home"] })}</th>
               <th> {t("Encrytion key", { ns: ["main", "home"] })}</th>
               <th> {t("Exam mark", { ns: ["main", "home"] })}</th>
@@ -207,9 +207,9 @@ const AddExamTable = ({
                     <td className={styles.row__matricule}>
                       {mark.matriculationNumber}
                     </td>
-                    <td className={styles.row__name}>
+                    {/* <td className={styles.row__name}>
                       {mark.user.firstName} {mark.user.lastName}
-                    </td>
+                    </td> */}
                     <td className={styles.row__status}>
                       {mark.mark?.length && mark.studentCodeId.length > 0 ? (
                         <FilledCard filled={"filled"} />

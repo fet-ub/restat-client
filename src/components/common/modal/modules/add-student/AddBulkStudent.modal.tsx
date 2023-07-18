@@ -179,7 +179,7 @@ const AddBulkStudentmodal = ({
         </label>
       </div>
 
-      <div className="mb-5 mt-8 flex flex-col gap-4">
+      {/* <div className="mb-5 mt-8 flex flex-col gap-4">
         <SelectInput
           selectOptions={COURSE_LEVELS}
           placeholder="select a course"
@@ -189,7 +189,7 @@ const AddBulkStudentmodal = ({
           }}
           value={form.level}
         />
-      </div>
+      </div> */}
 
       <div className="w-full mt-8">
         <Button

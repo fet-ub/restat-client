@@ -37,12 +37,12 @@ const AddUserModal = ({
     facultyId: "1",
   });
   const { t } = useTranslation();
-  const getUsersState = useAppSelector(
-    (state: RootState) => state.getUsersState
+  const createUserState = useAppSelector(
+    (state: RootState) => state.createUserState
   );
 
   useEffect(() => {
-    if (getUsersState.status === ApiRequestStatus.FULFILLED) {
+    if (createUserState.status === ApiRequestStatus.FULFILLED) {
       setForm({
         role: UserType.DEFAULT,
         departmentId: "",
@@ -57,7 +57,7 @@ const AddUserModal = ({
     }
     /* eslint-disable */
     // dispatch(resetcreateCourseState());
-  }, [getUsersState.status === ApiRequestStatus.FULFILLED]);
+  }, [createUserState.status === ApiRequestStatus.FULFILLED]);
   // console.log("role", form.role);
   // console.log(form);
 
@@ -66,7 +66,7 @@ const AddUserModal = ({
     dispatch(createUserThunk({ userType: form.role as UserType, body: form }));
     // setIsOpen(false);
 
-    if (getUsersState.status === ApiRequestStatus.FULFILLED) {
+    if (createUserState.status === ApiRequestStatus.FULFILLED) {
       console.log("it ran");
 
       setForm({
@@ -208,7 +208,7 @@ const AddUserModal = ({
 
         <div className="flex gap-5 mt-1  mb-8">
           <Button
-            disable={getUsersState.status === ApiRequestStatus.PENDING}
+            disable={createUserState.status === ApiRequestStatus.PENDING}
             text={t("Cancel", {
               ns: ["main", "home"],
             })}
@@ -216,13 +216,13 @@ const AddUserModal = ({
             buttonType="TERTIARY"
           />
           <Button
-            disable={getUsersState.status === ApiRequestStatus.PENDING}
+            disable={createUserState.status === ApiRequestStatus.PENDING}
             text={t("Confirm", {
               ns: ["main", "home"],
             })}
             fullWidth={true}
             buttonType="PRIMARY"
-            loading={getUsersState.status === ApiRequestStatus.PENDING}
+            loading={createUserState.status === ApiRequestStatus.PENDING}
           />
         </div>
       </form>

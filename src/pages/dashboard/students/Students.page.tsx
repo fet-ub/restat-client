@@ -75,21 +75,6 @@ const StudentsPage = () => {
     name: "",
   });
 
-  // useEffect(() => {
-  //   // const timeout = setTimeout(() => {
-  //   //   dispatch(getStudentsThunk());
-
-  //   // setAllStudents(getStudentsState.students);
-  //   setFilteredData(getStudentsState.students);
-  //   // }, 2000);
-
-  //   // return () => clearTimeout(timeout);
-
-  //   // eslint-disable-next-line
-  // }, []);
-
-  // getStudentsState;
-
   useEffect(() => {
     if (deleteStudentState.status === ApiRequestStatus.FULFILLED) {
       setDeleteModal(false);
@@ -353,7 +338,7 @@ const StudentsPage = () => {
                 : createStudentState.status === ApiRequestStatus.REJECTED
                 ? createStudentState.message
                 : createBulkStudentState.status === ApiRequestStatus.FULFILLED
-                ? createBulkStudentState.message
+                ? "Student was added successfully"
                 : createBulkStudentState.status === ApiRequestStatus.REJECTED
                 ? createBulkStudentState.message
                 : ""

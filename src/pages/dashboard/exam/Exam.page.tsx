@@ -37,6 +37,7 @@ const ExamPage = () => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [allStudents, setAllStudents] = useState<ExamMarksType[]>([]);
   const [selectedIndex, setSelectedIndex] = useState<any>("");
+  const [examMarksTableData, setExamMarksTableData] = useState<any>([]);
 
   useEffect(() => {
     const result = getStudentsState.students.map((obj) => ({
@@ -196,7 +197,11 @@ const ExamPage = () => {
       )}
       {isOpen && (
         <ModalContainer width="700px" onClick={() => setIsOpen(false)}>
-          <AddMarksModal modalType={MarksType.EXAM} />
+          <AddMarksModal
+            modalType={MarksType.EXAM}
+            examMarksTableData={examMarksTableData}
+            setExamsTableData={setExamMarksTableData}
+          />
         </ModalContainer>
       )}
     </div>

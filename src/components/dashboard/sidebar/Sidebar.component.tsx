@@ -79,7 +79,7 @@ const SidebarComponent = () => {
     {
       link: "/dashboard/users",
       label: t("Users", { ns: ["main", "home"] }),
-      notifications: 4,
+      notifications: 0,
       icon: <IconRepository.UsersIcon width={24} height={24} />,
       ref: [
         DashboardType.ADMIN,
@@ -91,7 +91,7 @@ const SidebarComponent = () => {
     {
       link: "/dashboard/transcript",
       label: t("Transcript", { ns: ["main", "home"] }),
-      notifications: 4,
+      notifications: 0,
       icon: <IconRepository.CertificateIcon width={24} height={24} />,
       ref: [DashboardType.STUDENT],
     },
@@ -111,10 +111,10 @@ const SidebarComponent = () => {
     {
       link: "/dashboard/ca",
       label: t("CA", { ns: ["main", "home"] }),
-      notifications: 1,
+      notifications: 0,
       icon: <IconRepository.CertificateIcon width={24} height={24} />,
       ref: [
-        // DashboardType.ADMIN,
+        DashboardType.ADMIN,
         DashboardType.DEAN,
         DashboardType.HOD,
         DashboardType.COORDINATOR,
@@ -124,7 +124,7 @@ const SidebarComponent = () => {
     {
       link: "/dashboard/exam",
       label: t("Exam", { ns: ["main", "home"] }),
-      notifications: 1,
+      notifications: 0,
       icon: <IconRepository.CertificateIcon width={24} height={24} />,
       ref: [
         DashboardType.ADMIN,
@@ -139,14 +139,14 @@ const SidebarComponent = () => {
     {
       link: "/dashboard/encrypt-ca",
       label: t("Encrypt CA", { ns: ["main", "home"] }),
-      notifications: 1,
+      notifications: 0,
       icon: <IconRepository.CertificateIcon width={24} height={24} />,
       ref: [
         // DashboardType.ADMIN,
-        DashboardType.DEAN,
-        DashboardType.HOD,
-        DashboardType.COORDINATOR,
-        DashboardType.LECTURER,
+        // DashboardType.DEAN,
+        // DashboardType.HOD,
+        // DashboardType.COORDINATOR,
+        // DashboardType.LECTURER,
         DashboardType.EXAMINER,
         DashboardType.SUPPORT_STAFF,
       ],

@@ -33,6 +33,7 @@ const CaPage = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [allStudents, setAllStudents] = useState<marksType[]>([]);
+  const [caMarksTableData, setcaMarksTableData] = useState<any>([]);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const [selectedIndex, setSelectedIndex] = useState<any>("");
@@ -162,7 +163,15 @@ const CaPage = () => {
       )}
       {isOpen && (
         <ModalContainer width="700px" onClick={() => setIsOpen(false)}>
-          <AddMarksModal modalType={MarksType.CA} />
+          <AddMarksModal
+            modalType={MarksType.CA}
+            // fileName={fileName}
+            // setFileName={setFileName}
+            caMarksTableData={caMarksTableData}
+            setCaMarksTableData={setcaMarksTableData}
+            // selectedFile={selectedFile}
+            // setSelectedFile={setSelectedFile}
+          />
         </ModalContainer>
       )}
       {showSuccessModal && (

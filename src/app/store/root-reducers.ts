@@ -1,4 +1,5 @@
 import loginSlice from "../feature/auth/slices/login.slice";
+import createBulkCaMarkSlice from "../feature/ca-mark/slices/createBulkCaMark.slice";
 import createCaMarkSlice from "../feature/ca-mark/slices/createCaMark.slice";
 import createCourseSlice from "../feature/course/slices/createCourse.slice";
 import deleteCourseSlice from "../feature/course/slices/deleteCourse.slice";
@@ -34,4 +35,5 @@ export default {
   createExamMarkState: createExamMarkSlice,
   getStatsState: getStatsSlice,
   getResultsState: getResultsSlice,
+  createBulkCaMarkSlice: createBulkCaMarkSlice,
 };

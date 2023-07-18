@@ -7,5 +7,7 @@ export interface CaMarkRequestType {
 
 export interface BulkCaCaMarkRequestType {
   matriculationNumber: string;
-  mark: string;
+  mark: string | number;
+  courseId: number | string;
+  semesterId: number | string;
 }
