@@ -6,6 +6,7 @@ import getCoursesSlice from "../feature/course/slices/getCourses.slice";
 import createExamMarkSlice from "../feature/exam-mark/slice/createExamMark.slice";
 import getLecturersSlice from "../feature/lecturer/slice/getLecturers.slice";
 import notificationSlice from "../feature/notification/notification.slice";
+import getStatsSlice from "../feature/stats/slice/getStats.slice";
 import createBulkStudentsSlice from "../feature/student/slice/createBulkStudents.slice";
 import createStudentSlice from "../feature/student/slice/createStudent.slice";
 import deleteStudentSlice from "../feature/student/slice/deleteStudent.slice";
@@ -30,4 +31,5 @@ export default {
   createCaMarkState: createCaMarkSlice,
   getLecturersState: getLecturersSlice,
   createExamMarkState: createExamMarkSlice,
+  getStatsState: getStatsSlice,
 };

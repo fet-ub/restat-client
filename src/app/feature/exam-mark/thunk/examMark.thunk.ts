@@ -8,7 +8,7 @@ import { ExamMarkRequestType } from "../../../../types/exam.type";
 const examMarkService = new ExamMarkService();
 
 export const createExamMarkThunk = createAsyncThunk(
-  "/createCaMark",
+  "/createExamMark",
   async (data: ExamMarkRequestType[], { rejectWithValue }) => {
     try {
       const response = await examMarkService.createExamMark(data);

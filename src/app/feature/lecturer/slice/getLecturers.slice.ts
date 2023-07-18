@@ -37,12 +37,12 @@ const getLecturersSlice = createSlice({
         state.status = ApiRequestStatus.FULFILLED;
         state.lecturers = action.payload;
 
-        console.log({ payload: action.payload });
+        // console.log({ payload: action.payload });
       })
       .addCase(getLecturersThunk.rejected, (state, action) => {
         (state.status = ApiRequestStatus.REJECTED),
           (state.message = (action.payload as StoredErrorResponseType).message);
-        console.log({ payload: action.payload });
+        // console.log({ payload: action.payload });
       });
   },
 });

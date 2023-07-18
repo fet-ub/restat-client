@@ -29,8 +29,11 @@ const IndexPage = () => {
   const getLecturersState = useAppSelector(
     (state: RootState) => state.getLecturersState
   );
+  const getStatsState = useAppSelector(
+    (state: RootState) => state.getStatsState
+  );
 
-  // console.log("hgjhghjg", getUsersState.users);
+  // console.log("hgjhghjg", getStatsState);
 
   const dashboardCardData = [
     {

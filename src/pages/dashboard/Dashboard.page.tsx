@@ -17,6 +17,7 @@ import { getUsersThunk } from "../../app/feature/user/thunk/user.thunk";
 import { getStudentsThunk } from "../../app/feature/student/thunk/student.thunk";
 import { getCoursesThunk } from "../../app/feature/course/thunk/course.thunk";
 import { getLecturersThunk } from "../../app/feature/lecturer/thunk/lecturer.thunk";
+import { getStatsThunk } from "../../app/feature/stats/thunk/stats.thunk";
 
 const DashboardPage = () => {
   const accessToken = useAppSelector(
@@ -38,6 +39,7 @@ const DashboardPage = () => {
   // console.log(role);
 
   useEffect(() => {
+    dispatch(getStatsThunk());
     dispatch(getStudentsThunk());
     dispatch(getUsersThunk());
     dispatch(getCoursesThunk());

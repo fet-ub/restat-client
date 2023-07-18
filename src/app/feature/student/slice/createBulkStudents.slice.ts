@@ -34,7 +34,7 @@ const createBulkStudentsSlice = createSlice({
       .addCase(createBulkStudentThunk.fulfilled, (state, action) => {
         state.status = ApiRequestStatus.FULFILLED;
 
-        console.log({ payload: action.payload });
+        // console.log({ payload: action.payload });
       })
       .addCase(createBulkStudentThunk.rejected, (state, action) => {
         (state.status = ApiRequestStatus.REJECTED),

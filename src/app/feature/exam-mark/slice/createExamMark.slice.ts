@@ -19,7 +19,7 @@ const initialState: InitialStateTypes = {
 };
 
 const createExamMarkSlice = createSlice({
-  name: "createStudentSlice",
+  name: "createExamSlice",
   initialState: initialState,
   reducers: {
     resetCreateExamMarkState: (state) => {

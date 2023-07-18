@@ -1,42 +1,47 @@
 /* eslint-disable */
-
 import { createSlice } from "@reduxjs/toolkit";
 
 import {
   ApiRequestStatus,
   StoredErrorResponseType,
 } from "../../../../types/api.types";
-import { createStudentThunk } from "../thunk/student.thunk";
+import { getStatsThunk } from "../thunk/stats.thunk";
+import { StatsResponseType } from "../../../../types/stats.type";
+// import { LecturerResponseTypes } from "../../../../types/lecturer.type";
+
 type InitialStateTypes = {
   status: ApiRequestStatus;
   message: string;
+  stats: StatsResponseType;
 };
 
 const initialState: InitialStateTypes = {
   status: ApiRequestStatus.IDLE,
   message: "",
+  stats: {} as StatsResponseType,
+  //   stats: [],
 };
 
-const createStudentSlice = createSlice({
-  name: "createStudentSlice",
+const getStatsSlice = createSlice({
+  name: "getStatsSlice",
   initialState: initialState,
   reducers: {
-    resetCreateStudentState: (state) => {
+    resetGetStatsState: (state) => {
       state.status = ApiRequestStatus.IDLE;
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(createStudentThunk.pending, (state, _action) => {
+      .addCase(getStatsThunk.pending, (state, _action) => {
         state.status = ApiRequestStatus.PENDING;
-        //  console.log({ payload: action.payload });
       })
-      .addCase(createStudentThunk.fulfilled, (state, action) => {
+      .addCase(getStatsThunk.fulfilled, (state, action) => {
         state.status = ApiRequestStatus.FULFILLED;
+        state.stats = action.payload;
 
-        // console.log({ payload: action.payload });
+        console.log({ payload: action.payload });
       })
-      .addCase(createStudentThunk.rejected, (state, action) => {
+      .addCase(getStatsThunk.rejected, (state, action) => {
         (state.status = ApiRequestStatus.REJECTED),
           (state.message = (action.payload as StoredErrorResponseType).message);
         console.log({ payload: action.payload });
@@ -44,5 +49,5 @@ const createStudentSlice = createSlice({
   },
 });
 
-export const { resetCreateStudentState } = createStudentSlice.actions;
-export default createStudentSlice.reducer;
+export const { resetGetStatsState } = getStatsSlice.actions;
+export default getStatsSlice.reducer;

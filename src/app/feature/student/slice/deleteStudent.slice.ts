@@ -38,7 +38,7 @@ const deleteStudentSlice = createSlice({
 
         // console.log(state.status);
 
-        console.log({ payload: action.payload });
+        // console.log({ payload: action.payload });
       })
       .addCase(deleteStudentThunk.rejected, (state, action) => {
         (state.status = ApiRequestStatus.REJECTED),
