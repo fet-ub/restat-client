@@ -43,4 +43,10 @@ export const LocalStorage = {
     set(CONSTANTS.STORAGE_KEY.ACCESS_TOKEN, data.accessToken);
     set(CONSTANTS.STORAGE_KEY.USER_ROLE, data.role);
   },
+
+  removeLoginData: () => {
+    localStorage.removeItem(CONSTANTS.STORAGE_KEY.CURRENT_USER);
+    localStorage.removeItem(CONSTANTS.STORAGE_KEY.ACCESS_TOKEN);
+    localStorage.removeItem(CONSTANTS.STORAGE_KEY.USER_ROLE);
+  },
 };
