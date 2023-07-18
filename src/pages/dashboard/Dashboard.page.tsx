@@ -19,11 +19,13 @@ import { getCoursesThunk } from "../../app/feature/course/thunk/course.thunk";
 import { getLecturersThunk } from "../../app/feature/lecturer/thunk/lecturer.thunk";
 import { getStatsThunk } from "../../app/feature/stats/thunk/stats.thunk";
 import { getResultsThunk } from "../../app/feature/results/thunk/results.thunk";
+import { LocalStorage } from "../../storage/LocalStorage";
 
 const DashboardPage = () => {
   const accessToken = useAppSelector(
     (state: RootState) => state.loginState
   ).accessToken;
+  const [showLogout, setShowLogout] = useState(false);
 
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -124,7 +126,12 @@ const DashboardPage = () => {
                   <span>2</span>
                 </div>
 
-                <div className={styles.user}>
+                <div
+                  onClick={() => {
+                    setShowLogout(!showLogout);
+                  }}
+                  className={styles.user}
+                >
                   <div className={styles.profile}>
                     <img src={Image} alt="profile" />
                     {/* <IconRepository.ProfileIcon /> */}
@@ -135,6 +142,21 @@ const DashboardPage = () => {
                     </h2>
                     <h3>{capitalizeFirstLetter(role)}</h3>
                   </div>
+
+                  {showLogout ? (
+                    <div className={styles.logout}>
+                      <button
+                        onClick={() => {
+                          LocalStorage.removeLoginData();
+                          window.location.reload();
+                        }}
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
             </div>

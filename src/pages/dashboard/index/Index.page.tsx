@@ -52,12 +52,12 @@ const IndexPage = () => {
     },
     {
       label: t("Users", { ns: ["main", "home"] }),
-      stats: getUsersState?.users.length,
+      stats: getUsersState?.users?.length,
       icon: <IconRepository.PersonIcon width={70} height={70} />,
     },
     {
       label: t("Lecturers", { ns: ["main", "home"] }),
-      stats: getLecturersState?.lecturers.length,
+      stats: getLecturersState?.lecturers?.length,
       icon: <IconRepository.PersonIcon width={70} height={70} />,
     },
   ];

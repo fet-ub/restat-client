@@ -100,7 +100,26 @@
   display: -ms-flexbox;
   align-items: center;
   gap: 1rem;
-  cursor: pointer;;
+  cursor: pointer;
+  position: relative;
+}
+
+.logout {
+  position: absolute;
+  top: 130%;
+  right: 0;
+  background: #fff;
+}
+
+.logout button {
+  padding: 16px 32px;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  font-size: 1.6rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .user h2 {
