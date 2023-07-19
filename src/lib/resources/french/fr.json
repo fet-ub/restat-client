@@ -69,7 +69,7 @@
   "The Record Management system for the": "Le système de gestion des dossiers pour",
   "Computer Engineering Department": "département d'ingénierie informatique",
   "Reset Your Password": "Réinitialisez votre mot de passe.",
-  "Enter your email": "Entrer votre Email",
+  "Enter your email": "Entrer votre email",
   "Enter your search term": "Entrez votre terme de recherche",
   "Edit Info": "Modifier les informations",
   "Upload CA marks": "Télécharger les marques CA",
@@ -121,5 +121,8 @@
   "Guardian Address": "Adresse du tuteur",
   "Guardian Phone Number": "Numéro de téléphone du tuteur",
   "Back": "Précédente",
-  "Next": "Suivante"
+  "Next": "Suivante",
+  "Click on this text to download an excel sheet template to upload Ca marks": "Cliquez sur ce texte pour télécharger un modèle de feuille Excel pour télécharger les notes Ca",
+  "Click on this text to download an excel sheet template to upload student": "Cliquez sur ce texte pour télécharger un modèle de feuille Excel pour télécharger l'élève",
+  "Click on this text to download excel sheet template to upload Exam marks": "Cliquez sur ce texte pour télécharger le modèle de feuille Excel pour télécharger les notes d'examen"
 }

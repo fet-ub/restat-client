@@ -232,9 +232,12 @@ const StudentsPage = () => {
               <BiHelpCircle size={20} color="#42BFDD" />
             </div>
             <div className="text-xl text-secondary dark:text-white cursor-pointer">
-              {" "}
-              Click on this text to download an excel sheet template to upload
-              student
+              {t(
+                "Click on this text to download an excel sheet template to upload student",
+                {
+                  ns: ["main", "home"],
+                }
+              )}
             </div>
           </div>
           {/* {t("Download CA File", { ns: ["main", "home"] })} */}

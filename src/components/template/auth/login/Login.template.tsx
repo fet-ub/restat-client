@@ -94,7 +94,7 @@ const LoginTemplate = () => {
           type="email"
           name="Email"
           id="Email"
-          placeholder="Enter your email"
+          placeholder={t("Enter your email", { ns: ["main", "home"] })}
           value={form.email}
           onChange={(e) => {
             setForm({ ...form, email: e.target.value });
