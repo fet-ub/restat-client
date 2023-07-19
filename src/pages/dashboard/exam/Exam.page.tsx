@@ -123,7 +123,8 @@ const ExamPage = () => {
             </div>
             <div className="text-xl text-secondary dark:text-white cursor-pointer">
               {" "}
-              Click on this text to download template excel to upload Exam marks
+              Click on this text to download an excel sheet template to upload
+              Exam marks
             </div>
           </div>
           {/* {t("Download CA File", { ns: ["main", "home"] })} */}

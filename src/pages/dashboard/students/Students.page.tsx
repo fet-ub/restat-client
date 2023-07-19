@@ -231,7 +231,8 @@ const StudentsPage = () => {
             </div>
             <div className="text-xl text-secondary dark:text-white cursor-pointer">
               {" "}
-              Click on this text to download template excel to upload student
+              Click on this text to download an excel sheet template to upload
+              student
             </div>
           </div>
           {/* {t("Download CA File", { ns: ["main", "home"] })} */}

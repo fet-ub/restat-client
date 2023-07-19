@@ -130,7 +130,8 @@ const CaPage = () => {
             </div>
             <div className="text-xl text-secondary dark:text-white cursor-pointer">
               {" "}
-              Click on this text to download template excel to upload Ca marks
+              Click on this text to download an excel sheet template to upload
+              Ca marks
             </div>
           </div>
           {/* {t("Download CA File", { ns: ["main", "home"] })} */}
