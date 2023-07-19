@@ -1,3 +1,4 @@
+import { AnyAction } from '@reduxjs/toolkit';
 import { UserType } from '../../user.type';
 
 export interface selectOptionType {
@@ -10,5 +11,5 @@ export interface SelectInputPropType {
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   value?: string | UserType | undefined | any;
   label?: string | any;
-  placeholder?: string;
+  placeholder?: string | any;
 }

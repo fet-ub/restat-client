@@ -4,6 +4,7 @@ import Button from '../../../../buttons/Button.common';
 import { StudentType } from '../../../../../../types/student.type';
 import { useAppSelector } from '../../../../../../lib/hooks';
 import { ApiRequestStatus } from '../../../../../../types/api.types';
+import { useTranslation } from 'react-i18next';
 const StudentGuardianInfoStep = ({
   form,
   setForm,
@@ -17,6 +18,7 @@ const StudentGuardianInfoStep = ({
   closeModal: () => void;
   handleAddStudent: (e: any) => void;
 }) => {
+  const { t } = useTranslation();
   const createStudentState = useAppSelector(
     (state) => state.createStudentState
   );
@@ -25,7 +27,7 @@ const StudentGuardianInfoStep = ({
       <div className="flex flex-col gap-3 mt-7">
         <TextInput
           placeholder="Ayuk"
-          label="Guardian First Name"
+          label={t('Guardian First Name', { ns: ['main', 'home'] })}
           type="text"
           id="GuardianFirstName"
           name="guardianfirstsname"
@@ -37,7 +39,7 @@ const StudentGuardianInfoStep = ({
         />
         <TextInput
           placeholder="Tabe"
-          label="Guardian Last Name"
+          label={t('Guardian Last Name', { ns: ['main', 'home'] })}
           type="text"
           id="GuardianLastName"
           name="guardianlasstsname"
@@ -50,8 +52,8 @@ const StudentGuardianInfoStep = ({
 
         <div className="flex justify-between gap-10">
           <TextInput
-            placeholder="Guardian Email"
-            label="Email"
+            placeholder={t('Guardian Email', { ns: ['main', 'home'] })}
+            label={t('Email', { ns: ['main', 'home'] })}
             type="email"
             id="address"
             name="email"
@@ -63,7 +65,7 @@ const StudentGuardianInfoStep = ({
           />
           <TextInput
             placeholder="Buea Town"
-            label="Guardian Address"
+            label={t('Guardian Address', { ns: ['main', 'home'] })}
             type="text"
             id="guardianAddress"
             name="guardianaddress"
@@ -76,7 +78,7 @@ const StudentGuardianInfoStep = ({
         </div>
         <TextInput
           placeholder="67234521"
-          label="Guardian Phone Number"
+          label={t('Guardian Phone Number', { ns: ['main', 'home'] })}
           type="number"
           id="GuardianPhone"
           name="guardianPhone"
@@ -90,13 +92,13 @@ const StudentGuardianInfoStep = ({
 
       <div className="flex gap-8 mt-6 mb-6">
         <Button
-          text="Back"
+          text={t('Back', { ns: ['main', 'home'] })}
           fullWidth={true}
           onClick={() => setCurrentStep(1)}
         />
         <Button
           disable={createStudentState.status === ApiRequestStatus.PENDING}
-          text="Add Student"
+          text={t('Add Student', { ns: ['main', 'home'] })}
           fullWidth={true}
           buttonType="PRIMARY"
           // onClick={closeModal}

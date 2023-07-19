@@ -9,6 +9,7 @@ import {
 } from '../../../../../../repository/constants/constants';
 import Button from '../../../../buttons/Button.common';
 import { StudentType } from '../../../../../../types/student.type';
+import { useTranslation } from 'react-i18next';
 
 const StudentAcademicInfoStep = ({
   form,
@@ -19,13 +20,14 @@ const StudentAcademicInfoStep = ({
   setForm: React.Dispatch<React.SetStateAction<StudentType>>;
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
 }) => {
+  const { t } = useTranslation();
   return (
     <div className="mt-5 mb-4 dark:bg-tertiary">
       <form>
         <div className="flex justify-between gap-10 mt-2 mb-1 ">
           <TextInput
             placeholder="FE19A038"
-            label="Matricule Number"
+            label={t('Matricule Number', { ns: ['main', 'home'] })}
             type="text"
             id="matricule"
             name="matricule"
@@ -38,7 +40,7 @@ const StudentAcademicInfoStep = ({
           <SelectInput
             selectOptions={COURSE_LEVELS}
             placeholder="select level"
-            label="Level"
+            label={t('Level', { ns: ['main', 'home'] })}
             onChange={(e) => {
               setForm({ ...form, level: e.target.value });
             }}
@@ -46,8 +48,8 @@ const StudentAcademicInfoStep = ({
           />
           <SelectInput
             selectOptions={SCHOOL_YEAR}
-            placeholder="year"
-            label="Year"
+            placeholder={t('Year', { ns: ['main', 'home'] })}
+            label={t('Year', { ns: ['main', 'home'] })}
             onChange={(e) => {
               setForm({ ...form, year: e.target.value });
             }}
@@ -58,8 +60,8 @@ const StudentAcademicInfoStep = ({
         <div className="flex justify-between gap-10">
           <SelectInput
             selectOptions={ENGINEERING_DEPARTMENTS}
-            placeholder="select department"
-            label="Department"
+            placeholder={t('select department', { ns: ['main', 'home'] })}
+            label={t('Department', { ns: ['main', 'home'] })}
             onChange={(e) => {
               setForm({ ...form, departmentId: e.target.value });
             }}
@@ -67,7 +69,7 @@ const StudentAcademicInfoStep = ({
           />
           <TextInput
             placeholder="example@email.com"
-            label="Email"
+            label={t('Email', { ns: ['main', 'home'] })}
             type="email"
             id="email"
             name="email"
@@ -82,8 +84,8 @@ const StudentAcademicInfoStep = ({
         <div className="flex flex-col gap-1">
           <SelectInput
             selectOptions={COMPUTER_PROGRAMS}
-            placeholder="select program"
-            label="Program"
+            placeholder={t('select program', { ns: ['main', 'home'] })}
+            label={t('Program', { ns: ['main', 'home'] })}
             onChange={(e) => {
               setForm({ ...form, program: e.target.value });
             }}
@@ -91,7 +93,7 @@ const StudentAcademicInfoStep = ({
           />
           <TextInput
             placeholder="Bsc Software Enginnering"
-            label="Certificate Obatianed"
+            label={t('Certificate Obatianed', { ns: ['main', 'home'] })}
             type="text"
             id="certificate"
             name="certificate"
@@ -103,8 +105,8 @@ const StudentAcademicInfoStep = ({
           />
           <SelectInput
             selectOptions={SCHOOL_YEAR}
-            placeholder="select school year"
-            label="Year Obtained"
+            placeholder={t('select school year', { ns: ['main', 'home'] })}
+            label={t('Year Obtained', { ns: ['main', 'home'] })}
             onChange={(e) => {
               setForm({ ...form, yearObtained: e.target.value });
             }}
@@ -114,12 +116,12 @@ const StudentAcademicInfoStep = ({
 
         <div className="flex gap-8 mt-3">
           <Button
-            text="Back"
+            text={t('Back', { ns: ['main', 'home'] })}
             fullWidth={true}
             onClick={() => setCurrentStep(0)}
           />
           <Button
-            text="Next"
+            text={t('Next', { ns: ['main', 'home'] })}
             fullWidth={true}
             buttonType="PRIMARY"
             onClick={() => setCurrentStep(2)}
