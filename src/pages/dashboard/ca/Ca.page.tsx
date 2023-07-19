@@ -15,6 +15,9 @@ import StatusModal from "../../../components/common/modal/modules/status/StatusM
 import { resetCreateCaMarkState } from "../../../app/feature/ca-mark/slices/createCaMark.slice";
 import { createCaMarkThunk } from "../../../app/feature/ca-mark/thunk/caMark.thunk";
 import { ApiRequestStatus } from "../../../types/api.types";
+import { CSVLink } from "react-csv";
+import { BiHelpCircle } from "react-icons/bi";
+import { uploadCaMarkTemplate } from "../../../data/excel-templates/dataTemplates";
 
 const CaPage = () => {
   const { t } = useTranslation();
@@ -115,7 +118,25 @@ const CaPage = () => {
         onClick={() => setIsOpen(true)}
         displayButton={true}
       />
-      <div className="w-[40%] mt-12">
+      <div>
+        <CSVLink
+          data={uploadCaMarkTemplate}
+          filename="uploadCaMarkTemplate"
+          // className="bg-primary  px-4 text-white   py-[10px]    rounded-lg outline-none text-[16px] flex justify-center items-center gap-3"
+        >
+          <div className="flex  items-center mt-4">
+            <div>
+              <BiHelpCircle size={20} color="#42BFDD" />
+            </div>
+            <div className="text-xl text-secondary dark:text-white cursor-pointer">
+              {" "}
+              Click on this text to download template excel to upload Ca marks
+            </div>
+          </div>
+          {/* {t("Download CA File", { ns: ["main", "home"] })} */}
+        </CSVLink>
+      </div>
+      <div className="w-[40%] mt-5">
         <SelectInput
           selectOptions={formatedCourses.sort((a, b) => {
             const nameA = a.name.toUpperCase();

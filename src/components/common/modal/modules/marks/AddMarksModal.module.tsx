@@ -17,6 +17,13 @@ import { BulkCaCaMarkRequestType } from "../../../../../types/caMark.type";
 import { createBulkCaMarkThunk } from "../../../../../app/feature/ca-mark/thunk/caMark.thunk";
 import { ExamMarkRequestType } from "../../../../../types/exam.type";
 import { createExamMarkThunk } from "../../../../../app/feature/exam-mark/thunk/examMark.thunk";
+import { CSVLink } from "react-csv";
+import { BiHelpCircle } from "react-icons/bi";
+import {
+  uploadCaMarkTemplate,
+  uploadExamMarkTemplate,
+} from "../../../../../data/excel-templates/dataTemplates";
+
 const AddMarksModal = ({
   modalType,
   caMarksTableData,
@@ -121,6 +128,45 @@ const AddMarksModal = ({
               ns: ["main", "home"],
             })}
       </p>
+      <div className="mb-6">
+        {modalType === MarksType.CA ? (
+          <CSVLink
+            data={uploadCaMarkTemplate}
+            filename="uploadCaMarkTemplate"
+            // className="bg-primary  px-4 text-white   py-[10px]    rounded-lg outline-none text-[16px] flex justify-center items-center gap-3"
+          >
+            <div className="flex  items-center">
+              <div>
+                <BiHelpCircle size={20} color="#42BFDD" />
+              </div>
+              <div className="text-xl text-secondary dark:text-white cursor-pointer">
+                {" "}
+                Click on this text to download an excel sheet template to upload
+                Ca marks
+              </div>
+            </div>
+            {/* {t("Download CA File", { ns: ["main", "home"] })} */}
+          </CSVLink>
+        ) : (
+          <CSVLink
+            data={uploadCaMarkTemplate}
+            filename="uploadExamMarkTemplate"
+            // className="bg-primary  px-4 text-white   py-[10px]    rounded-lg outline-none text-[16px] flex justify-center items-center gap-3"
+          >
+            <div className="flex  items-center">
+              <div>
+                <BiHelpCircle size={20} color="#42BFDD" />
+              </div>
+              <div className="text-xl text-secondary dark:text-white cursor-pointer">
+                {" "}
+                Click on this text to download excel sheet template to upload
+                Exam marks
+              </div>
+            </div>
+            {/* {t("Download CA File", { ns: ["main", "home"] })} */}
+          </CSVLink>
+        )}
+      </div>
 
       <div className={"bg-[#f4f4f4]  px-4 border-t-2 border-primary  py-4"}>
         <div className="flex mt-4">

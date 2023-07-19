@@ -17,6 +17,9 @@ import AddExamTable, {
   ExamMarksType,
 } from "../../../components/common/table/add-exam/addExamTable.common";
 import { resetCreateExamMarkState } from "../../../app/feature/exam-mark/slice/createExamMark.slice";
+import { CSVLink } from "react-csv";
+import { uploadExamMarkTemplate } from "../../../data/excel-templates/dataTemplates";
+import { BiHelpCircle } from "react-icons/bi";
 
 const ExamPage = () => {
   const { t } = useTranslation();
@@ -108,7 +111,25 @@ const ExamPage = () => {
         onClick={() => setIsOpen(true)}
         displayButton={true}
       />
-      <div className="w-[40%] mt-12">
+      <div>
+        <CSVLink
+          data={uploadExamMarkTemplate}
+          filename="uploadExamMarkTemplate"
+          // className="bg-primary  px-4 text-white   py-[10px]    rounded-lg outline-none text-[16px] flex justify-center items-center gap-3"
+        >
+          <div className="flex  items-center mt-4">
+            <div>
+              <BiHelpCircle size={20} color="#42BFDD" />
+            </div>
+            <div className="text-xl text-secondary dark:text-white cursor-pointer">
+              {" "}
+              Click on this text to download template excel to upload Exam marks
+            </div>
+          </div>
+          {/* {t("Download CA File", { ns: ["main", "home"] })} */}
+        </CSVLink>
+      </div>
+      <div className="w-[40%] mt-5">
         <SelectInput
           selectOptions={formatedCourses.sort((a, b) => {
             const nameA = a.name.toUpperCase();

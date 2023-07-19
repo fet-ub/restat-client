@@ -35,7 +35,9 @@ import DeleteModal from "../../../components/common/modal/modules/delete/DeleteM
 import { resetDeleteStudentState } from "../../../app/feature/student/slice/deleteStudent.slice";
 // import { StudentResponseTypes } from "../../../types/student.type";
 import { resetBulkStudentState } from "../../../app/feature/student/slice/createBulkStudents.slice";
-
+import { BiHelpCircle } from "react-icons/bi";
+import { CSVLink } from "react-csv";
+import { UploadStudentTemplate } from "../../../data/excel-templates/dataTemplates";
 //  GridValueGetterParams;
 
 const StudentsPage = () => {
@@ -215,6 +217,25 @@ const StudentsPage = () => {
           onClick={() => setIsOpen(true)}
           displayButton={true}
         />
+      </div>
+
+      <div>
+        <CSVLink
+          data={UploadStudentTemplate}
+          filename="uploadStudentTemplate"
+          // className="bg-primary  px-4 text-white   py-[10px]    rounded-lg outline-none text-[16px] flex justify-center items-center gap-3"
+        >
+          <div className="flex  items-center">
+            <div>
+              <BiHelpCircle size={20} color="#42BFDD" />
+            </div>
+            <div className="text-xl text-secondary dark:text-white cursor-pointer">
+              {" "}
+              Click on this text to download template excel to upload student
+            </div>
+          </div>
+          {/* {t("Download CA File", { ns: ["main", "home"] })} */}
+        </CSVLink>
       </div>
 
       <div className="w-[230px] mt-5">
