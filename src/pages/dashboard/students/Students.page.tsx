@@ -34,10 +34,12 @@ import DeleteIcon from "../../../icons/Delete.icon";
 import DeleteModal from "../../../components/common/modal/modules/delete/DeleteModal.module";
 import { resetDeleteStudentState } from "../../../app/feature/student/slice/deleteStudent.slice";
 // import { StudentResponseTypes } from "../../../types/student.type";
+
 import { resetBulkStudentState } from "../../../app/feature/student/slice/createBulkStudents.slice";
 import { BiHelpCircle } from "react-icons/bi";
 import { CSVLink } from "react-csv";
 import { UploadStudentTemplate } from "../../../data/excel-templates/dataTemplates";
+
 //  GridValueGetterParams;
 
 const StudentsPage = () => {
@@ -118,10 +120,10 @@ const StudentsPage = () => {
     // }
   };
 
-  const columns: GridColDef[] = [
+  const columns: any = [
     {
       field: "user",
-      headerName: "Name",
+      headerName: t("Name", { ns: ["main", "home"] }),
       width: 280,
       sortable: true,
 
@@ -130,13 +132,13 @@ const StudentsPage = () => {
     },
     {
       field: "matriculationNumber",
-      headerName: "Matrcule",
+      headerName: t("Matricule", { ns: ["main", "home"] }),
       width: 120,
       sortable: false,
     },
     {
       field: "level",
-      headerName: "level",
+      headerName: t("Level", { ns: ["main", "home"] }),
       width: 70,
       sortable: true,
       headerAlign: "left",
@@ -145,13 +147,13 @@ const StudentsPage = () => {
     },
     {
       field: "program",
-      headerName: "Program",
+      headerName: t("Program", { ns: ["main", "home"] }),
       width: 170,
       sortable: false,
     },
     {
       field: "phone",
-      headerName: "Phone",
+      headerName: t("Phone", { ns: ["main", "home"] }),
       width: 180,
       sortable: true,
       headerAlign: "left",
@@ -160,7 +162,7 @@ const StudentsPage = () => {
     },
     {
       field: "email",
-      headerName: "Email",
+      headerName: t("Email", { ns: ["main", "home"] }),
       width: 210,
       sortable: false,
       headerAlign: "left",
@@ -170,7 +172,7 @@ const StudentsPage = () => {
     },
     {
       field: "action",
-      headerName: "Action",
+      headerName: t("Action", { ns: ["main", "home"] }),
       sortable: false,
       width: 70,
       headerAlign: "left",
@@ -257,7 +259,7 @@ const StudentsPage = () => {
       <div className="flex items-center gap-[75px] mt-12">
         <SelectInput
           selectOptions={ENGINEERING_DEPARTMENTS}
-          placeholder="Select Department"
+          placeholder={t("Select Department", { ns: ["main", "home"] })}
           label={t("Department", { ns: ["main", "home"] })}
           value={form.department}
           onChange={(e) => {

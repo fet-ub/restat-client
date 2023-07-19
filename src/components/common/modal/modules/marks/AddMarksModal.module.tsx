@@ -244,7 +244,7 @@ const AddMarksModal = ({
           })}
           label={t("Course", { ns: ["main", "home"] })}
           value={selectedIndex}
-          placeholder="select a course"
+          placeholder={t("select a course", { ns: ["main", "home"] })}
           onChange={(e) => {
             setSelectedIndex(e.target.value);
           }}

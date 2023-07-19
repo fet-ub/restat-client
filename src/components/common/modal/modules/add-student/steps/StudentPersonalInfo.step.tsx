@@ -9,6 +9,7 @@ import {
 } from '../../../../../../repository/constants/constants';
 import DateInput from '../../../../inputs/date-input/DateInput';
 import { StudentType } from '../../../../../../types/student.type';
+import { useTranslation } from 'react-i18next';
 // import { AddStudentPropType } from '../../../../../../types/common/modal/add-student-modal.type';
 
 const StudentPersonalInfoStep = ({
@@ -22,12 +23,13 @@ const StudentPersonalInfoStep = ({
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
   closeModal: () => void;
 }) => {
+  const { t } = useTranslation();
   return (
     <form className="dark:bg-tertiary">
       <div className="flex justify-between gap-10 mt-6 mb-4">
         <TextInput
           placeholder="Ayuk"
-          label="First Name"
+          label={t('First Name', { ns: ['main', 'home'] })}
           type="text"
           id="FirstName"
           name="FirstName"
@@ -39,7 +41,7 @@ const StudentPersonalInfoStep = ({
         />
         <TextInput
           placeholder="Tabe"
-          label="Last Name"
+          label={t('Last Name', { ns: ['main', 'home'] })}
           type="text"
           id="LastName"
           name="LastName"
@@ -54,8 +56,8 @@ const StudentPersonalInfoStep = ({
       <div className="flex justify-between gap-10 mb-2 ">
         <SelectInput
           selectOptions={GENDER}
-          placeholder="select gender"
-          label="Gender"
+          placeholder={t('select gender', { ns: ['main', 'home'] })}
+          label={t('Genre', { ns: ['main', 'home'] })}
           onChange={(e) => {
             setForm({ ...form, gender: e.target.value });
           }}
@@ -64,8 +66,8 @@ const StudentPersonalInfoStep = ({
         />
         <SelectInput
           selectOptions={MARITAL_STATUS}
-          placeholder="select marital status"
-          label="Status"
+          placeholder={t('select marital status', { ns: ['main', 'home'] })}
+          label={t('Status', { ns: ['main', 'home'] })}
           onChange={(e) => {
             setForm({ ...form, status: e.target.value });
           }}
@@ -85,7 +87,7 @@ const StudentPersonalInfoStep = ({
       <div className="flex justify-between gap-10 mb-4">
         <TextInput
           placeholder="Buea"
-          label="Place of Birth"
+          label={t('Place of Birth', { ns: ['main', 'home'] })}
           type="text"
           id="pob"
           name="pob"
@@ -97,7 +99,7 @@ const StudentPersonalInfoStep = ({
         />
         <TextInput
           placeholder="Buea Town"
-          label="Address"
+          label={t('Address', { ns: ['main', 'home'] })}
           type="text"
           id="address"
           name="address"
@@ -112,16 +114,16 @@ const StudentPersonalInfoStep = ({
       <div className="flex justify-between gap-10 mb-4">
         <SelectInput
           selectOptions={REGIONS}
-          placeholder="select region"
-          label="Region"
+          placeholder={t('select region', { ns: ['main', 'home'] })}
+          label={t('Region', { ns: ['main', 'home'] })}
           onChange={(e) => {
             setForm({ ...form, region: e.target.value });
           }}
           value={form.region}
         />
         <TextInput
-          placeholder="National ID number"
-          label="National Identification"
+          placeholder={t('National ID number', { ns: ['main', 'home'] })}
+          label={t('National Identification', { ns: ['main', 'home'] })}
           type="text"
           id="nationalIdentification"
           name="nationalIdentification"
@@ -136,7 +138,7 @@ const StudentPersonalInfoStep = ({
       <div className="flex justify-between gap-10">
         <TextInput
           placeholder="Cameroon"
-          label="Country"
+          label={t('Country', { ns: ['main', 'home'] })}
           type="text"
           id="country"
           name="country"
@@ -149,7 +151,7 @@ const StudentPersonalInfoStep = ({
 
         <TextInput
           placeholder="6745020442"
-          label="Phone Number"
+          label={t('Phone Number', { ns: ['main', 'home'] })}
           type="number"
           id="phone"
           name="phone"
@@ -162,9 +164,13 @@ const StudentPersonalInfoStep = ({
       </div>
 
       <div className="flex gap-8 mt-3">
-        <Button text="Cancel" fullWidth={true} onClick={closeModal} />
         <Button
-          text="Next"
+          text={t('Cancel', { ns: ['main', 'home'] })}
+          fullWidth={true}
+          onClick={closeModal}
+        />
+        <Button
+          text={t('Next', { ns: ['main', 'home'] })}
           fullWidth={true}
           buttonType="PRIMARY"
           onClick={() => setCurrentStep(1)}

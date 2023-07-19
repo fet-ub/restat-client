@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import { useTranslation } from "react-i18next";
-import { useAppDispatch, useAppSelector } from "../../../../../lib/hooks";
-import Button from "../../../buttons/Button.common";
-import TextInput from "../../../inputs/text-input/TextInput.common";
-import SelectInput from "../../../inputs/select-input/SelectInput.common";
+import { useTranslation } from 'react-i18next';
+import { useAppDispatch, useAppSelector } from '../../../../../lib/hooks';
+import Button from '../../../buttons/Button.common';
+import TextInput from '../../../inputs/text-input/TextInput.common';
+import SelectInput from '../../../inputs/select-input/SelectInput.common';
 import {
   COURSE_LEVELS,
   SEMESTER,
   COURSE_STATUS,
-} from "../../../../../repository/constants/constants";
-import { CourseStatusType } from "../../../../../repository/constants/enums.constants";
-import { CONSTANTS } from "../../../../../constants/constants";
-import { useNavigate } from "react-router-dom";
-import { createCourseThunk } from "../../../../../app/feature/course/thunk/course.thunk";
-import { ApiRequestStatus } from "../../../../../types/api.types";
+} from '../../../../../repository/constants/constants';
+import { CourseStatusType } from '../../../../../repository/constants/enums.constants';
+import { CONSTANTS } from '../../../../../constants/constants';
+import { useNavigate } from 'react-router-dom';
+import { createCourseThunk } from '../../../../../app/feature/course/thunk/course.thunk';
+import { ApiRequestStatus } from '../../../../../types/api.types';
 // import { resetcreateCourseState } from "../../../../../app/feature/course/slices/createCourse.slice";
 
 const AddCourseModal = ({
@@ -35,17 +35,17 @@ const AddCourseModal = ({
   const createCourseState = useAppSelector((state) => state.createCourseState);
   const getLecturersState = useAppSelector((state) => state.getLecturersState);
 
-  const [selectedIndex, setSelectedIndex] = useState<any>("");
+  const [selectedIndex, setSelectedIndex] = useState<any>('');
   const [user, setUser] = useState({
     //   firstName: "",
-    id: "",
+    id: '',
   });
 
   useEffect(() => {
     const userInfo = localStorage.getItem(CONSTANTS.STORAGE_KEY.CURRENT_USER);
 
     if (!userInfo) {
-      navigate("/auth/login");
+      navigate('/auth/login');
     } else {
       setUser(JSON.parse(userInfo as string));
     }
@@ -55,13 +55,13 @@ const AddCourseModal = ({
   //  console.log(user.id)
 
   const [form, setForm] = useState({
-    facultyId: "1",
-    semesterId: "",
-    name: "",
-    courseCode: "",
-    level: "",
+    facultyId: '1',
+    semesterId: '',
+    name: '',
+    courseCode: '',
+    level: '',
     status: CourseStatusType.DEFAULT,
-    creditValue: "",
+    creditValue: '',
   });
 
   const formatedLecturers = getLecturersState.lecturers.map((obj, index) => ({
@@ -79,13 +79,13 @@ const AddCourseModal = ({
   useEffect(() => {
     if (createCourseState.status === ApiRequestStatus.FULFILLED) {
       setForm({
-        facultyId: "1",
-        semesterId: "",
-        name: "",
-        courseCode: "",
-        level: "",
+        facultyId: '1',
+        semesterId: '',
+        name: '',
+        courseCode: '',
+        level: '',
         status: CourseStatusType.DEFAULT,
-        creditValue: "",
+        creditValue: '',
       });
 
       setIsOpen(false);
@@ -115,16 +115,16 @@ const AddCourseModal = ({
     // setTracker(!tracker)
 
     if (createCourseState.status === ApiRequestStatus.FULFILLED) {
-      console.log("it ran");
+      console.log('it ran');
 
       setForm({
-        facultyId: "1",
-        semesterId: "",
-        name: "",
-        courseCode: "",
-        level: "",
+        facultyId: '1',
+        semesterId: '',
+        name: '',
+        courseCode: '',
+        level: '',
         status: CourseStatusType.DEFAULT,
-        creditValue: "",
+        creditValue: '',
       });
 
       setIsOpen(false);
@@ -135,17 +135,19 @@ const AddCourseModal = ({
   return (
     <div className="px-3 pb-5 bg-white dark:bg-tertiary">
       <h1 className="text-secondary text-3xl font-semibold dark:text-white">
-        {t("Add  Course", {
-          ns: ["main", "home"],
+        {t('Add  Course', {
+          ns: ['main', 'home'],
         })}
       </h1>
 
       <form className="mt-7" onSubmit={handleAddCourse}>
         <div className="w-full h-full  flex gap-9 mb-6  ">
           <TextInput
-            placeholder={"Machine Learning"}
-            label={t("Course Name", {
-              ns: ["main", "home"],
+            placeholder={t('Machine Learning', {
+              ns: ['main', 'home'],
+            })}
+            label={t('Course Name', {
+              ns: ['main', 'home'],
             })}
             type="text"
             id="name"
@@ -156,9 +158,9 @@ const AddCourseModal = ({
             }}
           />
           <TextInput
-            placeholder={"4"}
-            label={t("Credit Value", {
-              ns: ["main", "home"],
+            placeholder={'4'}
+            label={t('Credit Value', {
+              ns: ['main', 'home'],
             })}
             type="number"
             id="creditValue"
@@ -172,9 +174,11 @@ const AddCourseModal = ({
         <div className="w-full h-full mb-12 ">
           <SelectInput
             selectOptions={formatedLecturers}
-            label={t("Course Instructor", { ns: ["main", "home"] })}
+            label={t('Course Instructor', { ns: ['main', 'home'] })}
             value={selectedIndex}
-            placeholder="select a course Instructor"
+            placeholder={t('select a course Instructor', {
+              ns: ['main', 'home'],
+            })}
             onChange={(e) => {
               setSelectedIndex(e.target.value);
             }}
@@ -183,8 +187,8 @@ const AddCourseModal = ({
         <div className="flex gap-9 mb-6 ">
           <TextInput
             placeholder="CEF 238"
-            label={t("Course Code", {
-              ns: ["main", "home"],
+            label={t('Course Code', {
+              ns: ['main', 'home'],
             })}
             type="text"
             id="courseCode"
@@ -196,9 +200,11 @@ const AddCourseModal = ({
           />
           <SelectInput
             selectOptions={COURSE_LEVELS}
-            placeholder="level"
-            label={t("level", {
-              ns: ["main", "home"],
+            placeholder={t('Level', {
+              ns: ['main', 'home'],
+            })}
+            label={t('Level', {
+              ns: ['main', 'home'],
             })}
             onChange={(e) => {
               setForm({
@@ -212,9 +218,11 @@ const AddCourseModal = ({
         <div className="flex gap-9 mb-6 ">
           <SelectInput
             selectOptions={SEMESTER}
-            placeholder="semester"
-            label={t("Semester", {
-              ns: ["main", "home"],
+            placeholder={t('Semester', {
+              ns: ['main', 'home'],
+            })}
+            label={t('Semester', {
+              ns: ['main', 'home'],
             })}
             onChange={(e) => {
               setForm({
@@ -226,9 +234,11 @@ const AddCourseModal = ({
           />
           <SelectInput
             selectOptions={COURSE_STATUS}
-            placeholder="course status"
-            label={t("Status", {
-              ns: ["main", "home"],
+            placeholder={t('course status', {
+              ns: ['main', 'home'],
+            })}
+            label={t('Status', {
+              ns: ['main', 'home'],
             })}
             onChange={(e) => {
               setForm({
@@ -258,16 +268,16 @@ const AddCourseModal = ({
 
         <div className="flex gap-5 mt-1  mb-8">
           <Button
-            text={t("Cancel", {
-              ns: ["main", "home"],
+            text={t('Cancel', {
+              ns: ['main', 'home'],
             })}
             fullWidth={true}
             buttonType="TERTIARY"
           />
           <Button
             disable={createCourseState.status === ApiRequestStatus.PENDING}
-            text={t("Confirm", {
-              ns: ["main", "home"],
+            text={t('Confirm', {
+              ns: ['main', 'home'],
             })}
             fullWidth={true}
             buttonType="PRIMARY"
