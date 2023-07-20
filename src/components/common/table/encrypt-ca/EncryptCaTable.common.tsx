@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
 interface marksType {
   id?: string;
   matricule: string;
-  ca: number | string;
+  // ca: number | string;
   status: string;
   encrypt: string;
 }
@@ -124,10 +124,10 @@ const EncryptCaTable = ({
         <div className="flex justify-center items-center mt-4">
           <CSVLink
             data={exportData}
-            filename="EncryptedCAMarks"
+            filename="EncryptedScripts"
             className="bg-primary  px-4 text-white   py-[10px]    rounded-lg outline-none text-[16px] flex justify-center items-center gap-3"
           >
-            {t("Download CA File", { ns: ["main", "home"] })}
+            {t("Download Ecrypted Scripts", { ns: ["main", "home"] })}
           </CSVLink>
           {/* <Button
             text="Download File"
@@ -145,9 +145,9 @@ const EncryptCaTable = ({
               className={`${styles.table__heading} text-secondary dark:text-white  font-bold`}
             >
               <th> {t("Matricule Number", { ns: ["main", "home"] })}</th>
-              <th> {t("CA mark", { ns: ["main", "home"] })}</th>
-              <th> {t("Status", { ns: ["main", "home"] })}</th>
+              {/* <th> {t("CA mark", { ns: ["main", "home"] })}</th> */}
               <th> {t("Encrypt", { ns: ["main", "home"] })}</th>
+              <th> {t("Status", { ns: ["main", "home"] })}</th>
             </tr>
           </thead>
           <tbody>
@@ -170,14 +170,6 @@ const EncryptCaTable = ({
                 return (
                   <tr key={mark.id} className="text-secondary dark:text-white">
                     <td className={styles.row__matricule}>{mark.matricule}</td>
-                    <td className={styles.row__ca}>{mark.ca}</td>
-                    <td className={styles.row__status}>
-                      {mark.encrypt?.length > 0 ? (
-                        <StatusCard encrypted={"encrypted"} />
-                      ) : (
-                        <StatusCard encrypted={"not filled"} />
-                      )}
-                    </td>
                     <td className={styles.row__input}>
                       <input
                         name="encrypt"
@@ -186,6 +178,13 @@ const EncryptCaTable = ({
                         onChange={(e) => onChangeInput(e, mark.matricule)}
                         placeholder="Encrypt mark"
                       />
+                    </td>
+                    <td className={styles.row__status}>
+                      {mark.encrypt?.length > 0 ? (
+                        <StatusCard encrypted={"encrypted"} />
+                      ) : (
+                        <StatusCard encrypted={"not filled"} />
+                      )}
                     </td>
                   </tr>
                 );

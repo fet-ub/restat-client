@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import DashboardHeader from '../../../components/common/dashboard-header/DashboardHeader.common';
-import { IconRepository } from '../../../repository/icons/icon.repository';
-import EncryptCaTable from '../../../components/common/table/encrypt-ca/EncryptCaTable.common';
+import React, { useEffect, useState } from "react";
+import DashboardHeader from "../../../components/common/dashboard-header/DashboardHeader.common";
+import { IconRepository } from "../../../repository/icons/icon.repository";
+import EncryptCaTable from "../../../components/common/table/encrypt-ca/EncryptCaTable.common";
 import * as xlsx from "xlsx";
 import { useTranslation } from "react-i18next";
 
 const EncryptionCaPage = () => {
-    const { t } = useTranslation();
+  const { t } = useTranslation();
   // const [isOpen, setIsOpen] = useState(false);
   const [active, setActive] = useState(0);
 
@@ -31,7 +31,6 @@ const EncryptionCaPage = () => {
       // console.log(exceljson);
       setSelectedFile(exceljson);
       // console.log('zxcxzc',selectedFile);
-      
     }
   };
 
@@ -74,8 +73,6 @@ const EncryptionCaPage = () => {
     }
   }, [selectedFile]);
 
-
- 
   const handleXls = () => {
     setActive(0);
   };
@@ -93,10 +90,10 @@ const EncryptionCaPage = () => {
       />
 
       <h2 className="text-3xl font-bold text-secondary dark:text-white mt-10">
-        {t("Bulk Upload CA Marks", { ns: ["main", "home"] })}
+        {t("Bulk Upload Matricules", { ns: ["main", "home"] })}
       </h2>
       <p className="text-xl mb-5 mt-1 dark:text-white">
-        {t("Here,you can upload bulk CA marks as .xls or .csv", {
+        {t("Here,you can upload bulk Matricules  as .xls or .csv", {
           ns: ["main", "home"],
         })}
       </p>
@@ -161,6 +158,6 @@ const EncryptionCaPage = () => {
       />
     </div>
   );
-}
+};
 
-export default EncryptionCaPage
+export default EncryptionCaPage;
