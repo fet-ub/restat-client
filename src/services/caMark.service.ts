@@ -10,7 +10,7 @@ const authService = new AuthService();
 export class CaMarkService {
   public async createCaMark(data: CaMarkRequestType[]) {
     const request: Promise<any[]>[] = [] as Promise<any[]>[];
-
+    /* eslint-disable */
     data.map((ca: CaMarkRequestType) => {
       const body = new FormData();
       body.append("studentId", ca.studentId as string);

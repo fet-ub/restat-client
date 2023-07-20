@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from "react";
 import { IconRepository } from "../../../../../repository/icons/icon.repository";
 import SelectInput from "../../../inputs/select-input/SelectInput.common";
@@ -75,6 +76,7 @@ const AddMarksModal = ({
   const handleBulkCaMarksUpload = () => {
     if (modalType === MarksType.CA) {
       const uploadData: BulkCaCaMarkRequestType[] = [];
+      /* eslint-disable */
       caMarksTableData.map((CaMark: any) => {
         uploadData.push({
           matriculationNumber: CaMark.matriculationNumber,

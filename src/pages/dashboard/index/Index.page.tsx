@@ -29,12 +29,12 @@ const IndexPage = () => {
   const getLecturersState = useAppSelector(
     (state: RootState) => state.getLecturersState
   );
-  const getStatsState = useAppSelector(
-    (state: RootState) => state.getStatsState
-  );
-  const getResultsState = useAppSelector(
-    (state: RootState) => state.getResultsState
-  );
+  // const getStatsState = useAppSelector(
+  //   (state: RootState) => state.getStatsState
+  // );
+  // const getResultsState = useAppSelector(
+  //   (state: RootState) => state.getResultsState
+  // );
 
   // console.log("results", getResultsState);
   // console.log("stats", getStatsState);

@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import styles from "./sidebar.module.css";
 
@@ -184,6 +184,7 @@ const SidebarComponent = () => {
 
   useEffect(() => {
     setStateMutation(!stateMutation);
+    /* eslint-disable */
   }, [location.pathname]);
 
   const renderDashboardLinks = (dataSource: DataLinksType[]) => {

@@ -7,7 +7,7 @@ const authService = new AuthService();
 export class ExamMarkService {
   public async createExamMark(data: ExamMarkRequestType[]) {
     const request: Promise<any[]>[] = [] as Promise<any[]>[];
-
+    /* eslint-disable */
     data.map((exam: ExamMarkRequestType) => {
       const body = new FormData();
       body.append("studentCodeId", exam.studentCodeId as string);

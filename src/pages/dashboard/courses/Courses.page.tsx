@@ -1,29 +1,29 @@
-import { useState, useEffect } from 'react';
-import DashboardHeader from '../../../components/common/dashboard-header/DashboardHeader.common';
-import DownloadOptions from '../../../components/common/download-options/DownloadOptions.common';
-import TextInput from '../../../components/common/inputs/text-input/TextInput.common';
+import { useState, useEffect } from "react";
+import DashboardHeader from "../../../components/common/dashboard-header/DashboardHeader.common";
+import DownloadOptions from "../../../components/common/download-options/DownloadOptions.common";
+import TextInput from "../../../components/common/inputs/text-input/TextInput.common";
 import {
   DataGrid,
-  GridColDef,
+  // GridColDef,
   GridRenderCellParams,
   GridValueGetterParams,
-} from '@mui/x-data-grid';
-import { useTranslation } from 'react-i18next';
-import ModalContainer from '../../../components/common/modal/modal-container/ModalContainer.common';
-import AddCourseModal from '../../../components/common/modal/modules/course/AddCourseModal.module';
-import { useAppDispatch, useAppSelector } from '../../../lib/hooks';
+} from "@mui/x-data-grid";
+import { useTranslation } from "react-i18next";
+import ModalContainer from "../../../components/common/modal/modal-container/ModalContainer.common";
+import AddCourseModal from "../../../components/common/modal/modules/course/AddCourseModal.module";
+import { useAppDispatch, useAppSelector } from "../../../lib/hooks";
 import {
   getCoursesThunk,
   deleteCourseThunk,
-} from '../../../app/feature/course/thunk/course.thunk';
-import { RootState } from '../../../app/store/store';
-import EditIcon from '../../../icons/Edit.icon';
-import DeleteIcon from '../../../icons/Delete.icon';
-import DeleteModal from '../../../components/common/modal/modules/delete/DeleteModal.module';
-import StatusModal from '../../../components/common/modal/modules/status/StatusModal.module';
-import { ApiRequestStatus } from '../../../types/api.types';
-import { resetDeleteCourseState } from '../../../app/feature/course/slices/deleteCourse.slice';
-import { resetcreateCourseState } from '../../../app/feature/course/slices/createCourse.slice';
+} from "../../../app/feature/course/thunk/course.thunk";
+import { RootState } from "../../../app/store/store";
+import EditIcon from "../../../icons/Edit.icon";
+import DeleteIcon from "../../../icons/Delete.icon";
+import DeleteModal from "../../../components/common/modal/modules/delete/DeleteModal.module";
+import StatusModal from "../../../components/common/modal/modules/status/StatusModal.module";
+import { ApiRequestStatus } from "../../../types/api.types";
+import { resetDeleteCourseState } from "../../../app/feature/course/slices/deleteCourse.slice";
+import { resetcreateCourseState } from "../../../app/feature/course/slices/createCourse.slice";
 
 const CoursesPage = () => {
   const getCoursesState = useAppSelector(
@@ -40,9 +40,9 @@ const CoursesPage = () => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showSuccessDelete, setShowSuccessDelete] = useState(false);
   // const [filteredData, setFilteredData] = useState<any>([]);
-  const [searchText, setSearchText] = useState('');
-  const [courseId, setCourseId] = useState('');
-  const [selectedDeletedCourse, setSelectedDeletedCourse] = useState('');
+  const [searchText, setSearchText] = useState("");
+  const [courseId, setCourseId] = useState("");
+  const [selectedDeletedCourse, setSelectedDeletedCourse] = useState("");
   // const [trigger, setTrigger] = useState(false);
 
   // useEffect(() => {
@@ -73,6 +73,7 @@ const CoursesPage = () => {
     }
 
     // dispatch(resetcreateCourseState());
+    /* eslint-disable */
   }, [deleteCourseState.status === ApiRequestStatus.FULFILLED]);
 
   const handleDeleteCourse = async (id: any) => {
@@ -97,79 +98,79 @@ const CoursesPage = () => {
 
   const columns: any = [
     {
-      field: 'courseCode',
-      headerName: t('Code', { ns: ['main', 'home'] }),
+      field: "courseCode",
+      headerName: t("Code", { ns: ["main", "home"] }),
       width: 75,
       sortable: false,
     },
     {
-      field: 'name',
-      headerName: t('Title', { ns: ['main', 'home'] }),
+      field: "name",
+      headerName: t("Title", { ns: ["main", "home"] }),
       width: 290,
       sortable: true,
     },
     {
-      field: 'level',
-      headerName: t('Level', { ns: ['main', 'home'] }),
+      field: "level",
+      headerName: t("Level", { ns: ["main", "home"] }),
       width: 90,
       sortable: true,
-      type: 'number',
+      type: "number",
     },
     {
-      field: 'user',
-      headerName: t('Lecturer', { ns: ['main', 'home'] }),
+      field: "user",
+      headerName: t("Lecturer", { ns: ["main", "home"] }),
       width: 200,
       sortable: false,
-      headerAlign: 'left',
-      align: 'left',
+      headerAlign: "left",
+      align: "left",
       valueGetter: (params: GridValueGetterParams) =>
-        `${params.row.user.firstName || ''} ${params.row.user.lastName || ''}`,
+        `${params.row.user.firstName || ""} ${params.row.user.lastName || ""}`,
     },
     {
-      field: 'status',
-      headerName: t('Status', { ns: ['main', 'home'] }),
+      field: "status",
+      headerName: t("Status", { ns: ["main", "home"] }),
       width: 100,
       sortable: true,
-      headerAlign: 'left',
-      align: 'left',
+      headerAlign: "left",
+      align: "left",
     },
     {
-      field: 'creditValue',
-      headerName: t('Credit Value', { ns: ['main', 'home'] }),
+      field: "creditValue",
+      headerName: t("Credit Value", { ns: ["main", "home"] }),
       width: 120,
       sortable: true,
-      headerAlign: 'left',
-      align: 'center',
+      headerAlign: "left",
+      align: "center",
     },
     {
-      field: 'semesterId',
-      headerName: t('Semester', { ns: ['main', 'home'] }),
+      field: "semesterId",
+      headerName: t("Semester", { ns: ["main", "home"] }),
       width: 150,
       sortable: true,
-      headerAlign: 'left',
-      align: 'left',
+      headerAlign: "left",
+      align: "left",
       valueGetter: (params: GridValueGetterParams) =>
         params.row.semesterId === 1
-          ? 'First Semester'
+          ? "First Semester"
           : params.row.semesterId === 2
-          ? 'Second Semester'
-          : '',
+          ? "Second Semester"
+          : "",
     },
     {
-      field: 'action',
-      headerName: t('Action', { ns: ['main', 'home'] }),
+      field: "action",
+      headerName: t("Action", { ns: ["main", "home"] }),
       sortable: false,
       width: 100,
-      headerAlign: 'left',
-      align: 'left',
+      headerAlign: "left",
+      align: "left",
       renderCell: (params: GridRenderCellParams) => {
         return (
           <div
             style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              gap: '10px',
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              gap: "10px",
             }}
           >
             <div>
@@ -196,8 +197,8 @@ const CoursesPage = () => {
   return (
     <div>
       <DashboardHeader
-        label={t('Courses', { ns: ['main', 'home'] })}
-        ButtonText={t('Add New Course', { ns: ['main', 'home'] })}
+        label={t("Courses", { ns: ["main", "home"] })}
+        ButtonText={t("Add New Course", { ns: ["main", "home"] })}
         displayButton={true}
         onClick={() => setIsOpen(true)}
       />
@@ -207,18 +208,18 @@ const CoursesPage = () => {
 
       <div className="w-[400px] mt-8">
         <TextInput
-          label={t('Search', { ns: ['main', 'home'] })}
+          label={t("Search", { ns: ["main", "home"] })}
           type="search"
           name="text"
           id="search"
-          placeholder={t('Search course Title', { ns: ['main', 'home'] })}
+          placeholder={t("Search course Title", { ns: ["main", "home"] })}
           value={searchText}
           onChange={(e) => {
             handleFilter(e.target.value);
           }}
         />
       </div>
-      <div style={{ height: 420, width: '100%', marginTop: 40 }}>
+      <div style={{ height: 420, width: "100%", marginTop: 40 }}>
         <DataGrid
           rows={getCoursesState?.courses.filter((value) => {
             return value.name.toLowerCase().includes(searchText.toLowerCase());
@@ -232,7 +233,7 @@ const CoursesPage = () => {
           pageSizeOptions={[6, 10]}
           // checkboxSelection
           getRowId={(row: any) => row.id}
-          style={{ fontSize: '13px' }}
+          style={{ fontSize: "13px" }}
           className="dark:text-white"
         />
       </div>
@@ -272,17 +273,17 @@ const CoursesPage = () => {
           <StatusModal
             status={
               createCourseState.status === ApiRequestStatus.FULFILLED
-                ? 'SUCCESS'
+                ? "SUCCESS"
                 : createCourseState.status === ApiRequestStatus.REJECTED
-                ? 'ERROR'
-                : 'SUCCESS'
+                ? "ERROR"
+                : "SUCCESS"
             }
             text={
               createCourseState.status === ApiRequestStatus.FULFILLED
-                ? 'Sucessfully Added Course'
+                ? "Sucessfully Added Course"
                 : createCourseState.status === ApiRequestStatus.REJECTED
-                ? 'Could not Add Course!'
-                : ''
+                ? "Could not Add Course!"
+                : ""
             }
             onClick={() => {
               setShowSuccessModal(false);
@@ -307,17 +308,17 @@ const CoursesPage = () => {
           <StatusModal
             status={
               deleteCourseState.status === ApiRequestStatus.FULFILLED
-                ? 'SUCCESS'
+                ? "SUCCESS"
                 : deleteCourseState.status === ApiRequestStatus.REJECTED
-                ? 'ERROR'
-                : 'SUCCESS'
+                ? "ERROR"
+                : "SUCCESS"
             }
             text={
               deleteCourseState.status === ApiRequestStatus.FULFILLED
-                ? 'Sucessuly Deleted Course'
+                ? "Sucessuly Deleted Course"
                 : deleteCourseState.status === ApiRequestStatus.REJECTED
-                ? 'Could not Delete Course'
-                : ''
+                ? "Could not Delete Course"
+                : ""
             }
             onClick={() => {
               setShowSuccessDelete(false);

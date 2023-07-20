@@ -66,12 +66,12 @@ const AddCaTable = ({
     }
   };
 
-  const handleKeyDown = (event: any) => {
-    if (event.keyCode === 40) {
-      // 40 is the keycode for down arrow key
-      event.target.nextSibling.focus();
-    }
-  };
+  // const handleKeyDown = (event: any) => {
+  //   if (event.keyCode === 40) {
+  //     // 40 is the keycode for down arrow key
+  //     event.target.nextSibling.focus();
+  //   }
+  // };
 
   const onChangeInput = (
     e: React.ChangeEvent<HTMLInputElement>,

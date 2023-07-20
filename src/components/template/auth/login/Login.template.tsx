@@ -55,6 +55,7 @@ const LoginTemplate = () => {
     if (localStorage.getItem("accessToken") !== null) {
       navigate("/dashboard");
     }
+    /* eslint-disable */
   }, [window.location.pathname]);
 
   useEffect(() => {

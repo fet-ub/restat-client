@@ -1,29 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import SelectInput from '../../../components/common/inputs/select-input/SelectInput.common';
-import { ENGINEERING_DEPARTMENTS } from '../../../repository/constants/constants';
+import SelectInput from "../../../components/common/inputs/select-input/SelectInput.common";
+import { ENGINEERING_DEPARTMENTS } from "../../../repository/constants/constants";
 import {
   DataGrid,
-  GridColDef,
+  // GridColDef,
   GridRenderCellParams,
   GridValueGetterParams,
-} from '@mui/x-data-grid';
-import ModalContainer from '../../../components/common/modal/modal-container/ModalContainer.common';
-import AddUserModal from '../../../components/common/modal/modules/add-user/AddUserModal.module';
-import DashboardHeader from '../../../components/common/dashboard-header/DashboardHeader.common';
-import DownloadOptions from '../../../components/common/download-options/DownloadOptions.common';
-import { useTranslation } from 'react-i18next';
-import { getUsersThunk } from '../../../app/feature/user/thunk/user.thunk';
+} from "@mui/x-data-grid";
+import ModalContainer from "../../../components/common/modal/modal-container/ModalContainer.common";
+import AddUserModal from "../../../components/common/modal/modules/add-user/AddUserModal.module";
+import DashboardHeader from "../../../components/common/dashboard-header/DashboardHeader.common";
+import DownloadOptions from "../../../components/common/download-options/DownloadOptions.common";
+import { useTranslation } from "react-i18next";
+import { getUsersThunk } from "../../../app/feature/user/thunk/user.thunk";
 // import { ApiRequestStatus } from "../../../types/api.types";
-import { useAppDispatch, useAppSelector } from '../../../lib/hooks';
+import { useAppDispatch, useAppSelector } from "../../../lib/hooks";
 // import { resetGetUsersState } from "../../../app/feature/user/slices/getUsers.slice";
-import { RootState } from '../../../app/store/store';
+import { RootState } from "../../../app/store/store";
 // import { UserResponseTypes } from "../../../types/user.type";
-import EditIcon from '../../../icons/Edit.icon';
-import DeleteIcon from '../../../icons/Delete.icon';
-import { resetGetUsersState } from '../../../app/feature/user/slices/getUsers.slice';
-import { ApiRequestStatus } from '../../../types/api.types';
-import StatusModal from '../../../components/common/modal/modules/status/StatusModal.module';
+import EditIcon from "../../../icons/Edit.icon";
+import DeleteIcon from "../../../icons/Delete.icon";
+import { resetGetUsersState } from "../../../app/feature/user/slices/getUsers.slice";
+import { ApiRequestStatus } from "../../../types/api.types";
+import StatusModal from "../../../components/common/modal/modules/status/StatusModal.module";
 
 // interface TableUserResponseTypes {
 //   user: TableUser;
@@ -73,32 +73,32 @@ const UsersPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const columns: any = [
     {
-      field: 'name',
-      headerName: t('Name', { ns: ['main', 'home'] }),
+      field: "name",
+      headerName: t("Name", { ns: ["main", "home"] }),
       width: 280,
       sortable: false,
 
       valueGetter: (params: GridValueGetterParams) =>
-        `${params.row.user.firstName || ''} ${params.row.user.lastName || ''}`,
+        `${params.row.user.firstName || ""} ${params.row.user.lastName || ""}`,
     },
     {
-      field: 'role',
-      headerName: t('Role', { ns: ['main', 'home'] }),
+      field: "role",
+      headerName: t("Role", { ns: ["main", "home"] }),
       width: 270,
       sortable: false,
       valueGetter: (params: GridValueGetterParams) => params.row.role[0],
     },
     {
-      field: 'department',
-      headerName: t('Department', { ns: ['main', 'home'] }),
+      field: "department",
+      headerName: t("Department", { ns: ["main", "home"] }),
       width: 250,
       sortable: false,
       valueGetter: (params: GridValueGetterParams) =>
         params.row?.departments[0]?.name,
     },
     {
-      field: 'user',
-      headerName: t('Email', { ns: ['main', 'home'] }),
+      field: "user",
+      headerName: t("Email", { ns: ["main", "home"] }),
       width: 270,
       sortable: false,
       valueGetter: (params: GridValueGetterParams) => params.row.user.email,
@@ -112,20 +112,20 @@ const UsersPage = () => {
     //   align: "left",
     // },
     {
-      field: 'action',
-      headerName: t('Action', { ns: ['main', 'home'] }),
+      field: "action",
+      headerName: t("Action", { ns: ["main", "home"] }),
       sortable: false,
       width: 100,
-      headerAlign: 'left',
-      align: 'left',
+      headerAlign: "left",
+      align: "left",
       renderCell: (params: GridRenderCellParams) => {
         return (
           <div
             style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              gap: '10px',
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              gap: "10px",
             }}
           >
             <div>
@@ -154,8 +154,8 @@ const UsersPage = () => {
   return (
     <div>
       <DashboardHeader
-        label={t('Users', { ns: ['main', 'home'] })}
-        ButtonText={t('Add New User', { ns: ['main', 'home'] })}
+        label={t("Users", { ns: ["main", "home"] })}
+        ButtonText={t("Add New User", { ns: ["main", "home"] })}
         onClick={() => setIsOpen(true)}
         displayButton={true}
       />
@@ -166,13 +166,13 @@ const UsersPage = () => {
       <div className="w-[25%] mt-12">
         <SelectInput
           selectOptions={ENGINEERING_DEPARTMENTS}
-          placeholder={t('Select Department', { ns: ['main', 'home'] })}
-          label={t('Department', { ns: ['main', 'home'] })}
+          placeholder={t("Select Department", { ns: ["main", "home"] })}
+          label={t("Department", { ns: ["main", "home"] })}
           value=""
         />
       </div>
 
-      <div style={{ height: 400, width: '100%', marginTop: 40 }}>
+      <div style={{ height: 400, width: "100%", marginTop: 40 }}>
         <DataGrid
           rows={getUsersState.users}
           columns={columns}
@@ -184,7 +184,7 @@ const UsersPage = () => {
           pageSizeOptions={[5, 10]}
           checkboxSelection
           getRowId={(row: any) => row.user.id}
-          style={{ fontSize: '15px' }}
+          style={{ fontSize: "15px" }}
           className="dark:text-white"
         />
       </div>
@@ -201,25 +201,25 @@ const UsersPage = () => {
           <StatusModal
             status={
               getUsersState.status === ApiRequestStatus.FULFILLED
-                ? 'SUCCESS'
+                ? "SUCCESS"
                 : getUsersState.status === ApiRequestStatus.REJECTED
-                ? 'ERROR'
+                ? "ERROR"
                 : // : createBulkStudentState.status === ApiRequestStatus.FULFILLED
                   // ? "SUCCESS"
                   // : createBulkStudentState.status === ApiRequestStatus.REJECTED
                   // ? "ERROR"
-                  'SUCCESS'
+                  "SUCCESS"
             }
             text={
               getUsersState.status === ApiRequestStatus.FULFILLED
-                ? 'User was added successfully'
+                ? "User was added successfully"
                 : getUsersState.status === ApiRequestStatus.REJECTED
                 ? getUsersState.message
                 : // : createBulkStudentState.status === ApiRequestStatus.FULFILLED
                   // ? createBulkStudentState.message
                   // : createBulkStudentState.status === ApiRequestStatus.REJECTED
                   // ? createBulkStudentState.message
-                  ''
+                  ""
             }
             onClick={() => {
               setShowSuccessModal(false);

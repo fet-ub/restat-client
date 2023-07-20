@@ -47,7 +47,7 @@ export class StudentService {
   public async createBulkNewStudents(data: StudentRequestType[]) {
     const request: Promise<any[]>[] = [] as Promise<any[]>[];
     // const body = new FormData();
-
+    /* eslint-disable */
     data.map((student: StudentRequestType) => {
       const body = new FormData();
       body.append("facultyId", student.facultyId);

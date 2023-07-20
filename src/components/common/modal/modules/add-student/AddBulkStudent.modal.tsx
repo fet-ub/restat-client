@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import SelectInput from "../../../inputs/select-input/SelectInput.common";
-import { COURSE_LEVELS } from "../../../../../repository/constants/constants";
+// import SelectInput from "../../../inputs/select-input/SelectInput.common";
+// import { COURSE_LEVELS } from "../../../../../repository/constants/constants";
 import Button from "../../../buttons/Button.common";
 import { IconRepository } from "../../../../../repository/icons/icon.repository";
 import { AddBulkStudentModalPropType } from "../../../../../types/common/modal/add-bulk-student-modal.type";
@@ -27,9 +27,9 @@ const AddBulkStudentmodal = ({
     (state) => state.createBulkStudentState
   );
   const [active, setActive] = useState(0);
-  const [form, setForm] = useState({
-    level: "",
-  });
+  // const [form, setForm] = useState({
+  //   level: "",
+  // });
   const [user, setUser] = useState({
     id: "",
   });

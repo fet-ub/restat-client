@@ -8,7 +8,7 @@ import TextInput from "../../../components/common/inputs/text-input/TextInput.co
 import DownloadOptions from "../../../components/common/download-options/DownloadOptions.common";
 import {
   DataGrid,
-  GridColDef,
+  // GridColDef,
   GridRenderCellParams,
   GridValueGetterParams,
 } from "@mui/x-data-grid";
