@@ -204,7 +204,7 @@ const CoursesPage = () => {
       />
 
       {/* icons row */}
-      <DownloadOptions />
+      <DownloadOptions exportData={getCoursesState.courses} />
 
       <div className="w-[400px] mt-8">
         <TextInput

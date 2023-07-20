@@ -282,7 +282,7 @@ const StudentsPage = () => {
       </div>
 
       <div>
-        <DownloadOptions />
+        <DownloadOptions exportData={getStudentsState.students} />
       </div>
 
       <div

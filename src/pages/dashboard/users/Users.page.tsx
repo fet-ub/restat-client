@@ -161,7 +161,7 @@ const UsersPage = () => {
       />
 
       {/* icons row */}
-      <DownloadOptions />
+      <DownloadOptions exportData={getUsersState.users} />
 
       <div className="w-[25%] mt-12">
         <SelectInput
