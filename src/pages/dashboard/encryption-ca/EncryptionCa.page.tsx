@@ -7,30 +7,21 @@ import { useTranslation } from "react-i18next";
 
 const EncryptionCaPage = () => {
   const { t } = useTranslation();
-  // const [isOpen, setIsOpen] = useState(false);
-  const [active, setActive] = useState(0);
 
+  const [active, setActive] = useState(0);
   const [selectedFile, setSelectedFile] = useState<any>([]);
   const [marksTableData, setMarksTableData] = useState<any>([]);
-
   const [fileName, setFileName] = useState<any>("");
 
   const handleFileChange = async (e: any) => {
     if (e?.target?.files) {
-      //  setSelectedCategoryImage(URL.createObjectURL(e.target.files[0]));
-      // setSelectedFile(e.target.files[0]);
       setFileName(e.target.files[0]);
-      // console.log(e.target.files[0]);
-
-      // console.log(selectedFile?.name);
       const file = e.target.files[0];
       const data = await file.arrayBuffer(file);
       const excelfile = xlsx.read(data);
       const excelsheet = excelfile.Sheets[excelfile.SheetNames[0]];
       const exceljson = xlsx.utils.sheet_to_json(excelsheet);
-      // console.log(exceljson);
       setSelectedFile(exceljson);
-      // console.log('zxcxzc',selectedFile);
     }
   };
 
